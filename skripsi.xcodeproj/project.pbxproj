@@ -17,6 +17,8 @@
 		1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B04F29AC7385007229DB /* OnBoardingController.swift */; };
 		1587B05229AC7390007229DB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B05129AC7390007229DB /* LoginController.swift */; };
 		1587B05429AC739A007229DB /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B05329AC739A007229DB /* RegisterController.swift */; };
+		1587B05629AC7496007229DB /* OnboardingPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B05529AC7496007229DB /* OnboardingPages.swift */; };
+		159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FD2F829ACDF84000DFC26 /* OnboardingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		1587B04F29AC7385007229DB /* OnBoardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingController.swift; sourceTree = "<group>"; };
 		1587B05129AC7390007229DB /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		1587B05329AC739A007229DB /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		1587B05529AC7496007229DB /* OnboardingPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPages.swift; sourceTree = "<group>"; };
+		159FD2F829ACDF84000DFC26 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,13 +68,12 @@
 		1587B02D29AC71B6007229DB /* skripsi */ = {
 			isa = PBXGroup;
 			children = (
+				1587B04229AC7283007229DB /* Models */,
+				1587B04329AC728C007229DB /* Views */,
 				1587B04A29AC7339007229DB /* Controllers */,
 				1587B04529AC729E007229DB /* Supporting */,
 				1587B04429AC729A007229DB /* Extensions */,
-				1587B04229AC7283007229DB /* Models */,
-				1587B04329AC728C007229DB /* Views */,
 				1587B03229AC71B6007229DB /* ViewController.swift */,
-				1587B03429AC71B6007229DB /* Main.storyboard */,
 				1587B03929AC71B7007229DB /* LaunchScreen.storyboard */,
 				1587B03C29AC71B7007229DB /* Info.plist */,
 			);
@@ -80,6 +83,7 @@
 		1587B04229AC7283007229DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1587B05529AC7496007229DB /* OnboardingPages.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -87,6 +91,8 @@
 		1587B04329AC728C007229DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				159FD2F729ACDF5D000DFC26 /* CustomViews */,
+				1587B03429AC71B6007229DB /* Main.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,6 +123,14 @@
 				1587B05329AC739A007229DB /* RegisterController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		159FD2F729ACDF5D000DFC26 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				159FD2F829ACDF84000DFC26 /* OnboardingCell.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,7 +207,9 @@
 				1587B03329AC71B6007229DB /* ViewController.swift in Sources */,
 				1587B05229AC7390007229DB /* LoginController.swift in Sources */,
 				1587B02F29AC71B6007229DB /* AppDelegate.swift in Sources */,
+				1587B05629AC7496007229DB /* OnboardingPages.swift in Sources */,
 				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
+				159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */,
 				1587B04729AC72E6007229DB /* UIView+Extension.swift in Sources */,
 				1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */,
 				1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */,
