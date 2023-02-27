@@ -13,6 +13,10 @@
 		1587B03629AC71B6007229DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1587B03429AC71B6007229DB /* Main.storyboard */; };
 		1587B03829AC71B7007229DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1587B03729AC71B7007229DB /* Assets.xcassets */; };
 		1587B03B29AC71B7007229DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1587B03929AC71B7007229DB /* LaunchScreen.storyboard */; };
+		1587B04729AC72E6007229DB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B04629AC72E6007229DB /* UIView+Extension.swift */; };
+		1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B04F29AC7385007229DB /* OnBoardingController.swift */; };
+		1587B05229AC7390007229DB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B05129AC7390007229DB /* LoginController.swift */; };
+		1587B05429AC739A007229DB /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B05329AC739A007229DB /* RegisterController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		1587B03729AC71B7007229DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1587B03A29AC71B7007229DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1587B03C29AC71B7007229DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1587B04629AC72E6007229DB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		1587B04F29AC7385007229DB /* OnBoardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingController.swift; sourceTree = "<group>"; };
+		1587B05129AC7390007229DB /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		1587B05329AC739A007229DB /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,59 @@
 		1587B02D29AC71B6007229DB /* skripsi */ = {
 			isa = PBXGroup;
 			children = (
-				1587B02E29AC71B6007229DB /* AppDelegate.swift */,
-				1587B03029AC71B6007229DB /* SceneDelegate.swift */,
+				1587B04A29AC7339007229DB /* Controllers */,
+				1587B04529AC729E007229DB /* Supporting */,
+				1587B04429AC729A007229DB /* Extensions */,
+				1587B04229AC7283007229DB /* Models */,
+				1587B04329AC728C007229DB /* Views */,
 				1587B03229AC71B6007229DB /* ViewController.swift */,
 				1587B03429AC71B6007229DB /* Main.storyboard */,
-				1587B03729AC71B7007229DB /* Assets.xcassets */,
 				1587B03929AC71B7007229DB /* LaunchScreen.storyboard */,
 				1587B03C29AC71B7007229DB /* Info.plist */,
 			);
 			path = skripsi;
+			sourceTree = "<group>";
+		};
+		1587B04229AC7283007229DB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1587B04329AC728C007229DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1587B04429AC729A007229DB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1587B04629AC72E6007229DB /* UIView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1587B04529AC729E007229DB /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				1587B02E29AC71B6007229DB /* AppDelegate.swift */,
+				1587B03029AC71B6007229DB /* SceneDelegate.swift */,
+				1587B03729AC71B7007229DB /* Assets.xcassets */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		1587B04A29AC7339007229DB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1587B04F29AC7385007229DB /* OnBoardingController.swift */,
+				1587B05129AC7390007229DB /* LoginController.swift */,
+				1587B05329AC739A007229DB /* RegisterController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +191,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1587B03329AC71B6007229DB /* ViewController.swift in Sources */,
+				1587B05229AC7390007229DB /* LoginController.swift in Sources */,
 				1587B02F29AC71B6007229DB /* AppDelegate.swift in Sources */,
+				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
+				1587B04729AC72E6007229DB /* UIView+Extension.swift in Sources */,
+				1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */,
 				1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +346,7 @@
 				DEVELOPMENT_TEAM = BX9VA5G2BF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = skripsi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Skripsi;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -318,6 +375,7 @@
 				DEVELOPMENT_TEAM = BX9VA5G2BF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = skripsi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Skripsi;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
