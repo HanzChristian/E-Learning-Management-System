@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="loginController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="LoginController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sudah Punya Akun? Masuk Disini." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8M-5h-asR">
+                                <rect key="frame" x="20" y="160" width="313" height="109"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="109" id="E6Z-UE-6vS"/>
+                                    <constraint firstAttribute="width" constant="313" id="c3o-je-PJp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <color key="textColor" name="Button&amp;TextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Login Pattern" translatesAutoresizingMaskIntoConstraints="NO" id="Xdf-Uo-aY4">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="390" id="i5Z-lB-1ga"/>
+                                    <constraint firstAttribute="height" constant="200" id="qz4-KM-8GL"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WpI-Ph-kdf" customClass="CustomTextField" customModule="skripsi" customModuleProvider="target">
+                                <rect key="frame" x="20" y="299" width="350" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6Zx-hT-Gor"/>
+                                    <constraint firstAttribute="width" constant="350" id="Rlb-1D-fdA"/>
+                                </constraints>
+                                <color key="textColor" name="Button&amp;TextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q4H-bN-Glr" customClass="CustomTextField" customModule="skripsi" customModuleProvider="target">
+                                <rect key="frame" x="20" y="361" width="350" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="Agd-N8-QOs"/>
+                                    <constraint firstAttribute="height" constant="34" id="ti9-7j-4en"/>
+                                </constraints>
+                                <color key="textColor" name="Button&amp;TextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" textContentType="one-time-code"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLY-E6-wpB">
+                                <rect key="frame" x="20" y="451" width="351" height="57"/>
+                                <color key="backgroundColor" name="ButtonColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="c1D-Bs-4Sx"/>
+                                    <constraint firstAttribute="width" constant="351" id="ku9-7z-jiP"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="MASUK" titleAlignment="center">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="BackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="PLY-E6-wpB" secondAttribute="trailing" constant="19" id="89d-IB-JgT"/>
+                            <constraint firstItem="WpI-Ph-kdf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="G8Z-gO-Kf0"/>
+                            <constraint firstItem="Xdf-Uo-aY4" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="IGi-6j-XKO"/>
+                            <constraint firstItem="q4H-bN-Glr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Iun-3B-sTL"/>
+                            <constraint firstItem="q4H-bN-Glr" firstAttribute="top" secondItem="WpI-Ph-kdf" secondAttribute="bottom" constant="32" id="LQV-L1-sTj"/>
+                            <constraint firstItem="PLY-E6-wpB" firstAttribute="top" secondItem="q4H-bN-Glr" secondAttribute="bottom" constant="56" id="Lpf-TJ-V9w"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WpI-Ph-kdf" secondAttribute="trailing" constant="20" id="Mi2-Y6-Mcc"/>
+                            <constraint firstItem="N8M-5h-asR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="RHD-Vn-UO0"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="q4H-bN-Glr" secondAttribute="trailing" constant="20" id="aqc-en-eYQ"/>
+                            <constraint firstItem="PLY-E6-wpB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="cQd-u6-Jt3"/>
+                            <constraint firstItem="Xdf-Uo-aY4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="j4O-eg-9bN"/>
+                            <constraint firstItem="WpI-Ph-kdf" firstAttribute="top" secondItem="N8M-5h-asR" secondAttribute="bottom" constant="30" id="kEf-0U-s2w"/>
+                            <constraint firstItem="Xdf-Uo-aY4" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="s6Z-Qo-Fis"/>
+                            <constraint firstItem="N8M-5h-asR" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="160" id="zMO-KG-E6L"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="WpI-Ph-kdf" id="iW4-k4-JZn"/>
+                        <outlet property="passwordTextField" destination="q4H-bN-Glr" id="Tfx-B4-ysk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="56.92307692307692" y="-2.1327014218009479"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Login Pattern" width="130" height="93"/>
+        <namedColor name="BackgroundColor">
+            <color red="0.9137254901960784" green="0.88235294117647056" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Button&amp;TextColor">
+            <color red="0.25098039215686274" green="0.054901960784313725" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ButtonColor">
+            <color red="0.25099998712539673" green="0.054999999701976776" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

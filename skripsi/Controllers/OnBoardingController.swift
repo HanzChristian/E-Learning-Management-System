@@ -10,6 +10,7 @@ import Foundation
 
 class OnBoardingController: UIViewController{
     
+// MARK: - Variables & Outlet
     
     //IBOutlet
     @IBOutlet weak var collectionView: UICollectionView!
@@ -34,7 +35,6 @@ class OnBoardingController: UIViewController{
     
 }
 
-
 // MARK: - View Life Cycle
 extension OnBoardingController{
     override func viewDidLoad(){
@@ -53,18 +53,18 @@ extension OnBoardingController{
 // MARK: - IBActions
 extension OnBoardingController{
     @IBAction func signupPressed(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: "registerSegue", sender: self)
     }
     
     @IBAction func loginPressed(_ sender: UIButton){
-        
+        performSegue(withIdentifier: "loginSegue", sender: self)
     }
     @IBAction func pageValueChanged(_ sender: UIPageControl) {
 
     }
 }
 
-// MARK: - Private Functions
+// MARK: - Private/Functions
 extension OnBoardingController{
     private func btnShow(_ bool: Bool){
         signupBtn.isHidden = bool

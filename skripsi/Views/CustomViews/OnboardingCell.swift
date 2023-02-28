@@ -7,16 +7,21 @@
 
 import UIKit
 
+// MARK: - Variables/Outlets
+//Variables
 class OnboardingCell: UICollectionViewCell {
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var descLbl: UILabel!
     
-        func setup(_ pages: OnboardingPages){
+}
+
+// MARK: - Functions
+extension OnboardingCell{
+    func setup(_ pages: OnboardingPages){
         imgView.image = pages.image
         titleLbl.text = pages.title
         descLbl.text = pages.description
     }
-    
 }
