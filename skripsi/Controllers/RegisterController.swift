@@ -14,6 +14,7 @@ class RegisterController: UIViewController {
     @IBOutlet weak var namaTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
 }
 // MARK: - View Life Cycle
 extension RegisterController{
@@ -41,7 +42,12 @@ extension RegisterController{
             
         }
     }
+    @IBAction func registerPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "homepageSegue", sender: self)
+    }
 }
+
+
 
 // MARK: - Private/Functions
 

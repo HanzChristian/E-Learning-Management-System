@@ -28,7 +28,9 @@ extension LoginController{
 }
 // MARK: - IBActions
 extension LoginController{
-    
+    @IBAction func loginPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "homepageSegue", sender: self)
+    }
     
 }
 

@@ -98,6 +98,10 @@
                                         <real key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="registerPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7bX-Ak-vjS"/>
+                                    <segue destination="N8u-8E-0r5" kind="presentation" identifier="homepageSegue" modalPresentationStyle="fullScreen" id="tsz-Te-QHC"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="-7" translatesAutoresizingMaskIntoConstraints="NO" id="rJN-t0-ZFf">
                                 <rect key="frame" x="70.000000000000014" y="628" width="250.33333333333337" height="33.333333333333371"/>
@@ -175,20 +179,28 @@
             </objects>
             <point key="canvasLocation" x="736" y="-2"/>
         </scene>
+        <!--HomePage-->
+        <scene sceneID="cKe-ey-2gG">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="tabbarHomePage" storyboardName="HomePage" referencedIdentifier="tabbarHomePage" id="N8u-8E-0r5" userLabel="HomePage" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kw6-pZ-NtW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="791" y="-63"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Register Pattern" width="130" height="66.666664123535156"/>
         <namedColor name="BackgroundColor">
-            <color red="0.9137254901960784" green="0.88235294117647056" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91399997472763062" green="0.88200002908706665" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Button&amp;TextColor">
-            <color red="0.25098039215686274" green="0.054901960784313725" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.25099998712539673" green="0.054999999701976776" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonColor">
             <color red="0.25099998712539673" green="0.054999999701976776" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SegmentedPressedColor">
-            <color red="0.94901960784313721" green="0.80392156862745101" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.80400002002716064" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -25,6 +25,8 @@
 		15EEA14E29ADE193004A830B /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA14D29ADE193004A830B /* HomePage.storyboard */; };
 		15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA14F29ADE571004A830B /* UserDefaults+Extension.swift */; };
 		15EEA15229ADE728004A830B /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA15129ADE728004A830B /* HomePageController.swift */; };
+		15EEA15429AF215A004A830B /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA15329AF215A004A830B /* ProfileController.swift */; };
+		15EEA15729AF2951004A830B /* FindClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA15529AF2951004A830B /* FindClassController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		15EEA14D29ADE193004A830B /* HomePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
 		15EEA14F29ADE571004A830B /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		15EEA15129ADE728004A830B /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
+		15EEA15329AF215A004A830B /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		15EEA15529AF2951004A830B /* FindClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindClassController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,8 @@
 				1587B05129AC7390007229DB /* LoginController.swift */,
 				1587B05329AC739A007229DB /* RegisterController.swift */,
 				15EEA15129ADE728004A830B /* HomePageController.swift */,
+				15EEA15329AF215A004A830B /* ProfileController.swift */,
+				15EEA15529AF2951004A830B /* FindClassController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -230,6 +236,8 @@
 				1587B02F29AC71B6007229DB /* AppDelegate.swift in Sources */,
 				15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */,
 				1587B05629AC7496007229DB /* Onboarding.swift in Sources */,
+				15EEA15729AF2951004A830B /* FindClassController.swift in Sources */,
+				15EEA15429AF215A004A830B /* ProfileController.swift in Sources */,
 				15EEA15229ADE728004A830B /* HomePageController.swift in Sources */,
 				15EEA14C29ADCA67004A830B /* CustomTextField.swift in Sources */,
 				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
