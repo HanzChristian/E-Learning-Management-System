@@ -10,7 +10,10 @@ import UIKit
 class HomePageController: UIViewController {
     
     // MARK: - Variables & Outlet
- 
+    let role = UserDefaults.standard.integer(forKey: "role")
+    
+    @IBOutlet weak var findclassBtn: UIButton!
+    
 }
 
 // MARK: - View Life Cycle
@@ -31,6 +34,12 @@ extension HomePageController{
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        if(role == 1){ //pengajar
+            findclassBtn.setTitle("Bentuk Kelas", for: .normal)
+            findclassBtn.titleLabel?.minimumScaleFactor = 0.5
+            findclassBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+            findclassBtn.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
+        }
     }
 }
 // MARK: - IBActions
@@ -38,6 +47,15 @@ extension HomePageController{
 // MARK: - Private/Functions
 extension HomePageController{
     @IBAction func btnPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "findclassSegue", sender: nil)
+        if (role == 0){
+            performSegue(withIdentifier: "findclassSegue", sender: nil)
+        }else{
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MakeClassController") as! MakeClassController
+            vc.modalPresentationStyle = .automatic
+            let nav =  UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+        }
+        
     }
 }

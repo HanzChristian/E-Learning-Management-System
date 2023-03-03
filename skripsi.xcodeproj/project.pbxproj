@@ -27,6 +27,12 @@
 		15EEA15229ADE728004A830B /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA15129ADE728004A830B /* HomePageController.swift */; };
 		15EEA15429AF215A004A830B /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA15329AF215A004A830B /* ProfileController.swift */; };
 		15EEA15729AF2951004A830B /* FindClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA15529AF2951004A830B /* FindClassController.swift */; };
+		15EEA15A29B1ADE2004A830B /* EmptySpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA15929B1ADE2004A830B /* EmptySpaceController.swift */; };
+		15EEA15C29B1BE7C004A830B /* MakeClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA15B29B1BE7C004A830B /* MakeClassController.swift */; };
+		15EEA16329B1C384004A830B /* ClassNameTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA16129B1C384004A830B /* ClassNameTVC.swift */; };
+		15EEA16429B1C384004A830B /* ClassNameTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA16229B1C384004A830B /* ClassNameTVC.xib */; };
+		15EEA16729B1C4F4004A830B /* ClassDescriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA16529B1C4F4004A830B /* ClassDescriptionTVC.swift */; };
+		15EEA16829B1C4F4004A830B /* ClassDescriptionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA16629B1C4F4004A830B /* ClassDescriptionTVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +58,12 @@
 		15EEA15129ADE728004A830B /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		15EEA15329AF215A004A830B /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		15EEA15529AF2951004A830B /* FindClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindClassController.swift; sourceTree = "<group>"; };
+		15EEA15929B1ADE2004A830B /* EmptySpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySpaceController.swift; sourceTree = "<group>"; };
+		15EEA15B29B1BE7C004A830B /* MakeClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeClassController.swift; sourceTree = "<group>"; };
+		15EEA16129B1C384004A830B /* ClassNameTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassNameTVC.swift; sourceTree = "<group>"; };
+		15EEA16229B1C384004A830B /* ClassNameTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassNameTVC.xib; sourceTree = "<group>"; };
+		15EEA16529B1C4F4004A830B /* ClassDescriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDescriptionTVC.swift; sourceTree = "<group>"; };
+		15EEA16629B1C4F4004A830B /* ClassDescriptionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassDescriptionTVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +119,7 @@
 		1587B04329AC728C007229DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				15EEA15D29B1C2E3004A830B /* TableViewCells */,
 				159FD2F729ACDF5D000DFC26 /* CustomViews */,
 				1587B03429AC71B6007229DB /* Main.storyboard */,
 				159FD2FC29ADB0A6000DFC26 /* Register.storyboard */,
@@ -144,6 +157,8 @@
 				15EEA15129ADE728004A830B /* HomePageController.swift */,
 				15EEA15329AF215A004A830B /* ProfileController.swift */,
 				15EEA15529AF2951004A830B /* FindClassController.swift */,
+				15EEA15929B1ADE2004A830B /* EmptySpaceController.swift */,
+				15EEA15B29B1BE7C004A830B /* MakeClassController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -155,6 +170,25 @@
 				15EEA14B29ADCA67004A830B /* CustomTextField.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		15EEA15D29B1C2E3004A830B /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				15EEA16029B1C367004A830B /* Make Class */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		15EEA16029B1C367004A830B /* Make Class */ = {
+			isa = PBXGroup;
+			children = (
+				15EEA16129B1C384004A830B /* ClassNameTVC.swift */,
+				15EEA16229B1C384004A830B /* ClassNameTVC.xib */,
+				15EEA16529B1C4F4004A830B /* ClassDescriptionTVC.swift */,
+				15EEA16629B1C4F4004A830B /* ClassDescriptionTVC.xib */,
+			);
+			path = "Make Class";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +254,9 @@
 				15EEA14E29ADE193004A830B /* HomePage.storyboard in Resources */,
 				1587B03629AC71B6007229DB /* Main.storyboard in Resources */,
 				159FD2FF29ADB0B0000DFC26 /* Login.storyboard in Resources */,
+				15EEA16429B1C384004A830B /* ClassNameTVC.xib in Resources */,
 				159FD2FD29ADB0A6000DFC26 /* Register.storyboard in Resources */,
+				15EEA16829B1C4F4004A830B /* ClassDescriptionTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,17 +270,21 @@
 				1587B03329AC71B6007229DB /* ViewController.swift in Sources */,
 				1587B05229AC7390007229DB /* LoginController.swift in Sources */,
 				1587B02F29AC71B6007229DB /* AppDelegate.swift in Sources */,
+				15EEA15A29B1ADE2004A830B /* EmptySpaceController.swift in Sources */,
 				15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */,
 				1587B05629AC7496007229DB /* Onboarding.swift in Sources */,
 				15EEA15729AF2951004A830B /* FindClassController.swift in Sources */,
 				15EEA15429AF215A004A830B /* ProfileController.swift in Sources */,
 				15EEA15229ADE728004A830B /* HomePageController.swift in Sources */,
 				15EEA14C29ADCA67004A830B /* CustomTextField.swift in Sources */,
+				15EEA16329B1C384004A830B /* ClassNameTVC.swift in Sources */,
 				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
 				159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */,
+				15EEA15C29B1BE7C004A830B /* MakeClassController.swift in Sources */,
 				1587B04729AC72E6007229DB /* UIView+Extension.swift in Sources */,
 				1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */,
 				1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */,
+				15EEA16729B1C4F4004A830B /* ClassDescriptionTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

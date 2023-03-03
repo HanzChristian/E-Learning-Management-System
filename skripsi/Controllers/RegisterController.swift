@@ -15,6 +15,8 @@ class RegisterController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+//    let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.editin))
+    
 }
 // MARK: - View Life Cycle
 extension RegisterController{
@@ -35,11 +37,12 @@ extension RegisterController{
 // MARK: - IBActions
 extension RegisterController{
     @IBAction func segmentChange(_ sender: UISegmentedControl){
+        // 0 = pelajar , 1 = pengajar
         if sender.selectedSegmentIndex == 0 {
-            
+            UserDefaults.standard.set(0, forKey: "role")
         }
         else{
-            
+            UserDefaults.standard.set(1, forKey: "role")
         }
     }
     @IBAction func registerPressed(_ sender: UIButton) {
