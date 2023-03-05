@@ -12,6 +12,8 @@ class MakeClassController: UIViewController {
     // MARK: - Variables & Outlet
     var classNameTVC: ClassNameTVC?
     var classDescTVC: ClassDescriptionTVC?
+    var jumlahKelas: Kelas?
+    
     var height = 52.0
     let cellTitle = ["Nama Kelas", "Deskripsi Kelas"]
     

@@ -33,6 +33,10 @@
 		15EEA16429B1C384004A830B /* ClassNameTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA16229B1C384004A830B /* ClassNameTVC.xib */; };
 		15EEA16729B1C4F4004A830B /* ClassDescriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA16529B1C4F4004A830B /* ClassDescriptionTVC.swift */; };
 		15EEA16829B1C4F4004A830B /* ClassDescriptionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA16629B1C4F4004A830B /* ClassDescriptionTVC.xib */; };
+		15EEA16B29B4BF6B004A830B /* ClassTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA16929B4BF6B004A830B /* ClassTVC.swift */; };
+		15EEA16C29B4BF6B004A830B /* ClassTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA16A29B4BF6B004A830B /* ClassTVC.xib */; };
+		15EEA16F29B4C4A2004A830B /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA16E29B4C4A2004A830B /* Struct.swift */; };
+		15EEA17129B4C99D004A830B /* MuridClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA17029B4C99D004A830B /* MuridClassController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,10 @@
 		15EEA16229B1C384004A830B /* ClassNameTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassNameTVC.xib; sourceTree = "<group>"; };
 		15EEA16529B1C4F4004A830B /* ClassDescriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassDescriptionTVC.swift; sourceTree = "<group>"; };
 		15EEA16629B1C4F4004A830B /* ClassDescriptionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassDescriptionTVC.xib; sourceTree = "<group>"; };
+		15EEA16929B4BF6B004A830B /* ClassTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassTVC.swift; sourceTree = "<group>"; };
+		15EEA16A29B4BF6B004A830B /* ClassTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassTVC.xib; sourceTree = "<group>"; };
+		15EEA16E29B4C4A2004A830B /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
+		15EEA17029B4C99D004A830B /* MuridClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuridClassController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				1587B05529AC7496007229DB /* Onboarding.swift */,
+				15EEA16E29B4C4A2004A830B /* Struct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -159,6 +168,7 @@
 				15EEA15529AF2951004A830B /* FindClassController.swift */,
 				15EEA15929B1ADE2004A830B /* EmptySpaceController.swift */,
 				15EEA15B29B1BE7C004A830B /* MakeClassController.swift */,
+				15EEA17029B4C99D004A830B /* MuridClassController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -175,6 +185,7 @@
 		15EEA15D29B1C2E3004A830B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				15EEA16D29B4BF75004A830B /* Class */,
 				15EEA16029B1C367004A830B /* Make Class */,
 			);
 			path = TableViewCells;
@@ -189,6 +200,15 @@
 				15EEA16629B1C4F4004A830B /* ClassDescriptionTVC.xib */,
 			);
 			path = "Make Class";
+			sourceTree = "<group>";
+		};
+		15EEA16D29B4BF75004A830B /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				15EEA16929B4BF6B004A830B /* ClassTVC.swift */,
+				15EEA16A29B4BF6B004A830B /* ClassTVC.xib */,
+			);
+			path = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +277,7 @@
 				15EEA16429B1C384004A830B /* ClassNameTVC.xib in Resources */,
 				159FD2FD29ADB0A6000DFC26 /* Register.storyboard in Resources */,
 				15EEA16829B1C4F4004A830B /* ClassDescriptionTVC.xib in Resources */,
+				15EEA16C29B4BF6B004A830B /* ClassTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,8 +294,10 @@
 				15EEA15A29B1ADE2004A830B /* EmptySpaceController.swift in Sources */,
 				15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */,
 				1587B05629AC7496007229DB /* Onboarding.swift in Sources */,
+				15EEA17129B4C99D004A830B /* MuridClassController.swift in Sources */,
 				15EEA15729AF2951004A830B /* FindClassController.swift in Sources */,
 				15EEA15429AF215A004A830B /* ProfileController.swift in Sources */,
+				15EEA16F29B4C4A2004A830B /* Struct.swift in Sources */,
 				15EEA15229ADE728004A830B /* HomePageController.swift in Sources */,
 				15EEA14C29ADCA67004A830B /* CustomTextField.swift in Sources */,
 				15EEA16329B1C384004A830B /* ClassNameTVC.swift in Sources */,
@@ -284,6 +307,7 @@
 				1587B04729AC72E6007229DB /* UIView+Extension.swift in Sources */,
 				1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */,
 				1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */,
+				15EEA16B29B4BF6B004A830B /* ClassTVC.swift in Sources */,
 				15EEA16729B1C4F4004A830B /* ClassDescriptionTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

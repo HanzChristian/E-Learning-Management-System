@@ -34,14 +34,27 @@ extension EmptySpaceController{
     override func viewDidLoad(){
         super.viewDidLoad()
         if(role == 1){ //pengajar
-            findclassBtn.setTitle("BENTUK KELAS", for: .normal)
             findclassBtn.titleLabel?.minimumScaleFactor = 0.5
             findclassBtn.titleLabel?.adjustsFontSizeToFitWidth = true
             findclassBtn.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
+            findclassBtn.titleLabel?.text = "BENTUK KELAS"
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.enableHidden), name: NSNotification.Name(rawValue: "hidden"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.unableHidden), name: NSNotification.Name(rawValue: "unhidden"), object: nil)
     }
 }
     // MARK: - IBActions
     
     // MARK: - Private/Functions
+extension EmptySpaceController{
+    @objc func enableHidden(){
+        view.frame = self.view.bounds
+        view.isHidden = true
+    }
+
+    @objc func unableHidden(){
+        view.frame = self.view.bounds
+        view.isHidden = false
+    }
+}
 
