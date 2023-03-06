@@ -34,10 +34,11 @@ extension EmptySpaceController{
     override func viewDidLoad(){
         super.viewDidLoad()
         if(role == 1){ //pengajar
-            findclassBtn.titleLabel?.minimumScaleFactor = 0.5
-            findclassBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-            findclassBtn.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-            findclassBtn.titleLabel?.text = "BENTUK KELAS"
+            if let attrFont = UIFont(name: "Helvetica-Bold", size: 18) {
+                      let title = "BENTUK KELAS"
+                      let attrTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: attrFont])
+                      findclassBtn.setAttributedTitle(attrTitle, for: UIControl.State.normal)
+                  }
         }
         NotificationCenter.default.addObserver(self, selector: #selector(self.enableHidden), name: NSNotification.Name(rawValue: "hidden"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.unableHidden), name: NSNotification.Name(rawValue: "unhidden"), object: nil)

@@ -304,9 +304,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="YqQ-zZ-5p5"/>
                     <connections>
-                        <outlet property="findclassBtn" destination="xPW-Qh-6jp" id="yzw-za-SDn"/>
+                        <outlet property="findclassBtn" destination="xPW-Qh-6jp" id="5bK-ul-aK0"/>
                         <outlet property="tableView" destination="Sh0-5C-L9h" id="avZ-Vk-TYX"/>
-                        <segue destination="N1i-KS-oI3" kind="show" identifier="muridclassSegue" id="zgK-g9-bLM"/>
+                        <segue destination="fEk-fb-0Ap" kind="presentation" identifier="guruclassSegue" modalPresentationStyle="fullScreen" id="nJw-Bi-Wq9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6gz-AW-ZYb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -506,21 +506,67 @@
             </objects>
             <point key="canvasLocation" x="-155.38461538461539" y="634.83412322274876"/>
         </scene>
-        <!--Murid Class Controller-->
-        <scene sceneID="Dhb-qj-5Ga">
+        <!--Navigation Controller-->
+        <scene sceneID="ZIL-jX-gUP">
             <objects>
-                <viewController storyboardIdentifier="MuridClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N1i-KS-oI3" customClass="MuridClassController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="64d-Oi-kyZ">
+                <navigationController id="fEk-fb-0Ap" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="GSo-uR-Ocw"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9G-xy-vGT">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Q2P-eq-sFz" kind="relationship" relationship="rootViewController" id="AMQ-R5-1Wu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h1E-KW-4Fx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-154" y="-771"/>
+        </scene>
+        <!--Guru Class Controller-->
+        <scene sceneID="ljy-OF-8lb">
+            <objects>
+                <viewController storyboardIdentifier="GuruClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q2P-eq-sFz" customClass="GuruClassController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CwY-ER-Xj5">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="sAc-aj-QWp"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyb-zP-P3z">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="145"/>
+                                <color key="backgroundColor" name="SegmentedPressedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="145" id="czM-II-i4x"/>
+                                    <constraint firstAttribute="width" constant="390" id="duL-gi-1ly"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1yb-Bn-Ius">
+                                <rect key="frame" x="0.0" y="144" width="390" height="700"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="390" id="iaL-qM-GEb"/>
+                                    <constraint firstAttribute="height" constant="700" id="sge-ji-Zc1"/>
+                                </constraints>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jT1-Sg-YCg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eyb-zP-P3z" firstAttribute="top" secondItem="CwY-ER-Xj5" secondAttribute="top" id="HM8-TU-ZOS"/>
+                            <constraint firstItem="1yb-Bn-Ius" firstAttribute="trailing" secondItem="jT1-Sg-YCg" secondAttribute="trailing" id="cLp-qQ-k9H"/>
+                            <constraint firstAttribute="bottom" secondItem="1yb-Bn-Ius" secondAttribute="bottom" id="eIN-v9-Apr"/>
+                            <constraint firstItem="eyb-zP-P3z" firstAttribute="trailing" secondItem="jT1-Sg-YCg" secondAttribute="trailing" id="gmz-y5-FYz"/>
+                            <constraint firstItem="1yb-Bn-Ius" firstAttribute="leading" secondItem="jT1-Sg-YCg" secondAttribute="leading" id="ta4-Hc-c1I"/>
+                            <constraint firstItem="eyb-zP-P3z" firstAttribute="leading" secondItem="jT1-Sg-YCg" secondAttribute="leading" id="vGD-hS-e4d"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="K3t-N2-fXc"/>
+                    <navigationItem key="navigationItem" id="8mX-75-Jf5"/>
+                    <connections>
+                        <outlet property="tableView" destination="1yb-Bn-Ius" id="WKJ-JW-8Vj"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lzS-G4-TYr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W7N-W9-XTl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="623" y="-707"/>
+            <point key="canvasLocation" x="716.92307692307691" y="-771.32701421800948"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="paX-bT-cMk">

@@ -10,9 +10,8 @@ import UIKit
 
 // MARK: - Structures
 struct Kelas{
-//    let className: String
-//    let classModule: Int
-//    let classEnrollment: String
-//    let classImg: UIImage
-    let jumlahKelas: Int
+    let className: String
+    let classModule: String
+    let classEnrollment: String
+    let classImg: UIImage
 }

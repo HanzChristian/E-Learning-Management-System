@@ -11,8 +11,9 @@ class HomePageController: UIViewController {
     
     // MARK: - Variables & Outlet
     let role = UserDefaults.standard.integer(forKey: "role")
-    var jumlahKelas:[Kelas]?
-    var counts = 1
+    var jumlahKelas:[Kelas] = []
+    
+    var counts = 0
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var findclassBtn: UIButton!
@@ -25,21 +26,21 @@ extension HomePageController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        if(role == 1){
-            setBtn()
-        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        if(role == 1){
-            setBtn()
-        }
     }
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        jumlahKelas = [
+            Kelas(className: "Aljabar Linear", classModule: "2 Modul", classEnrollment: "En:ollment Key : 7F5DW", classImg: #imageLiteral(resourceName: "classimage-3")),
+            Kelas(className: "Matematika Teknik", classModule: "5 Modul", classEnrollment: "Enrollment Key : 21DWA", classImg: #imageLiteral(resourceName: "classimage-1")),
+            Kelas(className: "Fisika Listrik", classModule: "4 Modul", classEnrollment: "Enrollment Key : 35WZX", classImg: #imageLiteral(resourceName: "classimage-2"))
+        ]
+        
         if(role == 1){ //pengajar
             setBtn()
         }
@@ -57,7 +58,6 @@ extension HomePageController{
         }
     }
 }
-// MARK: - IBActions
 
 // MARK: - Private/Functions
 extension HomePageController{
@@ -65,6 +65,7 @@ extension HomePageController{
         if (role == 0){
             performSegue(withIdentifier: "findclassSegue", sender: nil)
         }else{
+            setBtn()
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MakeClassController") as! MakeClassController
             vc.modalPresentationStyle = .automatic
@@ -74,17 +75,19 @@ extension HomePageController{
     }
     
     func setBtn(){
-        findclassBtn.titleLabel?.text = "Bentuk Kelas"
-        findclassBtn.titleLabel?.minimumScaleFactor = 0.5
-        findclassBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        findclassBtn.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
+        if let attrFont = UIFont(name: "Helvetica", size: 12) {
+                  let title = "Bentuk Kelas"
+                  let attrTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: attrFont])
+                  findclassBtn.setAttributedTitle(attrTitle, for: UIControl.State.normal)
+              }
     }
+
 }
 // MARK: - TableView Delegate & Resource
 extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return jumlahKelas!.count
         return counts
+//        return jumlahKelas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,6 +98,8 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
 //        cell.classmodulLbl =
 //        cell.classenrollmentkeyLbl =
         
+        
+        cell.setupClass(jumlahKelas[indexPath.row])
         return cell
     }
     
@@ -103,8 +108,16 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "muridclassSegue", sender: self)
+        if(role == 1){
+            self.performSegue(withIdentifier: "guruclassSegue", sender: self)
+        }
+        else{
+//            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "FindClassController") as! FindClassController
+//            let nav =  UINavigationController(rootViewController: vc)
+//            self.present(nav, animated: true)
+            print("belom dibuat")
+        }
     }
-    
     
 }

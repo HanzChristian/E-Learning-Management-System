@@ -17,6 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="350" height="135"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5E-PM-hPP">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="135"/>
+                        <color key="backgroundColor" name="SegmentedPressedColor"/>
+                    </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="classimage-3" translatesAutoresizingMaskIntoConstraints="NO" id="njx-a2-lGC">
                         <rect key="frame" x="0.0" y="0.0" width="95" height="135"/>
                         <constraints>
@@ -50,15 +54,23 @@
                 </subviews>
                 <color key="backgroundColor" name="SegmentedPressedColor"/>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Y5E-PM-hPP" secondAttribute="bottom" id="2tr-it-daS"/>
+                    <constraint firstItem="Y5E-PM-hPP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7wx-Uq-6mR"/>
+                    <constraint firstAttribute="trailing" secondItem="Y5E-PM-hPP" secondAttribute="trailing" id="Eun-Oa-4LL"/>
                     <constraint firstAttribute="trailing" secondItem="X3y-Xk-HM5" secondAttribute="trailing" constant="7" id="IHJ-cz-8r4"/>
                     <constraint firstAttribute="bottom" secondItem="X3y-Xk-HM5" secondAttribute="bottom" constant="11" id="Kxd-0E-vz9"/>
+                    <constraint firstItem="Y5E-PM-hPP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OXR-AP-dhW"/>
+                    <constraint firstItem="Y5E-PM-hPP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="RPQ-yd-egJ"/>
                     <constraint firstItem="njx-a2-lGC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VT1-wy-aE2"/>
+                    <constraint firstAttribute="bottom" secondItem="Y5E-PM-hPP" secondAttribute="bottom" id="W9U-Eb-46n"/>
                     <constraint firstItem="7zV-9k-Zt9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="43" id="ZxM-qu-U7X"/>
                     <constraint firstItem="uyl-Ec-h7j" firstAttribute="leading" secondItem="njx-a2-lGC" secondAttribute="trailing" constant="22" id="a6O-zl-Eq6"/>
                     <constraint firstAttribute="bottom" secondItem="njx-a2-lGC" secondAttribute="bottom" id="fIw-dX-buc"/>
                     <constraint firstItem="njx-a2-lGC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lji-r0-Kzw"/>
                     <constraint firstItem="uyl-Ec-h7j" firstAttribute="top" secondItem="7zV-9k-Zt9" secondAttribute="bottom" constant="2" id="oGg-xA-Cqh"/>
                     <constraint firstItem="7zV-9k-Zt9" firstAttribute="leading" secondItem="njx-a2-lGC" secondAttribute="trailing" constant="22" id="utz-Bq-Nh2"/>
+                    <constraint firstItem="Y5E-PM-hPP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="x2E-zC-uoS"/>
+                    <constraint firstAttribute="trailing" secondItem="Y5E-PM-hPP" secondAttribute="trailing" id="x2r-Tx-czN"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -72,6 +84,7 @@
                 <outlet property="classenrollmentkeyLbl" destination="X3y-Xk-HM5" id="eja-kr-UVq"/>
                 <outlet property="classmodulLbl" destination="uyl-Ec-h7j" id="XYa-Vl-w9C"/>
                 <outlet property="classtitleLbl" destination="7zV-9k-Zt9" id="tcs-NN-PZJ"/>
+                <outlet property="shadowView" destination="Y5E-PM-hPP" id="wlH-cS-NRZ"/>
             </connections>
             <point key="canvasLocation" x="-12.307692307692307" y="20.971563981042653"/>
         </tableViewCell>
