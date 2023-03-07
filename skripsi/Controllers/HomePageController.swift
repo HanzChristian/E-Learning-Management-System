@@ -13,7 +13,7 @@ class HomePageController: UIViewController {
     let role = UserDefaults.standard.integer(forKey: "role")
     var jumlahKelas:[Kelas] = []
     
-    var counts = 0
+    var counts = 1
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var findclassBtn: UIButton!
@@ -35,6 +35,8 @@ extension HomePageController{
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
+        
         jumlahKelas = [
             Kelas(className: "Aljabar Linear", classModule: "2 Modul", classEnrollment: "En:ollment Key : 7F5DW", classImg: #imageLiteral(resourceName: "classimage-3")),
             Kelas(className: "Matematika Teknik", classModule: "5 Modul", classEnrollment: "Enrollment Key : 21DWA", classImg: #imageLiteral(resourceName: "classimage-1")),
@@ -86,8 +88,8 @@ extension HomePageController{
 // MARK: - TableView Delegate & Resource
 extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return counts
-//        return jumlahKelas.count
+//        return counts
+        return jumlahKelas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

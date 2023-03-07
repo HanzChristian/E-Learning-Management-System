@@ -27,9 +27,9 @@ extension GuruClassController{
         tableView.register(nibTugas, forCellReuseIdentifier: "TugasTVC")
     }
 }
-    // MARK: - IBActions
-    
-    // MARK: - Private/Functions
+// MARK: - IBActions
+
+// MARK: - Private/Functions
 extension GuruClassController{
     private func setNavItem(){
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -50,18 +50,43 @@ extension GuruClassController{
     }
     
     @objc private func choose(){
-        let actionSheet = UIAlertController(title: "Apakah kamu ingin menambahkan Modul?", message: nil, preferredStyle: .actionSheet)
-        let actModul = UIAlertAction(title: "Ya", style: .default) { _ in
-            //present
+        let actionSheet = UIAlertController(title: "Apakah yang ingin kamu tambahkan?", message: nil, preferredStyle: .actionSheet)
+        let actModul = UIAlertAction(title: "Tambahkan Modul", style: .default) { _ in
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ModulController") as! ModulController
+            vc.modalPresentationStyle = .pageSheet
+            let nav =  UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+        }
+        let actTugas = UIAlertAction(title: "Tambahkan Tugas", style: .default) { _ in
+            
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "TugasController") as! TugasController
+            vc.modalPresentationStyle = .pageSheet
+            let nav =  UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+            
         }
         let actBatal = UIAlertAction(title: "Batal", style: .cancel)
         actionSheet.addAction(actModul)
+        actionSheet.addAction(actTugas)
         actionSheet.addAction(actBatal)
         present(actionSheet, animated: true, completion: nil)
     }
     
-    @objc func btnTapped(sender: UIButton){
-       print("segue")
+    @objc func btnTappedModul(sender: UIButton){
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ModulController") as! ModulController
+        vc.modalPresentationStyle = .pageSheet
+        let nav =  UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true)
+    }
+    @objc func btnTappedTugas(sender: UIButton){
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "TugasController") as! TugasController
+        vc.modalPresentationStyle = .pageSheet
+        let nav =  UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true)
     }
 }
 
@@ -84,13 +109,24 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         let headerView = UIView()
         let frame: CGRect = tableView.frame
         
-        //bikin + button
-        let plusBtn: UIButton = UIButton(frame: CGRectMake(frame.size.width-70, 10, 30, 30))
-        plusBtn.setTitle("+", for: .normal)
-        plusBtn.setTitleColor(.black, for: .normal)
-        plusBtn.backgroundColor = .white
-        plusBtn.addTarget(self, action: #selector(GuruClassController.btnTapped(sender:)), for: .touchUpInside)
-        
+        if(section == 0){
+            //bikin + button
+            let plusBtn: UIButton = UIButton(frame: CGRectMake(frame.size.width-70, 10, 30, 30))
+            plusBtn.setTitle("+", for: .normal)
+            plusBtn.setTitleColor(.black, for: .normal)
+            plusBtn.backgroundColor = .white
+            plusBtn.addTarget(self, action: #selector(GuruClassController.btnTappedModul(sender:)), for: .touchUpInside)
+            headerView.addSubview(plusBtn)
+        }
+        else if(section == 1){
+            //bikin + button
+            let plusBtn: UIButton = UIButton(frame: CGRectMake(frame.size.width-70, 10, 30, 30))
+            plusBtn.setTitle("+", for: .normal)
+            plusBtn.setTitleColor(.black, for: .normal)
+            plusBtn.backgroundColor = .white
+            plusBtn.addTarget(self, action: #selector(GuruClassController.btnTappedTugas(sender:)), for: .touchUpInside)
+            headerView.addSubview(plusBtn)
+        }
         
         //bikin label section
         let sectionLabel = UILabel(frame: CGRect(x: 4, y: 20, width: tableView.bounds.size.width, height: 5))
@@ -99,22 +135,21 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         sectionLabel.text = cellTitle[section]
         sectionLabel.sizeToFit()
         headerView.addSubview(sectionLabel)
-        headerView.addSubview(plusBtn)
         return headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.section == 0){
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ModulTVC", for: indexPath) as! ModulTVC
-                return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ModulTVC", for: indexPath) as! ModulTVC
+            return cell
         }
         else if(indexPath.section == 1){
-                let cell = tableView.dequeueReusableCell(withIdentifier: "TugasTVC", for: indexPath) as! TugasTVC
-                return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TugasTVC", for: indexPath) as! TugasTVC
+            return cell
         }
         return UITableViewCell()
     }
@@ -135,7 +170,7 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     }
     
     
-
-
+    
+    
 }
 

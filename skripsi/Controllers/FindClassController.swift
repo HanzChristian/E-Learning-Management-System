@@ -16,6 +16,7 @@ class FindClassController: UIViewController {
 extension FindClassController{
     override func viewDidLoad(){
         super.viewDidLoad()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenView"), object: nil)
         setNavItem()
         self.tableView.delegate = self
         self.tableView.dataSource = self
