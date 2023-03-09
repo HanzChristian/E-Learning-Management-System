@@ -33,7 +33,7 @@ class ClassTVC: UITableViewCell {
     
     @objc func enableHidden(){
         potonganView.frame = self.potonganView.bounds
-        potonganView.isHidden = true
+        potonganView.isHidden = false
     }
     @objc func unableHidden(){
         potonganView.frame = self.potonganView.bounds

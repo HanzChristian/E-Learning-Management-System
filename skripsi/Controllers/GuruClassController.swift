@@ -165,7 +165,11 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(indexPath.section == 1){
-            print("clickable")
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "KumpulanTugasController") as! KumpulanTugasController
+            vc.modalPresentationStyle = .fullScreen
+            let nav =  UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
         }
     }
     

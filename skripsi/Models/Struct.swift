@@ -15,3 +15,9 @@ struct Kelas{
     let classEnrollment: String
     let classImg: UIImage
 }
+
+struct Tugas{
+    let tugasDate: String
+    let tugasName: String
+    let tugasFile: String
+}
