@@ -114,7 +114,7 @@ extension MakeClassController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        let sectionLabel = UILabel(frame: CGRect(x: 4, y: 20, width: tableView.bounds.size.width, height: 5))
+        let sectionLabel = UILabel(frame: CGRect(x: 5, y: 20, width: tableView.bounds.size.width, height: 5))
         sectionLabel.font = .systemFont(ofSize: 16, weight: .medium)
         sectionLabel.textColor = UIColor.black
         sectionLabel.text = cellTitle[section]
@@ -136,7 +136,7 @@ extension MakeClassController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 45
     }
     
 }

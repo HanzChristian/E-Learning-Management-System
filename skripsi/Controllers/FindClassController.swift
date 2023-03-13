@@ -35,7 +35,6 @@ extension FindClassController{
         navigationItem.title = "Cari Kelasku"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Batal", style: .plain, target: self, action: #selector(dismissSelf))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
         
         navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
@@ -46,10 +45,29 @@ extension FindClassController{
     @objc private func dismissSelf(){
         dismiss(animated: true,completion: nil)
     }
-    
-    @objc private func saveItem(){
-        //isi save data
-        print("Saved")
+
+    func showAlert(){
+        let alert = UIAlertController(title: "Masuk ke Kelas", message: "Masukkan Enrollment Key kelas!", preferredStyle: .alert)
+        
+        alert.addTextField{ field in
+            field.placeholder = "Enrollment Key"
+            field.returnKeyType = .done
+        }
+        alert.addAction(UIAlertAction(title: "Kembali", style: .cancel,handler: nil))
+        alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler: {_ in
+            guard let fields = alert.textFields,fields.count == 1 else{
+                return
+            }
+            let enrollmentField = fields[0]
+            guard let enrollmentKey = enrollmentField.text, !enrollmentKey.isEmpty else{
+                print("EnrolmentKeynya salah/kosong!")
+                return
+            }
+            print("Enrolment Key: \(enrollmentKey)")
+            self.dismiss(animated: true,completion: nil)
+        }))
+        
+        present(alert,animated:true)
     }
 }
 // MARK: - TableView Delegate & Datasource
@@ -74,8 +92,8 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
+        showAlert()
         
-        cell.layer.borderWidth = 3.0
-        cell.layer.borderColor = UIColor.systemBlue.cgColor
     }
+    
 }

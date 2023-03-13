@@ -26,6 +26,13 @@
 		154862E729B72C0A001B90DE /* TugasNameTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 154862E529B72C0A001B90DE /* TugasNameTVC.xib */; };
 		154862E929B99DFC001B90DE /* KumpulanTugasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862E829B99DFC001B90DE /* KumpulanTugasController.swift */; };
 		154862EC29B9A274001B90DE /* KumpulanTugasTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862EB29B9A274001B90DE /* KumpulanTugasTVC.swift */; };
+		1559C57429BDB8880006CA4F /* ExpandableTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C57229BDB8880006CA4F /* ExpandableTVC.swift */; };
+		1559C57529BDB8880006CA4F /* ExpandableTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1559C57329BDB8880006CA4F /* ExpandableTVC.xib */; };
+		1559C57729BDC9870006CA4F /* InputTugasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C57629BDC9870006CA4F /* InputTugasController.swift */; };
+		1559C57B29BFB3EC0006CA4F /* DeskripsiTugasTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C57929BFB3EC0006CA4F /* DeskripsiTugasTVC.swift */; };
+		1559C57C29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1559C57A29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib */; };
+		1559C57F29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C57D29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift */; };
+		1559C58029BFB3FC0006CA4F /* PengumpulanTugasTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1559C57E29BFB3FC0006CA4F /* PengumpulanTugasTVC.xib */; };
 		1587B02F29AC71B6007229DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B02E29AC71B6007229DB /* AppDelegate.swift */; };
 		1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B03029AC71B6007229DB /* SceneDelegate.swift */; };
 		1587B03329AC71B6007229DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B03229AC71B6007229DB /* ViewController.swift */; };
@@ -78,6 +85,13 @@
 		154862E529B72C0A001B90DE /* TugasNameTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TugasNameTVC.xib; sourceTree = "<group>"; };
 		154862E829B99DFC001B90DE /* KumpulanTugasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumpulanTugasController.swift; sourceTree = "<group>"; };
 		154862EB29B9A274001B90DE /* KumpulanTugasTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumpulanTugasTVC.swift; sourceTree = "<group>"; };
+		1559C57229BDB8880006CA4F /* ExpandableTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTVC.swift; sourceTree = "<group>"; };
+		1559C57329BDB8880006CA4F /* ExpandableTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpandableTVC.xib; sourceTree = "<group>"; };
+		1559C57629BDC9870006CA4F /* InputTugasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTugasController.swift; sourceTree = "<group>"; };
+		1559C57929BFB3EC0006CA4F /* DeskripsiTugasTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeskripsiTugasTVC.swift; sourceTree = "<group>"; };
+		1559C57A29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeskripsiTugasTVC.xib; sourceTree = "<group>"; };
+		1559C57D29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PengumpulanTugasTVC.swift; sourceTree = "<group>"; };
+		1559C57E29BFB3FC0006CA4F /* PengumpulanTugasTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PengumpulanTugasTVC.xib; sourceTree = "<group>"; };
 		1587B02B29AC71B6007229DB /* skripsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skripsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1587B02E29AC71B6007229DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1587B03029AC71B6007229DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +183,27 @@
 			path = "Kumpulan Tugas Class";
 			sourceTree = "<group>";
 		};
+		1559C57129BDB8610006CA4F /* Murid Class */ = {
+			isa = PBXGroup;
+			children = (
+				1559C57829BFB3C00006CA4F /* Tugas Murid Class */,
+				1559C57229BDB8880006CA4F /* ExpandableTVC.swift */,
+				1559C57329BDB8880006CA4F /* ExpandableTVC.xib */,
+			);
+			path = "Murid Class";
+			sourceTree = "<group>";
+		};
+		1559C57829BFB3C00006CA4F /* Tugas Murid Class */ = {
+			isa = PBXGroup;
+			children = (
+				1559C57929BFB3EC0006CA4F /* DeskripsiTugasTVC.swift */,
+				1559C57A29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib */,
+				1559C57D29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift */,
+				1559C57E29BFB3FC0006CA4F /* PengumpulanTugasTVC.xib */,
+			);
+			path = "Tugas Murid Class";
+			sourceTree = "<group>";
+		};
 		1587B02229AC71B6007229DB = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +292,7 @@
 				154862CA29B70C3F001B90DE /* ModulController.swift */,
 				154862D929B72958001B90DE /* TugasController.swift */,
 				154862E829B99DFC001B90DE /* KumpulanTugasController.swift */,
+				1559C57629BDC9870006CA4F /* InputTugasController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -273,6 +309,7 @@
 		15EEA15D29B1C2E3004A830B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				1559C57129BDB8610006CA4F /* Murid Class */,
 				154862C129B5DA36001B90DE /* Guru Class */,
 				15EEA16D29B4BF75004A830B /* Class */,
 				15EEA16029B1C367004A830B /* Make Class */,
@@ -361,16 +398,19 @@
 				154862D829B711D4001B90DE /* UploadTVC.xib in Resources */,
 				1587B03B29AC71B7007229DB /* LaunchScreen.storyboard in Resources */,
 				154862C529B5DA53001B90DE /* ModulTVC.xib in Resources */,
+				1559C57C29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib in Resources */,
 				154862E729B72C0A001B90DE /* TugasNameTVC.xib in Resources */,
 				1587B03829AC71B7007229DB /* Assets.xcassets in Resources */,
 				15EEA14E29ADE193004A830B /* HomePage.storyboard in Resources */,
 				1587B03629AC71B6007229DB /* Main.storyboard in Resources */,
 				159FD2FF29ADB0B0000DFC26 /* Login.storyboard in Resources */,
 				15EEA16429B1C384004A830B /* ClassNameTVC.xib in Resources */,
+				1559C57529BDB8880006CA4F /* ExpandableTVC.xib in Resources */,
 				159FD2FD29ADB0A6000DFC26 /* Register.storyboard in Resources */,
 				154862D429B711C3001B90DE /* ModulDescriptionTVC.xib in Resources */,
 				154862D029B711AF001B90DE /* ModulNameTVC.xib in Resources */,
 				15EEA16829B1C4F4004A830B /* ClassDescriptionTVC.xib in Resources */,
+				1559C58029BFB3FC0006CA4F /* PengumpulanTugasTVC.xib in Resources */,
 				154862E329B72BF7001B90DE /* TugasDescriptionTVC.xib in Resources */,
 				15EEA16C29B4BF6B004A830B /* ClassTVC.xib in Resources */,
 				154862C929B5DA62001B90DE /* TugasTVC.xib in Resources */,
@@ -392,6 +432,7 @@
 				15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */,
 				1587B05629AC7496007229DB /* Onboarding.swift in Sources */,
 				15EEA17129B4C99D004A830B /* MuridClassController.swift in Sources */,
+				1559C57729BDC9870006CA4F /* InputTugasController.swift in Sources */,
 				15EEA15729AF2951004A830B /* FindClassController.swift in Sources */,
 				15EEA15429AF215A004A830B /* ProfileController.swift in Sources */,
 				15EEA16F29B4C4A2004A830B /* Struct.swift in Sources */,
@@ -405,6 +446,7 @@
 				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
 				159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */,
 				15EEA15C29B1BE7C004A830B /* MakeClassController.swift in Sources */,
+				1559C57F29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift in Sources */,
 				154862EC29B9A274001B90DE /* KumpulanTugasTVC.swift in Sources */,
 				1587B04729AC72E6007229DB /* UIView+Extension.swift in Sources */,
 				1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */,
@@ -412,7 +454,9 @@
 				154862C429B5DA53001B90DE /* ModulTVC.swift in Sources */,
 				154862CB29B70C3F001B90DE /* ModulController.swift in Sources */,
 				1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */,
+				1559C57B29BFB3EC0006CA4F /* DeskripsiTugasTVC.swift in Sources */,
 				154862D729B711D4001B90DE /* UploadTVC.swift in Sources */,
+				1559C57429BDB8880006CA4F /* ExpandableTVC.swift in Sources */,
 				154862C029B5CDA3001B90DE /* GuruClassController.swift in Sources */,
 				154862E229B72BF7001B90DE /* TugasDescriptionTVC.swift in Sources */,
 				15EEA16B29B4BF6B004A830B /* ClassTVC.swift in Sources */,

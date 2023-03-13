@@ -83,13 +83,17 @@ extension TugasController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        let sectionLabel = UILabel(frame: CGRect(x: 4, y: -5, width: tableView.bounds.size.width, height: 5))
+        let sectionLabel = UILabel(frame: CGRect(x: 5, y: 0, width: tableView.bounds.size.width, height: 5))
         sectionLabel.font = .systemFont(ofSize: 16, weight: .medium)
         sectionLabel.textColor = UIColor.black
         sectionLabel.text = cellTitle[section]
         sectionLabel.sizeToFit()
         headerView.addSubview(sectionLabel)
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 25
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

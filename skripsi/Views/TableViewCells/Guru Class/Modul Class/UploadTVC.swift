@@ -8,7 +8,9 @@
 import UIKit
 
 class UploadTVC: UITableViewCell {
+// MARK: - IBOutlets & Variables
 
+    // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,4 +22,13 @@ class UploadTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
+}
+// MARK: - Functions
+extension UploadTVC{
+    @IBAction func uploadPressed(_ sender: UIButton) {
+//        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
+//              documentPicker.delegate = self
+//              documentPicker.allowsMultipleSelection = false
+//              present(documentPicker, animated: true, completion: nil)
+    }
 }

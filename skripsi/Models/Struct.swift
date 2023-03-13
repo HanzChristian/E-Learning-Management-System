@@ -21,3 +21,9 @@ struct Tugas{
     let tugasName: String
     let tugasFile: String
 }
+
+struct Modul{
+    let modulNum: String
+    let modulName: String
+    let modulDesc: String
+}

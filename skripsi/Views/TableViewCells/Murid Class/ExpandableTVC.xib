@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpandableTVC" id="KGk-i7-Jjw" customClass="ExpandableTVC" customModule="skripsi" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modul 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yT5-Hw-zPg">
+                        <rect key="frame" x="129.66666666666666" y="4" width="61" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sistem Persamaan Linear" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HvP-8D-t7q">
+                        <rect key="frame" x="66" y="24" width="188" height="20"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="azD-GS-wIh">
+                        <rect key="frame" x="16" y="58" width="288" height="129"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <string key="text">Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cy7-cC-yeo">
+                        <rect key="frame" x="16" y="195" width="134.33333333333334" height="34.333333333333343"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="  Pdf bab 1.pdf">
+                            <imageReference key="image" image="list.bullet" catalog="system" symbolScale="medium"/>
+                            <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="13"/>
+                        </buttonConfiguration>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CL3-Si-LR9">
+                        <rect key="frame" x="16" y="229.33333333333334" width="126" height="35.000000000000028"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="  Tugas bab 1">
+                            <imageReference key="image" image="list.bullet" catalog="system" symbolScale="medium"/>
+                            <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="13"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="tugasPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Sag-9M-g54"/>
+                        </connections>
+                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9yw-5i-4jR">
+                        <rect key="frame" x="285.33333333333331" y="21.333333333333332" width="18.666666666666686" height="10.999999999999996"/>
+                        <color key="tintColor" red="0.20000001789999999" green="0.20784312490000001" blue="0.21960783" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="HvP-8D-t7q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="73C-fy-y3F"/>
+                    <constraint firstItem="yT5-Hw-zPg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="7GZ-GO-oQT"/>
+                    <constraint firstItem="CL3-Si-LR9" firstAttribute="top" secondItem="Cy7-cC-yeo" secondAttribute="bottom" id="I3G-oj-kRb"/>
+                    <constraint firstItem="yT5-Hw-zPg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Wno-Gh-hef"/>
+                    <constraint firstItem="9yw-5i-4jR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="hXr-Yc-cbW"/>
+                    <constraint firstItem="Cy7-cC-yeo" firstAttribute="top" secondItem="azD-GS-wIh" secondAttribute="bottom" constant="8" id="ioZ-Ka-26Z"/>
+                    <constraint firstItem="azD-GS-wIh" firstAttribute="top" secondItem="HvP-8D-t7q" secondAttribute="bottom" constant="14" id="mRb-nD-ERl"/>
+                    <constraint firstItem="CL3-Si-LR9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qWC-Jf-DuN"/>
+                    <constraint firstAttribute="trailing" secondItem="9yw-5i-4jR" secondAttribute="trailing" constant="16" id="sda-lI-jUh"/>
+                    <constraint firstItem="Cy7-cC-yeo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="thj-7z-ds6"/>
+                    <constraint firstItem="HvP-8D-t7q" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="uSq-k1-h9C"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" red="1" green="0.96078431372549022" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="modulDescLbl" destination="azD-GS-wIh" id="x2U-za-hPI"/>
+                <outlet property="modulNameLbl" destination="HvP-8D-t7q" id="7UR-S4-dBQ"/>
+                <outlet property="modulNumLbl" destination="yT5-Hw-zPg" id="i1L-Kk-YOR"/>
+                <outlet property="modulPdfBtn" destination="Cy7-cC-yeo" id="FTS-Wu-Ygc"/>
+                <outlet property="tugasBtn" destination="CL3-Si-LR9" id="0Lo-UW-Elr"/>
+            </connections>
+            <point key="canvasLocation" x="-12.307692307692307" y="-1.4218009478672986"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chevron.down" catalog="system" width="128" height="70"/>
+        <image name="list.bullet" catalog="system" width="128" height="87"/>
+    </resources>
+</document>

@@ -11,10 +11,13 @@ class HomePageController: UIViewController {
     
     // MARK: - Variables & Outlet
     let role = UserDefaults.standard.integer(forKey: "role")
+    let dateFormatter = DateFormatter()
+    let dates = Date()
+
     var jumlahKelas:[Kelas] = []
-    
     var counts = 1
     
+    @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var findclassBtn: UIButton!
 }
@@ -58,6 +61,7 @@ extension HomePageController{
         else if(counts == 1){
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
         }
+        setTime()
     }
 }
 
@@ -82,6 +86,50 @@ extension HomePageController{
                   let attrTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: attrFont])
                   findclassBtn.setAttributedTitle(attrTitle, for: UIControl.State.normal)
               }
+    }
+    
+    func setTime(){
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: dates)
+        let minutes = calendar.component(.minute, from: dates)
+        
+        let string = ("20 Jun 2022 \(hour):\(minutes):00 +0700")
+        
+        dateFormatter.dateFormat = "dd MMM yyyy HH:mm:ss Z"
+        
+        let newDate = dateFormatter.date(from: string)!
+        
+        //pagi
+        let startMorning = ("20 Jun 2022 01:00:00 +0700")
+        let endMorning = ("20 Jun 2022 11:59:00 +0700")
+        
+        //siang
+        let startNoon = ("20 Jun 2022 12:00:00 +0700")
+        let endNoon = ("20 Jun 2022 13:59:00 +0700")
+        
+        //sore
+        let startEvening = ("20 Jun 2022 14:00:00 +0700")
+        let endEvening = ("20 Jun 2022 17:59:00 +0700")
+    
+        
+        let startMorningDate = dateFormatter.date(from: startMorning)!
+        let endMorningDate = dateFormatter.date(from: endMorning)!
+        let startNoonDate = dateFormatter.date(from: startNoon)!
+        let endNoonDate = dateFormatter.date(from: endNoon)!
+        let startEveningDate = dateFormatter.date(from: startEvening)!
+        let endEveningDate = dateFormatter.date(from: endEvening)!
+        
+        if(newDate >= startMorningDate && newDate <= endMorningDate){
+            timeLbl.text = "Selamat Pagi"
+        }
+        else if(newDate >= startNoonDate && newDate <= endNoonDate){
+            timeLbl.text = "Selamat Siang"
+        }
+        else if(newDate >= startEveningDate && newDate <= endEveningDate){
+            timeLbl.text = "Selamat Sore"
+        }else{
+            timeLbl.text = "Selamat Malam"
+        }
     }
 
 }
@@ -114,11 +162,11 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
             self.performSegue(withIdentifier: "guruclassSegue", sender: self)
         }
         else{
-//            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "FindClassController") as! FindClassController
-//            let nav =  UINavigationController(rootViewController: vc)
-//            self.present(nav, animated: true)
-            print("belom dibuat")
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MuridClassController") as! MuridClassController
+            vc.modalPresentationStyle = .fullScreen
+            let nav =  UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
         }
     }
     
