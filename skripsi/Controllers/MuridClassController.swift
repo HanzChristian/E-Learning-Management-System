@@ -51,19 +51,6 @@ extension MuridClassController{
         dismiss(animated: true,completion: nil)
     }
     
-    func makeSheet() {
-        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "InputTugasController") as! InputTugasController
-        vc.modalPresentationStyle = .fullScreen
-        let nav =  UINavigationController(rootViewController: vc)
-        
-        if let sheet = nav.presentationController as? UISheetPresentationController{
-            sheet.detents = [.medium()]
-            sheet.preferredCornerRadius = 15
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-        }
-        self.present(nav,animated: true)
-    }
 }
 // MARK: - TableView Delegate & Datasource
 extension MuridClassController:UITableViewDelegate,UITableViewDataSource{

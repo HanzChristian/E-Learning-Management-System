@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MobileCoreServices
+import UniformTypeIdentifiers
 
 class ModulController: UIViewController {
     // MARK: - Variables & Outlet
@@ -13,8 +15,9 @@ class ModulController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let cellTitle = ["Nama Modul", "Deskripsi Modul","Upload File"]
     var height = 52.0
+    var displayURL: String?
 }
-    // MARK: - View Life Cycle
+// MARK: - View Life Cycle
 extension ModulController{
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -33,9 +36,9 @@ extension ModulController{
         
     }
 }
-    // MARK: - IBActions
-    
-    // MARK: - Private/Functions
+// MARK: - IBActions
+
+// MARK: - Private/Functions
 extension ModulController{
     private func setNavItem(){
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -48,7 +51,7 @@ extension ModulController{
         navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         navigationController?.navigationBar.largeTitleTextAttributes =
-                [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 28)]
+        [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 28)]
     }
     
     @objc private func dismissSelf(){
@@ -60,7 +63,7 @@ extension ModulController{
     }
     
 }
-    // MARK: - TableView Datasource & Delegate
+// MARK: - TableView Datasource & Delegate
 extension ModulController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,12 +118,51 @@ extension ModulController:UITableViewDelegate,UITableViewDataSource{
         }
         else if(indexPath.section == 2){
             let cell = tableView.dequeueReusableCell(withIdentifier: "UploadTVC", for: indexPath) as! UploadTVC
+           
+            cell.importFile = { [weak self] in
+                let supportedTypes: [UTType] = [UTType.pdf,UTType.text,UTType.data,UTType.aliasFile]
+                let pickerViewController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
+                pickerViewController.delegate = self
+                pickerViewController.allowsMultipleSelection = false
+                pickerViewController.shouldShowFileExtensions = true
+                self!.present(pickerViewController, animated: true, completion: nil)
+            }
+            if(displayURL == nil){
+                cell.filenameLbl.setTitle("Masukkan File", for: .normal)
+            }else{
+                cell.filenameLbl.setTitle("\(displayURL!)", for: .normal)
+            }
+            
             return cell
         }
         return UITableViewCell()
     }
     
+}
+// MARK: - UIDocumentPickerViewController Deleagte and such
+extension ModulController:UIDocumentPickerDelegate{
     
+
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let myURL = urls.first else {
+            return
+        }
+        print("import result : \(myURL)")
+        
+        
+        displayURL = myURL.lastPathComponent
+        self.tableView.reloadData()
+    }
     
+
+    public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+
+
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("view was cancelled")
+    }
 }
 

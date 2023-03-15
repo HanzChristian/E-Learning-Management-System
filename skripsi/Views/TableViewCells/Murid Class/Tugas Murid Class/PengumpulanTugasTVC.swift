@@ -9,6 +9,13 @@ import UIKit
 
 class PengumpulanTugasTVC: UITableViewCell {
 
+    var importFile: (() -> Void)?
+    
+    @IBOutlet weak var kumpultugasLbl: UIButton!
+    @IBAction func kumpultugasPressed(_ sender: UIButton) {
+        importFile?()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

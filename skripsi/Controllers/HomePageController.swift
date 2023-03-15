@@ -120,15 +120,15 @@ extension HomePageController{
         let endEveningDate = dateFormatter.date(from: endEvening)!
         
         if(newDate >= startMorningDate && newDate <= endMorningDate){
-            timeLbl.text = "Selamat Pagi"
+            timeLbl.text = "Selamat Pagi!"
         }
         else if(newDate >= startNoonDate && newDate <= endNoonDate){
-            timeLbl.text = "Selamat Siang"
+            timeLbl.text = "Selamat Siang!"
         }
         else if(newDate >= startEveningDate && newDate <= endEveningDate){
-            timeLbl.text = "Selamat Sore"
+            timeLbl.text = "Selamat Sore!"
         }else{
-            timeLbl.text = "Selamat Malam"
+            timeLbl.text = "Selamat Malam!"
         }
     }
 

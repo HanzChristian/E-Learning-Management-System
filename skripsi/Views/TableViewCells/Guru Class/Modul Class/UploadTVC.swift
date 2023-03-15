@@ -9,7 +9,10 @@ import UIKit
 
 class UploadTVC: UITableViewCell {
 // MARK: - IBOutlets & Variables
-
+    
+    @IBOutlet weak var filenameLbl: UIButton!
+    
+    var importFile: (() -> Void)?
     // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,9 +29,6 @@ class UploadTVC: UITableViewCell {
 // MARK: - Functions
 extension UploadTVC{
     @IBAction func uploadPressed(_ sender: UIButton) {
-//        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePlainText as String], in: .import)
-//              documentPicker.delegate = self
-//              documentPicker.allowsMultipleSelection = false
-//              present(documentPicker, animated: true, completion: nil)
+        importFile?()
     }
 }

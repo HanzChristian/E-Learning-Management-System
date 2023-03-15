@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import MobileCoreServices
+import UniformTypeIdentifiers
 
 class InputTugasController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
+    var displayURL: String?
     let cellTitle = ["Deskripsi Tugas", "Pengumpulan Tugas"]
 }
     // MARK: - View Life Cycle
@@ -73,6 +76,20 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
             return cell
         }else if(indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: "PengumpulanTugasTVC", for: indexPath) as! PengumpulanTugasTVC
+            cell.importFile = { [weak self] in
+                let supportedTypes: [UTType] = [UTType.pdf,UTType.text,UTType.data,UTType.aliasFile]
+                let pickerViewController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
+                pickerViewController.delegate = self
+                pickerViewController.allowsMultipleSelection = false
+                pickerViewController.shouldShowFileExtensions = true
+                self!.present(pickerViewController, animated: true, completion: nil)
+            }
+            if(displayURL == nil){
+                cell.kumpultugasLbl.setTitle("Masukkan File", for: .normal)
+            }else{
+                cell.kumpultugasLbl.setTitle("\(displayURL!)", for: .normal)
+            }
+            
             return cell
         }
         return UITableViewCell()
@@ -101,6 +118,30 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
     }
+}
+// MARK: - UIDocumentPickerViewController Deleagte and such
+extension InputTugasController:UIDocumentPickerDelegate{
     
+
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let myURL = urls.first else {
+            return
+        }
+        print("import result : \(myURL)")
+        
+        
+        displayURL = myURL.lastPathComponent
+        self.tableView.reloadData()
+    }
     
+
+    public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+
+
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("view was cancelled")
+    }
 }
