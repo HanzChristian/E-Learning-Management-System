@@ -6,16 +6,22 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class MakeClassController: UIViewController {
     
     // MARK: - Variables & Outlet
     var classNameTVC: ClassNameTVC?
     var classDescTVC: ClassDescriptionTVC?
-    var jumlahKelas: Kelas?
-    
     var height = 52.0
     let cellTitle = ["Nama Kelas", "Deskripsi Kelas"]
+    let db = Firestore.firestore()
+    let userModel = UserModel()
+    let classModel = ClassModel()
+    var modulCount = 0
+    
+//    var modulCount = 0
+//    var classCount = 0
     
     @IBOutlet weak var tableView: UITableView!
 }
@@ -31,6 +37,15 @@ extension MakeClassController{
         tableView.register(nibClassName, forCellReuseIdentifier: "ClassNameTVC")
         let nibClassDesc = UINib(nibName: "ClassDescriptionTVC", bundle: nil)
         tableView.register(nibClassDesc, forCellReuseIdentifier: "ClassDescriptionTVC")
+        
+//        let docRef = db.document("elearningmanagement/class")
+//        docRef.getDocument{ snapshot, error in
+//            guard let data = snapshot?.data(),error == nil else{
+//                return
+//            }
+//            print(data)
+//        }
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.validateInput), name: NSNotification.Name(rawValue: "validateInput"), object: nil)
         
@@ -60,8 +75,19 @@ extension MakeClassController{
     }
 
     @objc private func saveItem(){
+        let randomString = makeEnrollmentKey(length: 5)
+        let uid = userModel.fetchUID()
         //isi save data
-        print("Saved")
+        if let nameClass = classNameTVC?.classnameTF.text,!nameClass.isEmpty,let descClass = classDescTVC?.classdescTF.text,!descClass.isEmpty{
+            storeData(nameClass: nameClass, descClass: descClass, uid: uid!, enrollmentKey: randomString,modulCount: modulCount)
+            print("masuk sini ke storedata")
+            print("Saved")
+            dismiss(animated: true,completion: nil)
+        }else{
+            print("gamasuk bro")
+            print("ini class name : \(classNameTVC?.classnameTF.text)\n ini classdesc : \(classDescTVC?.classdescTF.text)\n ini randomString : \(randomString)\n ini uid: \(uid)")
+        }
+
     }
     
     @objc func validateInput(){
@@ -74,6 +100,24 @@ extension MakeClassController{
             navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
+    
+    func storeData(nameClass: String, descClass: String,uid: String,enrollmentKey: String,modulCount: Int){
+        
+        let docRef = db.collection("class")
+        docRef.addDocument(data:[
+            "nameClass": nameClass,
+            "descClass": descClass,
+            "enrollmentKey": enrollmentKey,
+            "uid": uid,
+            "modulCount": modulCount
+        ])
+    }
+    
+    func makeEnrollmentKey(length: Int) -> String {
+      let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
 }
 
 // MARK: - Tableview Deletage & Datasource
@@ -100,13 +144,15 @@ extension MakeClassController:UITableViewDelegate,UITableViewDataSource{
         if(indexPath.section == 0){
             if(indexPath.row == 0){
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ClassNameTVC", for: indexPath) as! ClassNameTVC
-                return cell
+                classNameTVC = cell
+                return classNameTVC!
             }
         }
         else if(indexPath.section == 1){
             if(indexPath.row == 0){
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ClassDescriptionTVC", for: indexPath) as! ClassDescriptionTVC
-                return cell
+                classDescTVC = cell
+                return classDescTVC!
             }
         }
         return UITableViewCell()

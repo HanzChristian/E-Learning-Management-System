@@ -100,7 +100,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="registerPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7bX-Ak-vjS"/>
-                                    <segue destination="N8u-8E-0r5" kind="presentation" identifier="homepageSegue" modalPresentationStyle="fullScreen" id="tsz-Te-QHC"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="-7" translatesAutoresizingMaskIntoConstraints="NO" id="rJN-t0-ZFf">
@@ -129,6 +128,16 @@
                                     <constraint firstItem="b72-FJ-wBn" firstAttribute="leading" secondItem="rJN-t0-ZFf" secondAttribute="leading" constant="134.33000000000001" id="uVK-ka-fIH"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pastikan passwordmu memiliki setidaknya 8 karakter, memiliki sebuah karakter spesial dan sebuah angka!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmL-gy-Yn8">
+                                <rect key="frame" x="42.666666666666657" y="669" width="305" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="305" id="CeA-8f-L0N"/>
+                                    <constraint firstAttribute="height" constant="47" id="Oqb-2z-B8k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
@@ -146,12 +155,14 @@
                             <constraint firstAttribute="bottom" secondItem="Lvj-Mc-xbP" secondAttribute="bottom" id="Sqi-cV-jSA"/>
                             <constraint firstItem="pId-dw-8Yf" firstAttribute="top" secondItem="K5Y-Ck-XID" secondAttribute="bottom" constant="8" id="TJB-NE-Oc1"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="K5Y-Ck-XID" secondAttribute="trailing" constant="122" id="V4L-SQ-b3E"/>
+                            <constraint firstItem="fmL-gy-Yn8" firstAttribute="top" secondItem="rJN-t0-ZFf" secondAttribute="bottom" constant="7.6699999999999999" id="Zrr-L7-SZN"/>
                             <constraint firstItem="xY9-EF-DjT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="a08-MT-0Tn"/>
                             <constraint firstItem="uem-Se-qGm" firstAttribute="top" secondItem="pId-dw-8Yf" secondAttribute="bottom" constant="8" id="biL-Kn-uTn"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="LgI-jA-JVK" secondAttribute="trailing" constant="20" id="hNX-rf-QI1"/>
                             <constraint firstItem="pId-dw-8Yf" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="sGM-Fk-V8H"/>
                             <constraint firstItem="xY9-EF-DjT" firstAttribute="top" secondItem="DA9-PJ-TyO" secondAttribute="bottom" constant="32" id="sbw-b9-PYn"/>
                             <constraint firstItem="Lvj-Mc-xbP" firstAttribute="top" secondItem="pnl-EP-aZ0" secondAttribute="bottom" constant="24" id="snZ-hm-RCc"/>
+                            <constraint firstItem="fmL-gy-Yn8" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="tA8-8W-4i2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xY9-EF-DjT" secondAttribute="trailing" constant="20" id="tFt-CZ-Pud"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="DA9-PJ-TyO" secondAttribute="trailing" constant="20" id="uhS-yI-rQU"/>
                             <constraint firstItem="K5Y-Ck-XID" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="73" id="xAG-Po-s4v"/>
@@ -161,8 +172,10 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="DA9-PJ-TyO" id="C96-B3-Pay"/>
+                        <outlet property="errorLbl" destination="fmL-gy-Yn8" id="NdS-KI-yQg"/>
                         <outlet property="namaTextField" destination="LgI-jA-JVK" id="xJH-aL-5nl"/>
                         <outlet property="passwordTextField" destination="xY9-EF-DjT" id="Hdx-h7-lIb"/>
+                        <segue destination="N8u-8E-0r5" kind="presentation" identifier="homepageSegue" modalPresentationStyle="fullScreen" id="cPf-EO-wKc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

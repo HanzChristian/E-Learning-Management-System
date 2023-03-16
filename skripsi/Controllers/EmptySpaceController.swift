@@ -10,11 +10,11 @@ import UIKit
 class EmptySpaceController: UIViewController {
     
     // MARK: - Variables & Outlet
-    let role = UserDefaults.standard.integer(forKey: "role")
+    let role = UserDefaults.standard.string(forKey: "role")
     @IBOutlet weak var findclassBtn: UIButton!
     
     @IBAction func btnPressed(_ sender: UIButton) {
-        if(role == 0){
+        if(role == "pelajar"){
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "FindClassController") as! FindClassController
             let nav =  UINavigationController(rootViewController: vc)
@@ -33,7 +33,7 @@ class EmptySpaceController: UIViewController {
 extension EmptySpaceController{
     override func viewDidLoad(){
         super.viewDidLoad()
-        if(role == 1){ //pengajar
+        if(role == "pengajar"){ //pengajar
             if let attrFont = UIFont(name: "Helvetica-Bold", size: 18) {
                       let title = "BENTUK KELAS"
                       let attrTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: attrFont])

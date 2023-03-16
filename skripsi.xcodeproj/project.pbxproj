@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,6 +33,9 @@
 		1559C57C29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1559C57A29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib */; };
 		1559C57F29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C57D29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift */; };
 		1559C58029BFB3FC0006CA4F /* PengumpulanTugasTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1559C57E29BFB3FC0006CA4F /* PengumpulanTugasTVC.xib */; };
+		1559C58229C20FED0006CA4F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1559C58129C20FED0006CA4F /* GoogleService-Info.plist */; };
+		1559C58429C32A0C0006CA4F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C58329C32A0C0006CA4F /* UserModel.swift */; };
+		1559C58629C347610006CA4F /* ClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C58529C347610006CA4F /* ClassModel.swift */; };
 		1587B02F29AC71B6007229DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B02E29AC71B6007229DB /* AppDelegate.swift */; };
 		1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B03029AC71B6007229DB /* SceneDelegate.swift */; };
 		1587B03329AC71B6007229DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B03229AC71B6007229DB /* ViewController.swift */; };
@@ -63,6 +66,7 @@
 		15EEA16C29B4BF6B004A830B /* ClassTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA16A29B4BF6B004A830B /* ClassTVC.xib */; };
 		15EEA16F29B4C4A2004A830B /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA16E29B4C4A2004A830B /* Struct.swift */; };
 		15EEA17129B4C99D004A830B /* MuridClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA17029B4C99D004A830B /* MuridClassController.swift */; };
+		2F9FF2F75321F5EFEF32BD3C /* Pods_skripsi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 293692F012472A81F58F10BD /* Pods_skripsi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +96,9 @@
 		1559C57A29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeskripsiTugasTVC.xib; sourceTree = "<group>"; };
 		1559C57D29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PengumpulanTugasTVC.swift; sourceTree = "<group>"; };
 		1559C57E29BFB3FC0006CA4F /* PengumpulanTugasTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PengumpulanTugasTVC.xib; sourceTree = "<group>"; };
+		1559C58129C20FED0006CA4F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1559C58329C32A0C0006CA4F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		1559C58529C347610006CA4F /* ClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassModel.swift; sourceTree = "<group>"; };
 		1587B02B29AC71B6007229DB /* skripsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skripsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1587B02E29AC71B6007229DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1587B03029AC71B6007229DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +131,9 @@
 		15EEA16A29B4BF6B004A830B /* ClassTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassTVC.xib; sourceTree = "<group>"; };
 		15EEA16E29B4C4A2004A830B /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
 		15EEA17029B4C99D004A830B /* MuridClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuridClassController.swift; sourceTree = "<group>"; };
+		293692F012472A81F58F10BD /* Pods_skripsi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_skripsi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7016279429CD99812F02A560 /* Pods-skripsi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skripsi.release.xcconfig"; path = "Target Support Files/Pods-skripsi/Pods-skripsi.release.xcconfig"; sourceTree = "<group>"; };
+		D69CCFBCE77947FD36BD86BF /* Pods-skripsi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skripsi.debug.xcconfig"; path = "Target Support Files/Pods-skripsi/Pods-skripsi.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F9FF2F75321F5EFEF32BD3C /* Pods_skripsi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +220,8 @@
 			children = (
 				1587B02D29AC71B6007229DB /* skripsi */,
 				1587B02C29AC71B6007229DB /* Products */,
+				5E2445BB402EF80D185A83AB /* Pods */,
+				DD685168F7E9D80616EACCF2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,6 +243,7 @@
 				1587B04429AC729A007229DB /* Extensions */,
 				1587B03229AC71B6007229DB /* ViewController.swift */,
 				1587B03929AC71B7007229DB /* LaunchScreen.storyboard */,
+				1559C58129C20FED0006CA4F /* GoogleService-Info.plist */,
 				1587B03C29AC71B7007229DB /* Info.plist */,
 			);
 			path = skripsi;
@@ -240,6 +254,8 @@
 			children = (
 				1587B05529AC7496007229DB /* Onboarding.swift */,
 				15EEA16E29B4C4A2004A830B /* Struct.swift */,
+				1559C58329C32A0C0006CA4F /* UserModel.swift */,
+				1559C58529C347610006CA4F /* ClassModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -337,6 +353,23 @@
 			path = Class;
 			sourceTree = "<group>";
 		};
+		5E2445BB402EF80D185A83AB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D69CCFBCE77947FD36BD86BF /* Pods-skripsi.debug.xcconfig */,
+				7016279429CD99812F02A560 /* Pods-skripsi.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DD685168F7E9D80616EACCF2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				293692F012472A81F58F10BD /* Pods_skripsi.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -344,9 +377,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1587B03F29AC71B7007229DB /* Build configuration list for PBXNativeTarget "skripsi" */;
 			buildPhases = (
+				6F8941ADD6D78EB7D22C68BE /* [CP] Check Pods Manifest.lock */,
 				1587B02729AC71B6007229DB /* Sources */,
 				1587B02829AC71B6007229DB /* Frameworks */,
 				1587B02929AC71B6007229DB /* Resources */,
+				17ABB86F17BA0628AB6AD70A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -373,7 +408,7 @@
 				};
 			};
 			buildConfigurationList = 1587B02629AC71B6007229DB /* Build configuration list for PBXProject "skripsi" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -412,12 +447,55 @@
 				15EEA16829B1C4F4004A830B /* ClassDescriptionTVC.xib in Resources */,
 				1559C58029BFB3FC0006CA4F /* PengumpulanTugasTVC.xib in Resources */,
 				154862E329B72BF7001B90DE /* TugasDescriptionTVC.xib in Resources */,
+				1559C58229C20FED0006CA4F /* GoogleService-Info.plist in Resources */,
 				15EEA16C29B4BF6B004A830B /* ClassTVC.xib in Resources */,
 				154862C929B5DA62001B90DE /* TugasTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		17ABB86F17BA0628AB6AD70A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-skripsi/Pods-skripsi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-skripsi/Pods-skripsi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-skripsi/Pods-skripsi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F8941ADD6D78EB7D22C68BE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-skripsi-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1587B02729AC71B6007229DB /* Sources */ = {
@@ -434,6 +512,7 @@
 				15EEA17129B4C99D004A830B /* MuridClassController.swift in Sources */,
 				1559C57729BDC9870006CA4F /* InputTugasController.swift in Sources */,
 				15EEA15729AF2951004A830B /* FindClassController.swift in Sources */,
+				1559C58629C347610006CA4F /* ClassModel.swift in Sources */,
 				15EEA15429AF215A004A830B /* ProfileController.swift in Sources */,
 				15EEA16F29B4C4A2004A830B /* Struct.swift in Sources */,
 				154862C829B5DA62001B90DE /* TugasTVC.swift in Sources */,
@@ -458,6 +537,7 @@
 				154862D729B711D4001B90DE /* UploadTVC.swift in Sources */,
 				1559C57429BDB8880006CA4F /* ExpandableTVC.swift in Sources */,
 				154862C029B5CDA3001B90DE /* GuruClassController.swift in Sources */,
+				1559C58429C32A0C0006CA4F /* UserModel.swift in Sources */,
 				154862E229B72BF7001B90DE /* TugasDescriptionTVC.swift in Sources */,
 				15EEA16B29B4BF6B004A830B /* ClassTVC.swift in Sources */,
 				15EEA16729B1C4F4004A830B /* ClassDescriptionTVC.swift in Sources */,
@@ -602,6 +682,7 @@
 		};
 		1587B04029AC71B7007229DB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D69CCFBCE77947FD36BD86BF /* Pods-skripsi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -631,6 +712,7 @@
 		};
 		1587B04129AC71B7007229DB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7016279429CD99812F02A560 /* Pods-skripsi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

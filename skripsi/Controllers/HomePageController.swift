@@ -10,12 +10,14 @@ import UIKit
 class HomePageController: UIViewController {
     
     // MARK: - Variables & Outlet
-    let role = UserDefaults.standard.integer(forKey: "role")
+
+    let role = UserDefaults.standard.string(forKey: "role")
     let dateFormatter = DateFormatter()
     let dates = Date()
 
     var jumlahKelas:[Kelas] = []
     var counts = 1
+    let userModel = UserModel()
     
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -40,13 +42,22 @@ extension HomePageController{
         super.viewDidLoad()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
         
+//        userModel.fetchUser(){
+//
+//        }
+//
+//        var userRole = userModel.users.first?.role
+//        UserDefaults.standard.set(userRole, forKey: "role")
+//        
+//        print("userRole = \(userRole)\n userDefault = \(UserDefaults.standard.set(userRole, forKey: "role"))")
+        
         jumlahKelas = [
             Kelas(className: "Aljabar Linear", classModule: "2 Modul", classEnrollment: "En:ollment Key : 7F5DW", classImg: #imageLiteral(resourceName: "classimage-3")),
             Kelas(className: "Matematika Teknik", classModule: "5 Modul", classEnrollment: "Enrollment Key : 21DWA", classImg: #imageLiteral(resourceName: "classimage-1")),
             Kelas(className: "Fisika Listrik", classModule: "4 Modul", classEnrollment: "Enrollment Key : 35WZX", classImg: #imageLiteral(resourceName: "classimage-2"))
         ]
         
-        if(role == 1){ //pengajar
+        if(role == "pengajar"){ //pengajar
             setBtn()
         }
         self.tableView.delegate = self
@@ -68,10 +79,9 @@ extension HomePageController{
 // MARK: - Private/Functions
 extension HomePageController{
     @IBAction func btnPressed(_ sender: UIButton) {
-        if (role == 0){
+        if (role == "pelajar"){
             performSegue(withIdentifier: "findclassSegue", sender: nil)
         }else{
-            setBtn()
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MakeClassController") as! MakeClassController
             vc.modalPresentationStyle = .automatic
@@ -158,7 +168,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(role == 1){
+        if(role == "pengajar"){
             self.performSegue(withIdentifier: "guruclassSegue", sender: self)
         }
         else{

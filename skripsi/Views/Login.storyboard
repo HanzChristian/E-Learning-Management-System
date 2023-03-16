@@ -72,9 +72,18 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="F6x-Gd-jlm"/>
-                                    <segue destination="eCy-G6-a2s" kind="presentation" identifier="homepageSegue" modalPresentationStyle="fullScreen" id="aQD-2p-E5W"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pastikan passwordmu memiliki setidaknya 8 karakter, memiliki sebuah karakter spesial dan sebuah angka!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UA6-d5-eZz">
+                                <rect key="frame" x="42.666666666666657" y="516" width="305" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="FQO-ag-sWw"/>
+                                    <constraint firstAttribute="width" constant="305" id="fmP-55-PAq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="BackgroundColor"/>
@@ -91,13 +100,17 @@
                             <constraint firstItem="PLY-E6-wpB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="cQd-u6-Jt3"/>
                             <constraint firstItem="Xdf-Uo-aY4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="j4O-eg-9bN"/>
                             <constraint firstItem="WpI-Ph-kdf" firstAttribute="top" secondItem="N8M-5h-asR" secondAttribute="bottom" constant="30" id="kEf-0U-s2w"/>
+                            <constraint firstItem="UA6-d5-eZz" firstAttribute="top" secondItem="PLY-E6-wpB" secondAttribute="bottom" constant="8" id="oFv-Kw-qDk"/>
                             <constraint firstItem="Xdf-Uo-aY4" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="s6Z-Qo-Fis"/>
                             <constraint firstItem="N8M-5h-asR" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="160" id="zMO-KG-E6L"/>
+                            <constraint firstItem="UA6-d5-eZz" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="zXk-mI-E1r"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="WpI-Ph-kdf" id="iW4-k4-JZn"/>
+                        <outlet property="errorLbl" destination="UA6-d5-eZz" id="uic-HR-CMM"/>
                         <outlet property="passwordTextField" destination="q4H-bN-Glr" id="Tfx-B4-ysk"/>
+                        <segue destination="eCy-G6-a2s" kind="presentation" identifier="homepageSegue" modalPresentationStyle="fullScreen" id="8Uh-xO-VTt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

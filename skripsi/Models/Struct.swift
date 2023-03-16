@@ -9,6 +9,28 @@ import Foundation
 import UIKit
 
 // MARK: - Structures
+struct User{
+    var id: String = UUID().uuidString
+    var name: String
+    var role: String
+    
+    init(name: String, role: String,id: String) {
+        self.id = id
+        self.name = name
+        self.role = role
+    }
+
+}
+
+struct Class{
+    let className: String
+    let classModule: String
+    let classEnrollment: String
+    let classImg: UIImage
+    let classCount: Int
+}
+
+
 struct Kelas{
     let className: String
     let classModule: String
@@ -27,3 +49,4 @@ struct Modul{
     let modulName: String
     let modulDesc: String
 }
+
