@@ -7,8 +7,10 @@
 
 import UIKit
 import Foundation
+import FirebaseAuth
 
 class OnBoardingController: UIViewController{
+    
     
 // MARK: - Variables & Outlet
     
@@ -32,13 +34,46 @@ class OnBoardingController: UIViewController{
             }
         }
     }
+    let userModel = UserModel()
+    var userRole = ""
     
 }
 
 // MARK: - View Life Cycle
 extension OnBoardingController{
+    
+    override func viewWillAppear(_ animated: Bool) {
+        userModel.fetchUser(completion: { user in
+            self.userRole = user.role
+            
+        })
+        
+        if Core.shared.isNewUser(){
+//            Core.shared.notNewUser()
+            print("masuk sini gyan")
+            UserDefaults.standard.set(userRole, forKey: "role")
+        }
+        else{
+            print("ga masuk gyan")
+            
+            let mainAppViewController = UIStoryboard(name: "HomePage", bundle: nil).instantiateViewController(withIdentifier: "HomePageController")
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let sceneDelegate = windowScene.delegate as? SceneDelegate,
+               let window = sceneDelegate.window{
+                window.rootViewController = mainAppViewController
+                UIView.transition(with: window,
+                                  duration: 0.25,
+                                  options: .transitionCrossDissolve,
+                                  animations: nil,
+                                  completion: nil)
+                
+            }
+        }
+    }
+    
     override func viewDidLoad(){
         super.viewDidLoad()
+        
        pages = [
         OnboardingPages(title: "Akses Kelas", description: "Akses seluruh kelas yang dibentuk untuk membaca materi, mengerjakan tugas, dan melakukan tes", image: #imageLiteral(resourceName: "1st-Onboarding")),
         OnboardingPages(title: "Pilih Peran", description: "Masuk sebagai pengajar atau pelajar sesuai dengan peranmu dalam pembelajaran!", image: #imageLiteral(resourceName: "2nd-Onboarding")),
@@ -98,3 +133,12 @@ extension OnBoardingController: UICollectionViewDelegate,UICollectionViewDataSou
     }
 }
 
+class Core{
+    static let shared = Core()
+    func isNewUser() -> Bool{
+        return !UserDefaults.standard.bool(forKey: "isNewUser")
+    }
+    func notNewUser(){
+        UserDefaults.standard.set(true, forKey: "isNewUser")
+    }
+}

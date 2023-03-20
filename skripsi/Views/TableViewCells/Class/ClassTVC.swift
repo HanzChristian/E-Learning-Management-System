@@ -40,11 +40,11 @@ class ClassTVC: UITableViewCell {
         potonganView.isHidden = false
     }
     
-    func setupClass(_ kelas: Kelas){
-        classImg.image = kelas.classImg
-        classtitleLbl.text = kelas.className
-        classmodulLbl.text = kelas.classModule
-        classenrollmentkeyLbl.text = kelas.classEnrollment
-    }
-    
+//    func setupClass(_ kelas: Class){
+//        classImg.image = kelas.classImg
+//        classtitleLbl.text = kelas.className
+//        classmodulLbl.text = kelas.classModule
+//        classenrollmentkeyLbl.text = kelas.classEnrollment
+//    }
+//    
 }

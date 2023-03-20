@@ -24,19 +24,19 @@ struct User{
 
 struct Class{
     let className: String
-    let classModule: String
-    let classEnrollment: String
-    let classImg: UIImage
-    let classCount: Int
-}
-
-
-struct Kelas{
-    let className: String
-    let classModule: String
+    let classDesc: String
+    let classModule: Int
     let classEnrollment: String
     let classImg: UIImage
 }
+
+
+//struct Kelas{
+//    let className: String
+//    let classModule: String
+//    let classEnrollment: String
+//    let classImg: UIImage
+//}
 
 struct Tugas{
     let tugasDate: String

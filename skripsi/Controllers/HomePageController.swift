@@ -14,10 +14,10 @@ class HomePageController: UIViewController {
     let role = UserDefaults.standard.string(forKey: "role")
     let dateFormatter = DateFormatter()
     let dates = Date()
-
-    var jumlahKelas:[Kelas] = []
-    var counts = 1
+    
     let userModel = UserModel()
+    let classModel = ClassModel()
+    var listofClass = [Class]()
     
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -31,6 +31,7 @@ extension HomePageController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -40,8 +41,23 @@ extension HomePageController{
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        Core.shared.notNewUser()
+        
+        self.userModel.fetchUser{user in
+        }
+        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
         
+        classModel.fetchClassGuru(completion: { [self] classess in
+            listofClass.append(classess)
+            tableView.reloadData()
+            if(listofClass.count == 0){
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+            }
+            else if(listofClass.count == 1){
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+            }
+        })
 //        userModel.fetchUser(){
 //
 //        }
@@ -51,11 +67,7 @@ extension HomePageController{
 //        
 //        print("userRole = \(userRole)\n userDefault = \(UserDefaults.standard.set(userRole, forKey: "role"))")
         
-        jumlahKelas = [
-            Kelas(className: "Aljabar Linear", classModule: "2 Modul", classEnrollment: "En:ollment Key : 7F5DW", classImg: #imageLiteral(resourceName: "classimage-3")),
-            Kelas(className: "Matematika Teknik", classModule: "5 Modul", classEnrollment: "Enrollment Key : 21DWA", classImg: #imageLiteral(resourceName: "classimage-1")),
-            Kelas(className: "Fisika Listrik", classModule: "4 Modul", classEnrollment: "Enrollment Key : 35WZX", classImg: #imageLiteral(resourceName: "classimage-2"))
-        ]
+        
         
         if(role == "pengajar"){ //pengajar
             setBtn()
@@ -65,13 +77,7 @@ extension HomePageController{
         
         let nibClass = UINib(nibName: "ClassTVC", bundle: nil)
         tableView.register(nibClass, forCellReuseIdentifier: "ClassTVC")
-        
-        if(counts == 0){
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-        }
-        else if(counts == 1){
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-        }
+    
         setTime()
     }
 }
@@ -96,6 +102,12 @@ extension HomePageController{
                   let attrTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: attrFont])
                   findclassBtn.setAttributedTitle(attrTitle, for: UIControl.State.normal)
               }
+    }
+    
+    func refreshTV(){
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func setTime(){
@@ -141,25 +153,27 @@ extension HomePageController{
             timeLbl.text = "Selamat Malam!"
         }
     }
+    
 
 }
 // MARK: - TableView Delegate & Resource
 extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return counts
-        return jumlahKelas.count
+        return listofClass.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
         
-//        cell.classImg =
-//        cell.classtitleLbl =
-//        cell.classmodulLbl =
-//        cell.classenrollmentkeyLbl =
+        if(role == "pengajar"){
+            let eachClass = listofClass[indexPath.row]
         
-        
-        cell.setupClass(jumlahKelas[indexPath.row])
+            cell.classImg.image = eachClass.classImg
+            cell.classtitleLbl.text = eachClass.className
+            cell.classmodulLbl.text = "\(eachClass.classModule) modul"
+            cell.classenrollmentkeyLbl.text = eachClass.classEnrollment
+        }
+
         return cell
     }
     

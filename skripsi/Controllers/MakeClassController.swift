@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseStorage
 
 class MakeClassController: UIViewController {
     
@@ -19,6 +20,12 @@ class MakeClassController: UIViewController {
     let userModel = UserModel()
     let classModel = ClassModel()
     var modulCount = 0
+    
+    //Upload image
+    let storageRef = Storage.storage().reference()
+    var imageData: Data?
+    var path = ""
+    var fileRef: StorageReference? = nil
     
 //    var modulCount = 0
 //    var classCount = 0
@@ -75,12 +82,40 @@ extension MakeClassController{
     }
 
     @objc private func saveItem(){
+        
+        //Get selected random image
+        let img1 = #imageLiteral(resourceName: "classimage-2")
+        let img2 = #imageLiteral(resourceName: "classimage-1")
+        let img3 = #imageLiteral(resourceName: "classimage-3")
+        
+        let imgArray = [img1,img2,img3]
+        let randomImage = imgArray.randomElement()
+        
+        // Make sure it's not nil
+        guard randomImage != nil else{
+            return
+        }
+        
+        
+        // Turn image -> data
+        imageData = randomImage!.jpegData(compressionQuality: 0.8)
+        
+        guard imageData != nil else{
+            return
+        }
+
+        // Filepath and name
+        path = "images/\(UUID().uuidString).jpg"
+        fileRef = storageRef.child(path)
+        
         let randomString = makeEnrollmentKey(length: 5)
         let uid = userModel.fetchUID()
+        
+        
         //isi save data
         if let nameClass = classNameTVC?.classnameTF.text,!nameClass.isEmpty,let descClass = classDescTVC?.classdescTF.text,!descClass.isEmpty{
-            storeData(nameClass: nameClass, descClass: descClass, uid: uid!, enrollmentKey: randomString,modulCount: modulCount)
-            print("masuk sini ke storedata")
+            storeData(nameClass: nameClass, descClass: descClass, uid: uid!, enrollmentKey: randomString,modulCount: modulCount,imgURL: path)
+//            uploadImg()
             print("Saved")
             dismiss(animated: true,completion: nil)
         }else{
@@ -101,21 +136,77 @@ extension MakeClassController{
         }
     }
     
-    func storeData(nameClass: String, descClass: String,uid: String,enrollmentKey: String,modulCount: Int){
+    func storeData(nameClass: String, descClass: String,uid: String,enrollmentKey: String,modulCount: Int,imgURL: String){
         
-        let docRef = db.collection("class")
-        docRef.addDocument(data:[
-            "nameClass": nameClass,
-            "descClass": descClass,
-            "enrollmentKey": enrollmentKey,
-            "uid": uid,
-            "modulCount": modulCount
-        ])
+        // Upload data
+        fileRef!.putData(imageData!,metadata: nil) { [self] metadata, error in
+            if error == nil && metadata != nil{
+                // save ref to firestore
+                db.collection("class").addDocument(data: [
+                    "nameClass": nameClass,
+                    "descClass": descClass,
+                    "enrollmentKey": enrollmentKey,
+                    "uid": uid,
+                    "modulCount": modulCount,
+                    "imgURL": imgURL
+                ])
+            }
+        }
+    }
+    
+    func uploadImg(){
+//        //Get selected random image
+//        let img1 = #imageLiteral(resourceName: "classimage-2")
+//        let img2 = #imageLiteral(resourceName: "classimage-1")
+//        let img3 = #imageLiteral(resourceName: "classimage-3")
+//
+//        let imgArray = [img1,img2,img3]
+//        let randomImage = imgArray.randomElement()
+//
+//        // Make sure it's not nil
+//        guard randomImage != nil else{
+//            return
+//        }
+//
+//        // Make storage ref
+//        let storageRef = Storage.storage().reference()
+//
+//        // Turn image -> data
+//        let imageData = randomImage!.jpegData(compressionQuality: 0.8)
+//
+//        guard imageData != nil else{
+//            return
+//        }
+//
+//        // Filepath and name
+//        let path = "images/\(UUID().uuidString).jpg"
+//        let fileRef = storageRef.child(path)
+//
+//        // Upload data
+//        let uploadTask = fileRef.putData(imageData!,metadata: nil) { [self] metadata, error in
+//
+//            if error == nil && metadata != nil{
+//                // save ref to firestore
+//                db.collection("class").addDocument(data: [
+//                    "imageUrl": path
+//                ])
+//            }
+//        }
     }
     
     func makeEnrollmentKey(length: Int) -> String {
       let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    func makeRandomImg() -> UIImage{
+        let img1 = #imageLiteral(resourceName: "classimage-2")
+        let img2 = #imageLiteral(resourceName: "classimage-1")
+        let img3 = #imageLiteral(resourceName: "classimage-3")
+        
+        let imgArray = [img1,img2,img3]
+        let randomImage = imgArray.randomElement()
+        return randomImage!
     }
     
 }
