@@ -6,15 +6,36 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileController: UIViewController {
     
     // MARK: - Variables & Outlet
+    
+    @IBOutlet weak var nameLbl: UILabel!
+    
+    @IBOutlet weak var shortnameLbl: UILabel!
+    var userName: String?
+    var shortenName: String?
+    var userModel = UserModel()
 }
     // MARK: - View Life Cycle
 extension ProfileController{
     override func viewDidLoad(){
         super.viewDidLoad()
+        self.userModel.fetchUser{ [self] user in
+            userName = user.name
+            print("ini username pas fetch = \(userName)")
+        }
+    
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+            toShortenName()
+            nameLbl.text = userName
+            shortnameLbl.text = shortenName
+            
+            print("ini username = \(userName)")
+            print("ini shortname = \(shortenName)")
+        }
         
     }
 }
@@ -43,13 +64,30 @@ extension ProfileController{
         }))
         
         alert.addAction(UIAlertAction(title: "Ya", style: .destructive,handler:{_ in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "OnBoardingController") as! OnBoardingController
-            vc.navigationController?.pushViewController(vc, animated: true)
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc,animated:true)
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "OnBoardingController") as! OnBoardingController
+                vc.navigationController?.pushViewController(vc, animated: true)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc,animated:true)
+            }
+            catch let signOutError as NSError {
+                print("Error signing out: %@", signOutError)
+            }
         }))
         
         present(alert,animated:true)
+    }
+    
+    func toShortenName(){
+        //Make an array of uppercase string
+        let uppercaseChars = userName!.filter { $0.isUppercase }
+        
+        //Make the array into string
+        shortenName = String(uppercaseChars)
+        
     }
 }

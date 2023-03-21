@@ -30,6 +30,7 @@ extension HomePageController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         navigationController?.setNavigationBarHidden(true, animated: false)
         
     }

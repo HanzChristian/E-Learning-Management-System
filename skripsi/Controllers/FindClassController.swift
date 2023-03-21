@@ -10,19 +10,42 @@ import UIKit
 class FindClassController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
+    var listofClassMurid = [Class]()
+    var classModel = ClassModel()
+    var enrollmentKeyDB: String? = ""
 }
 
 // MARK: - View Life Cycle
 extension FindClassController{
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        classModel.fetchClassGuru(completion: { [self] classess in
+//            listofClassMurid.append(classess)
+//            tableView.reloadData()
+//            enrollmentKeyDB = classess.classEnrollment
+//            print("ini adalah enrollmentnya = \(enrollmentKeyDB)")
+//        })
+//    }
+//    
     override func viewDidLoad(){
         super.viewDidLoad()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenView"), object: nil)
         setNavItem()
+        print("data not fetch")
+        classModel.fetchClassAll(completion: { [self] classess in
+            listofClassMurid.append(classess)
+            tableView.reloadData()
+//            enrollmentKeyDB = classess.classEnrollment
+//            print("ini adalah enrollmentnya = \(enrollmentKeyDB)")
+        })
+        print("data fetched")
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
         let nibClass = UINib(nibName: "ClassTVC", bundle: nil)
         tableView.register(nibClass, forCellReuseIdentifier: "ClassTVC")
+        
     }
 }
 // MARK: - IBActions
@@ -57,6 +80,7 @@ extension FindClassController{
         alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler: {_ in
             guard let fields = alert.textFields,fields.count == 1 else{
                 return
+                //kondisi kalo bener, return ke homepage sebagai kelasnya
             }
             let enrollmentField = fields[0]
             guard let enrollmentKey = enrollmentField.text, !enrollmentKey.isEmpty else{
@@ -73,16 +97,20 @@ extension FindClassController{
 // MARK: - TableView Delegate & Datasource
 extension FindClassController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        print("list of class murid = \(listofClassMurid.count)")
+        return listofClassMurid.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
         
-        //        cell.classImg =
-        //        cell.classtitleLbl =
-        //        cell.classmodulLbl =
-        //        cell.classenrollmentkeyLbl =
+        let eachClass = listofClassMurid[indexPath.row]
+    
+        cell.classImg.image = eachClass.classImg
+        cell.classtitleLbl.text = eachClass.className
+        cell.classmodulLbl.text = "\(eachClass.classModule) modul"
+        cell.classenrollmentkeyLbl.text = eachClass.classEnrollment
         
         return cell
     }
@@ -93,6 +121,12 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
         showAlert()
+        let eachClass = listofClassMurid[indexPath.row]
+    
+        cell.classImg.image = eachClass.classImg
+        cell.classtitleLbl.text = eachClass.className
+        cell.classmodulLbl.text = "\(eachClass.classModule) modul"
+        cell.classenrollmentkeyLbl.text = eachClass.classEnrollment
         
     }
     

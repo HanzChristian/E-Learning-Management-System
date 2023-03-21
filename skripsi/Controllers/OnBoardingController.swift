@@ -56,18 +56,27 @@ extension OnBoardingController{
         else{
             print("ga masuk gyan")
             
-            let mainAppViewController = UIStoryboard(name: "HomePage", bundle: nil).instantiateViewController(withIdentifier: "HomePageController")
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let sceneDelegate = windowScene.delegate as? SceneDelegate,
-               let window = sceneDelegate.window{
-                window.rootViewController = mainAppViewController
-                UIView.transition(with: window,
-                                  duration: 0.25,
-                                  options: .transitionCrossDissolve,
-                                  animations: nil,
-                                  completion: nil)
-                
-            }
+//            // masih gamuncul tabbarnya
+//            var mainAppViewController = UIStoryboard(name: "HomePage", bundle: nil).instantiateViewController(withIdentifier: "HomePageController")
+//            if let navigationController = mainAppViewController as? UINavigationController {
+//                mainAppViewController = navigationController.viewControllers.first!
+//            }
+//            if let tabBarController = mainAppViewController as? UITabBarController {
+//                mainAppViewController = tabBarController.selectedViewController!
+//            }
+//
+//            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//               let sceneDelegate = windowScene.delegate as? SceneDelegate,
+//               let window = sceneDelegate.window{
+//                window.rootViewController = mainAppViewController
+//                UIView.transition(with: window,
+//                                  duration: 0.25,
+//                                  options: .transitionCrossDissolve,
+//                                  animations: nil,
+//                                  completion: nil)
+//
+//            }
+            self.performSegue(withIdentifier: "homepageSegue", sender: .none)
         }
     }
     
