@@ -154,45 +154,6 @@ extension MakeClassController{
         }
     }
     
-    func uploadImg(){
-//        //Get selected random image
-//        let img1 = #imageLiteral(resourceName: "classimage-2")
-//        let img2 = #imageLiteral(resourceName: "classimage-1")
-//        let img3 = #imageLiteral(resourceName: "classimage-3")
-//
-//        let imgArray = [img1,img2,img3]
-//        let randomImage = imgArray.randomElement()
-//
-//        // Make sure it's not nil
-//        guard randomImage != nil else{
-//            return
-//        }
-//
-//        // Make storage ref
-//        let storageRef = Storage.storage().reference()
-//
-//        // Turn image -> data
-//        let imageData = randomImage!.jpegData(compressionQuality: 0.8)
-//
-//        guard imageData != nil else{
-//            return
-//        }
-//
-//        // Filepath and name
-//        let path = "images/\(UUID().uuidString).jpg"
-//        let fileRef = storageRef.child(path)
-//
-//        // Upload data
-//        let uploadTask = fileRef.putData(imageData!,metadata: nil) { [self] metadata, error in
-//
-//            if error == nil && metadata != nil{
-//                // save ref to firestore
-//                db.collection("class").addDocument(data: [
-//                    "imageUrl": path
-//                ])
-//            }
-//        }
-    }
     
     func makeEnrollmentKey(length: Int) -> String {
       let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

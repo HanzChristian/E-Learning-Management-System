@@ -48,25 +48,32 @@ extension HomePageController{
         }
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
-        
-        classModel.fetchClassGuru(completion: { [self] classess in
-            listofClass.append(classess)
-            tableView.reloadData()
-            if(listofClass.count == 0){
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-            }
-            else if(listofClass.count == 1){
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-            }
-        })
-//        userModel.fetchUser(){
-//
-//        }
-//
-//        var userRole = userModel.users.first?.role
-//        UserDefaults.standard.set(userRole, forKey: "role")
-//        
-//        print("userRole = \(userRole)\n userDefault = \(UserDefaults.standard.set(userRole, forKey: "role"))")
+     
+        if(role == "pengajar"){
+            classModel.fetchClassGuru(completion: { [self] classess in
+                print("ngefetch")
+                listofClass.append(classess)
+                tableView.reloadData()
+                if(listofClass.count == 0){
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                }
+                else if(listofClass.count == 1){
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+                }
+            })
+        }else if(role == "pelajar"){
+            classModel.fetchClassMurid(completion: { [self] classess in
+                listofClass.append(classess)
+                tableView.reloadData()
+                print("jumlah kelas = \(listofClass.count)")
+                if(listofClass.count == 0){
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                }
+                else if(listofClass.count == 1){
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+                }
+            })
+        }
         
         
         
@@ -166,14 +173,12 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
         
-        if(role == "pengajar"){
             let eachClass = listofClass[indexPath.row]
         
             cell.classImg.image = eachClass.classImg
             cell.classtitleLbl.text = eachClass.className
             cell.classmodulLbl.text = "\(eachClass.classModule) modul"
             cell.classenrollmentkeyLbl.text = eachClass.classEnrollment
-        }
 
         return cell
     }

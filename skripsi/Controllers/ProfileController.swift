@@ -73,6 +73,7 @@ extension ProfileController{
                 vc.navigationController?.pushViewController(vc, animated: true)
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc,animated:true)
+                UserDefaults.standard.removeObject(forKey: "isNewUser")
             }
             catch let signOutError as NSError {
                 print("Error signing out: %@", signOutError)

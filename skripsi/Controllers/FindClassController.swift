@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class FindClassController: UIViewController {
     // MARK: - Variables & Outlet
@@ -13,6 +14,10 @@ class FindClassController: UIViewController {
     var listofClassMurid = [Class]()
     var classModel = ClassModel()
     var enrollmentKeyDB: String? = ""
+    let db = Firestore.firestore()
+    let userModel = UserModel()
+    var previousSelectedIndexPath: IndexPath?
+    
 }
 
 // MARK: - View Life Cycle
@@ -68,31 +73,21 @@ extension FindClassController{
     @objc private func dismissSelf(){
         dismiss(animated: true,completion: nil)
     }
-
-    func showAlert(){
-        let alert = UIAlertController(title: "Masuk ke Kelas", message: "Masukkan Enrollment Key kelas!", preferredStyle: .alert)
-        
-        alert.addTextField{ field in
-            field.placeholder = "Enrollment Key"
-            field.returnKeyType = .done
-        }
-        alert.addAction(UIAlertAction(title: "Kembali", style: .cancel,handler: nil))
-        alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler: {_ in
-            guard let fields = alert.textFields,fields.count == 1 else{
-                return
-                //kondisi kalo bener, return ke homepage sebagai kelasnya
-            }
-            let enrollmentField = fields[0]
-            guard let enrollmentKey = enrollmentField.text, !enrollmentKey.isEmpty else{
-                print("EnrolmentKeynya salah/kosong!")
-                return
-            }
-            print("Enrolment Key: \(enrollmentKey)")
-            self.dismiss(animated: true,completion: nil)
-        }))
-        
-        present(alert,animated:true)
+    
+    func storeData(nameClass: String, descClass: String,uidMurid: String,enrollmentKey: String,modulCount: Int,imgURL: String){
+        // Upload data
+        db.collection("muridClass").addDocument(data: [
+            "nameClass": nameClass,
+            "descClass": descClass,
+            "enrollmentKey": enrollmentKey,
+            "uidMurid": uidMurid,
+            "modulCount": modulCount,
+            "imgURL": imgURL
+        ])
     }
+    
+
+
 }
 // MARK: - TableView Delegate & Datasource
 extension FindClassController:UITableViewDelegate,UITableViewDataSource{
@@ -110,8 +105,7 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
         cell.classImg.image = eachClass.classImg
         cell.classtitleLbl.text = eachClass.className
         cell.classmodulLbl.text = "\(eachClass.classModule) modul"
-        cell.classenrollmentkeyLbl.text = eachClass.classEnrollment
-        
+        cell.classenrollmentkeyLbl.isHidden = true
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -119,14 +113,111 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
-        showAlert()
+       
         let eachClass = listofClassMurid[indexPath.row]
+        
+        if indexPath == previousSelectedIndexPath{
+               // Error handling with the same indexPath
+            //Make alert to get Enrollment Key
+            let alert = UIAlertController(title: "Masuk ke Kelas", message: "Masukkan Enrollment Key kelas!", preferredStyle: .alert)
+            
+            alert.addTextField{ field in
+                field.placeholder = "Enrollment Key"
+                field.returnKeyType = .done
+            }
+            alert.addAction(UIAlertAction(title: "Kembali", style: .cancel,handler: nil))
+            alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler: { [self]_ in
+                guard let fields = alert.textFields,fields.count == 1 else{
+                    return
+                }
+                let enrollmentField = fields[0]
+                let enrollmentKey = enrollmentField.text
+                
+                if enrollmentKey == eachClass.classEnrollment{
+                    print("Enrollmentkey yang dimasukkan cocok!")
+                    print("Enrolment Key: \(enrollmentKey)")
+                    print("Class Key: \(eachClass.classEnrollment)")
+                    
+                    let nameClass = eachClass.className
+                    let descClass = eachClass.classDesc
+                    let enrollmentKey = eachClass.classEnrollment
+                    let modulCount = eachClass.classModule
+                    let imgURL = eachClass.classImgString
+                    
+                    let uid = userModel.fetchUID()
+
+                    storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL)
+                    
+                    self.dismiss(animated: true,completion: nil)
+                }else{
+                    print("tidak cocok")
+                    print("Enrolment Key: \(enrollmentKey)")
+                    print("Class Key: \(eachClass.classEnrollment)")
+                }
+                
+            }))
+            
+            present(alert,animated:true)
+            
+               return
+           }
+        
+        previousSelectedIndexPath = indexPath
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
     
         cell.classImg.image = eachClass.classImg
         cell.classtitleLbl.text = eachClass.className
         cell.classmodulLbl.text = "\(eachClass.classModule) modul"
         cell.classenrollmentkeyLbl.text = eachClass.classEnrollment
+        cell.classenrollmentkeyLbl.isHidden = true
+        
+        
+        print("ini indexpath = \(indexPath)")
+        print("ini indexpath sebelum = \(previousSelectedIndexPath)")
+
+        
+        //Make alert to get Enrollment Key
+        let alert = UIAlertController(title: "Masuk ke Kelas", message: "Masukkan Enrollment Key kelas!", preferredStyle: .alert)
+        
+        alert.addTextField{ field in
+            field.placeholder = "Enrollment Key"
+            field.returnKeyType = .done
+        }
+        alert.addAction(UIAlertAction(title: "Kembali", style: .cancel,handler: nil))
+        alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler: { [self]_ in
+            guard let fields = alert.textFields,fields.count == 1 else{
+                return
+            }
+            let enrollmentField = fields[0]
+            let enrollmentKey = enrollmentField.text
+            
+            if enrollmentKey == eachClass.classEnrollment{
+                print("Enrollmentkey yang dimasukkan cocok!")
+                print("Enrolment Key: \(enrollmentKey)")
+                print("Class Key: \(eachClass.classEnrollment)")
+                
+                let nameClass = eachClass.className
+                let descClass = eachClass.classDesc
+                let enrollmentKey = eachClass.classEnrollment
+                let modulCount = eachClass.classModule
+                let imgURL = eachClass.classImgString
+                
+                let uid = userModel.fetchUID()
+
+                storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL)
+                
+                self.dismiss(animated: true,completion: nil)
+            }else{
+                print("tidak cocok")
+                print("Enrolment Key: \(enrollmentKey)")
+                print("Class Key: \(eachClass.classEnrollment)")
+            }
+            
+        }))
+        
+        present(alert,animated:true)
+        
         
     }
     

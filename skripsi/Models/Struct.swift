@@ -28,6 +28,7 @@ struct Class{
     let classModule: Int
     let classEnrollment: String
     let classImg: UIImage
+    let classImgString: String
 }
 
 
