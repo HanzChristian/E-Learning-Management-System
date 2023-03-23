@@ -110,12 +110,17 @@ extension RegisterController{
             return "Masukkan Semua field yang ada!"
         }
         
-        //check password
+        //check password & username
         let finalPassword =  passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let finalName = namaTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if RegisterController.isPasswordValid(finalPassword) == false{
             //password not secured
             return "Pastikan passwordmu memiliki setidaknya 6 karakter!"
+        }
+        
+        if RegisterController.isNameValid(finalName) == false{
+            return "Pastikan namamu memiliki setidaknya 1 karakter besar!"
         }
         
         return nil
@@ -125,6 +130,12 @@ extension RegisterController{
     static func isPasswordValid(_ password : String) -> Bool{
         let passwordTest = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.[a-z]).{6,}$")
         return passwordTest.evaluate(with: password)
+    }
+    
+    // Regex to check if Username has atleast 1 Upper Case
+    static func isNameValid(_ name : String) -> Bool{
+        let nameTest = "(?s)[^A-Z]*[A-Z].*"
+        return NSPredicate(format: "SELF MATCHES %@", nameTest).evaluate(with: name)
     }
     
     func showError(_ message:String){

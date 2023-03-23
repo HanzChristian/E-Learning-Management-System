@@ -83,6 +83,12 @@ extension HomePageController{
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        //make pull refresh view
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        
+        self.tableView.refreshControl = refreshControl
+        
         let nibClass = UINib(nibName: "ClassTVC", bundle: nil)
         tableView.register(nibClass, forCellReuseIdentifier: "ClassTVC")
     
@@ -112,9 +118,35 @@ extension HomePageController{
               }
     }
     
-    func refreshTV(){
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+    @objc func refresh(_ sender: Any){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2){ [self] in
+            listofClass.removeAll()
+            if(role == "pengajar"){
+                classModel.fetchClassGuru(completion: { [self] classess in
+                    print("ngefetch")
+                    listofClass.append(classess)
+                    tableView.reloadData()
+                    if(listofClass.count == 0){
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                    }
+                    else if(listofClass.count == 1){
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+                    }
+                })
+            }else if(role == "pelajar"){
+                classModel.fetchClassMurid(completion: { [self] classess in
+                    listofClass.append(classess)
+                    tableView.reloadData()
+                    print("jumlah kelas = \(listofClass.count)")
+                    if(listofClass.count == 0){
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                    }
+                    else if(listofClass.count == 1){
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+                    }
+                })
+            }
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
     

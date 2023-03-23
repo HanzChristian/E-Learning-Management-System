@@ -51,6 +51,16 @@
                                     <constraint firstAttribute="width" constant="267" id="OKc-as-2VD"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDr-Bf-NQi">
+                                <rect key="frame" x="136.66666666666666" y="127" width="117" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="117" id="6dH-CA-wQY"/>
+                                    <constraint firstAttribute="height" constant="60" id="Qes-Pk-QjU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
+                                <color key="textColor" name="ButtonColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hanz Christian" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceR-t6-KHt">
                                 <rect key="frame" x="0.0" y="256.33333333333331" width="390" height="42"/>
                                 <constraints>
@@ -151,22 +161,20 @@
                                     <action selector="quitPressed:" destination="2cG-sF-pOi" eventType="touchUpInside" id="buv-OM-dRr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDr-Bf-NQi">
-                                <rect key="frame" x="136.66666666666666" y="127" width="117" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="117" id="6dH-CA-wQY"/>
-                                    <constraint firstAttribute="height" constant="60" id="Qes-Pk-QjU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
-                                <color key="textColor" name="ButtonColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail berhasil diubah!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BR3-QT-SMW">
+                                <rect key="frame" x="105.66666666666669" y="638.33333333333337" width="179" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oJn-Hx-gAV"/>
                         <color key="backgroundColor" name="SegmentedPressedColor"/>
                         <constraints>
+                            <constraint firstItem="BR3-QT-SMW" firstAttribute="top" secondItem="n9Y-3I-6mR" secondAttribute="bottom" constant="20" id="2Ok-EC-fJs"/>
                             <constraint firstItem="oJn-Hx-gAV" firstAttribute="trailing" secondItem="neZ-7X-Iwn" secondAttribute="trailing" constant="16" id="5uZ-eY-8mR"/>
                             <constraint firstItem="rDr-Bf-NQi" firstAttribute="top" secondItem="oJn-Hx-gAV" secondAttribute="top" constant="80" id="6vk-yY-hIf"/>
+                            <constraint firstItem="BR3-QT-SMW" firstAttribute="centerX" secondItem="J7B-iK-dw4" secondAttribute="centerX" id="6xP-NE-N0o"/>
                             <constraint firstItem="gBz-L4-mmr" firstAttribute="top" secondItem="biq-9F-xWQ" secondAttribute="bottom" constant="20" id="AcS-Uu-Re9"/>
                             <constraint firstItem="46i-JE-8Sw" firstAttribute="top" secondItem="oJn-Hx-gAV" secondAttribute="top" constant="20" id="D2i-tK-pCg"/>
                             <constraint firstItem="biq-9F-xWQ" firstAttribute="top" secondItem="ceR-t6-KHt" secondAttribute="bottom" constant="40" id="FYD-a9-ya6"/>
@@ -191,6 +199,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Profilku" image="person.crop.circle" catalog="system" id="GDw-8q-nqL"/>
                     <connections>
+                        <outlet property="changeLbl" destination="BR3-QT-SMW" id="zdc-qt-MzY"/>
                         <outlet property="nameLbl" destination="ceR-t6-KHt" id="vT9-7m-fpn"/>
                         <outlet property="shortnameLbl" destination="rDr-Bf-NQi" id="SvA-Rd-3lF"/>
                     </connections>
@@ -994,6 +1003,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
