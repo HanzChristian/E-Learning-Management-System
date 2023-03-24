@@ -111,10 +111,11 @@ extension MakeClassController{
         let randomString = makeEnrollmentKey(length: 5)
         let uid = userModel.fetchUID()
         
+        let classid = "\(UUID().uuidString)"
         
         //isi save data
         if let nameClass = classNameTVC?.classnameTF.text,!nameClass.isEmpty,let descClass = classDescTVC?.classdescTF.text,!descClass.isEmpty{
-            storeData(nameClass: nameClass, descClass: descClass, uid: uid!, enrollmentKey: randomString,modulCount: modulCount,imgURL: path)
+            storeData(nameClass: nameClass, descClass: descClass, uid: uid!, enrollmentKey: randomString,modulCount: modulCount,imgURL: path,classid: classid)
 //            uploadImg()
             print("Saved")
             dismiss(animated: true,completion: nil)
@@ -136,7 +137,7 @@ extension MakeClassController{
         }
     }
     
-    func storeData(nameClass: String, descClass: String,uid: String,enrollmentKey: String,modulCount: Int,imgURL: String){
+    func storeData(nameClass: String, descClass: String,uid: String,enrollmentKey: String,modulCount: Int,imgURL: String,classid: String){
         
         // Upload data
         fileRef!.putData(imageData!,metadata: nil) { [self] metadata, error in
@@ -148,7 +149,8 @@ extension MakeClassController{
                     "enrollmentKey": enrollmentKey,
                     "uid": uid,
                     "modulCount": modulCount,
-                    "imgURL": imgURL
+                    "imgURL": imgURL,
+                    "classid": classid
                 ])
             }
         }

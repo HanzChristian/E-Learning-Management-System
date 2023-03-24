@@ -29,15 +29,19 @@ struct Class{
     let classEnrollment: String
     let classImg: UIImage
     let classImgString: String
+    let classid: String
 }
 
+struct SelectedIdx{
+    var indexPath: IndexPath
+    static var selectedIdx = SelectedIdx(indexPath: IndexPath(row: 0, section: 0))
+}
 
-//struct Kelas{
-//    let className: String
-//    let classModule: String
-//    let classEnrollment: String
-//    let classImg: UIImage
-//}
+struct SelectedClass{
+    var classPath: String
+    static var selectedClass = SelectedClass(classPath: "")
+    
+}
 
 struct Tugas{
     let tugasDate: String

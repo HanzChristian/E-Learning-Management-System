@@ -50,32 +50,35 @@ extension HomePageController{
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
      
         if(role == "pengajar"){
-            classModel.fetchClassGuru(completion: { [self] classess in
-                print("ngefetch")
-                listofClass.append(classess)
-                tableView.reloadData()
-                if(listofClass.count == 0){
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                }
-                else if(listofClass.count == 1){
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-                }
-            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
+                classModel.fetchClassGuru(completion: { [self] classess in
+                    print("ngefetch")
+                    listofClass.append(classess)
+                    tableView.reloadData()
+                    if(listofClass.count == 0){
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                    }
+                    else if(listofClass.count == 1){
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+                    }
+                })
+            }
         }else if(role == "pelajar"){
-            classModel.fetchClassMurid(completion: { [self] classess in
-                listofClass.append(classess)
-                tableView.reloadData()
-                print("jumlah kelas = \(listofClass.count)")
-                if(listofClass.count == 0){
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                }
-                else if(listofClass.count == 1){
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-                }
-            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
+                classModel.fetchClassMurid(completion: { [self] classess in
+                    listofClass.append(classess)
+                    tableView.reloadData()
+                    print("jumlah kelas = \(listofClass.count)")
+                    if(listofClass.count == 0){
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                    }
+                    else if(listofClass.count == 1){
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+                    }
+                })
+            }
         }
-        
-        
+    
         
         if(role == "pengajar"){ //pengajar
             setBtn()
@@ -220,10 +223,16 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let eachClass = listofClass[indexPath.row]
+        
         if(role == "pengajar"){
+            SelectedClass.selectedClass.classPath = eachClass.classid
+            SelectedIdx.selectedIdx.indexPath = indexPath
+            
             self.performSegue(withIdentifier: "guruclassSegue", sender: self)
         }
         else{
+            SelectedIdx.selectedIdx.indexPath = indexPath
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MuridClassController") as! MuridClassController
             vc.modalPresentationStyle = .fullScreen
@@ -231,5 +240,6 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
             self.present(nav, animated: true)
         }
     }
+    
     
 }

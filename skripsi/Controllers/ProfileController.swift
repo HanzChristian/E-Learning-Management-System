@@ -128,37 +128,14 @@ extension ProfileController{
                     .whereField("name", isEqualTo: userName)
                     .addSnapshotListener { (querySnapshot, err) in
                         if let err = err {
-                            UIView.animate(withDuration: 3.0, animations: { [self] in
-                                changeLbl.text = "Nama gagal berubah!"
-                                changeLbl.textColor = .red
-                                changeLbl.alpha = 1.0
-                            }) { (finished) in
-                                // Fade out animation
-                                UIView.animate(withDuration: 3.0, animations: { [self] in
-                                    changeLbl.alpha = 0.0
-                                }) { [self] (finished) in
-                                    // Animation complete
-                                }
-                            }
+                            showRedLbl(text: "Nama gagal diubah!")
                             // Some error occured
-                        } else if querySnapshot!.documents.count != 1 {
-                        } else {
+                        }else {
                             let document = querySnapshot!.documents.first
                             document!.reference.updateData([
                                 "name": name
                             ])
-                            //Make label changes
-                            UIView.animate(withDuration: 3.0, animations: { [self] in
-                                changeLbl.text = "Nama telah berhasil diubah!"
-                                changeLbl.alpha = 1.0
-                            }) { (finished) in
-                                // Fade out animation
-                                UIView.animate(withDuration: 3.0, animations: { [self] in
-                                    changeLbl.alpha = 0.0
-                                }) { [self] (finished) in
-                                    // Animation complete
-                                }
-                            }
+                            showBlueLbl(text: "Nama telah berhasil diubah!")
                         }
                     }
                 
@@ -166,24 +143,10 @@ extension ProfileController{
             }
             else{
                 print("masuk bawah")
-                UIView.animate(withDuration: 3.0, animations: { [self] in
-                    changeLbl.text = "Nama kosong/sama seperti sebelumnya!"
-                    changeLbl.textColor = .red
-                    changeLbl.alpha = 1.0
-                }) { (finished) in
-                    // Fade out animation
-                    UIView.animate(withDuration: 3.0, animations: { [self] in
-                        changeLbl.alpha = 0.0
-                    }) { [self] (finished) in
-                        // Animation complete
-                    }
-                }
+                showRedLbl(text: "Nama kosong/sama seperti sebelumnya!")
                 self.dismiss(animated: true,completion: nil)
             }
-            
-           
         }))
-            
         present(alert,animated:true)
     }
     
@@ -209,54 +172,20 @@ extension ProfileController{
                 currentUser?.updateEmail(to: email!){ error in
                     if let error = error{
                         print("error update email \(error)")
-                        UIView.animate(withDuration: 3.0, animations: { [self] in
-                            changeLbl.text = "Email gagal berubah!"
-                            changeLbl.textColor = .red
-                            changeLbl.alpha = 1.0
-                        }) { (finished) in
-                            // Fade out animation
-                            UIView.animate(withDuration: 3.0, animations: { [self] in
-                                changeLbl.alpha = 0.0
-                            }) { [self] (finished) in
-                                // Animation complete
-                            }
-                        }
+                        showRedLbl(text: "Email gagal diubah, coba login ulang!")
                     }else{
-                        UIView.animate(withDuration: 3.0, animations: { [self] in
-                            changeLbl.text = "Email telah berhasil diubah!"
-                            changeLbl.alpha = 1.0
-                        }) { (finished) in
-                            // Fade out animation
-                            UIView.animate(withDuration: 3.0, animations: { [self] in
-                                changeLbl.alpha = 0.0
-                            }) { [self] (finished) in
-                                // Animation complete
-                            }
-                        }
+                        showBlueLbl(text: "Email telah berhasil diubah!")
                     }
                 }
-                
                 self.dismiss(animated: true,completion: nil)
             }
             else{
-                UIView.animate(withDuration: 3.0, animations: { [self] in
-                    changeLbl.text = "Email kosong!"
-                    changeLbl.textColor = .red
-                    changeLbl.alpha = 1.0
-                }) { (finished) in
-                    // Fade out animation
-                    UIView.animate(withDuration: 3.0, animations: { [self] in
-                        changeLbl.alpha = 0.0
-                    }) { [self] (finished) in
-                        // Animation complete
-                    }
-                }
+                showRedLbl(text: "Email kosong!")
                 print("Email kosong!")
             }
             
            
         }))
-            
         present(alert,animated:true)
     }
     
@@ -282,60 +211,52 @@ extension ProfileController{
             
             
             let currentUser = Auth.auth().currentUser
-            
-            if(password != nil){
+        
+            if(password != nil || RegisterController.isNameValid(password!) != false){
                 currentUser?.updatePassword(to: password!){ error in
                     if let error = error{
                         print("error update password \(error)")
-                        UIView.animate(withDuration: 3.0, animations: { [self] in
-                            changeLbl.text = "Password gagal masuk!"
-                            changeLbl.textColor = .red
-                            changeLbl.alpha = 1.0
-                        }) { (finished) in
-                            // Fade out animation
-                            UIView.animate(withDuration: 3.0, animations: { [self] in
-                                changeLbl.alpha = 0.0
-                            }) { [self] (finished) in
-                                // Animation complete
-                            }
-                        }
+                        showRedLbl(text: "Password kosong/minimal masukkan 6 karakter!")
                     }else{
                         print("masuk ke animasi uiview")
-                        UIView.animate(withDuration: 3.0, animations: { [self] in
-                            changeLbl.text = "Password telah berhasil diubah!"
-                            changeLbl.alpha = 1.0
-                        }) { (finished) in
-                            // Fade out animation
-                            UIView.animate(withDuration: 3.0, animations: { [self] in
-                                changeLbl.alpha = 0.0
-                            }) { [self] (finished) in
-                                // Animation complete
-                            }
-                        }
+                        showBlueLbl(text: "Password telah berhasil diubah!")
+                        self.dismiss(animated: true,completion: nil)
                     }
                 
                 }
-                self.dismiss(animated: true,completion: nil)
             }
-            else{
-                UIView.animate(withDuration: 3.0, animations: { [self] in
-                    changeLbl.text = "Password kosong!"
-                    changeLbl.textColor = .red
-                    changeLbl.alpha = 1.0
-                }) { (finished) in
-                    // Fade out animation
-                    UIView.animate(withDuration: 3.0, animations: { [self] in
-                        changeLbl.alpha = 0.0
-                    }) { [self] (finished) in
-                        // Animation complete
-                    }
-                }
-                print("Password kosong!")
-            }
-            
-           
         }))
             
         present(alert,animated:true)
     }
+    
+    func showBlueLbl(text: String){
+        UIView.animate(withDuration: 2.0, animations: { [self] in
+            changeLbl.text = text
+            changeLbl.alpha = 1.0
+        }) { (finished) in
+            // Fade out animation
+            UIView.animate(withDuration: 5.0, animations: { [self] in
+                changeLbl.alpha = 0.0
+            }) { [self] (finished) in
+                // Animation complete
+            }
+        }
+    }
+    
+    func showRedLbl(text: String){
+        UIView.animate(withDuration: 2.0, animations: { [self] in
+            changeLbl.text = text
+            changeLbl.textColor = .red
+            changeLbl.alpha = 1.0
+        }) { (finished) in
+            // Fade out animation
+            UIView.animate(withDuration: 5.0, animations: { [self] in
+                changeLbl.alpha = 0.0
+            }) { [self] (finished) in
+                // Animation complete
+            }
+        }
+    }
+    
 }

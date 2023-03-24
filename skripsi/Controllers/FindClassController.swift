@@ -48,6 +48,12 @@ extension FindClassController{
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        //make pull refresh view
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        
+        self.tableView.refreshControl = refreshControl
+        
         let nibClass = UINib(nibName: "ClassTVC", bundle: nil)
         tableView.register(nibClass, forCellReuseIdentifier: "ClassTVC")
         
@@ -74,7 +80,7 @@ extension FindClassController{
         dismiss(animated: true,completion: nil)
     }
     
-    func storeData(nameClass: String, descClass: String,uidMurid: String,enrollmentKey: String,modulCount: Int,imgURL: String){
+    func storeData(nameClass: String, descClass: String,uidMurid: String,enrollmentKey: String,modulCount: Int,imgURL: String,classid: String){
         // Upload data
         db.collection("muridClass").addDocument(data: [
             "nameClass": nameClass,
@@ -82,7 +88,8 @@ extension FindClassController{
             "enrollmentKey": enrollmentKey,
             "uidMurid": uidMurid,
             "modulCount": modulCount,
-            "imgURL": imgURL
+            "imgURL": imgURL,
+            "classid": classid
         ])
     }
     
@@ -143,10 +150,13 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
                     let enrollmentKey = eachClass.classEnrollment
                     let modulCount = eachClass.classModule
                     let imgURL = eachClass.classImgString
+                    let classid = eachClass.classid
                     
                     let uid = userModel.fetchUID()
+                 
 
-                    storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL)
+                    storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL,classid: classid)
+                    
                     
                     self.dismiss(animated: true,completion: nil)
                 }else{
@@ -202,10 +212,11 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
                 let enrollmentKey = eachClass.classEnrollment
                 let modulCount = eachClass.classModule
                 let imgURL = eachClass.classImgString
+                let classid = eachClass.classid
                 
                 let uid = userModel.fetchUID()
 
-                storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL)
+                storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL,classid: classid)
                 
                 self.dismiss(animated: true,completion: nil)
             }else{
@@ -219,6 +230,19 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
         present(alert,animated:true)
         
         
+    }
+    
+    @objc func refresh(_ sender: Any){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2){ [self] in
+            listofClassMurid.removeAll()
+            classModel.fetchClassAll(completion: { [self] classess in
+                listofClassMurid.append(classess)
+                tableView.reloadData()
+    //            enrollmentKeyDB = classess.classEnrollment
+    //            print("ini adalah enrollmentnya = \(enrollmentKeyDB)")
+            })
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
     
 }

@@ -11,6 +11,9 @@ class GuruClassController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
     let cellTitle = ["Modul", "Kumpulan Tugas"]
+    let classModel = ClassModel()
+    var className: String?
+    var row: Int?
 }
 extension GuruClassController{
     // MARK: - View Life Cycle
@@ -19,8 +22,17 @@ extension GuruClassController{
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        row = SelectedIdx.selectedIdx.indexPath.row
+        print("ini rownya = \(row)")
+        
         super.viewDidLoad()
-        setNavItem()
+        classModel.fetchSelectedClass { [self] classess in
+            className = classess.className
+            print("ini classname = \(className)")
+            setNavItem()
+        }
+        
+    
         let nibModul = UINib(nibName: "ModulTVC", bundle: nil)
         tableView.register(nibModul, forCellReuseIdentifier: "ModulTVC")
         let nibTugas = UINib(nibName: "TugasTVC", bundle: nil)
@@ -34,7 +46,7 @@ extension GuruClassController{
     private func setNavItem(){
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        navigationItem.title = "Aljabar Linear"
+        navigationItem.title = className
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Kembali", style: .plain, target: self, action: #selector(dismissSelf))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Tambahkan Modul", style: .plain, target: self, action: #selector(choose))
