@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
 
 class HomePageController: UIViewController {
     
@@ -46,6 +48,7 @@ extension HomePageController{
         
         self.userModel.fetchUser{user in
         }
+        
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
      
@@ -124,6 +127,7 @@ extension HomePageController{
     @objc func refresh(_ sender: Any){
         DispatchQueue.main.asyncAfter(deadline: .now() + 2){ [self] in
             listofClass.removeAll()
+            
             if(role == "pengajar"){
                 classModel.fetchClassGuru(completion: { [self] classess in
                     print("ngefetch")

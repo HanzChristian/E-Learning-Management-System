@@ -121,6 +121,21 @@ extension ModulController{
                         ])
                     }
                 }
+            
+            db.collection("muridClass")
+                .whereField("classid", isEqualTo: classid)
+                .getDocuments { (querySnapshot,err) in
+                if let err = err{
+                    print("error murid class")
+                }else{
+                    let document = querySnapshot!.documents.first
+                    if(document != nil){
+                        document!.reference.updateData([
+                            "modulCount": FieldValue.increment(Int64(1))
+                        ])
+                    }
+                }
+            }
         }
     }
     
