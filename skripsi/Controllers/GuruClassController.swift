@@ -14,6 +14,8 @@ class GuruClassController: UIViewController {
     let classModel = ClassModel()
     var className: String?
     var row: Int?
+    var listofModul = [Modul]()
+    var listofTugas = [Tugas]()
 }
 extension GuruClassController{
     // MARK: - View Life Cycle
@@ -30,6 +32,13 @@ extension GuruClassController{
             className = classess.className
             print("ini classname = \(className)")
             setNavItem()
+            
+            if(listofModul.count == 0 || listofTugas.count == 0){
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenGuru"), object: nil)
+            }
+            else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenGuru"), object: nil)
+            }
         }
         
     
@@ -106,7 +115,20 @@ extension GuruClassController{
 extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        if(listofModul.count == 0) && (listofTugas.count == 0){
+            return 0
+        }
+        else if(listofModul.count != 0) && (listofTugas.count == 0){
+            return 1
+        }
+        else if(listofModul.count == 0) && (listofTugas.count != 0){
+            return 1
+        }
+        else if(listofModul.count != 0) && (listofTugas.count != 0){
+            return 2
+        }else{
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -151,7 +173,20 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if (section == 0) {
+            // cari tahu BG atau meds
+            if (listofTugas.count != 0 && listofModul.count != 0) {
+                return listofModul.count
+            } else if (listofTugas.count != 0 && listofModul.count == 0) {
+                return listofModul.count
+            } else if (listofTugas.count == 0 && listofModul.count != 0) {
+                return listofModul.count
+            }
+            return 0
+        } else if (section == 1){
+            return listofTugas.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

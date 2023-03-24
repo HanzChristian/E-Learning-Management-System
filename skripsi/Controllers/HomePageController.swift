@@ -213,7 +213,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
             cell.classImg.image = eachClass.classImg
             cell.classtitleLbl.text = eachClass.className
             cell.classmodulLbl.text = "\(eachClass.classModule) modul"
-            cell.classenrollmentkeyLbl.text = eachClass.classEnrollment
+            cell.classenrollmentkeyLbl.text = "Enrollment Key : \(eachClass.classEnrollment)"
 
         return cell
     }

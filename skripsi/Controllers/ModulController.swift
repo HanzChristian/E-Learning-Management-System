@@ -8,14 +8,30 @@
 import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
+import FirebaseFirestore
+import FirebaseStorage
 
 class ModulController: UIViewController {
     // MARK: - Variables & Outlet
-    
     @IBOutlet weak var tableView: UITableView!
     let cellTitle = ["Nama Modul", "Deskripsi Modul","Upload File"]
     var height = 52.0
+    let storageRef = Storage.storage().reference()
+    var path = ""
+    var fileRef: StorageReference? = nil
+    let db = Firestore.firestore()
+    var counter = 0
+    
     var displayURL: String?
+    var fullURL: String?
+    var extractURL: URL?
+    var classid : String?
+    var numModul: Int?
+    
+    var modulNameTVC: ModulNameTVC?
+    var modulDescriptionTVC: ModulDescriptionTVC?
+    var classModel = ClassModel()
+    
 }
 // MARK: - View Life Cycle
 extension ModulController{
@@ -23,6 +39,11 @@ extension ModulController{
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        classModel.fetchSelectedClass { [self] classess in
+            classid = classess.classid
+            print("ini classid = \(classid)")
+        }
         
         setNavItem()
         
@@ -59,7 +80,48 @@ extension ModulController{
     }
     
     @objc private func saveItem(){
-        dismiss(animated: true,completion: nil)
+        
+        if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty{
+            storeData(nameModul: nameModul, descModul: descModul, fileModul: fullURL!, classid: classid!)
+            dismiss(animated: true,completion: nil)
+        }else{
+            print("ga masuk bro")
+            print("ini nama modul = \(modulNameTVC?.nameTF.text), ini desc modul = \(modulDescriptionTVC?.descTV.text), ini filemodul = \(fullURL), ini classid = \(classid)")
+        }
+      
+    }
+    
+    func storeData(nameModul: String, descModul: String,fileModul: String,classid: String){
+        storageRef.child("pdf/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
+            (_,err) in
+            
+            if err != nil{
+                print("error disini gan \(err?.localizedDescription)")
+                return
+            }
+            
+            db.collection("modul").addDocument(data: [
+                "nameModul": nameModul,
+                "descModul": descModul,
+                "fileModul": fileModul,
+                "classid": classid
+            ])
+            
+            //Add Modul count to display in app
+            db.collection("class")
+                .whereField("classid", isEqualTo: classid)
+                .getDocuments { (querySnapshot, err) in
+                    if let err = err {
+                        print("error class")
+                        // Some error occured
+                    }else {
+                        let document = querySnapshot!.documents.first
+                        document!.reference.updateData([
+                            "modulCount": FieldValue.increment(Int64(1))
+                        ])
+                    }
+                }
+        }
     }
     
 }
@@ -110,11 +172,13 @@ extension ModulController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.section == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "ModulNameTVC", for: indexPath) as! ModulNameTVC
-            return cell
+            modulNameTVC = cell
+            return modulNameTVC!
         }
         else if(indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: "ModulDescriptionTVC", for: indexPath) as! ModulDescriptionTVC
-            return cell
+            modulDescriptionTVC = cell
+            return modulDescriptionTVC!
         }
         else if(indexPath.section == 2){
             let cell = tableView.dequeueReusableCell(withIdentifier: "UploadTVC", for: indexPath) as! UploadTVC
@@ -149,8 +213,13 @@ extension ModulController:UIDocumentPickerDelegate{
         }
         print("import result : \(myURL)")
         
-        
+        // extractURL to firebase Storage as URL,
+        // fullURL to save in firestore,
+        // displayURL to display in application
+        extractURL = myURL
+        fullURL = myURL.absoluteString
         displayURL = myURL.lastPathComponent
+        
         self.tableView.reloadData()
     }
     

@@ -8,7 +8,8 @@
 import UIKit
 
 class ModulDescriptionTVC: UITableViewCell {
-
+    @IBOutlet weak var descTV: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

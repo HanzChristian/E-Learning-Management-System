@@ -53,5 +53,6 @@ struct Modul{
     let modulNum: String
     let modulName: String
     let modulDesc: String
+    let modulFile: String
 }
 
