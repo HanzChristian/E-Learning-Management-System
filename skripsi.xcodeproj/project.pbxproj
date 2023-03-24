@@ -38,6 +38,7 @@
 		1559C58629C347610006CA4F /* ClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C58529C347610006CA4F /* ClassModel.swift */; };
 		1559C58829CDDD6D0006CA4F /* EmptySpaceGuruController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C58729CDDD6D0006CA4F /* EmptySpaceGuruController.swift */; };
 		1559C58A29CDE07C0006CA4F /* ModulModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C58929CDE07C0006CA4F /* ModulModel.swift */; };
+		1559C58C29CE08360006CA4F /* EmptySpaceFindController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1559C58B29CE08360006CA4F /* EmptySpaceFindController.swift */; };
 		1587B02F29AC71B6007229DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B02E29AC71B6007229DB /* AppDelegate.swift */; };
 		1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B03029AC71B6007229DB /* SceneDelegate.swift */; };
 		1587B03329AC71B6007229DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587B03229AC71B6007229DB /* ViewController.swift */; };
@@ -103,6 +104,7 @@
 		1559C58529C347610006CA4F /* ClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassModel.swift; sourceTree = "<group>"; };
 		1559C58729CDDD6D0006CA4F /* EmptySpaceGuruController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySpaceGuruController.swift; sourceTree = "<group>"; };
 		1559C58929CDE07C0006CA4F /* ModulModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulModel.swift; sourceTree = "<group>"; };
+		1559C58B29CE08360006CA4F /* EmptySpaceFindController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySpaceFindController.swift; sourceTree = "<group>"; };
 		1587B02B29AC71B6007229DB /* skripsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skripsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1587B02E29AC71B6007229DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1587B03029AC71B6007229DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				15EEA15129ADE728004A830B /* HomePageController.swift */,
 				15EEA15929B1ADE2004A830B /* EmptySpaceController.swift */,
 				1559C58729CDDD6D0006CA4F /* EmptySpaceGuruController.swift */,
+				1559C58B29CE08360006CA4F /* EmptySpaceFindController.swift */,
 				15EEA15329AF215A004A830B /* ProfileController.swift */,
 				15EEA15529AF2951004A830B /* FindClassController.swift */,
 				15EEA15B29B1BE7C004A830B /* MakeClassController.swift */,
@@ -523,6 +526,7 @@
 				1559C58829CDDD6D0006CA4F /* EmptySpaceGuruController.swift in Sources */,
 				15EEA15429AF215A004A830B /* ProfileController.swift in Sources */,
 				15EEA16F29B4C4A2004A830B /* Struct.swift in Sources */,
+				1559C58C29CE08360006CA4F /* EmptySpaceFindController.swift in Sources */,
 				154862C829B5DA62001B90DE /* TugasTVC.swift in Sources */,
 				15EEA15229ADE728004A830B /* HomePageController.swift in Sources */,
 				154862E929B99DFC001B90DE /* KumpulanTugasController.swift in Sources */,

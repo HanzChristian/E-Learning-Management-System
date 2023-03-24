@@ -174,7 +174,7 @@
                         <outlet property="loginBtn" destination="sRO-d1-0fY" id="IuH-u1-HGa"/>
                         <outlet property="pageControl" destination="c5D-38-5ce" id="2kt-Yf-LUD"/>
                         <outlet property="signupBtn" destination="2Yj-2c-fiF" id="tF0-hY-ofm"/>
-                        <segue destination="Tfc-Vq-Brq" kind="presentation" identifier="homepageSegue" modalPresentationStyle="fullScreen" id="SqS-tD-10H"/>
+                        <segue destination="Tfc-Vq-Brq" kind="presentation" id="SqS-tD-10H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VXU-vT-WaV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

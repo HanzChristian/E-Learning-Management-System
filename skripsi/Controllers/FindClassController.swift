@@ -23,15 +23,6 @@ class FindClassController: UIViewController {
 // MARK: - View Life Cycle
 extension FindClassController{
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        classModel.fetchClassGuru(completion: { [self] classess in
-//            listofClassMurid.append(classess)
-//            tableView.reloadData()
-//            enrollmentKeyDB = classess.classEnrollment
-//            print("ini adalah enrollmentnya = \(enrollmentKeyDB)")
-//        })
-//    }
-//    
     override func viewDidLoad(){
         super.viewDidLoad()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenView"), object: nil)
@@ -40,8 +31,12 @@ extension FindClassController{
         classModel.fetchClassAll(completion: { [self] classess in
             listofClassMurid.append(classess)
             tableView.reloadData()
-//            enrollmentKeyDB = classess.classEnrollment
-//            print("ini adalah enrollmentnya = \(enrollmentKeyDB)")
+            
+            if(listofClassMurid.count == 0){
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenFind"), object: nil)
+            }else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenFind"), object: nil)
+            }
         })
         print("data fetched")
         
@@ -238,8 +233,11 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
             classModel.fetchClassAll(completion: { [self] classess in
                 listofClassMurid.append(classess)
                 tableView.reloadData()
-    //            enrollmentKeyDB = classess.classEnrollment
-    //            print("ini adalah enrollmentnya = \(enrollmentKeyDB)")
+                if(listofClassMurid.count == 0){
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenFind"), object: nil)
+                }else{
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenFind"), object: nil)
+                }
             })
             self.tableView.refreshControl?.endRefreshing()
         }

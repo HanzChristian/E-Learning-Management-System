@@ -56,7 +56,7 @@ extension OnBoardingController{
         else{
             print("ga masuk gyan")
             
-//            // masih gamuncul tabbarnya
+            
             var mainAppViewController = UIStoryboard(name: "HomePage", bundle: nil).instantiateViewController(withIdentifier: "tabbarHomePage")
 
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

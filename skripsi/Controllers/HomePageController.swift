@@ -61,7 +61,7 @@ extension HomePageController{
                     if(listofClass.count == 0){
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
                     }
-                    else if(listofClass.count == 1){
+                    else{
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
                     }
                 })
@@ -75,7 +75,7 @@ extension HomePageController{
                     if(listofClass.count == 0){
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
                     }
-                    else if(listofClass.count == 1){
+                    else{
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
                     }
                 })
@@ -136,7 +136,7 @@ extension HomePageController{
                     if(listofClass.count == 0){
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
                     }
-                    else if(listofClass.count == 1){
+                    else{
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
                     }
                 })
@@ -148,7 +148,7 @@ extension HomePageController{
                     if(listofClass.count == 0){
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
                     }
-                    else if(listofClass.count == 1){
+                    else{
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
                     }
                 })
