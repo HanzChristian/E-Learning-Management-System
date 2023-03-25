@@ -118,6 +118,7 @@ extension MakeClassController{
             storeData(nameClass: nameClass, descClass: descClass, uid: uid!, enrollmentKey: randomString,modulCount: modulCount,imgURL: path,classid: classid)
 //            uploadImg()
             print("Saved")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
             dismiss(animated: true,completion: nil)
         }else{
             print("gamasuk bro")

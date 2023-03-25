@@ -11,14 +11,24 @@ class GuruClassController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
     let cellTitle = ["Modul", "Kumpulan Tugas"]
+    
     let classModel = ClassModel()
-    var className: String?
-    var row: Int?
+    let modulModel = ModulModel()
     var listofModul = [Modul]()
     var listofTugas = [Tugas]()
+    var jumlahModul = [JumlahModul]()
+    
+    var className: String?
+    var row: Int?
+    var modulCount = JumlahModul(modulNum: 0)
 }
 extension GuruClassController{
     // MARK: - View Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh(_:)), name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
+        
+    }
     
     override func viewDidLoad(){
         self.tableView.delegate = self
@@ -28,16 +38,24 @@ extension GuruClassController{
         print("ini rownya = \(row)")
         
         super.viewDidLoad()
+        
+        modulModel.fetchModul { [self] modul in
+            listofModul.append(modul)
+            modulCount.modulNum += 1
+            jumlahModul.append(modulCount)
+            tableView.reloadData()
+        }
+        
         classModel.fetchSelectedClass { [self] classess in
             className = classess.className
             print("ini classname = \(className)")
             setNavItem()
-            
-            if(listofModul.count == 0 || listofTugas.count == 0){
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenGuru"), object: nil)
-            }
-            else{
+            print("ini listofmodul count = \(listofModul.count)")
+            if(listofModul.count > 0 || listofTugas.count > 0){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenGuru"), object: nil)
+            }
+            else if(listofModul.count == 0 || listofTugas.count == 0){
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenGuru"), object: nil)
             }
         }
         
@@ -109,6 +127,19 @@ extension GuruClassController{
         let nav =  UINavigationController(rootViewController: vc)
         self.present(nav, animated: true)
     }
+    
+    @objc func refresh(_ sender: Any){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
+            listofModul.removeAll()
+            modulModel.fetchModul { [self] modul in
+                listofModul.append(modul)
+                modulCount.modulNum += 1
+                jumlahModul.append(modulCount)
+                tableView.reloadData()
+            }
+        }
+    }
+        
 }
 
 // MARK: - TableView Delegate & Datasource
@@ -192,6 +223,12 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.section == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "ModulTVC", for: indexPath) as! ModulTVC
+            
+            let modul = jumlahModul[indexPath.row]
+            let eachModul = listofModul[indexPath.row]
+            
+            cell.materiLbl.text = "\(eachModul.modulName)"
+            cell.modulLbl.text = "Modul \(modul.modulNum)"
             return cell
         }
         else if(indexPath.section == 1){
@@ -206,6 +243,7 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == .delete){
+            
             print("delete item")
         }
     }

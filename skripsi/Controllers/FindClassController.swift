@@ -152,7 +152,7 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
 
                     storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL,classid: classid)
                     
-                    
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
                     self.dismiss(animated: true,completion: nil)
                 }else{
                     print("tidak cocok")

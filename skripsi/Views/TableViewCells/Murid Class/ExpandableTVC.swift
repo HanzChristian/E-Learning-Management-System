@@ -34,11 +34,11 @@ class ExpandableTVC: UITableViewCell {
         // Configure the view for the selected state
     }
 // MARK: - Functions
-    func setupExpandable(_ modul: Modul){
-        modulNumLbl.text = modul.modulNum
-        modulNameLbl.text = modul.modulName
-        modulDescLbl.text = modul.modulDesc
-    }
+//    func setupExpandable(_ modul: Modul){
+//        modulNumLbl.text = modul.modulNum
+//        modulNameLbl.text = modul.modulName
+//        modulDescLbl.text = modul.modulDesc
+//    }
     func animate(){
         UIView.animate(withDuration: 0.5, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 1,options: .curveEaseIn, animations: {
             self.contentView.layoutIfNeeded()

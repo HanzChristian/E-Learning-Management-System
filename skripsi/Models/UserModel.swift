@@ -41,17 +41,6 @@ class UserModel{
                 users.append(user)
                 completion(self.users.first!)
             }
-            
-//            self.users = documents.map { (queryDocumentSnapshot) -> User in
-//
-//                let data = queryDocumentSnapshot.data()
-//                let name = data["name"] as? String ?? ""
-//                let role = data["role"] as? String ?? ""
-//                let id = data["uid"] as? String ?? ""
-//                print("fetchuser 2")
-//                return User(name: name, role: role, id: id)
-//            }
-//            completion(self.users.first!)
         }
     }
     

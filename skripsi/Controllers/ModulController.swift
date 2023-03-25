@@ -83,6 +83,7 @@ extension ModulController{
         
         if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty{
             storeData(nameModul: nameModul, descModul: descModul, fileModul: fullURL!, classid: classid!)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
             dismiss(animated: true,completion: nil)
         }else{
             print("ga masuk bro")

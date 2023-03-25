@@ -12,11 +12,11 @@ class MuridClassController: UIViewController{
     // MARK: - Variables & Outlet
     
     @IBOutlet weak var tableView: UITableView!
-    let data = [
-        Modul(modulNum: "Modul 1", modulName: "Sistem Persamaan Linear", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdawdwa"),
-        Modul(modulNum: "Modul 2", modulName: "Vektor dan Ruang", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdawdwadwadwad"),
-        Modul(modulNum: "Modul 3", modulName: "Analisa Vektor", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdadwadawdaw")
-    ]
+//    let data = [
+//        Modul(modulNum: "Modul 1", modulName: "Sistem Persamaan Linear", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdawdwa"),
+//        Modul(modulNum: "Modul 2", modulName: "Vektor dan Ruang", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdawdwadwadwad"),
+//        Modul(modulNum: "Modul 3", modulName: "Analisa Vektor", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdadwadawdaw")
+//    ]
     var selectedIdx: IndexPath = IndexPath(row: 4, section: 0)
     var previousIdx: IndexPath?
 }
@@ -55,7 +55,7 @@ extension MuridClassController{
 // MARK: - TableView Delegate & Datasource
 extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,7 +66,7 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
         //        cell.classmodulLbl =
         //        cell.classenrollmentkeyLbl =
         
-        cell.setupExpandable(data[indexPath.row])
+//        cell.setupExpandable(data[indexPath.row])
         cell.selectionStyle = .none
         cell.makeSheet = { [weak self] in
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)

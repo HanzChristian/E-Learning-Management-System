@@ -32,7 +32,7 @@ extension HomePageController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh(_:)), name: NSNotification.Name(rawValue: "refreshData"), object: nil)
         navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
@@ -51,11 +51,10 @@ extension HomePageController{
         
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
-     
+        
         if(role == "pengajar"){
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
                 classModel.fetchClassGuru(completion: { [self] classess in
-                    print("ngefetch")
                     listofClass.append(classess)
                     tableView.reloadData()
                     if(listofClass.count == 0){
@@ -106,7 +105,11 @@ extension HomePageController{
 extension HomePageController{
     @IBAction func btnPressed(_ sender: UIButton) {
         if (role == "pelajar"){
-            performSegue(withIdentifier: "findclassSegue", sender: nil)
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "FindClassController") as! FindClassController
+            vc.modalPresentationStyle = .automatic
+            let nav =  UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
         }else{
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MakeClassController") as! MakeClassController
@@ -125,7 +128,7 @@ extension HomePageController{
     }
     
     @objc func refresh(_ sender: Any){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2){ [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){ [self] in
             listofClass.removeAll()
             
             if(role == "pengajar"){
