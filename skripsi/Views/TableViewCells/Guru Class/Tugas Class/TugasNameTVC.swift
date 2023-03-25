@@ -9,6 +9,8 @@ import UIKit
 
 class TugasNameTVC: UITableViewCell {
 
+    
+    @IBOutlet weak var tugasNameTV: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

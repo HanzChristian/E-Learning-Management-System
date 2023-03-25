@@ -20,7 +20,7 @@
                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Misal: Tugas Modul 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="khU-fO-RZo">
                         <rect key="frame" x="15" y="0.0" width="305" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                     </textField>
                 </subviews>
                 <constraints>
@@ -32,6 +32,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="Table"/>
+            <connections>
+                <outlet property="tugasNameTV" destination="khU-fO-RZo" id="D82-ZG-2Ga"/>
+            </connections>
             <point key="canvasLocation" x="-12" y="-1"/>
         </tableViewCell>
     </objects>

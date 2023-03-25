@@ -9,6 +9,7 @@ import UIKit
 
 class TugasDescriptionTVC: UITableViewCell {
 
+    @IBOutlet weak var tugasDescTVC: UITextView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

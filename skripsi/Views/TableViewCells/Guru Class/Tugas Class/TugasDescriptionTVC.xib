@@ -23,7 +23,7 @@
                         <color key="backgroundColor" name="Table"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                     </textView>
                 </subviews>
                 <constraints>
@@ -35,6 +35,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="Table"/>
+            <connections>
+                <outlet property="tugasDescTVC" destination="Cbg-vE-v7R" id="imc-9v-vf0"/>
+            </connections>
             <point key="canvasLocation" x="-12" y="-1"/>
         </tableViewCell>
     </objects>

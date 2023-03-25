@@ -9,12 +9,12 @@ import Foundation
 import FirebaseFirestore
 import FirebaseStorage
 
-var classModel = ClassModel()
-var classid: String?
-var moduls = [Modul]()
-let db = Firestore.firestore()
+
 
 class ModulModel{
+    var classModel = ClassModel()
+    var classid: String?
+    let db = Firestore.firestore()
     
     func fetchModul(completion: @escaping(Modul) -> ()){
         
@@ -31,7 +31,10 @@ class ModulModel{
                 let modulName = data["nameModul"] as? String ?? ""
                 let modulDesc = data["descModul"] as? String ?? ""
                 let modulFile = data["fileModul"] as? String ?? ""
-                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile)
+                let modulid = data["modulid"] as? String ?? ""
+                let classid = data["classid"] as? String ?? ""
+                print("ini modulidnya di fetchmodul = \(modulid)")
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid)
                 completion(eachModul)
             }
             

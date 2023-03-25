@@ -44,18 +44,25 @@ struct SelectedClass{
 }
 
 struct Tugas{
-    let tugasDate: String
     let tugasName: String
-    let tugasFile: String
+    let tugasDesc: String
+    let tugasid: String
+    let modulid: String
+    let classid: String
 }
 
 struct Modul{
     let modulName: String
     let modulDesc: String
     let modulFile: String
+    let modulid: String
 }
 
 struct JumlahModul{
     var modulNum: Int
+}
+
+struct JumlahTugas{
+    var tugasNum: Int
 }
 

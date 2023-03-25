@@ -14,13 +14,16 @@ class GuruClassController: UIViewController {
     
     let classModel = ClassModel()
     let modulModel = ModulModel()
+    let tugasModel = TugasModel()
     var listofModul = [Modul]()
     var listofTugas = [Tugas]()
     var jumlahModul = [JumlahModul]()
+    var jumlahTugas = [JumlahTugas]()
     
     var className: String?
     var row: Int?
     var modulCount = JumlahModul(modulNum: 0)
+    var tugasCount = JumlahTugas(tugasNum: 0)
 }
 extension GuruClassController{
     // MARK: - View Life Cycle
@@ -39,11 +42,21 @@ extension GuruClassController{
         
         super.viewDidLoad()
         
-        modulModel.fetchModul { [self] modul in
-            listofModul.append(modul)
-            modulCount.modulNum += 1
-            jumlahModul.append(modulCount)
-            tableView.reloadData()
+        DispatchQueue.main.async{ [self] in
+            modulModel.fetchModul { [self] modul in
+                listofModul.append(modul)
+                modulCount.modulNum += 1
+                jumlahModul.append(modulCount)
+                tableView.reloadData()
+            }
+            
+            tugasModel.fetchAllTugas { [self] tugases in
+                listofTugas.append(tugases)
+                tugasCount.tugasNum += 1
+                jumlahTugas.append(tugasCount)
+                tableView.reloadData()
+            }
+            
         }
         
         classModel.fetchSelectedClass { [self] classess in
@@ -51,15 +64,17 @@ extension GuruClassController{
             print("ini classname = \(className)")
             setNavItem()
             print("ini listofmodul count = \(listofModul.count)")
+            print("ini listoftugas count = \(listofTugas.count)")
             if(listofModul.count > 0 || listofTugas.count > 0){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenGuru"), object: nil)
             }
             else if(listofModul.count == 0 || listofTugas.count == 0){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenGuru"), object: nil)
             }
+            
+            
+            
         }
-        
-    
         let nibModul = UINib(nibName: "ModulTVC", bundle: nil)
         tableView.register(nibModul, forCellReuseIdentifier: "ModulTVC")
         let nibTugas = UINib(nibName: "TugasTVC", bundle: nil)
@@ -135,6 +150,12 @@ extension GuruClassController{
                 listofModul.append(modul)
                 modulCount.modulNum += 1
                 jumlahModul.append(modulCount)
+                tableView.reloadData()
+            }
+            tugasModel.fetchAllTugas { [self] tugases in
+                listofTugas.append(tugases)
+                tugasCount.tugasNum += 1
+                jumlahTugas.append(tugasCount)
                 tableView.reloadData()
             }
         }
@@ -233,6 +254,12 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         }
         else if(indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: "TugasTVC", for: indexPath) as! TugasTVC
+            
+            let tugas = jumlahTugas[indexPath.row]
+            let eachTugas = listofTugas[indexPath.row]
+            
+            cell.materitugasLbl.text = "\(eachTugas.tugasName)"
+            cell.modultugasLbl.text = "Tugas Modul \(tugas.tugasNum)"
             return cell
         }
         return UITableViewCell()

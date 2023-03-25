@@ -12,11 +12,11 @@ class KumpulanTugasController: UIViewController {
     // MARK: - Variables & Outlet
     
     @IBOutlet weak var tableView: UITableView!
-    let data:[Tugas] = [
-        Tugas(tugasDate: "2 Feb 2022, 08:00", tugasName: "Hanz Christian", tugasFile: "punyahanz.pdf"),
-        Tugas(tugasDate: "2 Feb 2022, 07:30", tugasName: "Haris Maulana", tugasFile: "punyaharis.pdf"),
-        Tugas(tugasDate: "1 Feb 2022, 05:22", tugasName: "Michael", tugasFile: "punyamichael.pdf")
-    ]
+//    let data:[Tugas] = [
+//        Tugas(tugasDate: "2 Feb 2022, 08:00", tugasName: "Hanz Christian", tugasFile: "punyahanz.pdf"),
+//        Tugas(tugasDate: "2 Feb 2022, 07:30", tugasName: "Haris Maulana", tugasFile: "punyaharis.pdf"),
+//        Tugas(tugasDate: "1 Feb 2022, 05:22", tugasName: "Michael", tugasFile: "punyamichael.pdf")
+//    ]
 }
 // MARK: - View Life Cycle
 extension KumpulanTugasController{
@@ -58,15 +58,15 @@ extension KumpulanTugasController{
 extension KumpulanTugasController:UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+       return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tugas = data[indexPath.row]
+//        let tugas = data[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath) as! KumpulanTugasTVC
-        cell.tanggalLbl.text = tugas.tugasDate
-        cell.namaLbl.text = tugas.tugasName
-        cell.fileBtn.setTitle(tugas.tugasFile, for: .normal)
+//        cell.tanggalLbl.text = tugas.tugasDate
+//        cell.namaLbl.text = tugas.tugasName
+//        cell.fileBtn.setTitle(tugas.tugasFile, for: .normal)
         
         return cell
     }

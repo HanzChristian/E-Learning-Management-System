@@ -81,8 +81,10 @@ extension ModulController{
     
     @objc private func saveItem(){
         
+        let modulid = "\(UUID().uuidString)"
+        
         if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty{
-            storeData(nameModul: nameModul, descModul: descModul, fileModul: fullURL!, classid: classid!)
+            storeData(nameModul: nameModul, descModul: descModul, fileModul: fullURL!, classid: classid!,modulid: modulid)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
             dismiss(animated: true,completion: nil)
         }else{
@@ -92,7 +94,7 @@ extension ModulController{
       
     }
     
-    func storeData(nameModul: String, descModul: String,fileModul: String,classid: String){
+    func storeData(nameModul: String, descModul: String,fileModul: String,classid: String,modulid: String){
         storageRef.child("pdf/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
             (_,err) in
             
@@ -105,7 +107,8 @@ extension ModulController{
                 "nameModul": nameModul,
                 "descModul": descModul,
                 "fileModul": fileModul,
-                "classid": classid
+                "classid": classid,
+                "modulid": modulid
             ])
             
             //Add Modul count to display in app

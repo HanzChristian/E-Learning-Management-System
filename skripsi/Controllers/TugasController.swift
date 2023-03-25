@@ -6,17 +6,40 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class TugasController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
     let cellTitle = ["Nama Tugas", "Deskripsi Tugas"]
+    let db = Firestore.firestore()
     var height = 52.0
+    var classid: String?
+    var modulid: String?
+    var modulModel = ModulModel()
+    var classModel = ClassModel()
+    var tugasNameTVC = TugasNameTVC()
+    var tugasDescTVC = TugasDescriptionTVC()
+
 }
     // MARK: - View Life Cycle
 extension TugasController{
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        classModel.fetchSelectedClass { [self] classess in
+            classid = classess.classid
+            print("ini classid = \(classid)")
+            modulModel.fetchModul { [self] modules in
+                modulid = modules.modulid
+                print("ini modulid = \(modulid)")
+            }
+        }
+    }
+    
     override func viewDidLoad(){
         super.viewDidLoad()
+        
         setNavItem()
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -49,7 +72,26 @@ extension TugasController{
         self.dismiss(animated: true,completion: nil)
     }
     @objc private func saveItem(){
-        self.dismiss(animated: true,completion: nil)
+        
+        let tugasid = "\(UUID().uuidString)"
+        if let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty{
+            storeData(nameTugas: nameTugas, descTugas: descTugas, modulid: modulid!, tugasid: tugasid,classid: classid!)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
+            self.dismiss(animated: true,completion: nil)
+        }else{
+            print("ga masuk bro")
+        }
+
+    }
+    
+    func storeData(nameTugas: String, descTugas: String, modulid: String, tugasid: String,classid: String){
+        db.collection("tugas").addDocument(data: [
+            "nameTugas": nameTugas,
+            "descTugas": descTugas,
+            "modulid": modulid,
+            "tugasid": tugasid,
+            "classid": classid
+        ])
     }
     
 }
@@ -99,13 +141,13 @@ extension TugasController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.section == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "TugasNameTVC",for: indexPath) as! TugasNameTVC
-            
-            return cell
+            tugasNameTVC = cell
+            return tugasNameTVC
         }
         else if(indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: "TugasDescriptionTVC",for: indexPath) as! TugasDescriptionTVC
-            
-            return cell
+            tugasDescTVC = cell
+            return tugasDescTVC
         }
         return UITableViewCell()
     }
