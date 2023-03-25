@@ -23,28 +23,11 @@ extension EmptySpaceGuruController{
 // MARK: - IBActions
 extension EmptySpaceGuruController{
     @IBAction func btnPressed(_ sender: UIButton) {
-        let actionSheet = UIAlertController(title: "Apakah yang ingin kamu tambahkan?", message: nil, preferredStyle: .actionSheet)
-        let actModul = UIAlertAction(title: "Tambahkan Modul", style: .default) { _ in
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ModulController") as! ModulController
             vc.modalPresentationStyle = .pageSheet
             let nav =  UINavigationController(rootViewController: vc)
             self.present(nav, animated: true)
-        }
-        let actTugas = UIAlertAction(title: "Tambahkan Tugas", style: .default) { _ in
-            
-            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "TugasController") as! TugasController
-            vc.modalPresentationStyle = .pageSheet
-            let nav =  UINavigationController(rootViewController: vc)
-            self.present(nav, animated: true)
-            
-        }
-        let actBatal = UIAlertAction(title: "Batal", style: .cancel)
-        actionSheet.addAction(actModul)
-        actionSheet.addAction(actTugas)
-        actionSheet.addAction(actBatal)
-        present(actionSheet, animated: true, completion: nil)
     }
 }
 // MARK: - Private/Functions

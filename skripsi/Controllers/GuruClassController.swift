@@ -91,8 +91,14 @@ extension GuruClassController{
         navigationItem.title = className
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Kembali", style: .plain, target: self, action: #selector(dismissSelf))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Tambahkan Modul", style: .plain, target: self, action: #selector(choose))
         
+        print("listofmodul.count = \(listofModul.count)")
+        if(listofModul.count == 0){
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Tambahkan Modul", style: .plain, target: self, action: #selector(toModul))
+        }else{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Tambahkan Modul/Tugas", style: .plain, target: self, action: #selector(choose))
+        }
+
         navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         
@@ -101,6 +107,14 @@ extension GuruClassController{
     }
     @objc private func dismissSelf(){
         dismiss(animated: true,completion: nil)
+    }
+    
+    @objc private func toModul(){
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ModulController") as! ModulController
+        vc.modalPresentationStyle = .pageSheet
+        let nav =  UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true)
     }
     
     @objc private func choose(){
@@ -146,6 +160,7 @@ extension GuruClassController{
     @objc func refresh(_ sender: Any){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
             listofModul.removeAll()
+            listofTugas.removeAll()
             modulModel.fetchModul { [self] modul in
                 listofModul.append(modul)
                 modulCount.modulNum += 1
