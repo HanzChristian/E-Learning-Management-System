@@ -32,7 +32,7 @@ extension TugasController{
             print("ini classid = \(classid)")
             modulModel.fetchModul { [self] modules in
                 modulid = modules.modulid
-                print("ini modulid = \(modulid)")
+                print("ini modulid yang baru = \(modulid)")
             }
         }
     }
@@ -72,7 +72,6 @@ extension TugasController{
         self.dismiss(animated: true,completion: nil)
     }
     @objc private func saveItem(){
-        
         let tugasid = "\(UUID().uuidString)"
         if let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty{
             storeData(nameTugas: nameTugas, descTugas: descTugas, modulid: modulid!, tugasid: tugasid,classid: classid!)

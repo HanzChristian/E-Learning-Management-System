@@ -14,18 +14,21 @@ import FirebaseStorage
 class ModulController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
-    let cellTitle = ["Nama Modul", "Deskripsi Modul","Upload File"]
+    let cellTitle = ["Nama Modul", "Deskripsi Modul","Nama Tugas","Deskripsi Tugas","Upload File Modul"]
     var height = 52.0
     let storageRef = Storage.storage().reference()
     var path = ""
     var fileRef: StorageReference? = nil
     let db = Firestore.firestore()
     var counter = 0
+    var tugasNameTVC = TugasNameTVC()
+    var tugasDescTVC = TugasDescriptionTVC()
     
     var displayURL: String?
     var fullURL: String?
     var extractURL: URL?
     var classid : String?
+    var classname: String?
     var numModul: Int?
     
     var modulNameTVC: ModulNameTVC?
@@ -42,15 +45,21 @@ extension ModulController{
         
         classModel.fetchSelectedClass { [self] classess in
             classid = classess.classid
+            classname = classess.className
+            
             print("ini classid = \(classid)")
+            setNavItem()
         }
         
-        setNavItem()
         
         let nibModulName = UINib(nibName: "ModulNameTVC", bundle: nil)
         tableView.register(nibModulName, forCellReuseIdentifier: "ModulNameTVC")
         let nibModulDescription = UINib(nibName: "ModulDescriptionTVC", bundle: nil)
         tableView.register(nibModulDescription, forCellReuseIdentifier: "ModulDescriptionTVC")
+        let nibTugasName = UINib(nibName: "TugasNameTVC", bundle: nil)
+        tableView.register(nibTugasName, forCellReuseIdentifier: "TugasNameTVC")
+        let nibTugasDescription = UINib(nibName: "TugasDescriptionTVC", bundle: nil)
+        tableView.register(nibTugasDescription, forCellReuseIdentifier: "TugasDescriptionTVC")
         let nibUploadFile = UINib(nibName: "UploadTVC", bundle: nil)
         tableView.register(nibUploadFile, forCellReuseIdentifier: "UploadTVC")
         
@@ -64,7 +73,7 @@ extension ModulController{
     private func setNavItem(){
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        navigationItem.title = "Modul"
+        navigationItem.title = "Modul \(classname!)"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Batal", style: .plain, target: self, action: #selector(dismissSelf))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
@@ -82,10 +91,13 @@ extension ModulController{
     @objc private func saveItem(){
         
         let modulid = "\(UUID().uuidString)"
+        let tugasid = "\(UUID().uuidString)"
         
-        if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty{
-            storeData(nameModul: nameModul, descModul: descModul, fileModul: fullURL!, classid: classid!,modulid: modulid)
+            
+            if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty,let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty{
+            storeData(nameModul: nameModul, descModul: descModul, fileModul: fullURL!, classid: classid!,modulid: modulid,nameTugas: nameTugas,descTugas: descTugas,tugasid: tugasid)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
             dismiss(animated: true,completion: nil)
         }else{
             print("ga masuk bro")
@@ -94,7 +106,7 @@ extension ModulController{
       
     }
     
-    func storeData(nameModul: String, descModul: String,fileModul: String,classid: String,modulid: String){
+    func storeData(nameModul: String, descModul: String,fileModul: String,classid: String,modulid: String,nameTugas: String,descTugas: String,tugasid: String){
         storageRef.child("pdf/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
             (_,err) in
             
@@ -108,7 +120,10 @@ extension ModulController{
                 "descModul": descModul,
                 "fileModul": fileModul,
                 "classid": classid,
-                "modulid": modulid
+                "modulid": modulid,
+                "nameTugas": nameTugas,
+                "descTugas": descTugas,
+                "tugasid": tugasid
             ])
             
             //Add Modul count to display in app
@@ -148,7 +163,7 @@ extension ModulController{
 extension ModulController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -156,8 +171,14 @@ extension ModulController:UITableViewDelegate,UITableViewDataSource{
             return 1
         }else if (section == 1){
             return 1
-        }else{
+        }else if (section == 2){
             return 1
+        }else if(section == 3){
+            return 1
+        }else if(section == 4){
+            return 1
+        }else{
+            return 5
         }
     }
     
@@ -181,6 +202,10 @@ extension ModulController:UITableViewDelegate,UITableViewDataSource{
             if(indexPath.row == 0){
                 height = 80
             }
+        }else if(indexPath.section == 3){
+            if(indexPath.row == 0){
+                height = 80
+            }
         }
         else{
             height = 52
@@ -200,6 +225,16 @@ extension ModulController:UITableViewDelegate,UITableViewDataSource{
             return modulDescriptionTVC!
         }
         else if(indexPath.section == 2){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TugasNameTVC",for: indexPath) as! TugasNameTVC
+            tugasNameTVC = cell
+            return tugasNameTVC
+        }
+        else if(indexPath.section == 3){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TugasDescriptionTVC",for: indexPath) as! TugasDescriptionTVC
+            tugasDescTVC = cell
+            return tugasDescTVC
+        }
+        else if(indexPath.section == 4){
             let cell = tableView.dequeueReusableCell(withIdentifier: "UploadTVC", for: indexPath) as! UploadTVC
            
             cell.importFile = { [weak self] in

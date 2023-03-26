@@ -16,6 +16,7 @@ class ModulModel{
     var classid: String?
     let db = Firestore.firestore()
     
+    
     func fetchModul(completion: @escaping(Modul) -> ()){
         
         db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener { querySnapshot, error in
@@ -37,12 +38,31 @@ class ModulModel{
                 let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid)
                 completion(eachModul)
             }
-            
-            
-            
         }
-        
     }
+    
+    func fetchTugas(completion: @escaping(Tugas) -> ()){
+        
+        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener { querySnapshot, error in
+            
+            guard let documents = querySnapshot?.documents else{
+                print("No document")
+                return
+            }
+            
+            //kurang file di firestorage, karna gatau retrieve untuk download gimana
+            for document in documents{
+                let data = document.data()
+                let tugasName = data["nameTugas"] as? String ?? ""
+                let tugasDesc = data["descTugas"] as? String ?? ""
+                let tugasid = data["tugasid"] as? String ?? ""
+            
+                let eachTugas = Tugas(tugasName: tugasName, tugasDesc: tugasDesc, tugasid: tugasid)
+                completion(eachTugas)
+            }
+        }
+    }
+    
     
     
 }

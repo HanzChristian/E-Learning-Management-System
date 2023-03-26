@@ -47,8 +47,6 @@ struct Tugas{
     let tugasName: String
     let tugasDesc: String
     let tugasid: String
-    let modulid: String
-    let classid: String
 }
 
 struct Modul{
