@@ -1,15 +1,15 @@
 //
-//  DeskripsiTugasTVC.swift
+//  StatusTVC.swift
 //  skripsi
 //
-//  Created by Hanz Christian on 14/03/23.
+//  Created by Hanz Christian on 27/03/23.
 //
 
 import UIKit
 
-class DeskripsiTugasTVC: UITableViewCell {
+class StatusTVC: UITableViewCell {
 
-    @IBOutlet weak var descTugasLbl: UILabel!
+    @IBOutlet weak var statusLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

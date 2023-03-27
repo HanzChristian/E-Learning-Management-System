@@ -16,7 +16,7 @@ class ClassModel{
     
     func fetchClassGuru(completion: @escaping(Class) -> ()){
         let id = userModel.fetchUID()
-    
+        
         db.collection("class").whereField("uid", isEqualTo: "\(id!)").addSnapshotListener{ [self] querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
@@ -50,7 +50,7 @@ class ClassModel{
                         retrievedImage = UIImage(data: data!)
                         let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
                         
-//                        classes.append(eachClass)
+                        //                        classes.append(eachClass)
                         completion(eachClass)
                     }
                     else{
@@ -65,7 +65,7 @@ class ClassModel{
     
     func fetchClassMurid(completion: @escaping(Class) -> ()){
         let id = userModel.fetchUID()
-    
+        
         db.collection("muridClass").whereField("uidMurid", isEqualTo: "\(id!)").addSnapshotListener{ [self] querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
@@ -99,7 +99,7 @@ class ClassModel{
                         retrievedImage = UIImage(data: data!)
                         let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
                         
-//                        classes.append(eachClass)
+                        //                        classes.append(eachClass)
                         completion(eachClass)
                     }
                     else{
@@ -113,7 +113,7 @@ class ClassModel{
     }
     
     func fetchClassAll(completion: @escaping(Class) -> ()){
-    
+        
         db.collection("class").addSnapshotListener{ [self] querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
@@ -160,7 +160,7 @@ class ClassModel{
     }
     
     func fetchSelectedClass(completion: @escaping(Class) -> ()){
-    
+        
         db.collection("class").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener{ [self] querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
@@ -194,7 +194,7 @@ class ClassModel{
                         retrievedImage = UIImage(data: data!)
                         let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
                         
-//                        classes.append(eachClass)
+                        //                        classes.append(eachClass)
                         completion(eachClass)
                     }
                     else{

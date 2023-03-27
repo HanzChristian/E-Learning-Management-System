@@ -43,6 +43,12 @@ struct SelectedClass{
     
 }
 
+struct SelectedModul{
+    var modulPath: String
+    static var selectedModul = SelectedModul(modulPath: "")
+    
+}
+
 struct Tugas{
     let tugasName: String
     let tugasDesc: String
@@ -62,5 +68,11 @@ struct JumlahModul{
 
 struct JumlahTugas{
     var tugasNum: Int
+}
+
+struct TugasMurid{
+    let muridName: String
+    let tugasName: String
+    let tugasDate: String
 }
 

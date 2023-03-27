@@ -395,24 +395,43 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jqY-i6-HeV">
-                                <rect key="frame" x="0.0" y="110" width="390" height="734"/>
+                                <rect key="frame" x="0.0" y="276.66666666666669" width="390" height="567.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpZ-RX-sIa">
+                                <rect key="frame" x="20" y="151.33333333333334" width="354" height="125.33333333333334"/>
+                                <string key="text">In my app, I have a place to show news, located in one of the 4 tab views. For changing the information, all the aspects related to it are stored in firestore (title, subtitle, text). Currently, I'm using addSnapshotListener to fetch the data, because whenever I change the data in firestore it will automatically and instantly update. </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deskripsi Kelas :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OM-QW-s2F">
+                                <rect key="frame" x="16" y="127.99999999999999" width="128" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f83-0r-Nzt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="XgI-Ao-oPu" firstAttribute="leading" secondItem="rW0-rD-H5N" secondAttribute="leading" id="3yx-Wt-bvq"/>
-                            <constraint firstItem="jqY-i6-HeV" firstAttribute="top" secondItem="XgI-Ao-oPu" secondAttribute="bottom" id="Ccd-oj-yaH"/>
-                            <constraint firstAttribute="bottom" secondItem="jqY-i6-HeV" secondAttribute="bottom" id="Dls-P0-rOG"/>
-                            <constraint firstItem="jqY-i6-HeV" firstAttribute="trailing" secondItem="f83-0r-Nzt" secondAttribute="trailing" id="Ibu-JU-KYL"/>
-                            <constraint firstItem="jqY-i6-HeV" firstAttribute="leading" secondItem="f83-0r-Nzt" secondAttribute="leading" id="OZa-3G-bKu"/>
+                            <constraint firstItem="dpZ-RX-sIa" firstAttribute="top" secondItem="0OM-QW-s2F" secondAttribute="bottom" constant="3" id="8Zr-wg-OGJ"/>
+                            <constraint firstAttribute="bottom" secondItem="jqY-i6-HeV" secondAttribute="bottom" id="9tc-Av-P3j"/>
+                            <constraint firstItem="0OM-QW-s2F" firstAttribute="top" secondItem="XgI-Ao-oPu" secondAttribute="bottom" constant="18" id="LSH-cb-Isx"/>
+                            <constraint firstItem="f83-0r-Nzt" firstAttribute="trailing" secondItem="dpZ-RX-sIa" secondAttribute="trailing" constant="16" id="OWJ-ya-k0R"/>
+                            <constraint firstItem="dpZ-RX-sIa" firstAttribute="leading" secondItem="f83-0r-Nzt" secondAttribute="leading" constant="20" id="SAa-ml-2CI"/>
+                            <constraint firstItem="jqY-i6-HeV" firstAttribute="top" secondItem="dpZ-RX-sIa" secondAttribute="bottom" id="SPG-gK-kJE"/>
                             <constraint firstItem="XgI-Ao-oPu" firstAttribute="top" secondItem="rW0-rD-H5N" secondAttribute="top" id="Sq0-EV-FuB"/>
+                            <constraint firstItem="0OM-QW-s2F" firstAttribute="leading" secondItem="f83-0r-Nzt" secondAttribute="leading" constant="16" id="Wxv-so-dWb"/>
+                            <constraint firstItem="jqY-i6-HeV" firstAttribute="trailing" secondItem="f83-0r-Nzt" secondAttribute="trailing" id="YGL-Ib-bb8"/>
+                            <constraint firstItem="jqY-i6-HeV" firstAttribute="leading" secondItem="f83-0r-Nzt" secondAttribute="leading" id="asd-It-6bb"/>
                             <constraint firstAttribute="trailing" secondItem="XgI-Ao-oPu" secondAttribute="trailing" id="tD4-XU-5Uu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kuw-bU-TcG"/>
                     <connections>
+                        <outlet property="descClassLbl" destination="dpZ-RX-sIa" id="s9a-Tb-Uqj"/>
                         <outlet property="tableView" destination="jqY-i6-HeV" id="3uk-Wr-TUl"/>
                     </connections>
                 </viewController>
@@ -538,6 +557,23 @@
             </objects>
             <point key="canvasLocation" x="-982" y="31"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZIL-jX-gUP">
+            <objects>
+                <navigationController id="fEk-fb-0Ap" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="GSo-uR-Ocw"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9G-xy-vGT">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Q2P-eq-sFz" kind="relationship" relationship="rootViewController" id="AMQ-R5-1Wu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h1E-KW-4Fx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-154" y="-771"/>
+        </scene>
         <!--Empty Space Controller-->
         <scene sceneID="DPf-ke-X8V">
             <objects>
@@ -600,23 +636,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3yn-yi-I8b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-155.38461538461539" y="634.83412322274876"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ZIL-jX-gUP">
-            <objects>
-                <navigationController id="fEk-fb-0Ap" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="GSo-uR-Ocw"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9G-xy-vGT">
-                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Q2P-eq-sFz" kind="relationship" relationship="rootViewController" id="AMQ-R5-1Wu"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h1E-KW-4Fx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-154" y="-771"/>
         </scene>
         <!--Guru Class Controller-->
         <scene sceneID="ljy-OF-8lb">

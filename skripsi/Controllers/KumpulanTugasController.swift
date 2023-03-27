@@ -10,19 +10,30 @@ import UIKit
 class KumpulanTugasController: UIViewController {
     
     // MARK: - Variables & Outlet
-    
     @IBOutlet weak var tableView: UITableView!
-//    let data:[Tugas] = [
-//        Tugas(tugasDate: "2 Feb 2022, 08:00", tugasName: "Hanz Christian", tugasFile: "punyahanz.pdf"),
-//        Tugas(tugasDate: "2 Feb 2022, 07:30", tugasName: "Haris Maulana", tugasFile: "punyaharis.pdf"),
-//        Tugas(tugasDate: "1 Feb 2022, 05:22", tugasName: "Michael", tugasFile: "punyamichael.pdf")
-//    ]
+    var modulModel = ModulModel()
+    var listofTugas = [TugasMurid]()
+    var tugasName: String?
+    
+    
 }
 // MARK: - View Life Cycle
 extension KumpulanTugasController{
     override func viewDidLoad(){
         super.viewDidLoad()
-        setNavItem()
+        
+        DispatchQueue.main.async{ [self] in
+            modulModel.fetchAllTugas { [self] tugas in
+                listofTugas.append(tugas)
+                tableView.reloadData()
+                print("jumlah tugas yang ada = \(listofTugas.count)")
+            }
+            modulModel.fetchTugasMurid{ [self] tugas in
+                tugasName = tugas.tugasName
+                setNavItem()
+            }
+        }
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -35,7 +46,7 @@ extension KumpulanTugasController{
     private func setNavItem(){
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        navigationItem.title = "Kumpulan Tugas Modul 1" //nanti ganti
+        navigationItem.title = "Kumpulan \(tugasName!)" //nanti ganti
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Batal", style: .plain, target: self, action: #selector(dismissSelf))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
@@ -58,12 +69,16 @@ extension KumpulanTugasController{
 extension KumpulanTugasController:UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 3
+        return listofTugas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let tugas = data[indexPath.row]
+        let eachTugas = listofTugas[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath) as! KumpulanTugasTVC
+        
+        cell.tanggalLbl.text = eachTugas.tugasDate
+        cell.namaLbl.text = eachTugas.muridName
+        cell.fileBtn.setTitle(eachTugas.tugasName, for: .normal)
 //        cell.tanggalLbl.text = tugas.tugasDate
 //        cell.namaLbl.text = tugas.tugasName
 //        cell.fileBtn.setTitle(tugas.tugasFile, for: .normal)

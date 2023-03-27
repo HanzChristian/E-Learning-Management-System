@@ -53,6 +53,8 @@
 		159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FD2F829ACDF84000DFC26 /* OnboardingCell.swift */; };
 		159FD2FD29ADB0A6000DFC26 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 159FD2FC29ADB0A6000DFC26 /* Register.storyboard */; };
 		159FD2FF29ADB0B0000DFC26 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 159FD2FE29ADB0B0000DFC26 /* Login.storyboard */; };
+		15DD9CF129D164250001DD15 /* StatusTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DD9CEF29D164250001DD15 /* StatusTVC.swift */; };
+		15DD9CF229D164250001DD15 /* StatusTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15DD9CF029D164250001DD15 /* StatusTVC.xib */; };
 		15EEA14C29ADCA67004A830B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA14B29ADCA67004A830B /* CustomTextField.swift */; };
 		15EEA14E29ADE193004A830B /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA14D29ADE193004A830B /* HomePage.storyboard */; };
 		15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA14F29ADE571004A830B /* UserDefaults+Extension.swift */; };
@@ -121,6 +123,8 @@
 		159FD2F829ACDF84000DFC26 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		159FD2FC29ADB0A6000DFC26 /* Register.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Register.storyboard; sourceTree = "<group>"; };
 		159FD2FE29ADB0B0000DFC26 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		15DD9CEF29D164250001DD15 /* StatusTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTVC.swift; sourceTree = "<group>"; };
+		15DD9CF029D164250001DD15 /* StatusTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusTVC.xib; sourceTree = "<group>"; };
 		15EEA14B29ADCA67004A830B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		15EEA14D29ADE193004A830B /* HomePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
 		15EEA14F29ADE571004A830B /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				1559C57A29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib */,
 				1559C57D29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift */,
 				1559C57E29BFB3FC0006CA4F /* PengumpulanTugasTVC.xib */,
+				15DD9CEF29D164250001DD15 /* StatusTVC.swift */,
+				15DD9CF029D164250001DD15 /* StatusTVC.xib */,
 			);
 			path = "Tugas Murid Class";
 			sourceTree = "<group>";
@@ -452,6 +458,7 @@
 				1559C57529BDB8880006CA4F /* ExpandableTVC.xib in Resources */,
 				159FD2FD29ADB0A6000DFC26 /* Register.storyboard in Resources */,
 				154862D429B711C3001B90DE /* ModulDescriptionTVC.xib in Resources */,
+				15DD9CF229D164250001DD15 /* StatusTVC.xib in Resources */,
 				154862D029B711AF001B90DE /* ModulNameTVC.xib in Resources */,
 				15EEA16829B1C4F4004A830B /* ClassDescriptionTVC.xib in Resources */,
 				1559C58029BFB3FC0006CA4F /* PengumpulanTugasTVC.xib in Resources */,
@@ -536,6 +543,7 @@
 				154862CF29B711AF001B90DE /* ModulNameTVC.swift in Sources */,
 				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
 				159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */,
+				15DD9CF129D164250001DD15 /* StatusTVC.swift in Sources */,
 				15EEA15C29B1BE7C004A830B /* MakeClassController.swift in Sources */,
 				1559C57F29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift in Sources */,
 				154862EC29B9A274001B90DE /* KumpulanTugasTVC.swift in Sources */,

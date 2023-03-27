@@ -27,11 +27,15 @@ NPM_NAMA_BAB1</string>
                 </subviews>
                 <constraints>
                     <constraint firstItem="tcz-M8-eac" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="4Lr-wa-cTe"/>
+                    <constraint firstAttribute="trailing" secondItem="tcz-M8-eac" secondAttribute="trailing" constant="7" id="Rcv-xm-oXU"/>
                     <constraint firstItem="tcz-M8-eac" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="o89-dX-gze"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" red="1" green="0.96078431372549022" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="descTugasLbl" destination="tcz-M8-eac" id="Qah-Q3-cPc"/>
+            </connections>
             <point key="canvasLocation" x="80" y="-1.066350710900474"/>
         </tableViewCell>
     </objects>

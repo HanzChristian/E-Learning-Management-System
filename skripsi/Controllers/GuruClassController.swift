@@ -49,7 +49,7 @@ extension GuruClassController{
                 tableView.reloadData()
             }
             
-            modulModel.fetchTugas { [self] tugases in
+            modulModel.fetchTugasGuru { [self] tugases in
                 listofTugas.append(tugases)
                 tugasCount.tugasNum += 1
                 jumlahTugas.append(tugasCount)
@@ -134,7 +134,7 @@ extension GuruClassController{
                 jumlahModul.append(modulCount)
             }
             
-            modulModel.fetchTugas { [self] tugases in
+            modulModel.fetchTugasGuru { [self] tugases in
                 listofTugas.append(tugases)
                 tugasCount.tugasNum += 1
                 jumlahTugas.append(tugasCount)
@@ -240,6 +240,10 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let eachModul = listofModul[indexPath.row]
+        
+        SelectedModul.selectedModul.modulPath = eachModul.modulid
+        print("SelectedModul.selectedModul.modulPath adalah = \(SelectedModul.selectedModul.modulPath)")
         if(indexPath.section == 1){
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "KumpulanTugasController") as! KumpulanTugasController

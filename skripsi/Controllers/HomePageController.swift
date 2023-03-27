@@ -239,6 +239,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
             self.performSegue(withIdentifier: "guruclassSegue", sender: self)
         }
         else{
+            SelectedClass.selectedClass.classPath = eachClass.classid
             SelectedIdx.selectedIdx.indexPath = indexPath
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MuridClassController") as! MuridClassController

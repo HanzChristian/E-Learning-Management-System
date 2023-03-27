@@ -12,13 +12,21 @@ class MuridClassController: UIViewController{
     // MARK: - Variables & Outlet
     
     @IBOutlet weak var tableView: UITableView!
-//    let data = [
-//        Modul(modulNum: "Modul 1", modulName: "Sistem Persamaan Linear", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdawdwa"),
-//        Modul(modulNum: "Modul 2", modulName: "Vektor dan Ruang", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdawdwadwadwad"),
-//        Modul(modulNum: "Modul 3", modulName: "Analisa Vektor", modulDesc: "Pada bab ini, diharapkan mahasiswa dapat memahami konsep ruang vektor dan sub ruang vektor, memahami sifat-sifatnya, dan mampu menentukan apakah suatu himpunan merupakan ruang vektor umum atau bukan. Lebih lanjut, mahasiswa diharapkan memahami konsep bebas linear, basis, dan dimensi ruang vektor.",modulFile: "awdadwadawdaw")
-//    ]
-    var selectedIdx: IndexPath = IndexPath(row: 4, section: 0)
+    
+    @IBOutlet weak var descClassLbl: UILabel!
+    
+    var selectedIdx: IndexPath = IndexPath(row: 20, section: 0)
     var previousIdx: IndexPath?
+    var classModel = ClassModel()
+    var modulModel = ModulModel()
+    var listofModul = [Modul]()
+    var jumlahModul = [JumlahModul]()
+    
+    var modulCount = JumlahModul(modulNum: 0)
+    var className: String?
+    var classDesc: String?
+    var takeURL: String?
+    
 }
 // MARK: - View Life Cycle
 extension MuridClassController{
@@ -26,7 +34,24 @@ extension MuridClassController{
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        setNavItem()
+        
+        DispatchQueue.main.async{ [self] in
+            modulModel.fetchModul { [self] modul in
+                listofModul.append(modul)
+                modulCount.modulNum += 1
+                jumlahModul.append(modulCount)
+                tableView.reloadData()
+            }
+        }
+
+        classModel.fetchSelectedClass { [self] classess in
+            className = classess.className
+            classDesc = classess.classDesc
+            
+            descClassLbl.text = classDesc
+            setNavItem()
+        }
+    
         let nibMurid = UINib(nibName: "ExpandableTVC", bundle: nil)
         tableView.register(nibMurid, forCellReuseIdentifier: "ExpandableTVC")
     }
@@ -38,7 +63,7 @@ extension MuridClassController{
     private func setNavItem(){
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        navigationItem.title = "Aljabar Linear"
+        navigationItem.title = className
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Kembali", style: .plain, target: self, action: #selector(dismissSelf))
         
@@ -51,22 +76,36 @@ extension MuridClassController{
         dismiss(animated: true,completion: nil)
     }
     
+    
 }
 // MARK: - TableView Delegate & Datasource
 extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return listofModul.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTVC", for: indexPath) as! ExpandableTVC
         
-        //        cell.classImg =
-        //        cell.classtitleLbl =
-        //        cell.classmodulLbl =
-        //        cell.classenrollmentkeyLbl =
+        let modul = jumlahModul[indexPath.row]
+        let eachModul = listofModul[indexPath.row]
         
-//        cell.setupExpandable(data[indexPath.row])
+        SelectedModul.selectedModul.modulPath = eachModul.modulid
+        cell.modulNumLbl.text = "Modul \(modul.modulNum)"
+        cell.modulNameLbl.text = "\(eachModul.modulName)"
+        cell.modulDescLbl.text = "\(eachModul.modulDesc)"
+        
+        //fix font for Button
+        
+        let attrFont = UIFont.boldSystemFont(ofSize: 14)
+        let titlePdf = "Pdf bab \(modul.modulNum)"
+        let titleTugas = "Tugas bab \(modul.modulNum)"
+        let attrTitle = NSAttributedString(string: titlePdf, attributes: [NSAttributedString.Key.font: attrFont])
+        let attrTitle2 = NSAttributedString(string: titleTugas, attributes: [NSAttributedString.Key.font: attrFont])
+
+        cell.modulPdfBtn.setAttributedTitle(attrTitle, for: UIControl.State.normal)
+        cell.tugasBtn.setAttributedTitle(attrTitle2, for: UIControl.State.normal)
+        
         cell.selectionStyle = .none
         cell.makeSheet = { [weak self] in
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
@@ -79,6 +118,8 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
                 sheet.preferredCornerRadius = 15
                 sheet.prefersScrollingExpandsWhenScrolledToEdge = false
             }
+            SelectedModul.selectedModul.modulPath = eachModul.modulid
+            SelectedIdx.selectedIdx.indexPath.row = indexPath.row
             self!.present(nav,animated: true)
         }
         

@@ -15,8 +15,10 @@ class ModulModel{
     var classModel = ClassModel()
     var classid: String?
     let db = Firestore.firestore()
+    var userModel = UserModel()
     
     
+    //For fetching modul
     func fetchModul(completion: @escaping(Modul) -> ()){
         
         db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener { querySnapshot, error in
@@ -41,7 +43,8 @@ class ModulModel{
         }
     }
     
-    func fetchTugas(completion: @escaping(Tugas) -> ()){
+    //for fetching tugas in Guru, where it is based on Class id
+    func fetchTugasGuru(completion: @escaping(Tugas) -> ()){
         
         db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener { querySnapshot, error in
             
@@ -60,6 +63,72 @@ class ModulModel{
                 let eachTugas = Tugas(tugasName: tugasName, tugasDesc: tugasDesc, tugasid: tugasid)
                 completion(eachTugas)
             }
+        }
+    }
+    
+    //for fetching in Murid, where it is based on Modul id
+    func fetchTugasMurid(completion: @escaping(Tugas) -> ()){
+        
+        db.collection("modul").whereField("modulid", isEqualTo: "\(SelectedModul.selectedModul.modulPath)").addSnapshotListener { querySnapshot, error in
+            
+            guard let documents = querySnapshot?.documents else{
+                print("No document")
+                return
+            }
+            
+            //kurang file di firestorage, karna gatau retrieve untuk download gimana
+            for document in documents{
+                let data = document.data()
+                let tugasName = data["nameTugas"] as? String ?? ""
+                let tugasDesc = data["descTugas"] as? String ?? ""
+                let tugasid = data["tugasid"] as? String ?? ""
+            
+                let eachTugas = Tugas(tugasName: tugasName, tugasDesc: tugasDesc, tugasid: tugasid)
+                completion(eachTugas)
+            }
+        }
+    }
+    
+    //check if spesific murid already submit tugas file
+    func fetchTugasCondition(completion: @escaping(TugasMurid) -> ()){
+        let id = userModel.fetchUID()
+        db.collection("muridTugas").whereField("userid", isEqualTo: "\(id!)").whereField("modulid", isEqualTo: "\(SelectedModul.selectedModul.modulPath)").addSnapshotListener { querySnapshot, error in
+            
+            guard let documents = querySnapshot?.documents else{
+                print("No document")
+                return
+            }
+            
+            for document in documents{
+                let data = document.data()
+                let muridName = data["userName"] as? String ?? ""
+                let tugasName = data["displayedFile"] as? String ?? ""
+                let tugasDate = data["dateSubmitted"] as? String ?? ""
+            
+                let eachTugas = TugasMurid(muridName: muridName, tugasName: tugasName, tugasDate: tugasDate)
+                completion(eachTugas)
+            }
+            
+        }
+    }
+    
+    func fetchAllTugas(completion: @escaping(TugasMurid) -> ()){
+        db.collection("muridTugas").whereField("modulid", isEqualTo: "\(SelectedModul.selectedModul.modulPath)").addSnapshotListener { querySnapshot, error in
+            
+            guard let documents = querySnapshot?.documents else{
+                print("No document")
+                return
+            }
+            for document in documents{
+                let data = document.data()
+                let muridName = data["userName"] as? String ?? ""
+                let tugasName = data["displayedFile"] as? String ?? ""
+                let tugasDate = data["dateSubmitted"] as? String ?? ""
+            
+                let eachTugas = TugasMurid(muridName: muridName, tugasName: tugasName, tugasDate: tugasDate)
+                completion(eachTugas)
+            }
+            
         }
     }
     
