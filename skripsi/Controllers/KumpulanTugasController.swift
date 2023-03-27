@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import FirebaseStorage
 
-class KumpulanTugasController: UIViewController {
+class KumpulanTugasController: UIViewController,UIDocumentPickerDelegate {
     
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
@@ -83,6 +84,40 @@ extension KumpulanTugasController:UITableViewDelegate,UITableViewDataSource
 //        cell.namaLbl.text = tugas.tugasName
 //        cell.fileBtn.setTitle(tugas.tugasFile, for: .normal)
         
+        cell.downloadPDF = { [weak self] in
+            
+            //Download to local file
+            
+            //Create reference to the file that wants to be download
+            let storageRef = Storage.storage().reference(withPath: eachTugas.tugasFile)
+            
+            //Make the filename in local
+            let fileName = storageRef.name
+            
+            print("filenamenya : \(fileName)")
+            
+            //Create local filesystem URL
+            let localURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
+            
+            //Download the file
+            let download = storageRef.write(toFile: localURL)
+            
+            //Observing the download & open files App
+            download.observe(.success){ snapshot in
+                print("File downloaded")
+                
+                // Make the files App open and choose to save
+                let documentPicker = UIDocumentPickerViewController(forExporting: [localURL])
+                documentPicker.shouldShowFileExtensions = true
+                documentPicker.delegate = self
+                self!.present(documentPicker,animated: true,completion: nil)
+            }
+            
+            download.observe(.failure){ error in
+                print("Error downloading file!")
+            }
+            
+        }
         return cell
     }
     

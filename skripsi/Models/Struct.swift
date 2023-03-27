@@ -74,5 +74,6 @@ struct TugasMurid{
     let muridName: String
     let tugasName: String
     let tugasDate: String
+    let tugasFile: String
 }
 

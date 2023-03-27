@@ -71,7 +71,6 @@ extension InputTugasController{
         let label = UILabel()
         label.text = nameTugas
         label.font = .systemFont(ofSize: 18,weight: .semibold)
-        label.largeContentImageInsets
         
         
         let leftItem = UIBarButtonItem(customView: label)
@@ -79,6 +78,9 @@ extension InputTugasController{
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .bold)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
+        navigationController?.navigationBar.largeTitleTextAttributes =
+        [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 28)]
     }
     
     func setCurrentDate(){
@@ -91,12 +93,14 @@ extension InputTugasController{
     
     @objc private func saveItem(){
         setCurrentDate()
+        let path = "pdfTugas/\(displayURL!)"
+        
         self.userModel.fetchUser{ [self] user in
             let userName = user.name
             let uid = user.id
             print("ini username pas fetch = \(userName)")
             
-            storeData(username: userName,userid: uid,modulid: idModul,fileTugas:fullURL!,displayedFile: displayURL!, dateSubmitted:currentTime!)
+            storeData(username: userName,userid: uid,modulid: idModul,fileTugas:path,displayedFile: displayURL!, dateSubmitted:currentTime!)
             print("Saved")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
             dismiss(animated: true,completion: nil)
@@ -158,7 +162,7 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
                 }else{
                 }
             }
-            
+            return cell
         }else if(indexPath.section == 2){
             let cell = tableView.dequeueReusableCell(withIdentifier: "PengumpulanTugasTVC", for: indexPath) as! PengumpulanTugasTVC
             cell.importFile = { [weak self] in
@@ -167,6 +171,7 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
                 pickerViewController.delegate = self
                 pickerViewController.allowsMultipleSelection = false
                 pickerViewController.shouldShowFileExtensions = true
+                pickerViewController.modalPresentationStyle = .fullScreen
                 self!.present(pickerViewController, animated: true, completion: nil)
             }
             
@@ -222,6 +227,7 @@ extension InputTugasController:UIDocumentPickerDelegate{
     
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        
         guard let myURL = urls.first else {
             return
         }
@@ -233,6 +239,7 @@ extension InputTugasController:UIDocumentPickerDelegate{
         displayURL = myURL.lastPathComponent
         
         self.tableView.reloadData()
+    
     }
     
     

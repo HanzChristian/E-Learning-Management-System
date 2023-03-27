@@ -104,14 +104,16 @@ class ModulModel{
                 let muridName = data["userName"] as? String ?? ""
                 let tugasName = data["displayedFile"] as? String ?? ""
                 let tugasDate = data["dateSubmitted"] as? String ?? ""
+                let tugasFile = data["fileTugas"] as? String ?? ""
             
-                let eachTugas = TugasMurid(muridName: muridName, tugasName: tugasName, tugasDate: tugasDate)
+                let eachTugas = TugasMurid(muridName: muridName, tugasName: tugasName, tugasDate: tugasDate, tugasFile: tugasFile)
                 completion(eachTugas)
             }
             
         }
     }
     
+    //fetch all tugas based on modul in Guru
     func fetchAllTugas(completion: @escaping(TugasMurid) -> ()){
         db.collection("muridTugas").whereField("modulid", isEqualTo: "\(SelectedModul.selectedModul.modulPath)").addSnapshotListener { querySnapshot, error in
             
@@ -124,8 +126,9 @@ class ModulModel{
                 let muridName = data["userName"] as? String ?? ""
                 let tugasName = data["displayedFile"] as? String ?? ""
                 let tugasDate = data["dateSubmitted"] as? String ?? ""
+                let tugasFile = data["fileTugas"] as? String ?? ""
             
-                let eachTugas = TugasMurid(muridName: muridName, tugasName: tugasName, tugasDate: tugasDate)
+                let eachTugas = TugasMurid(muridName: muridName, tugasName: tugasName, tugasDate: tugasDate, tugasFile: tugasFile)
                 completion(eachTugas)
             }
             

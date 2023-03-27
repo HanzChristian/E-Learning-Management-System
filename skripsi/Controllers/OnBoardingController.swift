@@ -49,20 +49,16 @@ extension OnBoardingController{
         })
         
         if Core.shared.isNewUser(){
-//            Core.shared.notNewUser()
-            print("masuk sini gyan")
             UserDefaults.standard.set(userRole, forKey: "role")
         }
         else{
-            print("ga masuk gyan")
-            
-            
             var mainAppViewController = UIStoryboard(name: "HomePage", bundle: nil).instantiateViewController(withIdentifier: "tabbarHomePage")
 
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let sceneDelegate = windowScene.delegate as? SceneDelegate,
                let window = sceneDelegate.window{
                 window.rootViewController = mainAppViewController
+                window.makeKeyAndVisible()
                 UIView.transition(with: window,
                                   duration: 0.25,
                                   options: .transitionCrossDissolve,

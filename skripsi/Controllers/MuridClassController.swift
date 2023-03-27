@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import FirebaseStorage
 
-class MuridClassController: UIViewController{
+class MuridClassController: UIViewController,UIDocumentPickerDelegate{
     
     // MARK: - Variables & Outlet
     
@@ -26,6 +27,7 @@ class MuridClassController: UIViewController{
     var className: String?
     var classDesc: String?
     var takeURL: String?
+    
     
 }
 // MARK: - View Life Cycle
@@ -123,6 +125,41 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
             self!.present(nav,animated: true)
         }
         
+        cell.downloadPDF = { [weak self] in
+            
+            //Download to local file
+            
+            //Create reference to the file that wants to be download
+            let storageRef = Storage.storage().reference(withPath: eachModul.modulFile)
+            
+            //Make the filename in local
+            let fileName = storageRef.name
+            
+            //Create local filesystem URL
+            let localURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
+            
+            //Download the file
+            let download = storageRef.write(toFile: localURL)
+            
+            //Observing the download & open files App
+            download.observe(.success){ [self] snapshot in
+                print("File downloaded")
+                // Open up PDF file
+                let pdfVC = PDFController(url: localURL)
+                
+                //make navigation with Done button
+                let nav = UINavigationController(rootViewController: pdfVC)
+                nav.modalPresentationStyle = .fullScreen
+                pdfVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self!.dismissSelf))
+                self!.present(nav,animated: true,completion: nil)
+            }
+            
+            download.observe(.failure){ error in
+                print("Error downloading file!")
+            }
+            
+        }
+        
         //        cell.animate()
         return cell
     }
@@ -143,4 +180,5 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
     }
     
 }
+
 

@@ -10,6 +10,7 @@ import UIKit
 // MARK: - Variables & IBOutlets
 class ExpandableTVC: UITableViewCell {
     var makeSheet: (() -> Void)?
+    var downloadPDF: (() -> Void)?
     @IBOutlet weak var modulNumLbl: UILabel!
     @IBOutlet weak var modulNameLbl: UILabel!
     @IBOutlet weak var modulDescLbl: UILabel!
@@ -20,7 +21,10 @@ class ExpandableTVC: UITableViewCell {
         makeSheet?()
     }
     
-// MARK: - View Life Cycle
+    @IBAction func pdfPressed(_ sender: UIButton) {
+        downloadPDF?()
+    }
+    // MARK: - View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
 //        contentView.translatesAutoresizingMaskIntoConstraints = false

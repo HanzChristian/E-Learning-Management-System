@@ -16,6 +16,7 @@ class KumpulanTugasTVC: UITableViewCell {
     @IBOutlet weak var namaLbl: UILabel!
     
     @IBOutlet weak var fileBtn: UIButton!
+    var downloadPDF: (() -> Void)?
     
 // MARK: - Life Cycle
     override func awakeFromNib() {
@@ -30,7 +31,7 @@ class KumpulanTugasTVC: UITableViewCell {
     }
 // MARK: - Functions & IBActions
     @IBAction func filebtnPressed(_ sender: UIButton) {
-        
+        downloadPDF?()
     }
     
 }

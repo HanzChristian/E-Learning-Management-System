@@ -25,13 +25,12 @@ extension FindClassController{
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenView"), object: nil)
         setNavItem()
         print("data not fetch")
         classModel.fetchClassAll(completion: { [self] classess in
             listofClassMurid.append(classess)
             tableView.reloadData()
-            
+
             if(listofClassMurid.count == 0){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenFind"), object: nil)
             }else{
@@ -39,16 +38,16 @@ extension FindClassController{
             }
         })
         print("data fetched")
-        
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
+
         //make pull refresh view
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        
+
         self.tableView.refreshControl = refreshControl
-        
+
         let nibClass = UINib(nibName: "ClassTVC", bundle: nil)
         tableView.register(nibClass, forCellReuseIdentifier: "ClassTVC")
         

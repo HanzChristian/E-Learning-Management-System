@@ -55,6 +55,7 @@
 		159FD2FF29ADB0B0000DFC26 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 159FD2FE29ADB0B0000DFC26 /* Login.storyboard */; };
 		15DD9CF129D164250001DD15 /* StatusTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DD9CEF29D164250001DD15 /* StatusTVC.swift */; };
 		15DD9CF229D164250001DD15 /* StatusTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15DD9CF029D164250001DD15 /* StatusTVC.xib */; };
+		15DD9CF429D1E3E90001DD15 /* PDFController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DD9CF329D1E3E90001DD15 /* PDFController.swift */; };
 		15EEA14C29ADCA67004A830B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA14B29ADCA67004A830B /* CustomTextField.swift */; };
 		15EEA14E29ADE193004A830B /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15EEA14D29ADE193004A830B /* HomePage.storyboard */; };
 		15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EEA14F29ADE571004A830B /* UserDefaults+Extension.swift */; };
@@ -125,6 +126,7 @@
 		159FD2FE29ADB0B0000DFC26 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		15DD9CEF29D164250001DD15 /* StatusTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTVC.swift; sourceTree = "<group>"; };
 		15DD9CF029D164250001DD15 /* StatusTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusTVC.xib; sourceTree = "<group>"; };
+		15DD9CF329D1E3E90001DD15 /* PDFController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFController.swift; sourceTree = "<group>"; };
 		15EEA14B29ADCA67004A830B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		15EEA14D29ADE193004A830B /* HomePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
 		15EEA14F29ADE571004A830B /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				154862D929B72958001B90DE /* TugasController.swift */,
 				154862E829B99DFC001B90DE /* KumpulanTugasController.swift */,
 				1559C57629BDC9870006CA4F /* InputTugasController.swift */,
+				15DD9CF329D1E3E90001DD15 /* PDFController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				15EEA15229ADE728004A830B /* HomePageController.swift in Sources */,
 				154862E929B99DFC001B90DE /* KumpulanTugasController.swift in Sources */,
 				15EEA14C29ADCA67004A830B /* CustomTextField.swift in Sources */,
+				15DD9CF429D1E3E90001DD15 /* PDFController.swift in Sources */,
 				15EEA16329B1C384004A830B /* ClassNameTVC.swift in Sources */,
 				154862E629B72C0A001B90DE /* TugasNameTVC.swift in Sources */,
 				154862CF29B711AF001B90DE /* ModulNameTVC.swift in Sources */,

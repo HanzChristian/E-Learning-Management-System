@@ -1055,6 +1055,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="8a6-O5-W2i"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="QhD-jA-h6p" firstAttribute="top" secondItem="qDq-8f-PRA" secondAttribute="bottom" constant="43" id="8TU-UF-n7P"/>
@@ -1094,6 +1095,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="T1T-GW-UzQ"/>
                         <color key="backgroundColor" name="Table"/>
                         <constraints>
                             <constraint firstItem="33j-rX-QoH" firstAttribute="top" secondItem="h45-he-LTQ" secondAttribute="topMargin" id="5SV-ck-pA2"/>
