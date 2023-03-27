@@ -22,6 +22,10 @@ class LoginController: UIViewController {
 extension LoginController{
     override func viewDidLoad(){
         super.viewDidLoad()
+        //dismiss gesture
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tapGesture)
+        
         errorLbl.alpha = 0
         emailTextField.attributedPlaceholder = NSAttributedString(
             string: "Email",

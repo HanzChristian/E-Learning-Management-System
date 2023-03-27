@@ -40,6 +40,11 @@ class ModulController: UIViewController {
 extension ModulController{
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        //dismiss gesture
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tapGesture)
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -240,7 +245,7 @@ extension ModulController:UITableViewDelegate,UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "UploadTVC", for: indexPath) as! UploadTVC
            
             cell.importFile = { [weak self] in
-                let supportedTypes: [UTType] = [UTType.pdf,UTType.text,UTType.data,UTType.aliasFile]
+                let supportedTypes: [UTType] = [UTType.pdf]
                 let pickerViewController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
                 pickerViewController.delegate = self
                 pickerViewController.allowsMultipleSelection = false

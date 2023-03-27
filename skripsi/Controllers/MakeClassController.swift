@@ -36,6 +36,11 @@ class MakeClassController: UIViewController {
 extension MakeClassController{
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        //dismiss gesture
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tapGesture)
+        
         setNavItem()
         self.tableView.delegate = self
         self.tableView.dataSource = self

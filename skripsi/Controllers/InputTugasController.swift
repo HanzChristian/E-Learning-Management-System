@@ -166,7 +166,7 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
         }else if(indexPath.section == 2){
             let cell = tableView.dequeueReusableCell(withIdentifier: "PengumpulanTugasTVC", for: indexPath) as! PengumpulanTugasTVC
             cell.importFile = { [weak self] in
-                let supportedTypes: [UTType] = [UTType.pdf,UTType.text,UTType.data,UTType.aliasFile]
+                let supportedTypes: [UTType] = [UTType.pdf]
                 let pickerViewController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
                 pickerViewController.delegate = self
                 pickerViewController.allowsMultipleSelection = false
