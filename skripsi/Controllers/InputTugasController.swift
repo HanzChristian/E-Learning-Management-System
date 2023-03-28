@@ -33,6 +33,7 @@ class InputTugasController: UIViewController {
     var currentTime: String?
     var extractURL: URL?
     var tugasDisplay: String?
+    var classid: String?
     
 }
 // MARK: - View Life Cycle
@@ -47,6 +48,10 @@ extension InputTugasController{
                 nameTugas = tugas.tugasName
                 descTugas = tugas.tugasDesc
                 setNavItem()
+            }
+            
+            modulModel.fetchModul{[self] modules in
+                classid = modules.classid
             }
         }
         
@@ -100,7 +105,7 @@ extension InputTugasController{
             let uid = user.id
             print("ini username pas fetch = \(userName)")
             
-            storeData(username: userName,userid: uid,modulid: idModul,fileTugas:path,displayedFile: displayURL!, dateSubmitted:currentTime!)
+            storeData(username: userName,userid: uid,modulid: idModul,fileTugas:path,displayedFile: displayURL!, dateSubmitted:currentTime!,classid: classid!)
             print("Saved")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
             dismiss(animated: true,completion: nil)
@@ -108,7 +113,7 @@ extension InputTugasController{
       
     }
     
-    func storeData(username: String,userid: String, modulid: String, fileTugas: String,displayedFile: String,dateSubmitted: String){
+    func storeData(username: String,userid: String, modulid: String, fileTugas: String,displayedFile: String,dateSubmitted: String,classid: String){
         storageRef.child("pdfTugas/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
             (_,err) in
             
@@ -123,7 +128,8 @@ extension InputTugasController{
                 "modulid": modulid,
                 "fileTugas": fileTugas,
                 "displayedFile": displayedFile,
-                "dateSubmitted": dateSubmitted
+                "dateSubmitted": dateSubmitted,
+                "classid": classid
             ])
         }
     }

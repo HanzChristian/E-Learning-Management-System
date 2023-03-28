@@ -29,33 +29,16 @@ extension GuruClassController{
     
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh(_:)), name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
-        
     }
     
     override func viewDidLoad(){
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        row = SelectedIdx.selectedIdx.indexPath.row
-        print("ini rownya = \(row)")
-        
         super.viewDidLoad()
         
         DispatchQueue.main.async{ [self] in
-            modulModel.fetchModul { [self] modul in
-                listofModul.append(modul)
-                modulCount.modulNum += 1
-                jumlahModul.append(modulCount)
-                tableView.reloadData()
-            }
-            
-            modulModel.fetchTugasGuru { [self] tugases in
-                listofTugas.append(tugases)
-                tugasCount.tugasNum += 1
-                jumlahTugas.append(tugasCount)
-                tableView.reloadData()
-            }
-            
+            fetchData()
         }
         
         classModel.fetchSelectedClass { [self] classess in
@@ -126,21 +109,23 @@ extension GuruClassController{
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
             listofModul.removeAll()
             listofTugas.removeAll()
+            fetchData()
+            
+        }
+    }
+    
+    func fetchData(){
+        modulModel.fetchModul { [self] modul in
+            listofModul.append(modul)
+            modulCount.modulNum += 1
+            jumlahModul.append(modulCount)
+        }
+        
+        modulModel.fetchTugasGuru { [self] tugases in
+            listofTugas.append(tugases)
+            tugasCount.tugasNum += 1
+            jumlahTugas.append(tugasCount)
             tableView.reloadData()
-            
-            modulModel.fetchModul { [self] modul in
-                listofModul.append(modul)
-                modulCount.modulNum += 1
-                jumlahModul.append(modulCount)
-            }
-            
-            modulModel.fetchTugasGuru { [self] tugases in
-                listofTugas.append(tugases)
-                tugasCount.tugasNum += 1
-                jumlahTugas.append(tugasCount)
-                tableView.reloadData()
-            }
-            
         }
     }
     

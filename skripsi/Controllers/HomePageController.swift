@@ -12,14 +12,16 @@ import FirebaseFirestore
 class HomePageController: UIViewController {
     
     // MARK: - Variables & Outlet
-
+    
     let role = UserDefaults.standard.string(forKey: "role")
     let dateFormatter = DateFormatter()
     let dates = Date()
     
+    let db = Firestore.firestore()
     let userModel = UserModel()
     let classModel = ClassModel()
     var listofClass = [Class]()
+    
     
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -32,7 +34,6 @@ extension HomePageController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh(_:)), name: NSNotification.Name(rawValue: "refreshData"), object: nil)
         navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
@@ -46,41 +47,11 @@ extension HomePageController{
         super.viewDidLoad()
         Core.shared.notNewUser()
         
-        self.userModel.fetchUser{user in
-        }
-        
-        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
-        
-        if(role == "pengajar"){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
-                classModel.fetchClassGuru(completion: { [self] classess in
-                    listofClass.append(classess)
-                    tableView.reloadData()
-                    if(listofClass.count == 0){
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                    }
-                    else{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-                    }
-                })
-            }
-        }else if(role == "pelajar"){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
-                classModel.fetchClassMurid(completion: { [self] classess in
-                    listofClass.append(classess)
-                    tableView.reloadData()
-                    print("jumlah kelas = \(listofClass.count)")
-                    if(listofClass.count == 0){
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                    }
-                    else{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-                    }
-                })
-            }
-        }
     
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh(_:)), name: NSNotification.Name(rawValue: "refreshData"), object: nil)
+        
+        fetchData()
         
         if(role == "pengajar"){ //pengajar
             setBtn()
@@ -96,7 +67,7 @@ extension HomePageController{
         
         let nibClass = UINib(nibName: "ClassTVC", bundle: nil)
         tableView.register(nibClass, forCellReuseIdentifier: "ClassTVC")
-    
+        
         setTime()
     }
 }
@@ -121,44 +92,61 @@ extension HomePageController{
     
     func setBtn(){
         if let attrFont = UIFont(name: "Helvetica", size: 12) {
-                  let title = "Bentuk Kelas"
-                  let attrTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: attrFont])
-                  findclassBtn.setAttributedTitle(attrTitle, for: UIControl.State.normal)
-              }
+            let title = "Bentuk Kelas"
+            let attrTitle = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: attrFont])
+            findclassBtn.setAttributedTitle(attrTitle, for: UIControl.State.normal)
+        }
+    }
+    
+    func setEmpty(){
+        if(listofClass.count == 0){
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+        }else{
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+        }
+    }
+    func fetchData(){
+        
+        self.userModel.fetchUser{user in
+        }
+        if(role == "pengajar"){
+            classModel.fetchClassGuru(completion: { [self] classess in
+                print("ngefetch")
+                listofClass.append(classess)
+                print("ini jumlah classnya setelah di fetch = \(listofClass.count)")
+                tableView.reloadData()
+                setEmpty()
+            })
+            
+            if(listofClass.count == 0){
+                tableView.reloadData()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+            }
+            
+        }else if(role == "pelajar"){
+            classModel.fetchClassMurid(completion: { [self] classess in
+                print("jumlah kelas = \(listofClass.count)")
+                listofClass.append(classess)
+                tableView.reloadData()
+                setEmpty()
+            })
+            if(listofClass.count == 0){
+                tableView.reloadData()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+            }
+        }
     }
     
     @objc func refresh(_ sender: Any){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){ [self] in
-            listofClass.removeAll()
-            
-            if(role == "pengajar"){
-                classModel.fetchClassGuru(completion: { [self] classess in
-                    print("ngefetch")
-                    listofClass.append(classess)
-                    tableView.reloadData()
-                    if(listofClass.count == 0){
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                    }
-                    else{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-                    }
-                })
-            }else if(role == "pelajar"){
-                classModel.fetchClassMurid(completion: { [self] classess in
-                    listofClass.append(classess)
-                    tableView.reloadData()
-                    print("jumlah kelas = \(listofClass.count)")
-                    if(listofClass.count == 0){
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                    }
-                    else{
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-                    }
-                })
-            }
+        listofClass.removeAll()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){ [self] in
+            print("ini jumlah classnya sebelum di fetch = \(listofClass.count)")
+            fetchData()
             self.tableView.refreshControl?.endRefreshing()
         }
     }
+    
+
     
     func setTime(){
         let calendar = Calendar.current
@@ -182,7 +170,7 @@ extension HomePageController{
         //sore
         let startEvening = ("20 Jun 2022 14:00:00 +0700")
         let endEvening = ("20 Jun 2022 17:59:00 +0700")
-    
+        
         
         let startMorningDate = dateFormatter.date(from: startMorning)!
         let endMorningDate = dateFormatter.date(from: endMorning)!
@@ -204,7 +192,7 @@ extension HomePageController{
         }
     }
     
-
+    
 }
 // MARK: - TableView Delegate & Resource
 extension HomePageController:UITableViewDelegate,UITableViewDataSource{
@@ -215,13 +203,13 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
         
-            let eachClass = listofClass[indexPath.row]
+        let eachClass = listofClass[indexPath.row]
         
-            cell.classImg.image = eachClass.classImg
-            cell.classtitleLbl.text = eachClass.className
-            cell.classmodulLbl.text = "\(eachClass.classModule) modul"
-            cell.classenrollmentkeyLbl.text = "Enrollment Key : \(eachClass.classEnrollment)"
-
+        cell.classImg.image = eachClass.classImg
+        cell.classtitleLbl.text = eachClass.className
+        cell.classmodulLbl.text = "\(eachClass.classModule) modul"
+        cell.classenrollmentkeyLbl.text = "Enrollment Key : \(eachClass.classEnrollment)"
+        
         return cell
     }
     
@@ -248,6 +236,102 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
             self.present(nav, animated: true)
         }
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if(role == "pengajar"){
+            return .delete
+        }else{
+            return .none
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let eachClass = listofClass[indexPath.row]
+        if(editingStyle == .delete){
+            print("the classid that want to be delete = \(eachClass.classid)")
+            //execute multiple delete in one unit, if one operation is failed, all revert back
+            let batch = db.batch()
+            
+            //wait for all getDocuments() completed
+            let dispatchGroup = DispatchGroup()
+            
+            //delete field in Class
+            dispatchGroup.enter()
+            db.collection("class").whereField("classid", isEqualTo: eachClass.classid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let classDocRef = db.collection("class").document(document.documentID)
+                        //delete the document of the spesific collection
+                        batch.deleteDocument(classDocRef)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            //delete field in Modul
+            dispatchGroup.enter()
+            db.collection("modul").whereField("classid", isEqualTo: eachClass.classid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let modulDocRef = db.collection("modul").document(document.documentID)
+                        batch.deleteDocument(modulDocRef)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            //delete field in muridClass
+            dispatchGroup.enter()
+            db.collection("muridClass").whereField("classid", isEqualTo: eachClass.classid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let muridClassDocRef = db.collection("muridClass").document(document.documentID)
+                        batch.deleteDocument(muridClassDocRef)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            //delete field in muridTugas
+            dispatchGroup.enter()
+            db.collection("muridTugas").whereField("classid", isEqualTo: eachClass.classid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let muridTugasDocRef = db.collection("muridTugas").document(document.documentID)
+//                        batch.updateData(["classid": FieldValue.delete()], forDocument: muridTugasDocRef)
+                        batch.deleteDocument(muridTugasDocRef)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            //wait for all the getDocuments() calls completed
+            dispatchGroup.notify(queue: .main) {
+                //commit batch
+                batch.commit() { error in
+                    if let error = error {
+                        print("Error writing batched updates: \(error)")
+                    }else {
+                        print("Batched updates successful!")
+                    }
+                }
+            }
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
+            
+            
+        }
+    }
+    
     
     
 }

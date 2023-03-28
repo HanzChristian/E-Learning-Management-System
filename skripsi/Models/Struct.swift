@@ -60,6 +60,7 @@ struct Modul{
     let modulDesc: String
     let modulFile: String
     let modulid: String
+    let classid: String
 }
 
 struct JumlahModul{

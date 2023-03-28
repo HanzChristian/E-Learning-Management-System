@@ -14,160 +14,331 @@ class ClassModel{
     let userModel = UserModel()
     private var db = Firestore.firestore()
     
-    func fetchClassGuru(completion: @escaping(Class) -> ()){
+//    func fetchClassGuru(completion: @escaping(Class) -> ()){
+//        let id = userModel.fetchUID()
+//
+//        db.collection("class").whereField("uid", isEqualTo: "\(id!)").addSnapshotListener{ [self] querySnapshot, error in
+//
+//            guard let documents = querySnapshot?.documents else{
+//                print("No document")
+//                return
+//            }
+//
+//            for document in documents{
+//                print("documents \(document.data())")
+//                let data = document.data()
+//                let className = data["nameClass"] as? String ?? ""
+//                let classDesc = data["descClass"] as? String ?? ""
+//                let classModule = data["modulCount"] as? Int ?? 0
+//                let classEnrollment = data["enrollmentKey"] as? String ?? ""
+//                let imgURL = data["imgURL"] as? String ?? ""
+//                let classid = data["classid"] as? String ?? ""
+//                var retrievedImage: UIImage?
+//
+//                print("ini imgrul = \(imgURL)")
+//
+//                //take UIImage from imgURL
+//                let storageRef = Storage.storage().reference()
+//                let fileRef = storageRef.child(imgURL)
+//
+//                print("ini fileref : \(fileRef)")
+//
+//                fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+//                    // Check error
+//                    if error == nil && data != nil{
+//                        // make UIImage
+//                        retrievedImage = UIImage(data: data!)
+//                        let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
+//
+//                        //                        classes.append(eachClass)
+//                        completion(eachClass)
+//                    }
+//                    else{
+//                        print("Data image tidak ada/error\n error = \(error) & data = \(data)")
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//    }
+    
+    func fetchClassGuru(completion: @escaping (Class) -> ()) {
         let id = userModel.fetchUID()
         
-        db.collection("class").whereField("uid", isEqualTo: "\(id!)").addSnapshotListener{ [self] querySnapshot, error in
-            
-            guard let documents = querySnapshot?.documents else{
+        db.collection("class").whereField("uid", isEqualTo: "\(id!)").getDocuments { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
                 print("No document")
                 return
             }
             
-            for document in documents{
-                print("documents \(document.data())")
+            // Download all the class images in parallel
+            let imageDownloadGroup = DispatchGroup()
+            var imageDownloads = [String: UIImage]()
+            for document in documents {
                 let data = document.data()
-                let className = data["nameClass"] as? String ?? ""
-                let classDesc = data["descClass"] as? String ?? ""
-                let classModule = data["modulCount"] as? Int ?? 0
-                let classEnrollment = data["enrollmentKey"] as? String ?? ""
                 let imgURL = data["imgURL"] as? String ?? ""
-                let classid = data["classid"] as? String ?? ""
-                var retrievedImage: UIImage?
                 
-                print("ini imgrul = \(imgURL)")
-                
-                //take UIImage from imgURL
+                imageDownloadGroup.enter()
                 let storageRef = Storage.storage().reference()
                 let fileRef = storageRef.child(imgURL)
-                
-                print("ini fileref : \(fileRef)")
-                
                 fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                    // Check error
-                    if error == nil && data != nil{
-                        // make UIImage
-                        retrievedImage = UIImage(data: data!)
-                        let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
-                        
-                        //                        classes.append(eachClass)
-                        completion(eachClass)
+                    defer {
+                        imageDownloadGroup.leave()
                     }
-                    else{
-                        print("Data image tidak ada/error\n error = \(error) & data = \(data)")
+                    guard let imageData = data, error == nil, let image = UIImage(data: imageData) else {
+                        print("Error downloading image for class \(document.documentID): \(error?.localizedDescription ?? "")")
+                        return
                     }
+                    imageDownloads[imgURL] = image
                 }
-                
             }
             
+            // Wait images to be downloaded, then fetch
+            imageDownloadGroup.notify(queue: DispatchQueue.main) {
+                var classes = [Class]()
+                for document in documents {
+                    let data = document.data()
+                    let className = data["nameClass"] as? String ?? ""
+                    let classDesc = data["descClass"] as? String ?? ""
+                    let classModule = data["modulCount"] as? Int ?? 0
+                    let classEnrollment = data["enrollmentKey"] as? String ?? ""
+                    let imgURL = data["imgURL"] as? String ?? ""
+                    let classid = data["classid"] as? String ?? ""
+                    
+                    // Get the downloaded image for this class
+                    guard let classImg = imageDownloads[imgURL] else {
+                        print("Error: no downloaded image for class \(document.documentID)")
+                        continue
+                    }
+                    
+                    let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: classImg, classImgString: imgURL, classid: classid)
+        
+                    completion(eachClass)
+                }
+                
+        
+            }
         }
     }
     
-    func fetchClassMurid(completion: @escaping(Class) -> ()){
+//    func fetchClassMurid(completion: @escaping(Class) -> ()){
+//        let id = userModel.fetchUID()
+//
+//        db.collection("muridClass").whereField("uidMurid", isEqualTo: "\(id!)").addSnapshotListener{ [self] querySnapshot, error in
+//
+//            guard let documents = querySnapshot?.documents else{
+//                print("No document")
+//                return
+//            }
+//
+//            for document in documents{
+//                print("documents \(document.data())")
+//                let data = document.data()
+//                let className = data["nameClass"] as? String ?? ""
+//                let classDesc = data["descClass"] as? String ?? ""
+//                let classModule = data["modulCount"] as? Int ?? 0
+//                let classEnrollment = data["enrollmentKey"] as? String ?? ""
+//                let imgURL = data["imgURL"] as? String ?? ""
+//                let classid = data["classid"] as? String ?? ""
+//                var retrievedImage: UIImage?
+//
+//                print("ini imgrul = \(imgURL)")
+//
+//                //take UIImage from imgURL
+//                let storageRef = Storage.storage().reference()
+//                let fileRef = storageRef.child(imgURL)
+//
+//                print("ini fileref : \(fileRef)")
+//
+//                fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+//                    // Check error
+//                    if error == nil && data != nil{
+//                        // make UIImage
+//                        retrievedImage = UIImage(data: data!)
+//                        let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
+//
+//                        //                        classes.append(eachClass)
+//                        completion(eachClass)
+//                    }
+//                    else{
+//                        print("Data image tidak ada/error\n error = \(error) & data = \(data)")
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//    }
+    
+    func fetchClassMurid(completion: @escaping (Class) -> ()) {
         let id = userModel.fetchUID()
-        
-        db.collection("muridClass").whereField("uidMurid", isEqualTo: "\(id!)").addSnapshotListener{ [self] querySnapshot, error in
-            
-            guard let documents = querySnapshot?.documents else{
+
+        db.collection("muridClass").whereField("uidMurid", isEqualTo: "\(id!)").getDocuments { querySnapshot, error in
+
+            guard let documents = querySnapshot?.documents else {
+                print("No document")
+                return
+            }
+
+            // Download all the class images in parallel
+            let imageDownloadGroup = DispatchGroup()
+            var imageDownloads = [String: UIImage]()
+            for document in documents {
+                let data = document.data()
+                let imgURL = data["imgURL"] as? String ?? ""
+
+                imageDownloadGroup.enter()
+                let storageRef = Storage.storage().reference()
+                let fileRef = storageRef.child(imgURL)
+                fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                    defer {
+                        imageDownloadGroup.leave()
+                    }
+                    guard let imageData = data, error == nil, let image = UIImage(data: imageData) else {
+                        print("Error downloading image for class \(document.documentID): \(error?.localizedDescription ?? "")")
+                        return
+                    }
+                    imageDownloads[imgURL] = image
+                }
+            }
+
+            imageDownloadGroup.notify(queue: DispatchQueue.main) {
+                var classes = [Class]()
+                for document in documents {
+                    let data = document.data()
+                    let className = data["nameClass"] as? String ?? ""
+                    let classDesc = data["descClass"] as? String ?? ""
+                    let classModule = data["modulCount"] as? Int ?? 0
+                    let classEnrollment = data["enrollmentKey"] as? String ?? ""
+                    let imgURL = data["imgURL"] as? String ?? ""
+                    let classid = data["classid"] as? String ?? ""
+
+                    guard let classImg = imageDownloads[imgURL] else {
+                        print("Error: no downloaded image for class \(document.documentID)")
+                        continue
+                    }
+
+                    let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: classImg, classImgString: imgURL, classid: classid)
+
+                    completion(eachClass)
+                }
+            }
+        }
+    }
+
+    
+//    func fetchClassAll(completion: @escaping(Class) -> ()){
+//
+//        db.collection("class").addSnapshotListener{ [self] querySnapshot, error in
+//
+//            guard let documents = querySnapshot?.documents else{
+//                print("No document")
+//                return
+//            }
+//
+//            for document in documents{
+//                print("documents \(document.data())")
+//                let data = document.data()
+//                let className = data["nameClass"] as? String ?? ""
+//                let classDesc = data["descClass"] as? String ?? ""
+//                let classModule = data["modulCount"] as? Int ?? 0
+//                let classEnrollment = data["enrollmentKey"] as? String ?? ""
+//                let imgURL = data["imgURL"] as? String ?? ""
+//                let classid = data["classid"] as? String ?? ""
+//                var retrievedImage: UIImage?
+//
+//                print("ini imgrul = \(imgURL)")
+//
+//                //take UIImage from imgURL
+//                let storageRef = Storage.storage().reference()
+//                let fileRef = storageRef.child(imgURL)
+//
+//                print("ini fileref : \(fileRef)")
+//
+//                fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+//                    // Check error
+//                    if error == nil && data != nil{
+//                        // make UIImage
+//                        retrievedImage = UIImage(data: data!)
+//                        let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
+//
+//                        completion(eachClass)
+//                    }
+//                    else{
+//                        print("Data image tidak ada/error\n error = \(error) & data = \(data)")
+//                    }
+//                }
+//
+//            }
+//
+//        }
+//    }
+    
+    func fetchClassAll(completion: @escaping (Class) -> ()) {
+        db.collection("class").addSnapshotListener { [weak self] querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
                 print("No document")
                 return
             }
             
-            for document in documents{
-                print("documents \(document.data())")
+            // Download all the images in parallel
+            let imageDownloadGroup = DispatchGroup()
+            var imageDownloads = [String: UIImage]()
+            for document in documents {
                 let data = document.data()
-                let className = data["nameClass"] as? String ?? ""
-                let classDesc = data["descClass"] as? String ?? ""
-                let classModule = data["modulCount"] as? Int ?? 0
-                let classEnrollment = data["enrollmentKey"] as? String ?? ""
                 let imgURL = data["imgURL"] as? String ?? ""
-                let classid = data["classid"] as? String ?? ""
-                var retrievedImage: UIImage?
                 
-                print("ini imgrul = \(imgURL)")
-                
-                //take UIImage from imgURL
+                imageDownloadGroup.enter()
                 let storageRef = Storage.storage().reference()
                 let fileRef = storageRef.child(imgURL)
-                
-                print("ini fileref : \(fileRef)")
-                
                 fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                    // Check error
-                    if error == nil && data != nil{
-                        // make UIImage
-                        retrievedImage = UIImage(data: data!)
-                        let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
-                        
-                        //                        classes.append(eachClass)
-                        completion(eachClass)
+                    defer {
+                        imageDownloadGroup.leave()
                     }
-                    else{
-                        print("Data image tidak ada/error\n error = \(error) & data = \(data)")
+                    guard let imageData = data, error == nil, let image = UIImage(data: imageData) else {
+                        print("Error downloading image for class \(document.documentID): \(error?.localizedDescription ?? "")")
+                        return
                     }
+                    imageDownloads[imgURL] = image
                 }
-                
             }
             
+            // Wait for all the image downloads to complete before processing the query results
+            imageDownloadGroup.notify(queue: DispatchQueue.main) {
+                var classes = [Class]()
+                for document in documents {
+                    let data = document.data()
+                    let className = data["nameClass"] as? String ?? ""
+                    let classDesc = data["descClass"] as? String ?? ""
+                    let classModule = data["modulCount"] as? Int ?? 0
+                    let classEnrollment = data["enrollmentKey"] as? String ?? ""
+                    let imgURL = data["imgURL"] as? String ?? ""
+                    let classid = data["classid"] as? String ?? ""
+                    
+                    // Get the downloaded image for this class
+                    guard let classImg = imageDownloads[imgURL] else {
+                        print("Error: no downloaded image for class \(document.documentID)")
+                        continue
+                    }
+                    
+                    let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: classImg, classImgString: imgURL, classid: classid)
+                    
+                    completion(eachClass)
+                }
+            }
         }
     }
-    
-    func fetchClassAll(completion: @escaping(Class) -> ()){
-        
-        db.collection("class").addSnapshotListener{ [self] querySnapshot, error in
-            
-            guard let documents = querySnapshot?.documents else{
-                print("No document")
-                return
-            }
-            
-            for document in documents{
-                print("documents \(document.data())")
-                let data = document.data()
-                let className = data["nameClass"] as? String ?? ""
-                let classDesc = data["descClass"] as? String ?? ""
-                let classModule = data["modulCount"] as? Int ?? 0
-                let classEnrollment = data["enrollmentKey"] as? String ?? ""
-                let imgURL = data["imgURL"] as? String ?? ""
-                let classid = data["classid"] as? String ?? ""
-                var retrievedImage: UIImage?
-                
-                print("ini imgrul = \(imgURL)")
-                
-                //take UIImage from imgURL
-                let storageRef = Storage.storage().reference()
-                let fileRef = storageRef.child(imgURL)
-                
-                print("ini fileref : \(fileRef)")
-                
-                fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                    // Check error
-                    if error == nil && data != nil{
-                        // make UIImage
-                        retrievedImage = UIImage(data: data!)
-                        let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
-                        
-                        completion(eachClass)
-                    }
-                    else{
-                        print("Data image tidak ada/error\n error = \(error) & data = \(data)")
-                    }
-                }
-                
-            }
-            
-        }
-    }
-    
+
     func fetchSelectedClass(completion: @escaping(Class) -> ()){
-        
+
         db.collection("class").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener{ [self] querySnapshot, error in
-            
+
             guard let documents = querySnapshot?.documents else{
                 print("No document")
                 return
             }
-            
+
             for document in documents{
                 print("documents \(document.data())")
                 let data = document.data()
@@ -178,22 +349,22 @@ class ClassModel{
                 let imgURL = data["imgURL"] as? String ?? ""
                 let classid = data["classid"] as? String ?? ""
                 var retrievedImage: UIImage?
-                
+
                 print("ini imgrul = \(imgURL)")
-                
+
                 //take UIImage from imgURL
                 let storageRef = Storage.storage().reference()
                 let fileRef = storageRef.child(imgURL)
-                
+
                 print("ini fileref : \(fileRef)")
-                
+
                 fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
                     // Check error
                     if error == nil && data != nil{
                         // make UIImage
                         retrievedImage = UIImage(data: data!)
                         let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage!,classImgString: imgURL,classid: classid)
-                        
+
                         //                        classes.append(eachClass)
                         completion(eachClass)
                     }
@@ -201,10 +372,54 @@ class ClassModel{
                         print("Data image tidak ada/error\n error = \(error) & data = \(data)")
                     }
                 }
-                
+
             }
-            
+
         }
     }
+    
+//    func fetchSelectedClass(completion: @escaping (Class) -> Void) {
+//
+//        db.collection("class")
+//            .whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)")
+//            .addSnapshotListener { [self] querySnapshot, error in
+//
+//                guard let documents = querySnapshot?.documents else {
+//                    print("No document")
+//                    return
+//                }
+//
+//                for document in documents {
+//                    let data = document.data()
+//                    let className = data["nameClass"] as? String ?? ""
+//                    let classDesc = data["descClass"] as? String ?? ""
+//                    let classModule = data["modulCount"] as? Int ?? 0
+//                    let classEnrollment = data["enrollmentKey"] as? String ?? ""
+//                    let imgURL = data["imgURL"] as? String ?? ""
+//                    let classid = data["classid"] as? String ?? ""
+//
+//                    //take UIImage from imgURL
+//                    let storageRef = Storage.storage().reference()
+//                    let fileRef = storageRef.child(imgURL)
+//
+//                    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+//                        // Check error
+//                        if error == nil && data != nil {
+//                            // make UIImage
+//                            if let retrievedImage = UIImage(data: data!) {
+//                                let eachClass = Class(className: className, classDesc: classDesc, classModule: classModule, classEnrollment: classEnrollment, classImg: retrievedImage, classImgString: imgURL, classid: classid)
+//                                completion(eachClass)
+//                            } else {
+//                                print("Could not retrieve image from data.")
+//                            }
+//                        } else {
+//                            print("Data image tidak ada/error\n error = \(error) & data = \(data)")
+//                        }
+//                    }
+//
+//                }
+//            }
+//    }
+
     
 }
