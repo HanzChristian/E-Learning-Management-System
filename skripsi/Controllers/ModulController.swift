@@ -122,6 +122,7 @@ extension ModulController{
                 return
             }
             
+            
             db.collection("modul").addDocument(data: [
                 "nameModul": nameModul,
                 "descModul": descModul,
@@ -130,7 +131,8 @@ extension ModulController{
                 "modulid": modulid,
                 "nameTugas": nameTugas,
                 "descTugas": descTugas,
-                "tugasid": tugasid
+                "tugasid": tugasid,
+                "timestamp": FieldValue.serverTimestamp()
             ])
             
             //Add Modul count to display in app

@@ -46,6 +46,8 @@ extension HomePageController{
     override func viewDidLoad(){
         super.viewDidLoad()
         Core.shared.notNewUser()
+        self.userModel.fetchUser{user in
+        }
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
     
@@ -100,27 +102,28 @@ extension HomePageController{
     
     func setEmpty(){
         if(listofClass.count == 0){
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
         }else{
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
         }
     }
     func fetchData(){
-        
-        self.userModel.fetchUser{user in
-        }
         if(role == "pengajar"){
             classModel.fetchClassGuru(completion: { [self] classess in
                 print("ngefetch")
                 listofClass.append(classess)
                 print("ini jumlah classnya setelah di fetch = \(listofClass.count)")
                 tableView.reloadData()
+                if(classess.classid.count == 0){
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                }else{
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+                }
                 setEmpty()
             })
             
             if(listofClass.count == 0){
-                tableView.reloadData()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                tableView.reloadData()
             }
             
         }else if(role == "pelajar"){
@@ -131,8 +134,8 @@ extension HomePageController{
                 setEmpty()
             })
             if(listofClass.count == 0){
-                tableView.reloadData()
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+                tableView.reloadData()
             }
         }
     }

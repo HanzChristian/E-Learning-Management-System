@@ -67,9 +67,14 @@ class ClassModel{
         let id = userModel.fetchUID()
         
         db.collection("class").whereField("uid", isEqualTo: "\(id!)").getDocuments { querySnapshot, error in
+            
             guard let documents = querySnapshot?.documents else {
                 print("No document")
                 return
+            }
+            if (documents.count == 0){
+                print("Document kosong!")
+                return 
             }
             
             // Download all the class images in parallel
@@ -174,7 +179,7 @@ class ClassModel{
     func fetchClassMurid(completion: @escaping (Class) -> ()) {
         let id = userModel.fetchUID()
 
-        db.collection("muridClass").whereField("uidMurid", isEqualTo: "\(id!)").getDocuments { querySnapshot, error in
+        db.collection("muridClass").whereField("uidMurid", isEqualTo: "\(id!)").getDocuments{ querySnapshot, error in
 
             guard let documents = querySnapshot?.documents else {
                 print("No document")

@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class GuruClassController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
     let cellTitle = ["Modul", "Kumpulan Tugas"]
+    
+    let db = Firestore.firestore()
     
     let classModel = ClassModel()
     let modulModel = ModulModel()
@@ -53,9 +56,6 @@ extension GuruClassController{
             else if(listofModul.count == 0 || listofTugas.count == 0){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenGuru"), object: nil)
             }
-            
-            
-            
         }
         let nibModul = UINib(nibName: "ModulTVC", bundle: nil)
         tableView.register(nibModul, forCellReuseIdentifier: "ModulTVC")
@@ -114,11 +114,22 @@ extension GuruClassController{
         }
     }
     
+    func showEmpty(){
+        if(listofModul.count > 0 || listofTugas.count > 0){
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenGuru"), object: nil)
+        }
+        else if(listofModul.count == 0 || listofTugas.count == 0){
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenGuru"), object: nil)
+        }
+    }
+    
     func fetchData(){
         modulModel.fetchModul { [self] modul in
             listofModul.append(modul)
             modulCount.modulNum += 1
             jumlahModul.append(modulCount)
+            tableView.reloadData()
+            showEmpty()
         }
         
         modulModel.fetchTugasGuru { [self] tugases in
@@ -126,6 +137,7 @@ extension GuruClassController{
             tugasCount.tugasNum += 1
             jumlahTugas.append(tugasCount)
             tableView.reloadData()
+            showEmpty()
         }
     }
     
@@ -214,11 +226,87 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         return UITableViewCell()
     }
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
+        if(indexPath.section == 0){
+            return .delete
+        }else{
+            return .none
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let eachModul = listofModul[indexPath.row]
         if(editingStyle == .delete){
+            
+            let batch = db.batch()
+            let dispatchGroup = DispatchGroup()
+            
+            //delete field Modul
+            dispatchGroup.enter()
+            db.collection("modul").whereField("modulid", isEqualTo: eachModul.modulid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let modulDocRef = db.collection("modul").document(document.documentID)
+                        //delete the document of the spesific collection
+                        batch.deleteDocument(modulDocRef)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            dispatchGroup.enter()
+            db.collection("muridTugas").whereField("modulid", isEqualTo: eachModul.modulid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let muridTugasDocRef = db.collection("muridTugas").document(document.documentID)
+                        batch.deleteDocument(muridTugasDocRef)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            dispatchGroup.enter()
+            //Decrease the amount of Modul in Homepage
+            db.collection("class")
+                .whereField("classid", isEqualTo: eachModul.classid)
+                .getDocuments { (querySnapshot, err) in
+                    if let err = err {
+                        print("error class")
+                        // Some error occured
+                    }else {
+                        let document = querySnapshot!.documents.first
+                        document!.reference.updateData([
+                            "modulCount": FieldValue.increment(Int64(-1))
+                        ])
+                    }
+                    dispatchGroup.leave()
+                }
+            
+            //wait for all the getDocuments() calls completed
+            dispatchGroup.notify(queue: .main) {
+                //commit batch
+                batch.commit() { error in
+                    if let error = error {
+                        print("Error writing batched updates: \(error)")
+                    }else {
+                        print("Batched updates successful!")
+                    }
+                }
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
+                listofModul.removeAll()
+                listofTugas.removeAll()
+                fetchData()
+                self.tableView.reloadData()
+            }
+            showEmpty()
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
             
             print("delete item")
         }
