@@ -47,6 +47,7 @@ extension InputTugasController{
             modulModel.fetchTugasMurid { [self] tugas in
                 nameTugas = tugas.tugasName
                 descTugas = tugas.tugasDesc
+                
                 setNavItem()
             }
             
@@ -82,7 +83,11 @@ extension InputTugasController{
         self.navigationItem.leftBarButtonItem = leftItem
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .bold)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
+        if (tugasDisplay != nil){
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(saveItem))
+        }else{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
+        }
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         navigationController?.navigationBar.largeTitleTextAttributes =
         [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 28)]
@@ -97,20 +102,62 @@ extension InputTugasController{
     }
     
     @objc private func saveItem(){
-        setCurrentDate()
-        let path = "pdfTugas/\(displayURL!)"
         
-        self.userModel.fetchUser{ [self] user in
-            let userName = user.name
-            let uid = user.id
-            print("ini username pas fetch = \(userName)")
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){ [self] in
+            //Fetch data to get if the user already submitted or not
+            modulModel.fetchTugasCondition { [self] tugasCons in
+                tugasDisplay = tugasCons.tugasName
+            }
             
-            storeData(username: userName,userid: uid,modulid: idModul,fileTugas:path,displayedFile: displayURL!, dateSubmitted:currentTime!,classid: classid!)
-            print("Saved")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
-            dismiss(animated: true,completion: nil)
+            print("tugas displaynya = \(tugasDisplay)")
+            if(tugasDisplay != nil){ // the user is updating
+                let path = "pdfTugas/\(displayURL!)"
+                
+                //save the file first
+                storageRef.child("pdfTugas/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
+                    (_,err) in
+                    
+                    if err != nil{
+                        print("error disini gan \(err?.localizedDescription)")
+                        return
+                    }
+                    
+                    self.userModel.fetchUser{ [self] user in
+                        let uid = user.id
+                        db.collection("muridTugas").whereField("userid", isEqualTo: uid).whereField("modulid", isEqualTo: idModul).getDocuments { [self] querySnapshot, error in
+                            if let error = error{
+                                print("error getting docs: \(error)")
+                            }else{
+                                guard let document = querySnapshot?.documents.first else {
+                                    print("No document found")
+                                    return
+                                }
+                                document.reference.updateData([
+                                    "fileTugas": path,
+                                    "displayedFile": displayURL!
+                                ])
+                            }
+                        }
+                    }
+                }
+                dismiss(animated: true,completion: nil)
+            }else{
+                //if it is the first submit
+                setCurrentDate()
+                let path = "pdfTugas/\(displayURL!)"
+                
+                self.userModel.fetchUser{ [self] user in
+                    let userName = user.name
+                    let uid = user.id
+                    print("ini username pas fetch = \(userName)")
+                    
+                    storeData(username: userName,userid: uid,modulid: idModul,fileTugas:path,displayedFile: displayURL!, dateSubmitted:currentTime!,classid: classid!)
+                    print("Saved")
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
+                    dismiss(animated: true,completion: nil)
+                }
+            }
         }
-      
     }
     
     func storeData(username: String,userid: String, modulid: String, fileTugas: String,displayedFile: String,dateSubmitted: String,classid: String){
@@ -191,7 +238,7 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
                 tugasDisplay = tugasCons.tugasName
                 if(tugasDisplay != nil){
                     if(displayURL != nil){
-                        cell.kumpultugasLbl.setTitle("\(displayURL)", for: .normal)
+                        cell.kumpultugasLbl.setTitle("\(displayURL!)", for: .normal)
                     }else{
                         cell.kumpultugasLbl.setTitle("Edit File", for: .normal)
                     }
@@ -245,7 +292,7 @@ extension InputTugasController:UIDocumentPickerDelegate{
         displayURL = myURL.lastPathComponent
         
         self.tableView.reloadData()
-    
+        
     }
     
     

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseStorage
 
 class GuruClassController: UIViewController {
     // MARK: - Variables & Outlet
@@ -236,10 +237,13 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         let eachModul = listofModul[indexPath.row]
+        let storageRef = Storage.storage().reference().child(eachModul.modulFile)
+        
         if(editingStyle == .delete){
             
             let batch = db.batch()
             let dispatchGroup = DispatchGroup()
+            
             
             //delete field Modul
             dispatchGroup.enter()
@@ -251,11 +255,20 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
                         let modulDocRef = db.collection("modul").document(document.documentID)
                         //delete the document of the spesific collection
                         batch.deleteDocument(modulDocRef)
+                        
+                        storageRef.delete { error in
+                            if let error = error{
+                                print("Error deleting files \(error)")
+                            }else{
+                                print("file deleted sucessfully!")
+                            }
+                        }
                     }
                 }
                 dispatchGroup.leave()
             }
             
+            //delete field tugas
             dispatchGroup.enter()
             db.collection("muridTugas").whereField("modulid", isEqualTo: eachModul.modulid).getDocuments { [self] (querySnapshot, error) in
                 if let error = error {
@@ -264,6 +277,20 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
                     for document in querySnapshot!.documents {
                         let muridTugasDocRef = db.collection("muridTugas").document(document.documentID)
                         batch.deleteDocument(muridTugasDocRef)
+                        
+//                        guard let tugasFile = document.get("fileTugas") as? String else {
+//                                    print("Error: tugasFile field not found in Tugas document.")
+//                                    continue
+//                                }
+//                        let tugasFileRef = Storage.storage().reference(forURL: tugasFile)
+//
+//                        tugasFileRef.delete { error in
+//                            if let error = error{
+//                                print("Error deleting tugasFile: \(error)")
+//                            }else{
+//                                print("All pdf deleted sucesfully!")
+//                            }
+//                        }
                     }
                 }
                 dispatchGroup.leave()

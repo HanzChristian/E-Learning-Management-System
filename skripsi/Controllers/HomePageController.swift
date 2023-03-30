@@ -251,6 +251,9 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         let eachClass = listofClass[indexPath.row]
+        
+        let storageRef = Storage.storage().reference().child(eachClass.classImgString)
+        
         if(editingStyle == .delete){
             print("the classid that want to be delete = \(eachClass.classid)")
             //execute multiple delete in one unit, if one operation is failed, all revert back
@@ -269,6 +272,14 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
                         let classDocRef = db.collection("class").document(document.documentID)
                         //delete the document of the spesific collection
                         batch.deleteDocument(classDocRef)
+                        
+                        storageRef.delete { error in
+                            if let error = error{
+                                print("error delete img = \(error)")
+                            }else{
+                                print("img deleted succesfully!")
+                            }
+                        }
                     }
                 }
                 dispatchGroup.leave()
@@ -297,6 +308,14 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
                     for document in querySnapshot!.documents {
                         let muridClassDocRef = db.collection("muridClass").document(document.documentID)
                         batch.deleteDocument(muridClassDocRef)
+                        
+                        storageRef.delete { error in
+                            if let error = error{
+                                print("error delete img = \(error)")
+                            }else{
+                                print("img deleted succesfully!")
+                            }
+                        }
                     }
                 }
                 dispatchGroup.leave()
