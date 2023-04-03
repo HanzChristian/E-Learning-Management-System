@@ -76,7 +76,7 @@ extension OnBoardingController{
        pages = [
         OnboardingPages(title: "Akses Kelas", description: "Akses seluruh kelas yang dibentuk untuk membaca materi, mengerjakan tugas, dan melakukan tes", image: #imageLiteral(resourceName: "1st-Onboarding")),
         OnboardingPages(title: "Pilih Peran", description: "Masuk sebagai pengajar atau pelajar sesuai dengan peranmu dalam pembelajaran!", image: #imageLiteral(resourceName: "2nd-Onboarding")),
-        OnboardingPages(title: "Lihat Jadwal", description: "Lupa ada jadwal apa saja yang akan terjadi hari ini? atau hari esok? Lihat seluruh jadwal yang telah kamu buat dibantu dengan notifikasi yang mengingatkanmu!", image: #imageLiteral(resourceName: "3rd-Onboarding")),
+        OnboardingPages(title: "Baca PDF & Kumpulkan Tugas", description: "Masukkan dan download materi beserta tugas yang ada disetiap kelas dengan mudah melalui penampilan file secara langsung setelah didownload!", image: #imageLiteral(resourceName: "3rd-Onboarding")),
         OnboardingPages(title: "Sudah Siap?", description: "Apakah kamu sudah siap dengan pembelajaranmu? Daftar sekarang!", image: #imageLiteral(resourceName: "4th-Onboarding"))
         ]
         signupBtn.isHidden = true
