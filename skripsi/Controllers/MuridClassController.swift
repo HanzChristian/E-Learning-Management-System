@@ -32,20 +32,14 @@ class MuridClassController: UIViewController,UIDocumentPickerDelegate{
 }
 // MARK: - View Life Cycle
 extension MuridClassController{
+    
     override func viewDidLoad(){
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+    
+        fetchData()
         
-        DispatchQueue.main.async{ [self] in
-            modulModel.fetchModul { [self] modul in
-                listofModul.append(modul)
-                modulCount.modulNum += 1
-                jumlahModul.append(modulCount)
-                tableView.reloadData()
-            }
-        }
-
         classModel.fetchSelectedClass { [self] classess in
             className = classess.className
             classDesc = classess.classDesc
@@ -78,11 +72,23 @@ extension MuridClassController{
         dismiss(animated: true,completion: nil)
     }
     
+    func fetchData(){
+        listofModul.removeAll()
+        DispatchQueue.main.async{ [self] in
+            modulModel.fetchModul { [self] modul in
+                listofModul.append(modul)
+                modulCount.modulNum += 1
+                jumlahModul.append(modulCount)
+                tableView.reloadData()
+            }
+        }
+    }
     
 }
 // MARK: - TableView Delegate & Datasource
 extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("ini list modul count = \(listofModul.count)")
         return listofModul.count
     }
     

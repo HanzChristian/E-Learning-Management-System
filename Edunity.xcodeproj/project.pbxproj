@@ -425,7 +425,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1587B02629AC71B6007229DB /* Build configuration list for PBXProject "skripsi" */;
+			buildConfigurationList = 1587B02629AC71B6007229DB /* Build configuration list for PBXProject "Edunity" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -644,6 +644,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Edunity;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -697,6 +698,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = Edunity;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -769,7 +771,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1587B02629AC71B6007229DB /* Build configuration list for PBXProject "skripsi" */ = {
+		1587B02629AC71B6007229DB /* Build configuration list for PBXProject "Edunity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1587B03D29AC71B7007229DB /* Debug */,

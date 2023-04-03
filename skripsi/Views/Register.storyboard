@@ -123,11 +123,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250.33000000000001" id="LYy-VX-g3f"/>
-                                    <constraint firstAttribute="trailing" secondItem="dzr-Hc-jRe" secondAttribute="trailing" constant="109" id="U25-XP-hzw"/>
-                                    <constraint firstItem="b72-FJ-wBn" firstAttribute="leading" secondItem="rJN-t0-ZFf" secondAttribute="leading" constant="134.33000000000001" id="uVK-ka-fIH"/>
-                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pastikan passwordmu memiliki setidaknya 8 karakter, memiliki sebuah karakter spesial dan sebuah angka!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmL-gy-Yn8">
                                 <rect key="frame" x="42.666666666666657" y="669" width="305" height="47"/>
