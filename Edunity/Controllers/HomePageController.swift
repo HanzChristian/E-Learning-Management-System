@@ -273,6 +273,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
                         //delete the document of the spesific collection
                         batch.deleteDocument(classDocRef)
                         
+                        //delete image in storage
                         storageRef.delete { error in
                             if let error = error{
                                 print("error delete img = \(error)")

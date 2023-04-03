@@ -34,6 +34,7 @@ class InputTugasController: UIViewController {
     var extractURL: URL?
     var tugasDisplay: String?
     var classid: String?
+    var prevURL: String?
     
 }
 // MARK: - View Life Cycle
@@ -103,17 +104,29 @@ extension InputTugasController{
     
     @objc private func saveItem(){
         
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5){ [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.7){ [self] in
             //Fetch data to get if the user already submitted or not
             modulModel.fetchTugasCondition { [self] tugasCons in
                 tugasDisplay = tugasCons.tugasName
             }
             
-            print("tugas displaynya = \(tugasDisplay)")
             if(tugasDisplay != nil){ // the user is updating
                 let path = "pdfTugas/\(displayURL!)"
+                print("new url= \(displayURL!)")
+                print("prev url = pdfTugas/\(tugasDisplay!)")
+                prevURL = "pdfTugas/\(tugasDisplay!)"
                 
-                //save the file first
+                //delete prev file
+                let storageprevRef = Storage.storage().reference().child(prevURL!)
+                storageprevRef.delete { error in
+                    if let error = error{
+                        print("error delete pdf = \(error)")
+                    }else{
+                        print("pdf deleted succesfully!")
+                    }
+                }
+                
+                //save the file
                 storageRef.child("pdfTugas/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
                     (_,err) in
                     
