@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1587B02A29AC71B6007229DB"
-               BuildableName = "skripsi.app"
+               BuildableName = "Edunity.app"
                BlueprintName = "skripsi"
                ReferencedContainer = "container:Edunity.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1587B02A29AC71B6007229DB"
-            BuildableName = "skripsi.app"
+            BuildableName = "Edunity.app"
             BlueprintName = "skripsi"
             ReferencedContainer = "container:Edunity.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1587B02A29AC71B6007229DB"
-            BuildableName = "skripsi.app"
+            BuildableName = "Edunity.app"
             BlueprintName = "skripsi"
             ReferencedContainer = "container:Edunity.xcodeproj">
          </BuildableReference>
