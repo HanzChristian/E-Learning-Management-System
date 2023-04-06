@@ -63,6 +63,15 @@ struct Modul{
     let classid: String
 }
 
+struct Tes{
+    let tesName: String
+    let tesDesc: String
+    let modulName: String
+    let modulid: String
+    let tesid: String
+    let classid: String
+}
+
 struct JumlahModul{
     var modulNum: Int
 }

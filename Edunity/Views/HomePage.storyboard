@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XlG-yA-1kM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XlG-yA-1kM">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -31,7 +31,7 @@
         <!--Profilku-->
         <scene sceneID="AZN-As-xcw">
             <objects>
-                <viewController storyboardIdentifier="ProfileController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2cG-sF-pOi" customClass="ProfileController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2cG-sF-pOi" customClass="ProfileController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J7B-iK-dw4">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -212,7 +212,7 @@
         <!--Home Page Controller-->
         <scene sceneID="HPg-24-s8D">
             <objects>
-                <viewController storyboardIdentifier="HomePageController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TqV-UH-XNh" customClass="HomePageController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePageController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TqV-UH-XNh" customClass="HomePageController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZhX-I3-Yub">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -312,7 +312,7 @@
         <!--Find Class Controller-->
         <scene sceneID="Ks6-1e-u8U">
             <objects>
-                <viewController storyboardIdentifier="FindClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0X3-F4-8zG" customClass="FindClassController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FindClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0X3-F4-8zG" customClass="FindClassController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r3h-Zd-9Es">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -361,7 +361,7 @@
         <!--Murid Class Controller-->
         <scene sceneID="Kmg-k8-q0o">
             <objects>
-                <viewController storyboardIdentifier="MuridClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2QY-qb-PmW" customClass="MuridClassController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MuridClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2QY-qb-PmW" customClass="MuridClassController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rW0-rD-H5N">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -422,7 +422,7 @@
         <!--Input Tugas Controller-->
         <scene sceneID="IHE-TC-vhC">
             <objects>
-                <viewController storyboardIdentifier="InputTugasController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BHy-ff-WFD" customClass="InputTugasController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InputTugasController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BHy-ff-WFD" customClass="InputTugasController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vpb-Uo-B4a">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -471,7 +471,7 @@
         <!--Make Class Controller-->
         <scene sceneID="sDa-Qj-5v3">
             <objects>
-                <viewController storyboardIdentifier="MakeClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WtY-Sm-9iu" customClass="MakeClassController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MakeClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WtY-Sm-9iu" customClass="MakeClassController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BPl-0N-krL">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -543,7 +543,7 @@
                 <navigationController id="fEk-fb-0Ap" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="GSo-uR-Ocw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l9G-xy-vGT">
-                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -557,7 +557,7 @@
         <!--Empty Space Controller-->
         <scene sceneID="DPf-ke-X8V">
             <objects>
-                <viewController storyboardIdentifier="EmptySpaceController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="L7c-W4-4Be" customClass="EmptySpaceController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmptySpaceController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="L7c-W4-4Be" customClass="EmptySpaceController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Db-io-zvm">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="558"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -620,7 +620,7 @@
         <!--Guru Class Controller-->
         <scene sceneID="ljy-OF-8lb">
             <objects>
-                <viewController storyboardIdentifier="GuruClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q2P-eq-sFz" customClass="GuruClassController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GuruClassController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q2P-eq-sFz" customClass="GuruClassController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CwY-ER-Xj5">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -672,7 +672,7 @@
         <!--Tugas Controller-->
         <scene sceneID="9iQ-nO-6dk">
             <objects>
-                <viewController storyboardIdentifier="TugasController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3h6-Qp-cy6" customClass="TugasController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TugasController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3h6-Qp-cy6" customClass="TugasController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HTO-PX-CaO">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -714,7 +714,7 @@
         <!--Kumpulan Tugas Controller-->
         <scene sceneID="lRw-yB-GMj">
             <objects>
-                <viewController storyboardIdentifier="KumpulanTugasController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Py7-tj-nMR" customClass="KumpulanTugasController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KumpulanTugasController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Py7-tj-nMR" customClass="KumpulanTugasController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cFq-dt-dWk">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -754,7 +754,7 @@
                                 <rect key="frame" x="0.0" y="161" width="390" height="683"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="KumpulanTugasTVC" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="53" id="HGu-gh-Qh3" customClass="KumpulanTugasTVC" customModule="skripsi" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="KumpulanTugasTVC" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="53" id="HGu-gh-Qh3" customClass="KumpulanTugasTVC" customModule="Edunity" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HGu-gh-Qh3" id="RUf-ue-WBM">
@@ -843,7 +843,7 @@
         <!--Modul Controller-->
         <scene sceneID="qxm-ue-Qle">
             <objects>
-                <viewController storyboardIdentifier="ModulController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CMH-1e-4pK" customClass="ModulController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModulController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CMH-1e-4pK" customClass="ModulController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7bA-i4-9qU">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -955,6 +955,64 @@
             </objects>
             <point key="canvasLocation" x="4070.7692307692305" y="-1467.2985781990521"/>
         </scene>
+        <!--Input Tes Controller-->
+        <scene sceneID="0c9-ZA-VM6">
+            <objects>
+                <viewController storyboardIdentifier="InputTesController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nwW-mb-gs7" customClass="InputTesController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zCd-qh-FOw">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGJ-d7-ubg">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="110"/>
+                                <color key="backgroundColor" name="SegmentedPressedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="0EX-du-OQL"/>
+                                    <constraint firstAttribute="width" constant="390" id="hgV-fa-sKv"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="b4G-1s-HpA">
+                                <rect key="frame" x="0.0" y="130" width="390" height="680"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="EuQ-Na-69m"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="eGJ-d7-ubg" secondAttribute="trailing" id="3LY-o8-Frp"/>
+                            <constraint firstItem="EuQ-Na-69m" firstAttribute="bottom" secondItem="b4G-1s-HpA" secondAttribute="bottom" id="JLB-tE-VRZ"/>
+                            <constraint firstItem="b4G-1s-HpA" firstAttribute="leading" secondItem="EuQ-Na-69m" secondAttribute="leading" id="PS1-Yd-84l"/>
+                            <constraint firstItem="eGJ-d7-ubg" firstAttribute="top" secondItem="zCd-qh-FOw" secondAttribute="top" id="RF9-OX-szL"/>
+                            <constraint firstItem="eGJ-d7-ubg" firstAttribute="leading" secondItem="EuQ-Na-69m" secondAttribute="leading" id="jx4-zF-dJa"/>
+                            <constraint firstItem="EuQ-Na-69m" firstAttribute="trailing" secondItem="b4G-1s-HpA" secondAttribute="trailing" id="pmH-Jn-fMB"/>
+                            <constraint firstItem="b4G-1s-HpA" firstAttribute="top" secondItem="eGJ-d7-ubg" secondAttribute="bottom" constant="20" id="uGg-4U-3Zh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Njd-kT-kdL"/>
+                    <connections>
+                        <outlet property="tableView" destination="b4G-1s-HpA" id="lA8-Dh-FM3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fzC-Hb-kBe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5000" y="-745.02369668246445"/>
+        </scene>
+        <!--Soal Controller-->
+        <scene sceneID="SIk-hV-LIY">
+            <objects>
+                <viewController storyboardIdentifier="SoalController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gdR-HI-KOk" customClass="SoalController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qhF-Bp-thS">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Jdy-sM-B7e"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="snT-B9-8Dn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="So4-42-Dnh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6865" y="-745"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Duj-Y2-fgS">
             <objects>
@@ -994,7 +1052,7 @@
         <!--Empty Space Guru Controller-->
         <scene sceneID="xhh-mG-HQG">
             <objects>
-                <viewController storyboardIdentifier="EmptySpaceGuruController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lhh-7k-O1R" customClass="EmptySpaceGuruController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmptySpaceGuruController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lhh-7k-O1R" customClass="EmptySpaceGuruController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oA8-yz-6Rc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1056,7 +1114,7 @@
         <!--Empty Space Find Controller-->
         <scene sceneID="gzN-vT-fAA">
             <objects>
-                <viewController storyboardIdentifier="EmptySpaceFindController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NMW-7S-aw2" customClass="EmptySpaceFindController" customModule="skripsi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmptySpaceFindController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NMW-7S-aw2" customClass="EmptySpaceFindController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h45-he-LTQ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="689"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1089,6 +1147,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="964-po-Io0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2293.8461538461538" y="30.924170616113742"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cra-dn-SQl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Om3-UW-7P5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gxp-Dr-azd">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nwW-mb-gs7" kind="relationship" relationship="rootViewController" id="DA4-1x-d20"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xa2-EL-Fvi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4070.7692307692305" y="-745.02369668246445"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="US0-8n-ACW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zkQ-xL-hYN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Quh-vE-t7X">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gdR-HI-KOk" kind="relationship" relationship="rootViewController" id="13n-Z1-Nv7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nc7-ny-8q3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6025" y="-745"/>
         </scene>
     </scenes>
     <resources>

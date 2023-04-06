@@ -43,6 +43,54 @@ class ModulModel{
         }
     }
     
+    func fetchModulMurid(completion: @escaping(Modul) -> ()){
+        
+        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener { querySnapshot, error in
+            
+            guard let documents = querySnapshot?.documents else{
+                print("No document")
+                return
+            }
+            
+            //kurang file di firestorage, karna gatau retrieve untuk download gimana
+            for document in documents{
+                let data = document.data()
+                let modulName = data["nameModul"] as? String ?? ""
+                let modulDesc = data["descModul"] as? String ?? ""
+                let modulFile = data["fileModul"] as? String ?? ""
+                let modulid = data["modulid"] as? String ?? ""
+                let classid = data["classid"] as? String ?? ""
+                print("ini modulidnya di fetchmodul = \(modulid)")
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid)
+                completion(eachModul)
+            }
+        }
+    }
+    
+    func fetchModulTes(completion: @escaping(Modul) -> ()){
+        
+        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").whereField("modulid", isEqualTo: "\(SelectedModul.selectedModul.modulPath)").addSnapshotListener { querySnapshot, error in
+            
+            guard let documents = querySnapshot?.documents else{
+                print("No document")
+                return
+            }
+            
+            //kurang file di firestorage, karna gatau retrieve untuk download gimana
+            for document in documents{
+                let data = document.data()
+                let modulName = data["nameModul"] as? String ?? ""
+                let modulDesc = data["descModul"] as? String ?? ""
+                let modulFile = data["fileModul"] as? String ?? ""
+                let modulid = data["modulid"] as? String ?? ""
+                let classid = data["classid"] as? String ?? ""
+                print("ini modulidnya di fetchmodul = \(modulid)")
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid)
+                completion(eachModul)
+            }
+        }
+    }
+    
     //for fetching tugas in Guru, where it is based on Class id
     func fetchTugasGuru(completion: @escaping(Tugas) -> ()){
         

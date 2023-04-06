@@ -75,7 +75,7 @@ extension MuridClassController{
     func fetchData(){
         listofModul.removeAll()
         DispatchQueue.main.async{ [self] in
-            modulModel.fetchModul { [self] modul in
+            modulModel.fetchModulMurid { [self] modul in
                 listofModul.append(modul)
                 modulCount.modulNum += 1
                 jumlahModul.append(modulCount)

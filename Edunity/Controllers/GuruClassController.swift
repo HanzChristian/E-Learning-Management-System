@@ -12,19 +12,24 @@ import FirebaseStorage
 class GuruClassController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
-    let cellTitle = ["Modul", "Kumpulan Tugas"]
+    let cellTitle = ["Modul", "Kumpulan Tugas","Kumpulan Tes"]
     
     let db = Firestore.firestore()
     
     let classModel = ClassModel()
     let modulModel = ModulModel()
+    let tesModel = TesModel()
+    
     var listofModul = [Modul]()
     var listofTugas = [Tugas]()
+    var listofTes = [Tes]()
+    
     var jumlahModul = [JumlahModul]()
     var jumlahTugas = [JumlahTugas]()
     
     var className: String?
     var row: Int?
+    
     var modulCount = JumlahModul(modulNum: 0)
     var tugasCount = JumlahTugas(tugasNum: 0)
 }
@@ -51,6 +56,7 @@ extension GuruClassController{
             setNavItem()
             print("ini listofmodul count = \(listofModul.count)")
             print("ini listoftugas count = \(listofTugas.count)")
+            print("ini listoftes count = \(listofTes.count)")
             if(listofModul.count > 0 || listofTugas.count > 0){
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenGuru"), object: nil)
             }
@@ -62,6 +68,8 @@ extension GuruClassController{
         tableView.register(nibModul, forCellReuseIdentifier: "ModulTVC")
         let nibTugas = UINib(nibName: "TugasTVC", bundle: nil)
         tableView.register(nibTugas, forCellReuseIdentifier: "TugasTVC")
+        let nibTes = UINib(nibName: "TesTVC", bundle: nil)
+        tableView.register(nibTes, forCellReuseIdentifier: "TesTVC")
     }
 }
 // MARK: - IBActions
@@ -110,21 +118,22 @@ extension GuruClassController{
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
             listofModul.removeAll()
             listofTugas.removeAll()
+            listofTes.removeAll()
             fetchData()
-            
         }
     }
     
     func showEmpty(){
-        if(listofModul.count > 0 || listofTugas.count > 0){
+        if(listofModul.count > 0 || listofTugas.count > 0 || listofTes.count > 0){
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenGuru"), object: nil)
         }
-        else if(listofModul.count == 0 || listofTugas.count == 0){
+        else if(listofModul.count == 0 || listofTugas.count == 0 || listofTes.count == 0){
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenGuru"), object: nil)
         }
     }
     
     func fetchData(){
+        //fetch modul
         modulModel.fetchModul { [self] modul in
             listofModul.append(modul)
             modulCount.modulNum += 1
@@ -133,6 +142,7 @@ extension GuruClassController{
             showEmpty()
         }
         
+        //fetch tugas
         modulModel.fetchTugasGuru { [self] tugases in
             listofTugas.append(tugases)
             tugasCount.tugasNum += 1
@@ -140,6 +150,14 @@ extension GuruClassController{
             tableView.reloadData()
             showEmpty()
         }
+        
+        //fetch tes
+        tesModel.fetchAllTes { [self] tes in
+            listofTes.append(tes)
+            tableView.reloadData()
+            showEmpty()
+        }
+        
     }
     
 }
@@ -151,9 +169,13 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         if(listofModul.count == 0) && (listofTugas.count == 0){
             return 0
         }
-        else if(listofModul.count != 0) && (listofTugas.count != 0){
+        else if(listofModul.count != 0) && (listofTugas.count != 0) && (listofTes.count == 0){
             return 2
-        }else{
+        }
+        else if(listofModul.count != 0) && (listofTugas.count != 0) && (listofTes.count != 0){
+            return 3
+        }
+        else{
             return 0
         }
     }
@@ -192,13 +214,14 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            // cari tahu BG atau meds
             if (listofTugas.count != 0 && listofModul.count != 0) {
                 return listofModul.count
             }
             return 0
         } else if (section == 1){
             return listofTugas.count
+        } else if (section == 2){
+            return listofTes.count
         }
         return 0
     }
@@ -212,6 +235,8 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
             
             cell.materiLbl.text = "\(eachModul.modulName)"
             cell.modulLbl.text = "Modul \(modul.modulNum)"
+            
+            
             return cell
         }
         else if(indexPath.section == 1){
@@ -224,8 +249,17 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
             cell.modultugasLbl.text = "Tugas Modul \(tugas.tugasNum)"
             return cell
         }
+        else if(indexPath.section == 2){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TesTVC", for: indexPath) as! TesTVC
+            
+            let eachTes = listofTes[indexPath.row]
+            cell.tesName.text = eachTes.tesName
+            cell.modulName.text = eachTes.modulName
+            return cell
+        }
         return UITableViewCell()
     }
+    
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if(indexPath.section == 0){
             return .delete
@@ -344,9 +378,37 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         
         SelectedModul.selectedModul.modulPath = eachModul.modulid
         print("SelectedModul.selectedModul.modulPath adalah = \(SelectedModul.selectedModul.modulPath)")
-        if(indexPath.section == 1){
+        
+        
+        if(indexPath.section == 0){
+            //Check if the tes exist
+            tesModel.fetchSpesificTes { [self] tes, error in
+                if let error = error {
+                    // Error handling
+                    let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "InputTesController") as! InputTesController
+                    vc.modalPresentationStyle = .popover
+                    let nav =  UINavigationController(rootViewController: vc)
+                    self.present(nav, animated: true)
+                    return
+                }
+
+                if let exist = tes?.tesid {
+                    print("exist = \(exist)")
+                    print("udah ada di db, gabisa edit")
+                }
+            }
+        }
+        else if(indexPath.section == 1){
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "KumpulanTugasController") as! KumpulanTugasController
+            vc.modalPresentationStyle = .fullScreen
+            let nav =  UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
+        }
+        else if(indexPath.section == 2){
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "SoalController") as! SoalController
             vc.modalPresentationStyle = .fullScreen
             let nav =  UINavigationController(rootViewController: vc)
             self.present(nav, animated: true)
