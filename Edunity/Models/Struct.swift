@@ -40,13 +40,16 @@ struct SelectedIdx{
 struct SelectedClass{
     var classPath: String
     static var selectedClass = SelectedClass(classPath: "")
-    
 }
 
 struct SelectedModul{
     var modulPath: String
     static var selectedModul = SelectedModul(modulPath: "")
-    
+}
+
+struct SelectedTes{
+    var tesPath: String
+    static var selectedTes = SelectedTes(tesPath: "")
 }
 
 struct Tugas{
@@ -80,10 +83,23 @@ struct JumlahTugas{
     var tugasNum: Int
 }
 
+struct JumlahSoal{
+    var soalNum: Int
+}
+
 struct TugasMurid{
     let muridName: String
     let tugasName: String
     let tugasDate: String
     let tugasFile: String
+}
+
+struct Soal{
+    var soalQuestion: String
+    var soalAnswerA: String
+    var soalAnswerB: String
+    var soalAnswerC: String
+    var soalAnswerD: String
+    var soalCorrectAns: String
 }
 

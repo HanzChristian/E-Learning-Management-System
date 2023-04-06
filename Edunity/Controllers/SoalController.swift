@@ -61,7 +61,11 @@ extension SoalController{
     }
     
     @objc private func toInputSoal(){
-        print("segue")
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "MakeSoalController") as! MakeSoalController
+        vc.modalPresentationStyle = .fullScreen
+        let nav =  UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true)
     }
 }
 

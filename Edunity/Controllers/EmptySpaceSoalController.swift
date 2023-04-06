@@ -11,6 +11,14 @@ import UIKit
 class EmptySpaceSoalController:UIViewController{
     // MARK: - Variables & Outlet
     
+    @IBAction func btnPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "MakeSoalController") as! MakeSoalController
+        vc.modalPresentationStyle = .fullScreen
+        let nav =  UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true)
+    }
+    
 }
     // MARK: - View Life Cycle
 extension EmptySpaceSoalController{

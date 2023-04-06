@@ -73,5 +73,42 @@ class TesModel{
                 completion(nil, NSError(domain: "MyApp", code: 0, userInfo: [NSLocalizedDescriptionKey: "No documents parsed"]))
             }
     }
+  
+    func fetchTesid(completion: @escaping (Tes?, Error?) -> Void) {
+        db.collection("tes")
+            .whereField("tesid", isEqualTo: "\(SelectedTes.selectedTes.tesPath)")
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    // Return the error if there is an issue with the query
+                    completion(nil, error)
+                    return
+                }
+
+                guard let documents = querySnapshot?.documents else {
+                    // Return an error if there are no documents found
+                    completion(nil, NSError(domain: "MyApp", code: 0, userInfo: [NSLocalizedDescriptionKey: "No documents found"]))
+                    return
+                }
+
+                // If there is at least one document, parse it and return it
+                for document in documents {
+                    let data = document.data()
+                    let tesName = data["nameTes"] as? String ?? ""
+                    let tesDesc = data["descTes"] as? String ?? ""
+                    let modulName = data["nameModul"] as? String ?? ""
+                    let modulid = data["modulid"] as? String ?? ""
+                    let tesid = data["tesid"] as? String ?? ""
+                    let classid = data["classid"] as? String ?? ""
+
+                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid)
+
+                    completion(eachTes, nil)
+                    return
+                }
+
+                // Return error
+                completion(nil, NSError(domain: "MyApp", code: 0, userInfo: [NSLocalizedDescriptionKey: "No documents parsed"]))
+            }
+    }
 
 }

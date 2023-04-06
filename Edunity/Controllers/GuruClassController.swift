@@ -388,6 +388,7 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let eachModul = listofModul[indexPath.row]
+
         
         SelectedModul.selectedModul.modulPath = eachModul.modulid
         print("SelectedModul.selectedModul.modulPath adalah = \(SelectedModul.selectedModul.modulPath)")
@@ -408,11 +409,29 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
             self.present(nav, animated: true)
         }
         else if(indexPath.section == 2){
-            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "SoalController") as! SoalController
-            let nav =  UINavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true)
+            let eachTes = listofTes[indexPath.row]
+            SelectedTes.selectedTes.tesPath = eachTes.tesid
+            print("SelectedTes adalah = \(SelectedTes.selectedTes.tesPath)")
+            
+            let actionSheet = UIAlertController(title: "Apa yang ingin kamu lihat?", message: nil, preferredStyle: .actionSheet)
+            
+            let actSoal = UIAlertAction(title: "Masukkan Soal", style: .default) { _ in
+                let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "SoalController") as! SoalController
+                let nav =  UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true)
+            }
+            let actNilai = UIAlertAction(title: "Kumpulan Nilai", style: .default){ _ in
+               print("belom buat")
+            }
+            let actBatal = UIAlertAction(title: "Batal", style: .cancel)
+            
+            actionSheet.addAction(actSoal)
+            actionSheet.addAction(actNilai)
+            actionSheet.addAction(actBatal)
+            
+            present(actionSheet, animated: true, completion: nil)
         }
 
     }

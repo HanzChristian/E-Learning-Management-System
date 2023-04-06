@@ -18,6 +18,19 @@
 		1517677C29DE986100294010 /* TesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517677A29DE986100294010 /* TesTVC.xib */; };
 		1517677E29DEAF5200294010 /* SoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517677D29DEAF5200294010 /* SoalController.swift */; };
 		1517678029DEC91700294010 /* EmptySpaceSoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517677F29DEC91700294010 /* EmptySpaceSoalController.swift */; };
+		1517678229DF129C00294010 /* MakeSoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517678129DF129C00294010 /* MakeSoalController.swift */; };
+		1517678629DF13A800294010 /* QuestionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517678429DF13A800294010 /* QuestionTVC.swift */; };
+		1517678729DF13A800294010 /* QuestionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517678529DF13A800294010 /* QuestionTVC.xib */; };
+		1517678A29DF13C000294010 /* AnswerATVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517678829DF13C000294010 /* AnswerATVC.swift */; };
+		1517678B29DF13C000294010 /* AnswerATVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517678929DF13C000294010 /* AnswerATVC.xib */; };
+		1517678E29DF13CF00294010 /* AnswerBTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517678C29DF13CF00294010 /* AnswerBTVC.swift */; };
+		1517678F29DF13CF00294010 /* AnswerBTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517678D29DF13CF00294010 /* AnswerBTVC.xib */; };
+		1517679229DF13DB00294010 /* AnswerCTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517679029DF13DB00294010 /* AnswerCTVC.swift */; };
+		1517679329DF13DB00294010 /* AnswerCTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517679129DF13DB00294010 /* AnswerCTVC.xib */; };
+		1517679629DF13E700294010 /* AnswerDTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517679429DF13E700294010 /* AnswerDTVC.swift */; };
+		1517679729DF13E700294010 /* AnswerDTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517679529DF13E700294010 /* AnswerDTVC.xib */; };
+		1517679A29DF13FC00294010 /* CorrectAnswerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517679829DF13FC00294010 /* CorrectAnswerTVC.swift */; };
+		1517679B29DF13FC00294010 /* CorrectAnswerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517679929DF13FC00294010 /* CorrectAnswerTVC.xib */; };
 		154862C029B5CDA3001B90DE /* GuruClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862BF29B5CDA3001B90DE /* GuruClassController.swift */; };
 		154862C429B5DA53001B90DE /* ModulTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862C229B5DA53001B90DE /* ModulTVC.swift */; };
 		154862C529B5DA53001B90DE /* ModulTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 154862C329B5DA53001B90DE /* ModulTVC.xib */; };
@@ -96,6 +109,19 @@
 		1517677A29DE986100294010 /* TesTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesTVC.xib; sourceTree = "<group>"; };
 		1517677D29DEAF5200294010 /* SoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoalController.swift; sourceTree = "<group>"; };
 		1517677F29DEC91700294010 /* EmptySpaceSoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySpaceSoalController.swift; sourceTree = "<group>"; };
+		1517678129DF129C00294010 /* MakeSoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeSoalController.swift; sourceTree = "<group>"; };
+		1517678429DF13A800294010 /* QuestionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTVC.swift; sourceTree = "<group>"; };
+		1517678529DF13A800294010 /* QuestionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionTVC.xib; sourceTree = "<group>"; };
+		1517678829DF13C000294010 /* AnswerATVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerATVC.swift; sourceTree = "<group>"; };
+		1517678929DF13C000294010 /* AnswerATVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerATVC.xib; sourceTree = "<group>"; };
+		1517678C29DF13CF00294010 /* AnswerBTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerBTVC.swift; sourceTree = "<group>"; };
+		1517678D29DF13CF00294010 /* AnswerBTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerBTVC.xib; sourceTree = "<group>"; };
+		1517679029DF13DB00294010 /* AnswerCTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCTVC.swift; sourceTree = "<group>"; };
+		1517679129DF13DB00294010 /* AnswerCTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerCTVC.xib; sourceTree = "<group>"; };
+		1517679429DF13E700294010 /* AnswerDTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDTVC.swift; sourceTree = "<group>"; };
+		1517679529DF13E700294010 /* AnswerDTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerDTVC.xib; sourceTree = "<group>"; };
+		1517679829DF13FC00294010 /* CorrectAnswerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerTVC.swift; sourceTree = "<group>"; };
+		1517679929DF13FC00294010 /* CorrectAnswerTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CorrectAnswerTVC.xib; sourceTree = "<group>"; };
 		154862BF29B5CDA3001B90DE /* GuruClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuruClassController.swift; sourceTree = "<group>"; };
 		154862C229B5DA53001B90DE /* ModulTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulTVC.swift; sourceTree = "<group>"; };
 		154862C329B5DA53001B90DE /* ModulTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModulTVC.xib; sourceTree = "<group>"; };
@@ -191,9 +217,29 @@
 			path = "Tes Class";
 			sourceTree = "<group>";
 		};
+		1517678329DF137C00294010 /* Soal Class */ = {
+			isa = PBXGroup;
+			children = (
+				1517678429DF13A800294010 /* QuestionTVC.swift */,
+				1517678529DF13A800294010 /* QuestionTVC.xib */,
+				1517678829DF13C000294010 /* AnswerATVC.swift */,
+				1517678929DF13C000294010 /* AnswerATVC.xib */,
+				1517678C29DF13CF00294010 /* AnswerBTVC.swift */,
+				1517678D29DF13CF00294010 /* AnswerBTVC.xib */,
+				1517679029DF13DB00294010 /* AnswerCTVC.swift */,
+				1517679129DF13DB00294010 /* AnswerCTVC.xib */,
+				1517679429DF13E700294010 /* AnswerDTVC.swift */,
+				1517679529DF13E700294010 /* AnswerDTVC.xib */,
+				1517679829DF13FC00294010 /* CorrectAnswerTVC.swift */,
+				1517679929DF13FC00294010 /* CorrectAnswerTVC.xib */,
+			);
+			path = "Soal Class";
+			sourceTree = "<group>";
+		};
 		154862C129B5DA36001B90DE /* Guru Class */ = {
 			isa = PBXGroup;
 			children = (
+				1517678329DF137C00294010 /* Soal Class */,
 				1517676A29DE86DF00294010 /* Tes Class */,
 				154862EA29B9A24B001B90DE /* Kumpulan Tugas Class */,
 				154862DB29B72BC0001B90DE /* Tugas Class */,
@@ -365,6 +411,7 @@
 				15DD9CF329D1E3E90001DD15 /* PDFController.swift */,
 				1517676829DE85F400294010 /* InputTesController.swift */,
 				1517677D29DEAF5200294010 /* SoalController.swift */,
+				1517678129DF129C00294010 /* MakeSoalController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -492,12 +539,15 @@
 				1559C57C29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib in Resources */,
 				154862E729B72C0A001B90DE /* TugasNameTVC.xib in Resources */,
 				1587B03829AC71B7007229DB /* Assets.xcassets in Resources */,
+				1517678F29DF13CF00294010 /* AnswerBTVC.xib in Resources */,
 				15EEA14E29ADE193004A830B /* HomePage.storyboard in Resources */,
+				1517679729DF13E700294010 /* AnswerDTVC.xib in Resources */,
 				1587B03629AC71B6007229DB /* Main.storyboard in Resources */,
 				159FD2FF29ADB0B0000DFC26 /* Login.storyboard in Resources */,
 				15EEA16429B1C384004A830B /* ClassNameTVC.xib in Resources */,
 				1517677229DE873900294010 /* TesDescriptionTVC.xib in Resources */,
 				1559C57529BDB8880006CA4F /* ExpandableTVC.xib in Resources */,
+				1517679B29DF13FC00294010 /* CorrectAnswerTVC.xib in Resources */,
 				159FD2FD29ADB0A6000DFC26 /* Register.storyboard in Resources */,
 				154862D429B711C3001B90DE /* ModulDescriptionTVC.xib in Resources */,
 				15DD9CF229D164250001DD15 /* StatusTVC.xib in Resources */,
@@ -507,9 +557,12 @@
 				154862E329B72BF7001B90DE /* TugasDescriptionTVC.xib in Resources */,
 				1559C58229C20FED0006CA4F /* GoogleService-Info.plist in Resources */,
 				1517677C29DE986100294010 /* TesTVC.xib in Resources */,
+				1517678B29DF13C000294010 /* AnswerATVC.xib in Resources */,
 				1517676E29DE872200294010 /* TesNameTVC.xib in Resources */,
+				1517678729DF13A800294010 /* QuestionTVC.xib in Resources */,
 				15EEA16C29B4BF6B004A830B /* ClassTVC.xib in Resources */,
 				154862C929B5DA62001B90DE /* TugasTVC.xib in Resources */,
+				1517679329DF13DB00294010 /* AnswerCTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,9 +615,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1517679629DF13E700294010 /* AnswerDTVC.swift in Sources */,
 				1587B03329AC71B6007229DB /* ViewController.swift in Sources */,
+				1517679A29DF13FC00294010 /* CorrectAnswerTVC.swift in Sources */,
 				1587B05229AC7390007229DB /* LoginController.swift in Sources */,
 				1587B02F29AC71B6007229DB /* AppDelegate.swift in Sources */,
+				1517679229DF13DB00294010 /* AnswerCTVC.swift in Sources */,
 				154862DA29B72958001B90DE /* TugasController.swift in Sources */,
 				15EEA15A29B1ADE2004A830B /* EmptySpaceController.swift in Sources */,
 				15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */,
@@ -582,7 +638,9 @@
 				1517677E29DEAF5200294010 /* SoalController.swift in Sources */,
 				1559C58C29CE08360006CA4F /* EmptySpaceFindController.swift in Sources */,
 				154862C829B5DA62001B90DE /* TugasTVC.swift in Sources */,
+				1517678E29DF13CF00294010 /* AnswerBTVC.swift in Sources */,
 				15EEA15229ADE728004A830B /* HomePageController.swift in Sources */,
+				1517678629DF13A800294010 /* QuestionTVC.swift in Sources */,
 				154862E929B99DFC001B90DE /* KumpulanTugasController.swift in Sources */,
 				15EEA14C29ADCA67004A830B /* CustomTextField.swift in Sources */,
 				1517677129DE873900294010 /* TesDescriptionTVC.swift in Sources */,
@@ -590,7 +648,9 @@
 				15EEA16329B1C384004A830B /* ClassNameTVC.swift in Sources */,
 				1517677B29DE986100294010 /* TesTVC.swift in Sources */,
 				154862E629B72C0A001B90DE /* TugasNameTVC.swift in Sources */,
+				1517678229DF129C00294010 /* MakeSoalController.swift in Sources */,
 				154862CF29B711AF001B90DE /* ModulNameTVC.swift in Sources */,
+				1517678A29DF13C000294010 /* AnswerATVC.swift in Sources */,
 				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
 				159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */,
 				15DD9CF129D164250001DD15 /* StatusTVC.swift in Sources */,
