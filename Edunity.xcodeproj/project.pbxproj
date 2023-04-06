@@ -17,6 +17,7 @@
 		1517677B29DE986100294010 /* TesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517677929DE986100294010 /* TesTVC.swift */; };
 		1517677C29DE986100294010 /* TesTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517677A29DE986100294010 /* TesTVC.xib */; };
 		1517677E29DEAF5200294010 /* SoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517677D29DEAF5200294010 /* SoalController.swift */; };
+		1517678029DEC91700294010 /* EmptySpaceSoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517677F29DEC91700294010 /* EmptySpaceSoalController.swift */; };
 		154862C029B5CDA3001B90DE /* GuruClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862BF29B5CDA3001B90DE /* GuruClassController.swift */; };
 		154862C429B5DA53001B90DE /* ModulTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862C229B5DA53001B90DE /* ModulTVC.swift */; };
 		154862C529B5DA53001B90DE /* ModulTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 154862C329B5DA53001B90DE /* ModulTVC.xib */; };
@@ -94,6 +95,7 @@
 		1517677929DE986100294010 /* TesTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesTVC.swift; sourceTree = "<group>"; };
 		1517677A29DE986100294010 /* TesTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesTVC.xib; sourceTree = "<group>"; };
 		1517677D29DEAF5200294010 /* SoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoalController.swift; sourceTree = "<group>"; };
+		1517677F29DEC91700294010 /* EmptySpaceSoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySpaceSoalController.swift; sourceTree = "<group>"; };
 		154862BF29B5CDA3001B90DE /* GuruClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuruClassController.swift; sourceTree = "<group>"; };
 		154862C229B5DA53001B90DE /* ModulTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulTVC.swift; sourceTree = "<group>"; };
 		154862C329B5DA53001B90DE /* ModulTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModulTVC.xib; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				15EEA15929B1ADE2004A830B /* EmptySpaceController.swift */,
 				1559C58729CDDD6D0006CA4F /* EmptySpaceGuruController.swift */,
 				1559C58B29CE08360006CA4F /* EmptySpaceFindController.swift */,
+				1517677F29DEC91700294010 /* EmptySpaceSoalController.swift */,
 				15EEA15329AF215A004A830B /* ProfileController.swift */,
 				15EEA15529AF2951004A830B /* FindClassController.swift */,
 				15EEA15B29B1BE7C004A830B /* MakeClassController.swift */,
@@ -568,6 +571,7 @@
 				1517677429DE92C400294010 /* TesModel.swift in Sources */,
 				1559C58A29CDE07C0006CA4F /* ModulModel.swift in Sources */,
 				1587B05629AC7496007229DB /* Onboarding.swift in Sources */,
+				1517678029DEC91700294010 /* EmptySpaceSoalController.swift in Sources */,
 				15EEA17129B4C99D004A830B /* MuridClassController.swift in Sources */,
 				1559C57729BDC9870006CA4F /* InputTugasController.swift in Sources */,
 				15EEA15729AF2951004A830B /* FindClassController.swift in Sources */,

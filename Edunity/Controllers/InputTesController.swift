@@ -18,10 +18,14 @@ class InputTesController:UIViewController{
     let cellTitle = ["Nama Tes","Deskripsi Tes"]
     let db = Firestore.firestore()
     let modulModel = ModulModel()
+    let tesModel = TesModel()
     
     var tesNameTVC: TesNameTVC?
     var tesDescTVC: TesDescriptionTVC?
     var largeTitle: String?
+    var exist: String?
+    var prevtesName: String?
+    var prevtesDesc: String?
     
 }
 extension InputTesController{
@@ -39,9 +43,16 @@ extension InputTesController{
         
         modulModel.fetchModulTes { [self] modules in
             largeTitle = modules.modulName
-            setNavItem()
+            tesModel.fetchSpesificTes { [self] tes, error in
+                if let error = error{
+                    exist = nil
+                    setNavItem()
+                    return
+                }
+                exist = tes?.tesid
+                setNavItem()
+            }
         }
-        
     }
 }
 // MARK: - IBActions
@@ -53,8 +64,13 @@ extension InputTesController{
         navigationController?.navigationBar.prefersLargeTitles = true
         
         navigationItem.title = "Input Tes \(largeTitle!)"
-    
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
+        
+        if(exist != nil){
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Update", style: .plain, target: self, action: #selector(updateItem))
+        }else{
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
+        }
+        
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Batal", style: .plain, target: self, action: #selector(dismissSelf))
         
@@ -81,6 +97,20 @@ extension InputTesController{
         }
     }
     
+    @objc private func updateItem(){
+        
+        if let nameTes = tesNameTVC?.tesNameTV.text,!nameTes.isEmpty,let descTes = tesDescTVC?.tesDescTF.text,!descTes.isEmpty{
+            updateData(nameTes: nameTes, descTes: descTes)
+            print("Update succesful!")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
+            dismissSelf()
+        }else{
+            print("ga masuk bro")
+        }
+        
+    }
+    
     @objc private func dismissSelf(){
         self.dismiss(animated: true,completion: nil)
     }
@@ -96,8 +126,22 @@ extension InputTesController{
             "tesid": tesid,
             "timestamp": FieldValue.serverTimestamp()
         ])
-        
     }
+    
+    private func updateData(nameTes: String,descTes: String){
+        db.collection("tes").whereField("classid", isEqualTo: SelectedClass.selectedClass.classPath).whereField("modulid", isEqualTo: SelectedModul.selectedModul.modulPath).getDocuments { (querySnapshot, err) in
+            if let err = err{
+                print("error")
+            }else{
+                let document = querySnapshot!.documents.first
+                document!.reference.updateData([
+                    "nameTes": nameTes,
+                    "descTes": descTes
+                ])
+            }
+        }
+    }
+    
     
 }
 // MARK: - TableView Delegate & Datasource
@@ -116,13 +160,30 @@ extension InputTesController:UITableViewDelegate,UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "TesNameTVC", for: indexPath) as! TesNameTVC
             
             tesNameTVC = cell
+            
+            tesModel.fetchSpesificTes { [self] tes, error in
+                if let error = error{
+                    return
+                }
+                prevtesName = tes?.tesName
+                tesNameTVC?.tesNameTV.text = prevtesName
+            }
+            
             return tesNameTVC!
             
-            return cell
         }else if(indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: "TesDescriptionTVC", for: indexPath) as! TesDescriptionTVC
             
             tesDescTVC = cell
+            
+            tesModel.fetchSpesificTes { [self] tes, error in
+                if let error = error{
+                    return
+                }
+                prevtesDesc = tes?.tesDesc
+                tesDescTVC?.tesDescTF.text = prevtesDesc
+            }
+            
             return tesDescTVC!
         }
         return UITableViewCell()

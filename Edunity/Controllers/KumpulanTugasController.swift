@@ -49,8 +49,7 @@ extension KumpulanTugasController{
         
         navigationItem.title = "Kumpulan \(tugasName!)" //nanti ganti
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Batal", style: .plain, target: self, action: #selector(dismissSelf))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(saveItem))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Kembali", style: .plain, target: self, action: #selector(dismissSelf))
         
         navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
@@ -59,10 +58,6 @@ extension KumpulanTugasController{
     }
     
     @objc private func dismissSelf(){
-        self.dismiss(animated: true,completion: nil)
-    }
-    
-    @objc private func saveItem(){
         self.dismiss(animated: true,completion: nil)
     }
 }

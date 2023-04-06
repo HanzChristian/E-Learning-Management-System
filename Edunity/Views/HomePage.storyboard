@@ -1004,14 +1004,47 @@
                     <view key="view" contentMode="scaleToFill" id="qhF-Bp-thS">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCs-Qc-Psp">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="145"/>
+                                <color key="backgroundColor" name="SegmentedPressedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="390" id="Fer-CO-Sf0"/>
+                                    <constraint firstAttribute="height" constant="145" id="p0f-8u-ItT"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zwG-ET-SiU">
+                                <rect key="frame" x="0.0" y="145" width="390" height="665"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="WFC-o4-6D3">
+                                    <rect key="frame" x="0.0" y="35" width="390" height="559"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <connections>
+                                        <segue destination="N0o-6u-2rj" kind="embed" id="XBG-mm-891"/>
+                                    </connections>
+                                </containerView>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Jdy-sM-B7e"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Jdy-sM-B7e" firstAttribute="bottom" secondItem="zwG-ET-SiU" secondAttribute="bottom" id="6E3-Fn-X4g"/>
+                            <constraint firstItem="aCs-Qc-Psp" firstAttribute="leading" secondItem="qhF-Bp-thS" secondAttribute="leading" id="7Xw-2J-sgN"/>
+                            <constraint firstItem="zwG-ET-SiU" firstAttribute="leading" secondItem="Jdy-sM-B7e" secondAttribute="leading" id="Jb8-HV-LUe"/>
+                            <constraint firstAttribute="trailing" secondItem="aCs-Qc-Psp" secondAttribute="trailing" id="Pgf-bc-H5S"/>
+                            <constraint firstItem="Jdy-sM-B7e" firstAttribute="trailing" secondItem="zwG-ET-SiU" secondAttribute="trailing" id="Rpi-s8-vIy"/>
+                            <constraint firstItem="zwG-ET-SiU" firstAttribute="top" secondItem="aCs-Qc-Psp" secondAttribute="bottom" id="obJ-PV-tJb"/>
+                            <constraint firstItem="aCs-Qc-Psp" firstAttribute="top" secondItem="qhF-Bp-thS" secondAttribute="top" id="tmy-Wc-NeH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="snT-B9-8Dn"/>
+                    <connections>
+                        <outlet property="tableView" destination="zwG-ET-SiU" id="eBe-2K-fiq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="So4-42-Dnh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6865" y="-745"/>
+            <point key="canvasLocation" x="6864.6153846153848" y="-745.02369668246445"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Duj-Y2-fgS">
@@ -1183,6 +1216,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nc7-ny-8q3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6025" y="-745"/>
+        </scene>
+        <!--Empty Space Soal Controller-->
+        <scene sceneID="XUj-zd-q0S">
+            <objects>
+                <viewController storyboardIdentifier="EmptySpaceSoalController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N0o-6u-2rj" customClass="EmptySpaceSoalController" customModule="Edunity" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="taQ-sK-fKb">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="559"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="burung" translatesAutoresizingMaskIntoConstraints="NO" id="8hV-bU-Y3W">
+                                <rect key="frame" x="34.666666666666657" y="47" width="321" height="339"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="339" id="NpS-kr-Wag"/>
+                                    <constraint firstAttribute="width" constant="321" id="gxb-Aw-XK7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="belum ada soal?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Cn-iZ-xTX">
+                                <rect key="frame" x="119.33333333333333" y="430" width="151.33333333333337" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" name="ButtonColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGS-cb-gHz">
+                                <rect key="frame" x="19.666666666666657" y="478" width="351" height="57"/>
+                                <color key="backgroundColor" name="ButtonColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="351" id="WDA-57-1JU"/>
+                                    <constraint firstAttribute="height" constant="57" id="eVb-9i-tix"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="BENTUK SOAL">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnPressed:" destination="lhh-7k-O1R" eventType="touchUpInside" id="3m8-Cw-JtB"/>
+                                    <action selector="btnPressed:" destination="L7c-W4-4Be" eventType="touchUpInside" id="9HC-5z-XbG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pGS-cb-gHz" firstAttribute="top" secondItem="8Cn-iZ-xTX" secondAttribute="bottom" constant="24" id="J4V-HB-EoI"/>
+                            <constraint firstItem="8hV-bU-Y3W" firstAttribute="top" secondItem="taQ-sK-fKb" secondAttribute="topMargin" id="Wms-aW-KMv"/>
+                            <constraint firstItem="8Cn-iZ-xTX" firstAttribute="top" secondItem="8hV-bU-Y3W" secondAttribute="bottom" constant="44" id="Zod-IT-nIn"/>
+                            <constraint firstItem="8hV-bU-Y3W" firstAttribute="centerX" secondItem="taQ-sK-fKb" secondAttribute="centerX" id="cOM-UX-IIf"/>
+                            <constraint firstItem="8Cn-iZ-xTX" firstAttribute="centerX" secondItem="taQ-sK-fKb" secondAttribute="centerX" id="kd8-NV-g9D"/>
+                            <constraint firstItem="pGS-cb-gHz" firstAttribute="centerX" secondItem="taQ-sK-fKb" secondAttribute="centerX" id="pcc-bF-QQp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GLb-GC-aBI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7758" y="-745"/>
         </scene>
     </scenes>
     <resources>

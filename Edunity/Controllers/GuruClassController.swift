@@ -277,7 +277,19 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
             
             let batch = db.batch()
             let dispatchGroup = DispatchGroup()
+        
             
+            dispatchGroup.enter()
+            //delete prev file
+            let storageprevRef = Storage.storage().reference().child(eachModul.modulFile)
+            storageprevRef.delete { error in
+                if let error = error{
+                    print("error delete pdf = \(error)")
+                }else{
+                    print("pdf deleted succesfully!")
+                }
+                dispatchGroup.leave()
+            }
             
             //delete field Modul
             dispatchGroup.enter()
@@ -311,20 +323,20 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
                     for document in querySnapshot!.documents {
                         let muridTugasDocRef = db.collection("muridTugas").document(document.documentID)
                         batch.deleteDocument(muridTugasDocRef)
-                        
-//                        guard let tugasFile = document.get("fileTugas") as? String else {
-//                                    print("Error: tugasFile field not found in Tugas document.")
-//                                    continue
-//                                }
-//                        let tugasFileRef = Storage.storage().reference(forURL: tugasFile)
-//
-//                        tugasFileRef.delete { error in
-//                            if let error = error{
-//                                print("Error deleting tugasFile: \(error)")
-//                            }else{
-//                                print("All pdf deleted sucesfully!")
-//                            }
-//                        }
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            //delete field tes
+            dispatchGroup.enter()
+            db.collection("tes").whereField("modulid", isEqualTo: eachModul.modulid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let tesDocRef = db.collection("tes").document(document.documentID)
+                        batch.deleteDocument(tesDocRef)
                     }
                 }
                 dispatchGroup.leave()
@@ -362,6 +374,7 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
             DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
                 listofModul.removeAll()
                 listofTugas.removeAll()
+                listofTes.removeAll()
                 fetchData()
                 self.tableView.reloadData()
             }
@@ -381,23 +394,11 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         
         
         if(indexPath.section == 0){
-            //Check if the tes exist
-            tesModel.fetchSpesificTes { [self] tes, error in
-                if let error = error {
-                    // Error handling
-                    let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "InputTesController") as! InputTesController
-                    vc.modalPresentationStyle = .popover
-                    let nav =  UINavigationController(rootViewController: vc)
-                    self.present(nav, animated: true)
-                    return
-                }
-
-                if let exist = tes?.tesid {
-                    print("exist = \(exist)")
-                    print("udah ada di db, gabisa edit")
-                }
-            }
+            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "InputTesController") as! InputTesController
+            vc.modalPresentationStyle = .popover
+            let nav =  UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true)
         }
         else if(indexPath.section == 1){
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
@@ -409,10 +410,11 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         else if(indexPath.section == 2){
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "SoalController") as! SoalController
-            vc.modalPresentationStyle = .fullScreen
             let nav =  UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
         }
+
     }
     
     

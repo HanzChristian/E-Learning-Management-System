@@ -256,7 +256,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
         
         if(editingStyle == .delete){
             print("the classid that want to be delete = \(eachClass.classid)")
-            //execute multiple delete in one unit, if one operation is failed, all revert back
+            
             let batch = db.batch()
             
             //wait for all getDocuments() completed
@@ -332,6 +332,20 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
                         let muridTugasDocRef = db.collection("muridTugas").document(document.documentID)
 //                        batch.updateData(["classid": FieldValue.delete()], forDocument: muridTugasDocRef)
                         batch.deleteDocument(muridTugasDocRef)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            //delete field in tes
+            dispatchGroup.enter()
+            db.collection("tes").whereField("classid", isEqualTo: eachClass.classid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let tesDocRef = db.collection("tes").document(document.documentID)
+                        batch.deleteDocument(tesDocRef)
                     }
                 }
                 dispatchGroup.leave()
