@@ -136,6 +136,7 @@ extension MakeSoalController{
             
             print("saved")
             
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshSoal"), object: nil)
             dismissSelf()
         } else {
             print("ga masuk bro")

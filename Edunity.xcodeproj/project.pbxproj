@@ -31,6 +31,9 @@
 		1517679729DF13E700294010 /* AnswerDTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517679529DF13E700294010 /* AnswerDTVC.xib */; };
 		1517679A29DF13FC00294010 /* CorrectAnswerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517679829DF13FC00294010 /* CorrectAnswerTVC.swift */; };
 		1517679B29DF13FC00294010 /* CorrectAnswerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517679929DF13FC00294010 /* CorrectAnswerTVC.xib */; };
+		1517679D29DFF6B400294010 /* SoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517679C29DFF6B400294010 /* SoalModel.swift */; };
+		151767A129DFF82800294010 /* SoalTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517679F29DFF82800294010 /* SoalTVC.swift */; };
+		151767A229DFF82800294010 /* SoalTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151767A029DFF82800294010 /* SoalTVC.xib */; };
 		154862C029B5CDA3001B90DE /* GuruClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862BF29B5CDA3001B90DE /* GuruClassController.swift */; };
 		154862C429B5DA53001B90DE /* ModulTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862C229B5DA53001B90DE /* ModulTVC.swift */; };
 		154862C529B5DA53001B90DE /* ModulTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 154862C329B5DA53001B90DE /* ModulTVC.xib */; };
@@ -122,6 +125,9 @@
 		1517679529DF13E700294010 /* AnswerDTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerDTVC.xib; sourceTree = "<group>"; };
 		1517679829DF13FC00294010 /* CorrectAnswerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerTVC.swift; sourceTree = "<group>"; };
 		1517679929DF13FC00294010 /* CorrectAnswerTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CorrectAnswerTVC.xib; sourceTree = "<group>"; };
+		1517679C29DFF6B400294010 /* SoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoalModel.swift; sourceTree = "<group>"; };
+		1517679F29DFF82800294010 /* SoalTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoalTVC.swift; sourceTree = "<group>"; };
+		151767A029DFF82800294010 /* SoalTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SoalTVC.xib; sourceTree = "<group>"; };
 		154862BF29B5CDA3001B90DE /* GuruClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuruClassController.swift; sourceTree = "<group>"; };
 		154862C229B5DA53001B90DE /* ModulTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulTVC.swift; sourceTree = "<group>"; };
 		154862C329B5DA53001B90DE /* ModulTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModulTVC.xib; sourceTree = "<group>"; };
@@ -236,11 +242,21 @@
 			path = "Soal Class";
 			sourceTree = "<group>";
 		};
-		154862C129B5DA36001B90DE /* Guru Class */ = {
+		1517679E29DFF7F500294010 /* Make Class */ = {
 			isa = PBXGroup;
 			children = (
 				1517678329DF137C00294010 /* Soal Class */,
 				1517676A29DE86DF00294010 /* Tes Class */,
+				1517679F29DFF82800294010 /* SoalTVC.swift */,
+				151767A029DFF82800294010 /* SoalTVC.xib */,
+			);
+			path = "Make Class";
+			sourceTree = "<group>";
+		};
+		154862C129B5DA36001B90DE /* Guru Class */ = {
+			isa = PBXGroup;
+			children = (
+				1517679E29DFF7F500294010 /* Make Class */,
 				154862EA29B9A24B001B90DE /* Kumpulan Tugas Class */,
 				154862DB29B72BC0001B90DE /* Tugas Class */,
 				154862C229B5DA53001B90DE /* ModulTVC.swift */,
@@ -352,6 +368,7 @@
 				1559C58529C347610006CA4F /* ClassModel.swift */,
 				1559C58929CDE07C0006CA4F /* ModulModel.swift */,
 				1517677329DE92C400294010 /* TesModel.swift */,
+				1517679C29DFF6B400294010 /* SoalModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -536,6 +553,7 @@
 				154862D829B711D4001B90DE /* UploadTVC.xib in Resources */,
 				1587B03B29AC71B7007229DB /* LaunchScreen.storyboard in Resources */,
 				154862C529B5DA53001B90DE /* ModulTVC.xib in Resources */,
+				151767A229DFF82800294010 /* SoalTVC.xib in Resources */,
 				1559C57C29BFB3EC0006CA4F /* DeskripsiTugasTVC.xib in Resources */,
 				154862E729B72C0A001B90DE /* TugasNameTVC.xib in Resources */,
 				1587B03829AC71B7007229DB /* Assets.xcassets in Resources */,
@@ -624,6 +642,7 @@
 				154862DA29B72958001B90DE /* TugasController.swift in Sources */,
 				15EEA15A29B1ADE2004A830B /* EmptySpaceController.swift in Sources */,
 				15EEA15029ADE571004A830B /* UserDefaults+Extension.swift in Sources */,
+				1517679D29DFF6B400294010 /* SoalModel.swift in Sources */,
 				1517677429DE92C400294010 /* TesModel.swift in Sources */,
 				1559C58A29CDE07C0006CA4F /* ModulModel.swift in Sources */,
 				1587B05629AC7496007229DB /* Onboarding.swift in Sources */,
@@ -654,6 +673,7 @@
 				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
 				159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */,
 				15DD9CF129D164250001DD15 /* StatusTVC.swift in Sources */,
+				151767A129DFF82800294010 /* SoalTVC.swift in Sources */,
 				15EEA15C29B1BE7C004A830B /* MakeClassController.swift in Sources */,
 				1559C57F29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift in Sources */,
 				154862EC29B9A274001B90DE /* KumpulanTugasTVC.swift in Sources */,
