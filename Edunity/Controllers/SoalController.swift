@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
 
 class SoalController:UIViewController{
     // MARK: - Variables & Outlet
@@ -16,10 +17,12 @@ class SoalController:UIViewController{
     var jumlahSoal = [JumlahSoal]()
     var soalCount = JumlahSoal(soalNum: 0)
     var listofSoal = [Soal]()
-    
     var soalModel = SoalModel()
     
+    let db = Firestore.firestore()
+    
     var tesName: String?
+    var exist: String?
     
 }
 // MARK: - View Life Cycle
@@ -35,17 +38,13 @@ extension SoalController{
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        fetchDataCondition()
+        
+        
         DispatchQueue.main.async{ [self] in
             fetchData()
         }
         
-        tesModel.fetchSpesificTes { [self] tes, error in
-            if let error = error{
-                return
-            }
-            tesName = tes?.tesName
-            setNavItem()
-        }
         
         let nibSoal = UINib(nibName: "SoalTVC", bundle: nil)
         tableView.register(nibSoal, forCellReuseIdentifier: "SoalTVC")
@@ -56,16 +55,18 @@ extension SoalController{
 // MARK: - Private/Functions
 extension SoalController{
     private func setNavItem(){
+        print("ini listofSoal.count = \(listofSoal.count) , ini exist = \(exist)")
         navigationController?.navigationBar.prefersLargeTitles = true
         
         navigationItem.title = tesName
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Kembali", style: .plain, target: self, action: #selector(dismissSelf))
         
-        if(listofSoal.count > 0){
+        if(listofSoal.count > 0 && exist == nil){
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simpan", style: .plain, target: self, action: #selector(SaveItem))
-        }else{
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Tambahkan", style: .plain, target: self, action: #selector(toInputSoal))
+        }else if(exist != nil){
+            navigationItem.rightBarButtonItem?.title = ""
+            navigationItem.rightBarButtonItem?.isEnabled = false
         }
         
         navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
@@ -100,6 +101,31 @@ extension SoalController{
             jumlahSoal.append(soalCount)
             tableView.reloadData()
             showEmpty()
+            setNavItem()
+            print("list of soal = \(listofSoal)")
+        }
+    }
+    
+    private func fetchDataCondition(){
+        //Check for tes name first - tes name will always be there
+        tesModel.fetchSpesificTes { [self] tes, error in
+            if let error = error{
+                return
+            }
+            tesName = tes?.tesName
+            
+            //Check if fixed soal exist
+            soalModel.fetchFixedSoal { soal, error in
+                if let error = error{
+                    //fixed soal not exist
+                    setNavItem()
+                    exist = nil
+                    return
+                }
+                //fixed soal exist
+                exist = soal?.soalAnswerA
+                setNavItem()
+            }
         }
     }
     
@@ -119,7 +145,30 @@ extension SoalController{
             print("keluar")
         }))
         
-        alert.addAction(UIAlertAction(title: "Simpan", style: .default,handler:{_ in
+        alert.addAction(UIAlertAction(title: "Simpan", style: .default,handler:{ [self]_ in
+            let tesRef = db.collection("tes").whereField("tesid", isEqualTo: SelectedTes.selectedTes.tesPath)
+            
+            tesRef.getDocuments { [self] (querySnapshot,error) in
+                if let error = error {
+                    print("Error getting document: \(error)")
+                    return
+                }
+                
+                guard let document = querySnapshot?.documents.first else {
+                    print("Tes document does not exist")
+                    return
+                }
+                
+                // Update with new fixedQuestions
+                document.reference.updateData(["fixedQuestion": listofSoal.map { $0.toDictionary() }]) { error in
+                    if let error = error {
+                        print("Error updating document: \(error)")
+                    } else {
+                        print("Document updated successfully")
+                        dismiss(animated: true,completion: nil)
+                    }
+                }
+            }
             
         }))
         
@@ -165,13 +214,21 @@ extension SoalController:UITableViewDelegate,UITableViewDataSource{
         let headerView = UIView()
         let frame: CGRect = tableView.frame
         
-        //add plus btn
-        let plusBtn: UIButton = UIButton(frame: CGRectMake(frame.size.width-70, 10, 30, 30))
-        plusBtn.setTitle("+", for: .normal)
-        plusBtn.setTitleColor(.black, for: .normal)
-        plusBtn.backgroundColor = .white
-        plusBtn.addTarget(self, action: #selector(SoalController.btnTapped(sender:)), for: .touchUpInside)
-        headerView.addSubview(plusBtn)
+        soalModel.fetchFixedSoal { [self] soal, error in
+            if let error = error{
+                exist = nil
+                if(exist == nil){
+                    //add plus btn
+                    let plusBtn: UIButton = UIButton(frame: CGRectMake(frame.size.width-70, 10, 30, 30))
+                    plusBtn.setTitle("+", for: .normal)
+                    plusBtn.setTitleColor(.black, for: .normal)
+                    plusBtn.backgroundColor = .white
+                    plusBtn.addTarget(self, action: #selector(SoalController.btnTapped(sender:)), for: .touchUpInside)
+                    headerView.addSubview(plusBtn)
+                }
+                return
+            }
+        }
         
         return headerView
     }

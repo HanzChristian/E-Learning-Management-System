@@ -43,7 +43,7 @@ extension InputTesController{
         
         modulModel.fetchModulTes { [self] modules in
             largeTitle = modules.modulName
-            tesModel.fetchSpesificTes { [self] tes, error in
+            tesModel.fetchTesInModul { [self] tes, error in
                 if let error = error{
                     exist = nil
                     setNavItem()
@@ -161,7 +161,7 @@ extension InputTesController:UITableViewDelegate,UITableViewDataSource{
             
             tesNameTVC = cell
             
-            tesModel.fetchSpesificTes { [self] tes, error in
+            tesModel.fetchTesInModul { [self] tes, error in
                 if let error = error{
                     return
                 }
@@ -176,7 +176,7 @@ extension InputTesController:UITableViewDelegate,UITableViewDataSource{
             
             tesDescTVC = cell
             
-            tesModel.fetchSpesificTes { [self] tes, error in
+            tesModel.fetchTesInModul { [self] tes, error in
                 if let error = error{
                     return
                 }

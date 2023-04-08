@@ -41,6 +41,7 @@ extension GuruClassController{
     }
     
     override func viewDidLoad(){
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -154,6 +155,7 @@ extension GuruClassController{
             tableView.reloadData()
             showEmpty()
         }
+        
         
     }
     
@@ -420,13 +422,8 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let eachModul = listofModul[indexPath.row]
-        
-        
-        SelectedModul.selectedModul.modulPath = eachModul.modulid
-        print("SelectedModul.selectedModul.modulPath adalah = \(SelectedModul.selectedModul.modulPath)")
-        
-        
         if(indexPath.section == 0){
+            SelectedModul.selectedModul.modulPath = eachModul.modulid
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "InputTesController") as! InputTesController
             vc.modalPresentationStyle = .popover
@@ -434,6 +431,7 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
             self.present(nav, animated: true)
         }
         else if(indexPath.section == 1){
+            SelectedModul.selectedModul.modulPath = eachModul.modulid
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "KumpulanTugasController") as! KumpulanTugasController
             vc.modalPresentationStyle = .fullScreen

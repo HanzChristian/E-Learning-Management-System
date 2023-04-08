@@ -45,6 +45,8 @@ extension HomePageController{
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+
         Core.shared.notNewUser()
         self.userModel.fetchUser{user in
         }
@@ -199,12 +201,15 @@ extension HomePageController{
 }
 // MARK: - TableView Delegate & Resource
 extension HomePageController:UITableViewDelegate,UITableViewDataSource{
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listofClass.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
+        
         
         let eachClass = listofClass[indexPath.row]
         
@@ -219,6 +224,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 135
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let eachClass = listofClass[indexPath.row]
@@ -368,7 +374,5 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
             
         }
     }
-    
-    
-    
+ 
 }

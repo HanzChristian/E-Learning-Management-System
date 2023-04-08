@@ -39,12 +39,4 @@ class ClassTVC: UITableViewCell {
         potonganView.frame = self.potonganView.bounds
         potonganView.isHidden = false
     }
-    
-//    func setupClass(_ kelas: Class){
-//        classImg.image = kelas.classImg
-//        classtitleLbl.text = kelas.className
-//        classmodulLbl.text = kelas.classModule
-//        classenrollmentkeyLbl.text = kelas.classEnrollment
-//    }
-//    
 }

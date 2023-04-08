@@ -101,5 +101,17 @@ struct Soal{
     var soalAnswerC: String
     var soalAnswerD: String
     var soalCorrectAns: String
+    
+    //function to change custom objects into dictionary so it can be read by Firestore
+    func toDictionary() -> [String: Any] {
+           return [
+               "soalQuestion": soalQuestion,
+               "soalAnswerA": soalAnswerA,
+               "soalAnswerB": soalAnswerB,
+               "soalAnswerC": soalAnswerC,
+               "soalAnswerD": soalAnswerD,
+               "soalCorrectAns": soalCorrectAns
+           ]
+       }
 }
 
