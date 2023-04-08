@@ -453,7 +453,11 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
                 self.present(nav, animated: true)
             }
             let actNilai = UIAlertAction(title: "Kumpulan Nilai", style: .default){ _ in
-                print("belom buat")
+                let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "KumpulanTesController") as! KumpulanTesController
+                let nav =  UINavigationController(rootViewController: vc)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true)
             }
             let actBatal = UIAlertAction(title: "Batal", style: .cancel)
             

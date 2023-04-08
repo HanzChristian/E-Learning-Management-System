@@ -34,6 +34,8 @@
 		1517679D29DFF6B400294010 /* SoalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517679C29DFF6B400294010 /* SoalModel.swift */; };
 		151767A129DFF82800294010 /* SoalTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517679F29DFF82800294010 /* SoalTVC.swift */; };
 		151767A229DFF82800294010 /* SoalTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151767A029DFF82800294010 /* SoalTVC.xib */; };
+		151767A629E149C400294010 /* KumpulanTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151767A529E149C400294010 /* KumpulanTesController.swift */; };
+		151767A929E14B0600294010 /* KumpulanTesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151767A829E14B0600294010 /* KumpulanTesTVC.swift */; };
 		154862C029B5CDA3001B90DE /* GuruClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862BF29B5CDA3001B90DE /* GuruClassController.swift */; };
 		154862C429B5DA53001B90DE /* ModulTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154862C229B5DA53001B90DE /* ModulTVC.swift */; };
 		154862C529B5DA53001B90DE /* ModulTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 154862C329B5DA53001B90DE /* ModulTVC.xib */; };
@@ -128,6 +130,8 @@
 		1517679C29DFF6B400294010 /* SoalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoalModel.swift; sourceTree = "<group>"; };
 		1517679F29DFF82800294010 /* SoalTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoalTVC.swift; sourceTree = "<group>"; };
 		151767A029DFF82800294010 /* SoalTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SoalTVC.xib; sourceTree = "<group>"; };
+		151767A529E149C400294010 /* KumpulanTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumpulanTesController.swift; sourceTree = "<group>"; };
+		151767A829E14B0600294010 /* KumpulanTesTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KumpulanTesTVC.swift; sourceTree = "<group>"; };
 		154862BF29B5CDA3001B90DE /* GuruClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuruClassController.swift; sourceTree = "<group>"; };
 		154862C229B5DA53001B90DE /* ModulTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulTVC.swift; sourceTree = "<group>"; };
 		154862C329B5DA53001B90DE /* ModulTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModulTVC.xib; sourceTree = "<group>"; };
@@ -253,9 +257,18 @@
 			path = "Make Class";
 			sourceTree = "<group>";
 		};
+		151767A729E14AF100294010 /* Kumpulan Tes Class */ = {
+			isa = PBXGroup;
+			children = (
+				151767A829E14B0600294010 /* KumpulanTesTVC.swift */,
+			);
+			path = "Kumpulan Tes Class";
+			sourceTree = "<group>";
+		};
 		154862C129B5DA36001B90DE /* Guru Class */ = {
 			isa = PBXGroup;
 			children = (
+				151767A729E14AF100294010 /* Kumpulan Tes Class */,
 				1517679E29DFF7F500294010 /* Make Class */,
 				154862EA29B9A24B001B90DE /* Kumpulan Tugas Class */,
 				154862DB29B72BC0001B90DE /* Tugas Class */,
@@ -429,6 +442,7 @@
 				1517676829DE85F400294010 /* InputTesController.swift */,
 				1517677D29DEAF5200294010 /* SoalController.swift */,
 				1517678129DF129C00294010 /* MakeSoalController.swift */,
+				151767A529E149C400294010 /* KumpulanTesController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -651,6 +665,7 @@
 				1559C57729BDC9870006CA4F /* InputTugasController.swift in Sources */,
 				15EEA15729AF2951004A830B /* FindClassController.swift in Sources */,
 				1559C58629C347610006CA4F /* ClassModel.swift in Sources */,
+				151767A629E149C400294010 /* KumpulanTesController.swift in Sources */,
 				1559C58829CDDD6D0006CA4F /* EmptySpaceGuruController.swift in Sources */,
 				15EEA15429AF215A004A830B /* ProfileController.swift in Sources */,
 				15EEA16F29B4C4A2004A830B /* Struct.swift in Sources */,
@@ -677,6 +692,7 @@
 				15EEA15C29B1BE7C004A830B /* MakeClassController.swift in Sources */,
 				1559C57F29BFB3FC0006CA4F /* PengumpulanTugasTVC.swift in Sources */,
 				154862EC29B9A274001B90DE /* KumpulanTugasTVC.swift in Sources */,
+				151767A929E14B0600294010 /* KumpulanTesTVC.swift in Sources */,
 				1587B04729AC72E6007229DB /* UIView+Extension.swift in Sources */,
 				1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */,
 				154862D329B711C3001B90DE /* ModulDescriptionTVC.swift in Sources */,

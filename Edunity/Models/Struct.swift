@@ -115,3 +115,9 @@ struct Soal{
        }
 }
 
+struct KumpulanNilai{
+    var waktuKumpul: String
+    var name: String
+    var score: Int
+}
+
