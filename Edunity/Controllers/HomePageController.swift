@@ -240,8 +240,8 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
             SelectedIdx.selectedIdx.indexPath = indexPath
             let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "MuridClassController") as! MuridClassController
-            vc.modalPresentationStyle = .fullScreen
             let nav =  UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
         }
     }

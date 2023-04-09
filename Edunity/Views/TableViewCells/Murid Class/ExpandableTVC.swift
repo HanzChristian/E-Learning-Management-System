@@ -11,11 +11,19 @@ import UIKit
 class ExpandableTVC: UITableViewCell {
     var makeSheet: (() -> Void)?
     var downloadPDF: (() -> Void)?
+    var goToTes: (() -> Void)?
+    
     @IBOutlet weak var modulNumLbl: UILabel!
     @IBOutlet weak var modulNameLbl: UILabel!
     @IBOutlet weak var modulDescLbl: UILabel!
     @IBOutlet weak var modulPdfBtn: UIButton!
     @IBOutlet weak var tugasBtn: UIButton!
+    @IBOutlet weak var tesBtn: UIButton!
+    
+    
+    @IBAction func tesPressed(_ sender: UIButton) {
+        goToTes?()
+    }
     
     @IBAction func tugasPressed(_ sender: UIButton) {
         makeSheet?()

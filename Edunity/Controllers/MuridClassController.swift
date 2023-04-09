@@ -20,6 +20,8 @@ class MuridClassController: UIViewController,UIDocumentPickerDelegate{
     var previousIdx: IndexPath?
     var classModel = ClassModel()
     var modulModel = ModulModel()
+    var tesModel = TesModel()
+    var soalModel = SoalModel()
     var listofModul = [Modul]()
     var jumlahModul = [JumlahModul]()
     
@@ -27,6 +29,9 @@ class MuridClassController: UIViewController,UIDocumentPickerDelegate{
     var className: String?
     var classDesc: String?
     var takeURL: String?
+    var tesExists: String?
+    var tesId: String?
+    var tesName: String?
     
     
 }
@@ -75,7 +80,7 @@ extension MuridClassController{
     func fetchData(){
         listofModul.removeAll()
         DispatchQueue.main.async{ [self] in
-            modulModel.fetchModulMurid { [self] modul in
+            modulModel.fetchModul { [self] modul in
                 listofModul.append(modul)
                 modulCount.modulNum += 1
                 jumlahModul.append(modulCount)
@@ -99,6 +104,38 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
         let eachModul = listofModul[indexPath.row]
         
         SelectedModul.selectedModul.modulPath = eachModul.modulid
+        
+        soalModel.fetchCheckSoal { [self] soal, error in
+            if let error = error{
+                tesExists = nil
+                cell.tesBtn.isHidden = true
+                print("tes tidak exist! \(tesExists)")
+                return
+            }
+            print("tes exist! \(tesExists)")
+            tesModel.fetchTesInModul { [self] tes, error in
+                if let error = error{
+                    return
+                }
+                tesName = tes?.tesName
+                tesId = tes?.tesid
+                cell.tesBtn.isHidden = false
+                let attrFont = UIFont.boldSystemFont(ofSize: 14)
+                let titleBtn = "\(tesName!)"
+                let attrTitle3 = NSAttributedString(string: titleBtn, attributes: [NSAttributedString.Key.font: attrFont])
+                cell.tesBtn.setAttributedTitle(attrTitle3, for: UIControl.State.normal)
+                
+                cell.goToTes = { [weak self] in
+                    SelectedTes.selectedTes.tesPath = self!.tesId!
+                    let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "TesRuleController") as! TesRuleController
+                    let nav =  UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    self!.present(nav, animated: true)
+                }
+            }
+        }
+        
         cell.modulNumLbl.text = "Modul \(modul.modulNum)"
         cell.modulNameLbl.text = "\(eachModul.modulName)"
         cell.modulDescLbl.text = "\(eachModul.modulDesc)"
@@ -165,8 +202,6 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
             }
             
         }
-        
-        //        cell.animate()
         return cell
     }
     

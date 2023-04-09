@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		09C2E8227A6439394E2912E6 /* Pods_skripsi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E43BC10F6D2B20B573DF0 /* Pods_skripsi.framework */; };
+		150024BD29E2F266002C4554 /* TesRuleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024BC29E2F266002C4554 /* TesRuleController.swift */; };
+		150024BF29E302C4002C4554 /* DoTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024BE29E302C4002C4554 /* DoTesController.swift */; };
 		1517676929DE85F400294010 /* InputTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517676829DE85F400294010 /* InputTesController.swift */; };
 		1517676D29DE872200294010 /* TesNameTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517676B29DE872200294010 /* TesNameTVC.swift */; };
 		1517676E29DE872200294010 /* TesNameTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517676C29DE872200294010 /* TesNameTVC.xib */; };
@@ -104,6 +106,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		150024BC29E2F266002C4554 /* TesRuleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesRuleController.swift; sourceTree = "<group>"; };
+		150024BE29E302C4002C4554 /* DoTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoTesController.swift; sourceTree = "<group>"; };
 		1517676829DE85F400294010 /* InputTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTesController.swift; sourceTree = "<group>"; };
 		1517676B29DE872200294010 /* TesNameTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesNameTVC.swift; sourceTree = "<group>"; };
 		1517676C29DE872200294010 /* TesNameTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesNameTVC.xib; sourceTree = "<group>"; };
@@ -443,6 +447,8 @@
 				1517677D29DEAF5200294010 /* SoalController.swift */,
 				1517678129DF129C00294010 /* MakeSoalController.swift */,
 				151767A529E149C400294010 /* KumpulanTesController.swift */,
+				150024BC29E2F266002C4554 /* TesRuleController.swift */,
+				150024BE29E302C4002C4554 /* DoTesController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -677,6 +683,7 @@
 				1517678629DF13A800294010 /* QuestionTVC.swift in Sources */,
 				154862E929B99DFC001B90DE /* KumpulanTugasController.swift in Sources */,
 				15EEA14C29ADCA67004A830B /* CustomTextField.swift in Sources */,
+				150024BD29E2F266002C4554 /* TesRuleController.swift in Sources */,
 				1517677129DE873900294010 /* TesDescriptionTVC.swift in Sources */,
 				15DD9CF429D1E3E90001DD15 /* PDFController.swift in Sources */,
 				15EEA16329B1C384004A830B /* ClassNameTVC.swift in Sources */,
@@ -697,6 +704,7 @@
 				1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */,
 				154862D329B711C3001B90DE /* ModulDescriptionTVC.swift in Sources */,
 				1517676D29DE872200294010 /* TesNameTVC.swift in Sources */,
+				150024BF29E302C4002C4554 /* DoTesController.swift in Sources */,
 				154862C429B5DA53001B90DE /* ModulTVC.swift in Sources */,
 				154862CB29B70C3F001B90DE /* ModulController.swift in Sources */,
 				1587B03129AC71B6007229DB /* SceneDelegate.swift in Sources */,
