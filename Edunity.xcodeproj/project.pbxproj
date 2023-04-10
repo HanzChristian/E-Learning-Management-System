@@ -10,6 +10,7 @@
 		09C2E8227A6439394E2912E6 /* Pods_skripsi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8E43BC10F6D2B20B573DF0 /* Pods_skripsi.framework */; };
 		150024BD29E2F266002C4554 /* TesRuleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024BC29E2F266002C4554 /* TesRuleController.swift */; };
 		150024BF29E302C4002C4554 /* DoTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024BE29E302C4002C4554 /* DoTesController.swift */; };
+		150024C129E44591002C4554 /* TesMuridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024C029E44591002C4554 /* TesMuridModel.swift */; };
 		1517676929DE85F400294010 /* InputTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517676829DE85F400294010 /* InputTesController.swift */; };
 		1517676D29DE872200294010 /* TesNameTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517676B29DE872200294010 /* TesNameTVC.swift */; };
 		1517676E29DE872200294010 /* TesNameTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517676C29DE872200294010 /* TesNameTVC.xib */; };
@@ -108,6 +109,7 @@
 /* Begin PBXFileReference section */
 		150024BC29E2F266002C4554 /* TesRuleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesRuleController.swift; sourceTree = "<group>"; };
 		150024BE29E302C4002C4554 /* DoTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoTesController.swift; sourceTree = "<group>"; };
+		150024C029E44591002C4554 /* TesMuridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesMuridModel.swift; sourceTree = "<group>"; };
 		1517676829DE85F400294010 /* InputTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTesController.swift; sourceTree = "<group>"; };
 		1517676B29DE872200294010 /* TesNameTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesNameTVC.swift; sourceTree = "<group>"; };
 		1517676C29DE872200294010 /* TesNameTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesNameTVC.xib; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				1559C58929CDE07C0006CA4F /* ModulModel.swift */,
 				1517677329DE92C400294010 /* TesModel.swift */,
 				1517679C29DFF6B400294010 /* SoalModel.swift */,
+				150024C029E44591002C4554 /* TesMuridModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1517679629DF13E700294010 /* AnswerDTVC.swift in Sources */,
+				150024C129E44591002C4554 /* TesMuridModel.swift in Sources */,
 				1587B03329AC71B6007229DB /* ViewController.swift in Sources */,
 				1517679A29DF13FC00294010 /* CorrectAnswerTVC.swift in Sources */,
 				1587B05229AC7390007229DB /* LoginController.swift in Sources */,

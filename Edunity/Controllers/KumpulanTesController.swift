@@ -13,7 +13,9 @@ class KumpulanTesController:UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     var tesModel = TesModel()
+    var tesMuridModel = TesMuridModel()
     var tesName: String?
+    var listofTes = [TesMurid]()
 }
 extension KumpulanTesController{
     // MARK: - View Life Cycle
@@ -28,6 +30,9 @@ extension KumpulanTesController{
             tesName = tes?.tesName
             setNavItem()
         }
+        
+        fetchData()
+    
         
     }
 }
@@ -50,18 +55,35 @@ extension KumpulanTesController{
     @objc private func dismissSelf(){
         self.dismiss(animated: true,completion: nil)
     }
+    
+    private func fetchData(){
+        tesMuridModel.fetchHasilTes { [self] tes, error in
+            if let error = error{
+                return
+            }
+            listofTes.append(tes!)
+            tableView.reloadData()
+        }
+    }
 }
 
 // MARK: - TableView Delegate & Datasource
 extension KumpulanTesController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return listofTes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let eachTes = listofTes[indexPath.row]
+        
         if(indexPath.section == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! KumpulanTesTVC
+            cell.waktuLbl.text = eachTes.tesTime
+            cell.namaLbl.text = eachTes.muridName
+            cell.nilaiLbl.text = "\(eachTes.tesScore)"
+            
             return cell
         }
     

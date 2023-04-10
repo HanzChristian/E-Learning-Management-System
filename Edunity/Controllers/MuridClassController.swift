@@ -22,6 +22,7 @@ class MuridClassController: UIViewController,UIDocumentPickerDelegate{
     var modulModel = ModulModel()
     var tesModel = TesModel()
     var soalModel = SoalModel()
+    var tesMuridModel = TesMuridModel()
     var listofModul = [Modul]()
     var jumlahModul = [JumlahModul]()
     
@@ -29,9 +30,9 @@ class MuridClassController: UIViewController,UIDocumentPickerDelegate{
     var className: String?
     var classDesc: String?
     var takeURL: String?
-    var tesExists: String?
     var tesId: String?
     var tesName: String?
+    var tesScore: Int?
     
     
 }
@@ -55,6 +56,7 @@ extension MuridClassController{
     
         let nibMurid = UINib(nibName: "ExpandableTVC", bundle: nil)
         tableView.register(nibMurid, forCellReuseIdentifier: "ExpandableTVC")
+        
     }
 }
 // MARK: - IBActions
@@ -73,6 +75,7 @@ extension MuridClassController{
         navigationController?.navigationBar.largeTitleTextAttributes =
         [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 28)]
     }
+    
     @objc private func dismissSelf(){
         dismiss(animated: true,completion: nil)
     }
@@ -107,31 +110,44 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
         
         soalModel.fetchCheckSoal { [self] soal, error in
             if let error = error{
-                tesExists = nil
                 cell.tesBtn.isHidden = true
-                print("tes tidak exist! \(tesExists)")
                 return
             }
-            print("tes exist! \(tesExists)")
+
             tesModel.fetchTesInModul { [self] tes, error in
                 if let error = error{
                     return
                 }
                 tesName = tes?.tesName
                 tesId = tes?.tesid
-                cell.tesBtn.isHidden = false
-                let attrFont = UIFont.boldSystemFont(ofSize: 14)
-                let titleBtn = "\(tesName!)"
-                let attrTitle3 = NSAttributedString(string: titleBtn, attributes: [NSAttributedString.Key.font: attrFont])
-                cell.tesBtn.setAttributedTitle(attrTitle3, for: UIControl.State.normal)
                 
-                cell.goToTes = { [weak self] in
-                    SelectedTes.selectedTes.tesPath = self!.tesId!
-                    let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "TesRuleController") as! TesRuleController
-                    let nav =  UINavigationController(rootViewController: vc)
-                    nav.modalPresentationStyle = .fullScreen
-                    self!.present(nav, animated: true)
+                tesMuridModel.fetchTesCondition { [self] tesMurid, error in
+                    if let error = error{
+                        cell.tesBtn.isHidden = false
+                        let attrFont = UIFont.boldSystemFont(ofSize: 14)
+                        let titleBtn = "\(tesName!)"
+                        let attrTitle3 = NSAttributedString(string: titleBtn, attributes: [NSAttributedString.Key.font: attrFont])
+                        cell.tesBtn.setAttributedTitle(attrTitle3, for: UIControl.State.normal)
+                        
+                        cell.goToTes = { [weak self] in
+                            SelectedTes.selectedTes.tesPath = self!.tesId!
+                            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "TesRuleController") as! TesRuleController
+                            let nav =  UINavigationController(rootViewController: vc)
+                            nav.modalPresentationStyle = .fullScreen
+                            self!.present(nav, animated: true)
+                        }
+                    }else{
+//                        fetchData()
+                        tesScore = tesMurid?.tesScore
+                        cell.tesBtn.isHidden = false
+                        cell.tesBtn.isUserInteractionEnabled = false
+                        cell.tesBtn.isEnabled = false
+                        let attrFont = UIFont.boldSystemFont(ofSize: 14)
+                        let titleBtn = "\(tesName!) - Nilai: \(tesScore!)"
+                        let attrTitle3 = NSAttributedString(string: titleBtn, attributes: [NSAttributedString.Key.font: attrFont])
+                        cell.tesBtn.setAttributedTitle(attrTitle3, for: UIControl.State.normal)
+                    }
                 }
             }
         }
@@ -141,7 +157,6 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
         cell.modulDescLbl.text = "\(eachModul.modulDesc)"
         
         //fix font for Button
-        
         let attrFont = UIFont.boldSystemFont(ofSize: 14)
         let titlePdf = "Pdf bab \(modul.modulNum)"
         let titleTugas = "Tugas bab \(modul.modulNum)"

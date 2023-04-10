@@ -286,13 +286,17 @@ extension DoTesController{
                     "name": userName,
                     "score": finalScore,
                     "time": "\(timeString(time: elapsedTime))",
-                    "userid": id
+                    "userid": id,
+                    "tesid": SelectedTes.selectedTes.tesPath,
+                    "classid": SelectedClass.selectedClass.classPath,
+                    "modulid": SelectedModul.selectedModul.modulPath
                 ]){ (error) in
                     
                     if error != nil{
                     }
                     else{
                         self.dismiss(animated: true,completion: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissView"), object: nil)
                     }
                 }
             }

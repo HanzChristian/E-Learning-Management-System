@@ -94,6 +94,12 @@ struct TugasMurid{
     let tugasFile: String
 }
 
+struct TesMurid{
+    let muridName: String
+    let tesScore: Int
+    let tesTime: String
+}
+
 struct Soal{
     var soalQuestion: String
     var soalAnswerA: String
