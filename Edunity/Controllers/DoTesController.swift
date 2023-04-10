@@ -24,6 +24,7 @@ class DoTesController:UIViewController{
     var ansArray = [String]()
     var ans: String?
     var listofSoal = [Soal]()
+    var back: Bool?
     
     var soalModel = SoalModel()
 }
@@ -102,7 +103,7 @@ extension DoTesController{
         }else{
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Selanjutnya", style: .plain, target: self, action: #selector(nextQuestion))
         }
-
+        
         navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         navigationController?.navigationBar.largeTitleTextAttributes =
@@ -118,26 +119,31 @@ extension DoTesController{
     }
     
     private func defineSelectedAns(){
-        if(ansArray[soalCount - 1] == "A"){
-            answerALbl.backgroundColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
-            answerBLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-            answerCLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-            answerDLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-        }else if(ansArray[soalCount - 1] == "B"){
-            answerBLbl.backgroundColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
-            answerALbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-            answerCLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-            answerDLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-        }else if(ansArray[soalCount - 1] == "C"){
-            answerCLbl.backgroundColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
-            answerALbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-            answerBLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-            answerDLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-        }else if(ansArray[soalCount - 1] == "D"){
-            answerDLbl.backgroundColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
-            answerALbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-            answerBLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
-            answerCLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+        print("defineselecdtedAns = \(soalCount)")
+        if(soalCount == ansArray.count && back == false){
+            defineNetralAns()
+        }else{
+            if(ansArray[soalCount - 1] == "A"){
+                answerALbl.backgroundColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
+                answerBLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+                answerCLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+                answerDLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+            }else if(ansArray[soalCount - 1] == "B"){
+                answerBLbl.backgroundColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
+                answerALbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+                answerCLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+                answerDLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+            }else if(ansArray[soalCount - 1] == "C"){
+                answerCLbl.backgroundColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
+                answerALbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+                answerBLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+                answerDLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+            }else if(ansArray[soalCount - 1] == "D"){
+                answerDLbl.backgroundColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
+                answerALbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+                answerBLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+                answerCLbl.backgroundColor = UIColor(red: 242/255, green: 146/255, blue: 29/255, alpha: 1.0)
+            }
         }
     }
     
@@ -150,33 +156,87 @@ extension DoTesController{
     
     
     @objc private func prevQuestion(){
+        //condition if user in the last question they approach
+        if(soalCount == ansArray.count){
+            back = false
+        }else{
+            back = true
+        }
+        
         soalCount -= 1
-//        ansArray.removeLast()
+        ans = ansArray[soalCount-1]
+        //        ansArray.removeLast()
         defineEachSoal()
         defineSelectedAns()
         setNavItem()
+        
     }
     
     @objc private func nextQuestion(){
         if(ans != nil){
+            //if back never pressed
+            if(back == nil){
+                ansArray.append(ans!)
+                print("ansArray = \(ansArray), soalCount = \(soalCount),ansArrayke = \(ansArray[soalCount-1])")
+                soalCount += 1
+                defineEachSoal()
+                defineNetralAns()
+                setNavItem()
+                errorLbl.isHidden = true
+            }else{
+                if(back == true && soalCount == ansArray.count){
+                    //if back is pressed atleast once and at the -1 array
+                    print("1 back = \(back!) dan soalcount = \(soalCount) dan ansArray = \(ansArray.count)")
+                    back = true
+                }else if(soalCount > ansArray.count){
+                    //if back is pressed atleast once
+                    print("2 back = \(back!) dan soalcount = \(soalCount) dan ansArray = \(ansArray.count)")
+                    back = false
+                }else{
+                    print("3 back = \(back!) dan soalcount = \(soalCount) dan ansArray = \(ansArray.count)")
+                    back = true
+                }
+                
+                if(back == true && soalCount == ansArray.count){
+                    print("tes 1 \(ans!)")
+                    ans = ansArray[soalCount-1]
+                    ansArray[soalCount-1] = ans!
+                    
+                    print("ansArray = \(ansArray), soalCount = \(soalCount),ansArrayke = \(ansArray[soalCount-1])")
+                    soalCount += 1
+                    defineNetralAns()
+                    defineEachSoal()
+                    setNavItem()
+                    errorLbl.isHidden = true
+                }
+                else if(back == true){
+                    print("tes 2 \(ans!)")
+                    //update the previous answer in array based on soalCount
+                    
+                    ans = ansArray[soalCount-1]
+                    ansArray[soalCount-1] = ans!
+                    
+                    
+                    print("ansArray = \(ansArray), soalCount = \(soalCount),ansArrayke = \(ansArray[soalCount-1])")
+                    soalCount += 1
+                    defineSelectedAns()
+                    defineEachSoal()
+                    setNavItem()
+                    errorLbl.isHidden = true
+                }else if(back == false){
+                    print("tes 3 \(ans!)")
+                    //if the next question is the question that the user haven't access yet
+                    ansArray.append(ans!)
+                    print("ansArray = \(ansArray), soalCount = \(soalCount),ansArrayke = \(ansArray[soalCount-1])")
+                    soalCount += 1
+                    defineEachSoal()
+                    defineNetralAns()
+                    setNavItem()
+                    errorLbl.isHidden = true
+                }
+            }
             
-            ansArray.append(ans!)
             
-//            //if we are on the last index
-//            if(soalCount == ansArray.count){
-//                print("soalCount = \(soalCount) dan ansArrayCount = \(ansArray.count)")
-//                defineNetralAns()
-//            }else{
-//                print("soalCount = \(soalCount) dan ansArrayCount = \(ansArray.count)")
-//                //not on the last index
-//                defineSelectedAns()
-//            }
-            
-            soalCount += 1
-            defineEachSoal()
-            defineNetralAns()
-            setNavItem()
-            errorLbl.isHidden = true
         }else{
             errorLbl.isHidden = false
         }

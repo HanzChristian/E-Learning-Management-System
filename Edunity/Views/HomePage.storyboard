@@ -584,14 +584,14 @@
                                 <color key="textColor" name="Button&amp;TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Siapakah presiden pertama di Indonesia?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0g-xa-rwi">
-                                <rect key="frame" x="16" y="203" width="358" height="52.666666666666657"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0g-xa-rwi">
+                                <rect key="frame" x="16" y="203" width="358" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <color key="textColor" name="ButtonColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-Lm-JiJ">
-                                <rect key="frame" x="19.666666666666657" y="285.66666666666669" width="351" height="57"/>
+                                <rect key="frame" x="19.666666666666657" y="233" width="351" height="57"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.5725490196078431" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="351" id="KJy-gg-Ep2"/>
@@ -599,9 +599,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="A. Jokowi">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
-                                </buttonConfiguration>
+                                <buttonConfiguration key="configuration" style="plain"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="15"/>
@@ -614,7 +612,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IuV-JQ-b54">
-                                <rect key="frame" x="19.666666666666657" y="357.66666666666669" width="351" height="57"/>
+                                <rect key="frame" x="19.666666666666657" y="305" width="351" height="57"/>
                                 <color key="backgroundColor" name="SliderColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="YGl-YI-g9Q"/>
@@ -622,9 +620,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="B. Jokowi">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
-                                </buttonConfiguration>
+                                <buttonConfiguration key="configuration" style="plain"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="15"/>
@@ -637,7 +633,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAu-qG-1nF">
-                                <rect key="frame" x="19.666666666666657" y="429.66666666666669" width="351" height="57"/>
+                                <rect key="frame" x="19.666666666666657" y="377" width="351" height="57"/>
                                 <color key="backgroundColor" name="SliderColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="351" id="DdK-5b-Kb8"/>
@@ -645,9 +641,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="C. Jokowi">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
-                                </buttonConfiguration>
+                                <buttonConfiguration key="configuration" style="plain"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="15"/>
@@ -660,7 +654,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNf-eh-Bpf">
-                                <rect key="frame" x="19.666666666666657" y="501.66666666666674" width="351" height="57"/>
+                                <rect key="frame" x="19.666666666666657" y="449" width="351" height="57"/>
                                 <color key="backgroundColor" name="SliderColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="351" id="Nhg-bn-fOb"/>
@@ -668,9 +662,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="D. Jokowi">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
-                                </buttonConfiguration>
+                                <buttonConfiguration key="configuration" style="plain"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="15"/>
@@ -683,7 +675,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pastikan jawaban sudah terisi!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiH-xq-Vfa">
-                                <rect key="frame" x="65" y="598.66666666666663" width="260.33333333333331" height="23"/>
+                                <rect key="frame" x="65" y="546" width="260.33333333333331" height="23"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                 <color key="textColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
