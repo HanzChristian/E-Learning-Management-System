@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
 
 class DoTesController:UIViewController{
     // MARK: - Variables & Outlet
@@ -25,8 +26,13 @@ class DoTesController:UIViewController{
     var ans: String?
     var listofSoal = [Soal]()
     var back: Bool?
+    var time: String?
+    var correctAns = 0
     
     var soalModel = SoalModel()
+    var userModel = UserModel()
+    let db = Firestore.firestore()
+
 }
 // MARK: - View Life Cycle
 extension DoTesController{
@@ -244,8 +250,55 @@ extension DoTesController{
     
     @objc private func saveAnswer(){
         ansArray.append(ans!)
-        print("ansArray = \(ansArray)")
-        self.dismiss(animated: true,completion: nil)
+        
+        let alert = UIAlertController(title: "Kamu yakin ingin menyelesaikan tes?", message: "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Belum", style: .cancel,handler:{_ in
+            print("keluar")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Selesai", style: .default,handler:{ [self]_ in
+            //save here
+            let answerList = listofSoal.map { $0.soalCorrectAns }
+         
+            print("ansArray = \(ansArray), answerList = \(answerList)")
+            time = timerLbl.text
+            timer?.invalidate()
+            
+            //loop to see how many correct ans
+            for i in 0..<answerList.count{
+                if(ansArray[i] == answerList[i]){
+                    correctAns += 1
+                }else{
+                    
+                }
+            }
+            
+            //score
+            var finalScore = Double(correctAns) / Double(listofSoal.count)
+            finalScore *= 100
+            
+            userModel.fetchUser { [self] user in
+                let id = user.id
+                let userName = user.name
+                
+                db.collection("muridTes").addDocument(data: [
+                    "name": userName,
+                    "score": finalScore,
+                    "time": "\(timeString(time: elapsedTime))",
+                    "userid": id
+                ]){ (error) in
+                    
+                    if error != nil{
+                    }
+                    else{
+                        self.dismiss(animated: true,completion: nil)
+                    }
+                }
+            }
+        }))
+        
+        present(alert,animated:true)
     }
     
     private func timeString(time: TimeInterval) -> String{
