@@ -165,11 +165,7 @@ extension SoalController{
                         print("Error updating document: \(error)")
                     } else {
                         print("Document updated successfully")
-                        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "MuridClassController") as! MuridClassController
-                        let nav =  UINavigationController(rootViewController: vc)
-                        nav.modalPresentationStyle = .fullScreen
-                        self.present(nav, animated: true)
+                        self.dismiss(animated: true,completion: nil)
                     }
                 }
             }

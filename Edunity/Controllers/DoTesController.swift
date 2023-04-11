@@ -295,8 +295,13 @@ extension DoTesController{
                     if error != nil{
                     }
                     else{
-                        self.dismiss(animated: true,completion: nil)
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissView"), object: nil)
+                        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "HomePageController") as! HomePageController
+                        let nav =  UINavigationController(rootViewController: vc)
+                        nav.modalPresentationStyle = .fullScreen
+                        self.present(nav, animated: true)
+//                        self.dismiss(animated: true,completion: nil)
+//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissView"), object: nil)
                     }
                 }
             }

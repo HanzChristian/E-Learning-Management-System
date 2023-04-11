@@ -44,6 +44,7 @@ extension MuridClassController{
         self.tableView.delegate = self
         self.tableView.dataSource = self
     
+        print("classid : \(SelectedClass.selectedClass.classPath)")
         fetchData()
         
         classModel.fetchSelectedClass { [self] classess in
@@ -82,14 +83,13 @@ extension MuridClassController{
     
     func fetchData(){
         listofModul.removeAll()
-        DispatchQueue.main.async{ [self] in
-            modulModel.fetchModul { [self] modul in
-                listofModul.append(modul)
-                modulCount.modulNum += 1
-                jumlahModul.append(modulCount)
-                tableView.reloadData()
-            }
+        modulModel.fetchModul { [self] modul in
+            listofModul.append(modul)
+            modulCount.modulNum += 1
+            jumlahModul.append(modulCount)
+            tableView.reloadData()
         }
+        
     }
     
 }

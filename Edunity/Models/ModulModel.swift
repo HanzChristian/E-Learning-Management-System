@@ -24,11 +24,10 @@ class ModulModel{
         db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "timestamp",descending: false).addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
-                print("No document")
+                print("No document = \(SelectedClass.selectedClass.classPath)")
                 return
             }
             
-            //kurang file di firestorage, karna gatau retrieve untuk download gimana
             for document in documents{
                 let data = document.data()
                 let modulName = data["nameModul"] as? String ?? ""
