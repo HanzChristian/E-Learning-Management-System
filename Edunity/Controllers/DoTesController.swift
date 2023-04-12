@@ -20,17 +20,21 @@ class DoTesController:UIViewController{
     @IBOutlet weak var errorLbl: UILabel!
     
     var soalCount = 1
-    var timer: Timer?
-    var elapsedTime: TimeInterval = 0
     var ansArray = [String]()
     var ans: String?
     var listofSoal = [Soal]()
     var back: Bool?
-    var time: String?
     var correctAns = 0
+    
+    var timer: Timer?
+    var timeFirebase: Double?
+    var timeFirebaseConvert: String?
+    var remainingTime: TimeInterval?
+    var remainingTimeUpdated: String?
     
     var soalModel = SoalModel()
     var userModel = UserModel()
+    var tesModel = TesModel()
     let db = Firestore.firestore()
 
 }
@@ -41,6 +45,7 @@ extension DoTesController{
         super.viewDidLoad()
         
         errorLbl.isHidden = true
+        
         startTimer()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
@@ -262,7 +267,6 @@ extension DoTesController{
             let answerList = listofSoal.map { $0.soalCorrectAns }
          
             print("ansArray = \(ansArray), answerList = \(answerList)")
-            time = timerLbl.text
             timer?.invalidate()
             
             //loop to see how many correct ans
@@ -285,7 +289,6 @@ extension DoTesController{
                 db.collection("muridTes").addDocument(data: [
                     "name": userName,
                     "score": finalScore,
-                    "time": "\(timeString(time: elapsedTime))",
                     "userid": id,
                     "tesid": SelectedTes.selectedTes.tesPath,
                     "classid": SelectedClass.selectedClass.classPath,
@@ -300,8 +303,6 @@ extension DoTesController{
                         let nav =  UINavigationController(rootViewController: vc)
                         nav.modalPresentationStyle = .fullScreen
                         self.present(nav, animated: true)
-//                        self.dismiss(animated: true,completion: nil)
-//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dismissView"), object: nil)
                     }
                 }
             }
@@ -310,24 +311,98 @@ extension DoTesController{
         present(alert,animated:true)
     }
     
-    private func timeString(time: TimeInterval) -> String{
-        let minutes = Int(time) / 60
-        let seconds = Int(time) % 60
+    private func forceSave(){
+        let alert = UIAlertController(title: "Waktu tes telah habis!", message: "", preferredStyle: .alert)
         
-        return String(format: "%02d:%02d", minutes, seconds)
+        alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler:{ [self]_ in
+            //save here
+            let answerList = listofSoal.map { $0.soalCorrectAns }
+            
+            if(ansArray.count < answerList.count){
+                for _ in ansArray.count..<answerList.count{
+                    ansArray.append("-")
+                }
+            }
+            
+            print("total answer: \(answerList), jawaban yang masuk : \(ansArray)")
+            //loop to see how many correct ans
+            for i in 0..<answerList.count{
+                if(ansArray[i] == answerList[i]){
+                    correctAns += 1
+                }else{
+                    
+                }
+            }
+            
+            //score
+            var finalScore = Double(correctAns) / Double(listofSoal.count)
+            finalScore *= 100
+            
+            userModel.fetchUser { [self] user in
+                let id = user.id
+                let userName = user.name
+                
+                db.collection("muridTes").addDocument(data: [
+                    "name": userName,
+                    "score": finalScore,
+                    "userid": id,
+                    "tesid": SelectedTes.selectedTes.tesPath,
+                    "classid": SelectedClass.selectedClass.classPath,
+                    "modulid": SelectedModul.selectedModul.modulPath
+                ]){ (error) in
+                    
+                    if error != nil{
+                    }
+                    else{
+                        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                        let vc = storyboard.instantiateViewController(withIdentifier: "HomePageController") as! HomePageController
+                        let nav =  UINavigationController(rootViewController: vc)
+                        nav.modalPresentationStyle = .fullScreen
+                        self.present(nav, animated: true)
+                    }
+                }
+            }
+        }))
+        present(alert,animated: true)
+        
     }
     
     private func startTimer(){
-        //make timer = 0/stop
-        timer?.invalidate()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [self] _ in
+        tesModel.fetchSpesificTes { [self] tes, error in
+            timeFirebase = tes?.timer
+            timeFirebaseConvert = convertTime(TimeInterval(timeFirebase!))
             
-            elapsedTime += 1
+            remainingTime = TimeInterval(timeFirebase!)
             
-            //update label
-            timerLbl.text = "Timer: \(timeString(time: elapsedTime ?? 0))"
-        })
-        
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                guard let self = self else { return }
+                
+                remainingTime! -= 1
+                
+                // Update timer label
+                remainingTimeUpdated = self.convertTime(remainingTime!)
+                self.timerLbl.text = "Sisa Waktu : \(remainingTimeUpdated!)"
+                
+                // End time when 00:00:00
+                if remainingTime! <= 0 {
+                    timer.invalidate()
+                    self.timerLbl.text = "Sisa Waktu : 00:00:00"
+                    forceSave()
+                    
+                }
+            }
+            
+            //start Countdown
+            RunLoop.current.add(timer!, forMode: .common)
+        }
     }
+
+    //convert Double into time format
+    private func convertTime(_ timeInterval: TimeInterval) -> String{
+        let hours = Int(timeInterval/3600)
+        let minutes = Int((timeInterval.truncatingRemainder(dividingBy: 3600))/60)
+        let seconds = Int(timeInterval.truncatingRemainder(dividingBy: 60))
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
 }

@@ -28,8 +28,10 @@ class TesModel{
                 let modulid = data["modulid"] as? String ?? ""
                 let tesid = data["tesid"] as? String ?? ""
                 let classid = data["classid"] as? String ?? ""
+                let timer = data["timer"] as? Double ?? 0.0
+                let displayedTime = data["displayedTime"] as? String ?? ""
                 
-                let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid)
+                let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime)
                 
                 completion(eachTes)
             }
@@ -62,8 +64,10 @@ class TesModel{
                     let modulid = data["modulid"] as? String ?? ""
                     let tesid = data["tesid"] as? String ?? ""
                     let classid = data["classid"] as? String ?? ""
-
-                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid)
+                    let timer = data["timer"] as? Double ?? 0.0
+                    let displayedTime = data["displayedTime"] as? String ?? ""
+                    
+                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime)
 
                     completion(eachTes, nil)
                     return
@@ -100,8 +104,10 @@ class TesModel{
                     let modulid = data["modulid"] as? String ?? ""
                     let tesid = data["tesid"] as? String ?? ""
                     let classid = data["classid"] as? String ?? ""
-
-                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid)
+                    let timer = data["timer"] as? Double ?? 0.0
+                    let displayedTime = data["displayedTime"] as? String ?? ""
+                    
+                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime)
 
                     completion(eachTes, nil)
                     return

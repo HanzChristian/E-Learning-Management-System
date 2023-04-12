@@ -38,9 +38,8 @@ class TesMuridModel{
                     let data = document.data()
                     let muridName = data["name"] as? String ?? ""
                     let tesScore = data["score"] as? Int ?? 0
-                    let tesTime = data["time"] as? String ?? ""
                     
-                    let eachTesMurid = TesMurid(muridName: muridName, tesScore: tesScore, tesTime: tesTime)
+                    let eachTesMurid = TesMurid(muridName: muridName, tesScore: tesScore)
                     
                     completion(eachTesMurid, nil)
                     return
@@ -74,9 +73,8 @@ class TesMuridModel{
                     let data = document.data()
                     let muridName = data["name"] as? String ?? ""
                     let tesScore = data["score"] as? Int ?? 0
-                    let tesTime = data["time"] as? String ?? ""
                     
-                    let eachTesMurid = TesMurid(muridName: muridName, tesScore: tesScore, tesTime: tesTime)
+                    let eachTesMurid = TesMurid(muridName: muridName, tesScore: tesScore)
                     print("masuk sene gyan")
                     
                     completion(eachTesMurid, nil)

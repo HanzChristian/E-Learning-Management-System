@@ -12,7 +12,6 @@ class KumpulanTesTVC:UITableViewCell{
    
 // MARK: - Variables & IBOutlets
     
-    @IBOutlet weak var waktuLbl: UILabel!
     
     @IBOutlet weak var namaLbl: UILabel!
     @IBOutlet weak var nilaiLbl: UILabel!

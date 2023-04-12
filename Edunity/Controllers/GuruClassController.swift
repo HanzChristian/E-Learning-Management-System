@@ -389,21 +389,45 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
         }
         else if(indexPath.section == 2){
             if(editingStyle == .delete){
-                db.collection("tes").whereField("tesid", isEqualTo: eachTes.tesid).getDocuments {(querySnapshot, error) in
+                let batch = db.batch()
+                let dispatchGroup = DispatchGroup()
+                
+                //delete field tes
+                dispatchGroup.enter()
+                db.collection("tes").whereField("tesid", isEqualTo: eachTes.tesid).getDocuments { [self] (querySnapshot, error) in
                     if let error = error {
+                        print("Error getting documents: \(error)")
                     } else {
-                        //delete
-                        guard let documents = querySnapshot?.documents else {
-                            print("No documents found")
-                            return
+                        for document in querySnapshot!.documents {
+                            let tesDocRef = db.collection("tes").document(document.documentID)
+                            batch.deleteDocument(tesDocRef)
                         }
-                        for document in documents {
-                            document.reference.delete { error in
-                                if let error = error {
-                                } else {
-                                    print("Document deleted!")
-                                }
-                            }
+                    }
+                    dispatchGroup.leave()
+                }
+                
+                //delete field muridTes
+                dispatchGroup.enter()
+                db.collection("muridTes").whereField("tesid", isEqualTo: eachTes.tesid).getDocuments { [self] (querySnapshot, error) in
+                    if let error = error {
+                        print("Error getting documents: \(error)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            let muridTesDocRef = db.collection("muridTes").document(document.documentID)
+                            batch.deleteDocument(muridTesDocRef)
+                        }
+                    }
+                    dispatchGroup.leave()
+                }
+                
+                //wait for all the getDocuments() calls completed
+                dispatchGroup.notify(queue: .main) {
+                    //commit batch
+                    batch.commit() { error in
+                        if let error = error {
+                            print("Error writing batched updates: \(error)")
+                        }else {
+                            print("Batched updates successful!")
                         }
                     }
                 }

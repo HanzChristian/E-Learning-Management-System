@@ -11,6 +11,8 @@
 		150024BD29E2F266002C4554 /* TesRuleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024BC29E2F266002C4554 /* TesRuleController.swift */; };
 		150024BF29E302C4002C4554 /* DoTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024BE29E302C4002C4554 /* DoTesController.swift */; };
 		150024C129E44591002C4554 /* TesMuridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024C029E44591002C4554 /* TesMuridModel.swift */; };
+		150024C429E680EE002C4554 /* TimerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024C229E680EE002C4554 /* TimerTVC.swift */; };
+		150024C529E680EE002C4554 /* TimerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 150024C329E680EE002C4554 /* TimerTVC.xib */; };
 		1517676929DE85F400294010 /* InputTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517676829DE85F400294010 /* InputTesController.swift */; };
 		1517676D29DE872200294010 /* TesNameTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517676B29DE872200294010 /* TesNameTVC.swift */; };
 		1517676E29DE872200294010 /* TesNameTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517676C29DE872200294010 /* TesNameTVC.xib */; };
@@ -110,6 +112,8 @@
 		150024BC29E2F266002C4554 /* TesRuleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesRuleController.swift; sourceTree = "<group>"; };
 		150024BE29E302C4002C4554 /* DoTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoTesController.swift; sourceTree = "<group>"; };
 		150024C029E44591002C4554 /* TesMuridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesMuridModel.swift; sourceTree = "<group>"; };
+		150024C229E680EE002C4554 /* TimerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTVC.swift; sourceTree = "<group>"; };
+		150024C329E680EE002C4554 /* TimerTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerTVC.xib; sourceTree = "<group>"; };
 		1517676829DE85F400294010 /* InputTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTesController.swift; sourceTree = "<group>"; };
 		1517676B29DE872200294010 /* TesNameTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesNameTVC.swift; sourceTree = "<group>"; };
 		1517676C29DE872200294010 /* TesNameTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesNameTVC.xib; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				1517676C29DE872200294010 /* TesNameTVC.xib */,
 				1517676F29DE873900294010 /* TesDescriptionTVC.swift */,
 				1517677029DE873900294010 /* TesDescriptionTVC.xib */,
+				150024C229E680EE002C4554 /* TimerTVC.swift */,
+				150024C329E680EE002C4554 /* TimerTVC.xib */,
 			);
 			path = "Tes Class";
 			sourceTree = "<group>";
@@ -584,6 +590,7 @@
 				15EEA14E29ADE193004A830B /* HomePage.storyboard in Resources */,
 				1517679729DF13E700294010 /* AnswerDTVC.xib in Resources */,
 				1587B03629AC71B6007229DB /* Main.storyboard in Resources */,
+				150024C529E680EE002C4554 /* TimerTVC.xib in Resources */,
 				159FD2FF29ADB0B0000DFC26 /* Login.storyboard in Resources */,
 				15EEA16429B1C384004A830B /* ClassNameTVC.xib in Resources */,
 				1517677229DE873900294010 /* TesDescriptionTVC.xib in Resources */,
@@ -697,6 +704,7 @@
 				154862CF29B711AF001B90DE /* ModulNameTVC.swift in Sources */,
 				1517678A29DF13C000294010 /* AnswerATVC.swift in Sources */,
 				1587B05429AC739A007229DB /* RegisterController.swift in Sources */,
+				150024C429E680EE002C4554 /* TimerTVC.swift in Sources */,
 				159FD2F929ACDF84000DFC26 /* OnboardingCell.swift in Sources */,
 				15DD9CF129D164250001DD15 /* StatusTVC.swift in Sources */,
 				151767A129DFF82800294010 /* SoalTVC.swift in Sources */,

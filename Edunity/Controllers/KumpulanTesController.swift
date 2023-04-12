@@ -80,7 +80,6 @@ extension KumpulanTesController:UITableViewDelegate,UITableViewDataSource{
         
         if(indexPath.section == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! KumpulanTesTVC
-            cell.waktuLbl.text = eachTes.tesTime
             cell.namaLbl.text = eachTes.muridName
             cell.nilaiLbl.text = "\(eachTes.tesScore)"
             

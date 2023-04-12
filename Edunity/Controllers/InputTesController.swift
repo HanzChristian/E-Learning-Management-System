@@ -15,17 +15,19 @@ class InputTesController:UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     
-    let cellTitle = ["Nama Tes","Deskripsi Tes"]
+    let cellTitle = ["Nama Tes","Deskripsi Tes","Waktu Pengerjaan"]
     let db = Firestore.firestore()
     let modulModel = ModulModel()
     let tesModel = TesModel()
     
     var tesNameTVC: TesNameTVC?
     var tesDescTVC: TesDescriptionTVC?
+    var timerTVC: TimerTVC?
     var largeTitle: String?
     var exist: String?
     var prevtesName: String?
     var prevtesDesc: String?
+    var prevTimer: String?
     
 }
 extension InputTesController{
@@ -40,6 +42,8 @@ extension InputTesController{
         tableView.register(nibTesName, forCellReuseIdentifier: "TesNameTVC")
         let nibTesDesc = UINib(nibName: "TesDescriptionTVC", bundle: nil)
         tableView.register(nibTesDesc, forCellReuseIdentifier: "TesDescriptionTVC")
+        let nibTimer = UINib(nibName: "TimerTVC", bundle: nil)
+        tableView.register(nibTimer, forCellReuseIdentifier: "TimerTVC")
         
         modulModel.fetchModulTes { [self] modules in
             largeTitle = modules.modulName
@@ -84,8 +88,11 @@ extension InputTesController{
     @objc private func saveItem(){
         let tesid = UUID().uuidString
         
-        if let nameTes = tesNameTVC?.tesNameTV.text,!nameTes.isEmpty,let descTes = tesDescTVC?.tesDescTF.text,!descTes.isEmpty{
-            storeData(nameTes: nameTes, descTes: descTes, modulid: SelectedModul.selectedModul.modulPath,classid: SelectedClass.selectedClass.classPath,tesid: tesid,nameModul: largeTitle!)
+        if let nameTes = tesNameTVC?.tesNameTV.text,!nameTes.isEmpty,let descTes = tesDescTVC?.tesDescTF.text,!descTes.isEmpty,let timer = timerTVC?.timerLbl.text,!timer.isEmpty{
+            
+            let time = timerTVC?.selectedTimeInterval
+            
+            storeData(nameTes: nameTes, descTes: descTes, modulid: SelectedModul.selectedModul.modulPath,classid: SelectedClass.selectedClass.classPath,tesid: tesid,nameModul: largeTitle!,timer:time!,displayedTime:timer)
             print("Saved")
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
@@ -99,8 +106,10 @@ extension InputTesController{
     
     @objc private func updateItem(){
         
-        if let nameTes = tesNameTVC?.tesNameTV.text,!nameTes.isEmpty,let descTes = tesDescTVC?.tesDescTF.text,!descTes.isEmpty{
-            updateData(nameTes: nameTes, descTes: descTes)
+        if let nameTes = tesNameTVC?.tesNameTV.text,!nameTes.isEmpty,let descTes = tesDescTVC?.tesDescTF.text,!descTes.isEmpty,let timer = timerTVC?.timerLbl.text,!timer.isEmpty{
+            
+            let time = timerTVC?.selectedTimeInterval
+            updateData(nameTes: nameTes, descTes: descTes,timer: time!,displayedTime: timer)
             print("Update succesful!")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
@@ -115,7 +124,7 @@ extension InputTesController{
         self.dismiss(animated: true,completion: nil)
     }
     
-    private func storeData(nameTes: String,descTes: String, modulid: String, classid: String, tesid: String,nameModul: String){
+    private func storeData(nameTes: String,descTes: String, modulid: String, classid: String, tesid: String,nameModul: String,timer: Double,displayedTime: String){
         // Upload data
         db.collection("tes").addDocument(data: [
             "nameTes": nameTes,
@@ -124,11 +133,13 @@ extension InputTesController{
             "modulid": modulid,
             "classid": classid,
             "tesid": tesid,
+            "timer": timer,
+            "displayedTime": displayedTime,
             "timestamp": FieldValue.serverTimestamp()
         ])
     }
     
-    private func updateData(nameTes: String,descTes: String){
+    private func updateData(nameTes: String,descTes: String,timer: Double,displayedTime: String){
         db.collection("tes").whereField("classid", isEqualTo: SelectedClass.selectedClass.classPath).whereField("modulid", isEqualTo: SelectedModul.selectedModul.modulPath).getDocuments { (querySnapshot, err) in
             if let err = err{
                 print("error")
@@ -136,7 +147,9 @@ extension InputTesController{
                 let document = querySnapshot!.documents.first
                 document!.reference.updateData([
                     "nameTes": nameTes,
-                    "descTes": descTes
+                    "descTes": descTes,
+                    "timer": timer,
+                    "displayedTime": displayedTime
                 ])
             }
         }
@@ -148,7 +161,7 @@ extension InputTesController{
 extension InputTesController:UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,6 +198,20 @@ extension InputTesController:UITableViewDelegate,UITableViewDataSource{
             }
             
             return tesDescTVC!
+        }else if(indexPath.section == 2){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TimerTVC", for: indexPath) as! TimerTVC
+            
+            timerTVC = cell
+            
+            tesModel.fetchTesInModul { [self] tes, error in
+                if let error = error{
+                    return
+                }
+                prevTimer = tes?.displayedTime
+                timerTVC?.timerLbl.text = prevTimer
+            }
+            
+            return cell
         }
         return UITableViewCell()
     }
@@ -211,6 +238,14 @@ extension InputTesController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? TimerTVC{
+            if !cell.isFirstResponder{
+                _ = cell.becomeFirstResponder()
+            }
+        }
     }
     
 }

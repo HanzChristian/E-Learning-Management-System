@@ -73,6 +73,8 @@ struct Tes{
     let modulid: String
     let tesid: String
     let classid: String
+    let timer: Double
+    let displayedTime: String
 }
 
 struct JumlahModul{
@@ -97,7 +99,6 @@ struct TugasMurid{
 struct TesMurid{
     let muridName: String
     let tesScore: Int
-    let tesTime: String
 }
 
 struct Soal{
@@ -107,7 +108,6 @@ struct Soal{
     var soalAnswerC: String
     var soalAnswerD: String
     var soalCorrectAns: String
-    
     //function to change custom objects into dictionary so it can be read by Firestore
     func toDictionary() -> [String: Any] {
            return [
@@ -117,13 +117,7 @@ struct Soal{
                "soalAnswerC": soalAnswerC,
                "soalAnswerD": soalAnswerD,
                "soalCorrectAns": soalCorrectAns
-           ]
+           ] as [String: Any]
        }
-}
-
-struct KumpulanNilai{
-    var waktuKumpul: String
-    var name: String
-    var score: Int
 }
 

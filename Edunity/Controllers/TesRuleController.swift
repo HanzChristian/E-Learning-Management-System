@@ -33,8 +33,6 @@ extension TesRuleController{
             descTesLbl.text = tesDesc
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.dismissView), name: NSNotification.Name(rawValue: "dismissView"), object: nil)
-        
     }
 }
     // MARK: - IBActions
@@ -70,8 +68,5 @@ extension TesRuleController{
         self.dismiss(animated: true,completion: nil)
     }
     
-    @objc func dismissView(){
-        self.dismiss(animated: false,completion: nil)
-    }
 }
     // MARK: - Private/Functions
