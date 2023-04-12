@@ -13,6 +13,8 @@
 		150024C129E44591002C4554 /* TesMuridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024C029E44591002C4554 /* TesMuridModel.swift */; };
 		150024C429E680EE002C4554 /* TimerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024C229E680EE002C4554 /* TimerTVC.swift */; };
 		150024C529E680EE002C4554 /* TimerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 150024C329E680EE002C4554 /* TimerTVC.xib */; };
+		150024C729E7020B002C4554 /* EmptySpaceTugasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024C629E7020B002C4554 /* EmptySpaceTugasController.swift */; };
+		150024C929E703CE002C4554 /* EmptySpaceTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150024C829E703CE002C4554 /* EmptySpaceTesController.swift */; };
 		1517676929DE85F400294010 /* InputTesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517676829DE85F400294010 /* InputTesController.swift */; };
 		1517676D29DE872200294010 /* TesNameTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1517676B29DE872200294010 /* TesNameTVC.swift */; };
 		1517676E29DE872200294010 /* TesNameTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1517676C29DE872200294010 /* TesNameTVC.xib */; };
@@ -114,6 +116,8 @@
 		150024C029E44591002C4554 /* TesMuridModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesMuridModel.swift; sourceTree = "<group>"; };
 		150024C229E680EE002C4554 /* TimerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTVC.swift; sourceTree = "<group>"; };
 		150024C329E680EE002C4554 /* TimerTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerTVC.xib; sourceTree = "<group>"; };
+		150024C629E7020B002C4554 /* EmptySpaceTugasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySpaceTugasController.swift; sourceTree = "<group>"; };
+		150024C829E703CE002C4554 /* EmptySpaceTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySpaceTesController.swift; sourceTree = "<group>"; };
 		1517676829DE85F400294010 /* InputTesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTesController.swift; sourceTree = "<group>"; };
 		1517676B29DE872200294010 /* TesNameTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesNameTVC.swift; sourceTree = "<group>"; };
 		1517676C29DE872200294010 /* TesNameTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TesNameTVC.xib; sourceTree = "<group>"; };
@@ -441,6 +445,8 @@
 				15EEA15929B1ADE2004A830B /* EmptySpaceController.swift */,
 				1559C58729CDDD6D0006CA4F /* EmptySpaceGuruController.swift */,
 				1559C58B29CE08360006CA4F /* EmptySpaceFindController.swift */,
+				150024C629E7020B002C4554 /* EmptySpaceTugasController.swift */,
+				150024C829E703CE002C4554 /* EmptySpaceTesController.swift */,
 				1517677F29DEC91700294010 /* EmptySpaceSoalController.swift */,
 				15EEA15329AF215A004A830B /* ProfileController.swift */,
 				15EEA15529AF2951004A830B /* FindClassController.swift */,
@@ -714,6 +720,7 @@
 				151767A929E14B0600294010 /* KumpulanTesTVC.swift in Sources */,
 				1587B04729AC72E6007229DB /* UIView+Extension.swift in Sources */,
 				1587B05029AC7385007229DB /* OnBoardingController.swift in Sources */,
+				150024C929E703CE002C4554 /* EmptySpaceTesController.swift in Sources */,
 				154862D329B711C3001B90DE /* ModulDescriptionTVC.swift in Sources */,
 				1517676D29DE872200294010 /* TesNameTVC.swift in Sources */,
 				150024BF29E302C4002C4554 /* DoTesController.swift in Sources */,
@@ -723,6 +730,7 @@
 				1517676929DE85F400294010 /* InputTesController.swift in Sources */,
 				1559C57B29BFB3EC0006CA4F /* DeskripsiTugasTVC.swift in Sources */,
 				154862D729B711D4001B90DE /* UploadTVC.swift in Sources */,
+				150024C729E7020B002C4554 /* EmptySpaceTugasController.swift in Sources */,
 				1559C57429BDB8880006CA4F /* ExpandableTVC.swift in Sources */,
 				154862C029B5CDA3001B90DE /* GuruClassController.swift in Sources */,
 				1559C58429C32A0C0006CA4F /* UserModel.swift in Sources */,

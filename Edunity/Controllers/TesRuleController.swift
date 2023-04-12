@@ -13,10 +13,13 @@ class TesRuleController:UIViewController{
     
     @IBOutlet weak var namaTesLbl: UILabel!
     @IBOutlet weak var descTesLbl: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
+    
     var tesModel = TesModel()
     var tesName: String?
     var tesDesc: String?
-    
+    var tesTime: String?
+
     
 }
 extension TesRuleController{
@@ -28,9 +31,11 @@ extension TesRuleController{
         tesModel.fetchTesInModul { [self] tes, error in
             tesName = tes?.tesName
             tesDesc = tes?.tesDesc
+            tesTime = tes?.displayedTime
             
             namaTesLbl.text = tesName
             descTesLbl.text = tesDesc
+            timeLbl.text = "Batas Waktu Pengerjaan : \(tesTime!)"
         }
         
     }

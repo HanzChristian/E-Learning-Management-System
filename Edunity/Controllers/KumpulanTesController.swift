@@ -12,6 +12,9 @@ class KumpulanTesController:UIViewController{
     // MARK: - Variables & Outlet
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var namaLbl: UILabel!
+    @IBOutlet weak var nilaiLbl: UILabel!
+    
     var tesModel = TesModel()
     var tesMuridModel = TesMuridModel()
     var tesName: String?
@@ -26,6 +29,11 @@ extension KumpulanTesController{
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenTes"), object: nil)
+        namaLbl.isHidden = true
+        nilaiLbl.isHidden = true
+        
+        
         tesModel.fetchSpesificTes { [self] tes, error in
             tesName = tes?.tesName
             setNavItem()
@@ -33,7 +41,7 @@ extension KumpulanTesController{
         
         fetchData()
     
-        
+
     }
 }
 
@@ -44,7 +52,7 @@ extension KumpulanTesController{
         
         navigationItem.title = "Kumpulan nilai \(tesName!)"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Batal", style: .plain, target: self, action: #selector(dismissSelf))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Kembali", style: .plain, target: self, action: #selector(dismissSelf))
         
         navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 0.251, green: 0.055, blue: 0.196, alpha: 1)
         
@@ -63,6 +71,15 @@ extension KumpulanTesController{
             }
             listofTes.append(tes!)
             tableView.reloadData()
+            if(listofTes.count == 0){
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenTes"), object: nil)
+                namaLbl.isHidden = true
+                nilaiLbl.isHidden = true
+            }else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenTes"), object: nil)
+                namaLbl.isHidden = false
+                nilaiLbl.isHidden = false
+            }
         }
     }
 }

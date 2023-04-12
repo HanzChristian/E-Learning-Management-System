@@ -46,12 +46,15 @@ extension HomePageController{
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        if(listofClass.count == 0){
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
+        }else{
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
+        }
 
         Core.shared.notNewUser()
         self.userModel.fetchUser{user in
         }
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenView"), object: nil)
     
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh(_:)), name: NSNotification.Name(rawValue: "refreshData"), object: nil)
         
@@ -102,56 +105,31 @@ extension HomePageController{
         }
     }
     
-    func setEmpty(){
-        if(listofClass.count == 0){
-        }else{
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-        }
-    }
     func fetchData(){
         if(role == "pengajar"){
             classModel.fetchClassGuru(completion: { [self] classess in
-                print("ngefetch")
                 listofClass.append(classess)
-                print("ini jumlah classnya setelah di fetch = \(listofClass.count)")
                 tableView.reloadData()
-                if(classess.classid.count == 0){
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                }else{
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
-                }
-                setEmpty()
+                print("listofClass guru = \(listofClass.count)")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
             })
-            
-            if(listofClass.count == 0){
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                tableView.reloadData()
-            }
             
         }else if(role == "pelajar"){
-            classModel.fetchClassMurid(completion: { [self] classess in
-                print("jumlah kelas = \(listofClass.count)")
+            classModel.fetchClassMurid { [self] classess in
                 listofClass.append(classess)
                 tableView.reloadData()
-                setEmpty()
-            })
-            if(listofClass.count == 0){
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhidden"), object: nil)
-                tableView.reloadData()
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidden"), object: nil)
             }
         }
     }
     
     @objc func refresh(_ sender: Any){
-        listofClass.removeAll()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){ [self] in
-            print("ini jumlah classnya sebelum di fetch = \(listofClass.count)")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){ [self] in
+            listofClass.removeAll()
             fetchData()
             self.tableView.refreshControl?.endRefreshing()
         }
     }
-    
-
     
     func setTime(){
         let calendar = Calendar.current
@@ -352,6 +330,20 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
                     for document in querySnapshot!.documents {
                         let tesDocRef = db.collection("tes").document(document.documentID)
                         batch.deleteDocument(tesDocRef)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            //delete field in muridTes
+            dispatchGroup.enter()
+            db.collection("muridTes").whereField("classid", isEqualTo: eachClass.classid).getDocuments { [self] (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let muridTesDocRef = db.collection("muridTes").document(document.documentID)
+                        batch.deleteDocument(muridTesDocRef)
                     }
                 }
                 dispatchGroup.leave()

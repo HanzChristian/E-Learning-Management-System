@@ -12,6 +12,11 @@ class KumpulanTugasController: UIViewController,UIDocumentPickerDelegate {
     
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var tanggalLbl: UILabel!
+    @IBOutlet weak var namaLbl: UILabel!
+    @IBOutlet weak var fileLbl: UILabel!
+    
     var modulModel = ModulModel()
     var listofTugas = [TugasMurid]()
     var tugasName: String?
@@ -23,11 +28,26 @@ extension KumpulanTugasController{
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenTugas"), object: nil)
+        tanggalLbl.isHidden = true
+        namaLbl.isHidden = true
+        fileLbl.isHidden = true
+        
         DispatchQueue.main.async{ [self] in
             modulModel.fetchAllTugas { [self] tugas in
                 listofTugas.append(tugas)
                 tableView.reloadData()
-                print("jumlah tugas yang ada = \(listofTugas.count)")
+                if(listofTugas.count == 0){
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenTugas"), object: nil)
+                    tanggalLbl.isHidden = true
+                    namaLbl.isHidden = true
+                    fileLbl.isHidden = true
+                }else{
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenTugas"), object: nil)
+                    tanggalLbl.isHidden = false
+                    namaLbl.isHidden = false
+                    fileLbl.isHidden = false
+                }
             }
             modulModel.fetchTugasMurid{ [self] tugas in
                 tugasName = tugas.tugasName

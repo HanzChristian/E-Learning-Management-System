@@ -97,18 +97,15 @@ extension ModulController{
         
         let modulid = "\(UUID().uuidString)"
         let tugasid = "\(UUID().uuidString)"
-
-        let path = "pdf/\(displayURL!)"
-        print("ini adalah pathnya ! = \(path)")
             
-            if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty,let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty{
+        if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty,let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty{
+            let path = "pdf/\(displayURL!)"
             storeData(nameModul: nameModul, descModul: descModul, fileModul: path, classid: classid!,modulid: modulid,nameTugas: nameTugas,descTugas: descTugas,tugasid: tugasid)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
             dismiss(animated: true,completion: nil)
         }else{
-            print("ga masuk bro")
-            print("ini nama modul = \(modulNameTVC?.nameTF.text), ini desc modul = \(modulDescriptionTVC?.descTV.text), ini filemodul = \(fullURL), ini classid = \(classid)")
+            
         }
       
     }

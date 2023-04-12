@@ -108,22 +108,34 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
         
         SelectedModul.selectedModul.modulPath = eachModul.modulid
         
+        //check if the test is already saved or not
         soalModel.fetchCheckSoal { [self] soal, error in
             if let error = error{
+                //not saved
+                print("masuk pertama")
                 cell.tesBtn.isHidden = true
                 return
             }
-
+            //saved
+            print("masuk kedua")
+            //fetch for tes name and tes id
             tesModel.fetchTesInModul { [self] tes, error in
                 if let error = error{
                     return
+                    print("masuk ketiga")
                 }
+                print("masuk keempat")
                 tesName = tes?.tesName
                 tesId = tes?.tesid
                 
+                //check if murid already submit test or not
                 tesMuridModel.fetchTesCondition { [self] tesMurid, error in
                     if let error = error{
+                        //not submitted yet
+                        print("masuk kelima")
                         cell.tesBtn.isHidden = false
+                        cell.tesBtn.isUserInteractionEnabled = true
+                        cell.tesBtn.isEnabled = true
                         let attrFont = UIFont.boldSystemFont(ofSize: 14)
                         let titleBtn = "\(tesName!)"
                         let attrTitle3 = NSAttributedString(string: titleBtn, attributes: [NSAttributedString.Key.font: attrFont])
@@ -138,7 +150,8 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
                             self!.present(nav, animated: true)
                         }
                     }else{
-//                        fetchData()
+                        print("masuk keenam")
+                        //submitted
                         tesScore = tesMurid?.tesScore
                         cell.tesBtn.isHidden = false
                         cell.tesBtn.isUserInteractionEnabled = false

@@ -47,6 +47,8 @@ extension GuruClassController{
         
         super.viewDidLoad()
         
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhiddenGuru"), object: nil)
+        
         DispatchQueue.main.async{ [self] in
             fetchData()
         }
@@ -339,6 +341,19 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
                         for document in querySnapshot!.documents {
                             let tesDocRef = db.collection("tes").document(document.documentID)
                             batch.deleteDocument(tesDocRef)
+                        }
+                    }
+                    dispatchGroup.leave()
+                }
+                
+                dispatchGroup.enter()
+                db.collection("muridTes").whereField("tesid", isEqualTo: eachModul.modulid).getDocuments { [self] (querySnapshot, error) in
+                    if let error = error {
+                        print("Error getting documents: \(error)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            let muridTesDocRef = db.collection("muridTes").document(document.documentID)
+                            batch.deleteDocument(muridTesDocRef)
                         }
                     }
                     dispatchGroup.leave()
