@@ -27,24 +27,16 @@ class ProfileController: UIViewController {
     // MARK: - View Life Cycle
 extension ProfileController{
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.userModel.fetchUser{ [self] user in
-            userName = user.name
-            print("ini username pas fetch = \(userName)")
-        }
-    }
-    
     override func viewDidLoad(){
         super.viewDidLoad()
         changeLbl.alpha = 0
-    
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+        
+        self.userModel.fetchUser{ [self] user in
+            userName = user.name
+            
             toShortenName()
             nameLbl.text = userName
             shortnameLbl.text = shortenName
-            
-            print("ini username = \(userName)")
-            print("ini shortname = \(shortenName)")
         }
         
     }
@@ -121,9 +113,7 @@ extension ProfileController{
             let nameField = fields[0]
             let name = nameField.text
             
-            print("INI NAMA SEBELUM = \(userName) dan ini nama diubah = \(name)")
             if(name != nil){
-                print("masuk atas")
                 self.db.collection("users")
                     .whereField("name", isEqualTo: userName)
                     .addSnapshotListener { (querySnapshot, err) in
@@ -131,11 +121,19 @@ extension ProfileController{
                             showRedLbl(text: "Nama gagal diubah!")
                             // Some error occured
                         }else {
-                            let document = querySnapshot!.documents.first
-                            document!.reference.updateData([
-                                "name": name
-                            ])
-                            showBlueLbl(text: "Nama telah berhasil diubah!")
+                            if let document = querySnapshot!.documents.first {
+                                document.reference.updateData([
+                                    "name": name
+                                ])
+                                showBlueLbl(text: "Nama telah berhasil diubah!")
+                                self.nameLbl.text = name
+                                self.shortnameLbl.text = String(name!.filter { "A"..."Z" ~= $0 }.prefix(2))
+                                
+                            } else {
+                                showBlueLbl(text: "Nama telah berhasil diubah!")
+                                self.nameLbl.text = name
+                                self.shortnameLbl.text = String(name!.filter { "A"..."Z" ~= $0 }.prefix(2))
+                            }
                         }
                     }
                 
