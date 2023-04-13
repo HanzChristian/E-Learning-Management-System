@@ -115,7 +115,7 @@ extension GuruClassController{
     }
     
     @objc func refresh(_ sender: Any){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3){ [self] in
             listofModul.removeAll()
             listofTugas.removeAll()
             listofTes.removeAll()
@@ -157,8 +157,6 @@ extension GuruClassController{
             tableView.reloadData()
             showEmpty()
         }
-        
-        
     }
     
 }
@@ -272,7 +270,6 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         let eachModul = listofModul[indexPath.row]
-        let eachTes = listofTes[indexPath.row]
         
         let storageRef = Storage.storage().reference().child(eachModul.modulFile)
         
@@ -376,6 +373,24 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
                         dispatchGroup.leave()
                     }
                 
+                dispatchGroup.enter()
+                //Decrease the amount of Modul in Homepage Murid
+                db.collection("muridClass")
+                    .whereField("classid", isEqualTo: eachModul.classid)
+                    .getDocuments { (querySnapshot,err) in
+                    if let err = err{
+                        print("error murid class")
+                    }else{
+                        let document = querySnapshot!.documents.first
+                        if(document != nil){
+                            document!.reference.updateData([
+                                "modulCount": FieldValue.increment(Int64(-1))
+                            ])
+                        }
+                    }
+                        dispatchGroup.leave()
+                }
+                
                 //wait for all the getDocuments() calls completed
                 dispatchGroup.notify(queue: .main) {
                     //commit batch
@@ -403,6 +418,8 @@ extension GuruClassController:UITableViewDelegate,UITableViewDataSource{
             }
         }
         else if(indexPath.section == 2){
+            
+            let eachTes = listofTes[indexPath.row]
             if(editingStyle == .delete){
                 let batch = db.batch()
                 let dispatchGroup = DispatchGroup()

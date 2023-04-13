@@ -253,7 +253,7 @@
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sh0-5C-L9h">
                                         <rect key="frame" x="0.0" y="84" width="390" height="536"/>
-                                        <color key="backgroundColor" name="Table"/>
+                                        <color key="backgroundColor" red="0.98039215686274506" green="0.93333333333333335" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="536" id="1T0-Tb-aOQ"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="390" id="3kT-UP-dP0"/>
@@ -1647,7 +1647,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eot-gl-5J0">
                                 <rect key="frame" x="0.0" y="178" width="390" height="666"/>
                                 <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="WE3-w6-ESd">
-                                    <rect key="frame" x="0.0" y="122" width="390" height="545"/>
+                                    <rect key="frame" x="0.0" y="121.66666793823242" width="390" height="545"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <connections>
                                         <segue destination="1Hl-Ie-2l0" kind="embed" id="Jub-25-D8j"/>

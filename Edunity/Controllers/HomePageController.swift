@@ -65,6 +65,7 @@ extension HomePageController{
         }
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        tableView.separatorStyle = .none
         
         //make pull refresh view
         let refreshControl = UIRefreshControl()
@@ -124,7 +125,7 @@ extension HomePageController{
     }
     
     @objc func refresh(_ sender: Any){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){ [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){ [self] in
             listofClass.removeAll()
             fetchData()
             self.tableView.refreshControl?.endRefreshing()
@@ -200,9 +201,15 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 135
+        return 145.0
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            let separatorView = UIView(frame: CGRect(x: 0, y: cell.frame.height - 10, width: cell.frame.width, height: 10))
+            separatorView.backgroundColor = UIColor(red: 250/255, green: 238/255, blue: 228/255, alpha: 1.0)
+            separatorView.tag = 100
+           cell.addSubview(separatorView)
+       }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let eachClass = listofClass[indexPath.row]
@@ -239,7 +246,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
         let storageRef = Storage.storage().reference().child(eachClass.classImgString)
         
         if(editingStyle == .delete){
-            print("the classid that want to be delete = \(eachClass.classid)")
+            
             
             let batch = db.batch()
             
@@ -362,7 +369,6 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
             }
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
-            
             
         }
     }

@@ -23,6 +23,7 @@ class ModulController: UIViewController {
     var counter = 0
     var tugasNameTVC = TugasNameTVC()
     var tugasDescTVC = TugasDescriptionTVC()
+    var uploadTVC = UploadTVC()
     
     var displayURL: String?
     var fullURL: String?
@@ -98,7 +99,7 @@ extension ModulController{
         let modulid = "\(UUID().uuidString)"
         let tugasid = "\(UUID().uuidString)"
             
-        if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty,let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty{
+        if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty,let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty,displayURL != nil{
             let path = "pdf/\(displayURL!)"
             storeData(nameModul: nameModul, descModul: descModul, fileModul: path, classid: classid!,modulid: modulid,nameTugas: nameTugas,descTugas: descTugas,tugasid: tugasid)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
