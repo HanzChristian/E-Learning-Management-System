@@ -37,7 +37,7 @@ class TesMuridModel{
                 for document in documents {
                     let data = document.data()
                     let muridName = data["name"] as? String ?? ""
-                    let tesScore = data["score"] as? Int ?? 0
+                    let tesScore = data["score"] as? String ?? ""
                     
                     let eachTesMurid = TesMurid(muridName: muridName, tesScore: tesScore)
                     
@@ -72,7 +72,7 @@ class TesMuridModel{
                 for document in documents {
                     let data = document.data()
                     let muridName = data["name"] as? String ?? ""
-                    let tesScore = data["score"] as? Int ?? 0
+                    let tesScore = data["score"] as? String ?? ""
                     
                     let eachTesMurid = TesMurid(muridName: muridName, tesScore: tesScore)
                     print("masuk sene gyan")

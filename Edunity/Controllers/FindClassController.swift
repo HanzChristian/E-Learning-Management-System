@@ -26,7 +26,8 @@ extension FindClassController{
     override func viewDidLoad(){
         super.viewDidLoad()
         setNavItem()
-        print("data not fetch")
+        
+        listofClassMurid.removeAll()
         classModel.fetchClassAll(completion: { [self] classess in
             listofClassMurid.append(classess)
             tableView.reloadData()

@@ -32,7 +32,7 @@ class MuridClassController: UIViewController,UIDocumentPickerDelegate{
     var takeURL: String?
     var tesId: String?
     var tesName: String?
-    var tesScore: Int?
+    var tesScore: String?
     
     
 }
@@ -45,7 +45,10 @@ extension MuridClassController{
         self.tableView.dataSource = self
     
         print("classid : \(SelectedClass.selectedClass.classPath)")
-        fetchData()
+        
+        DispatchQueue.main.async { [self] in
+            fetchData()
+        }
         
         classModel.fetchSelectedClass { [self] classess in
             className = classess.className
@@ -83,13 +86,13 @@ extension MuridClassController{
     
     func fetchData(){
         listofModul.removeAll()
-        modulModel.fetchModulMurid { [self] modul in
+        modulModel.fetchModul { [self] modul in
             listofModul.append(modul)
+            print("listofmodul = \(listofModul.count) tes")
             modulCount.modulNum += 1
             jumlahModul.append(modulCount)
             tableView.reloadData()
         }
-        
     }
     
 }
@@ -153,6 +156,7 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
                         print("masuk keenam")
                         //submitted
                         tesScore = tesMurid?.tesScore
+                        print("masuk keenam \(tesScore!)")
                         cell.tesBtn.isHidden = false
                         cell.tesBtn.isUserInteractionEnabled = false
                         cell.tesBtn.isEnabled = false

@@ -281,6 +281,7 @@ extension DoTesController{
             //score
             var finalScore = Double(correctAns) / Double(listofSoal.count)
             finalScore *= 100
+            let formattedFinalScore = String(format: "%.2f", finalScore)
             
             userModel.fetchUser { [self] user in
                 let id = user.id
@@ -288,7 +289,7 @@ extension DoTesController{
                 
                 db.collection("muridTes").addDocument(data: [
                     "name": userName,
-                    "score": finalScore,
+                    "score": formattedFinalScore,
                     "userid": id,
                     "tesid": SelectedTes.selectedTes.tesPath,
                     "classid": SelectedClass.selectedClass.classPath,
@@ -300,7 +301,10 @@ extension DoTesController{
                     else{
                         let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
                         let vc = storyboard.instantiateViewController(withIdentifier: "HomePageController") as! HomePageController
-                        let nav =  UINavigationController(rootViewController: vc)
+                        let tabStoryboard = UIStoryboard(name: "HomePage", bundle: nil)
+                        let tabVC = tabStoryboard.instantiateViewController(withIdentifier: "tabbarHomePage") as! UITabBarController
+                        
+                        let nav =  UINavigationController(rootViewController: tabVC)
                         nav.modalPresentationStyle = .fullScreen
                         self.present(nav, animated: true)
                     }
@@ -337,6 +341,7 @@ extension DoTesController{
             //score
             var finalScore = Double(correctAns) / Double(listofSoal.count)
             finalScore *= 100
+            let formattedFinalScore = String(format: "%.2f", finalScore)
             
             userModel.fetchUser { [self] user in
                 let id = user.id
@@ -344,7 +349,7 @@ extension DoTesController{
                 
                 db.collection("muridTes").addDocument(data: [
                     "name": userName,
-                    "score": finalScore,
+                    "score": formattedFinalScore,
                     "userid": id,
                     "tesid": SelectedTes.selectedTes.tesPath,
                     "classid": SelectedClass.selectedClass.classPath,
@@ -356,7 +361,11 @@ extension DoTesController{
                     else{
                         let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
                         let vc = storyboard.instantiateViewController(withIdentifier: "HomePageController") as! HomePageController
-                        let nav =  UINavigationController(rootViewController: vc)
+                        
+                        let tabStoryboard = UIStoryboard(name: "HomePage", bundle: nil)
+                        let tabVC = tabStoryboard.instantiateViewController(withIdentifier: "tabbarHomePage") as! UITabBarController
+                        
+                        let nav =  UINavigationController(rootViewController: tabVC)
                         nav.modalPresentationStyle = .fullScreen
                         self.present(nav, animated: true)
                     }

@@ -98,7 +98,7 @@ struct TugasMurid{
 
 struct TesMurid{
     let muridName: String
-    let tesScore: Int
+    let tesScore: String
 }
 
 struct Soal{
