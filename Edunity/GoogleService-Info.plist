@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>140837431932-187itvap437ovaens2io8tkv0e6p9uvk.apps.googleusercontent.com</string>
+	<string>140837431932-ljn3qb7hrds57kkdt392et2b4ev4ev9b.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.140837431932-187itvap437ovaens2io8tkv0e6p9uvk</string>
+	<string>com.googleusercontent.apps.140837431932-ljn3qb7hrds57kkdt392et2b4ev4ev9b</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBaJf-Bcul9LBcX3uQ4XqKpIOdA8u6Dwmg</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.hanzchristian.skripsi</string>
+	<string>com.hanzchristian.edunity</string>
 	<key>PROJECT_ID</key>
 	<string>elearningmanagement-8acc1</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:140837431932:ios:cce69944fa1699c12c37f9</string>
+	<string>1:140837431932:ios:352445fd2e5072002c37f9</string>
 </dict>
 </plist>

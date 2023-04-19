@@ -35,6 +35,9 @@ extension SoalController{
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tapGesture)
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         

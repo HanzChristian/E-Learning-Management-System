@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseMessaging
 
 class FindClassController: UIViewController {
     // MARK: - Variables & Outlet
@@ -77,18 +78,43 @@ extension FindClassController{
     
     func storeData(nameClass: String, descClass: String,uidMurid: String,enrollmentKey: String,modulCount: Int,imgURL: String,classid: String){
         // Upload data
-        db.collection("muridClass").addDocument(data: [
-            "nameClass": nameClass,
-            "descClass": descClass,
-            "enrollmentKey": enrollmentKey,
-            "uidMurid": uidMurid,
-            "modulCount": modulCount,
-            "imgURL": imgURL,
-            "classid": classid
-        ])
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error dalam mendapatkan token perangkat: \(error.localizedDescription)")
+                return
+            }
+            print("Device token: \(token!)")
+            
+            // Add the user data and device token to Firestore
+            let db = Firestore.firestore()
+            db.collection("muridClass").addDocument(data: [
+                "nameClass": nameClass,
+                "descClass": descClass,
+                "enrollmentKey": enrollmentKey,
+                "uidMurid": uidMurid,
+                "modulCount": modulCount,
+                "imgURL": imgURL,
+                "classid": classid,
+                "token": [token]
+            ]) { error in
+                if let error = error {
+                    print("Error saat menambahkan data ke Firestore: \(error.localizedDescription)")
+                } else {
+                    print("Data berhasil ditambahkan ke Firestore")
+                    
+                    // Subscribe to the class's topic
+                    Messaging.messaging().subscribe(toTopic: classid) { error in
+                        if let error = error {
+                            print("Error dalam subscribe ke topik: \(error.localizedDescription)")
+                        } else {
+                            print("Berhasil subscribe ke topik: \(classid)")
+                        }
+                    }
+                }
+            }
+        }
+        
     }
-    
-
 
 }
 // MARK: - TableView Delegate & Datasource

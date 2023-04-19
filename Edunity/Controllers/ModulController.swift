@@ -10,11 +10,13 @@ import MobileCoreServices
 import UniformTypeIdentifiers
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseMessaging
 
 class ModulController: UIViewController {
     // MARK: - Variables & Outlet
     @IBOutlet weak var tableView: UITableView!
     let cellTitle = ["Nama Modul", "Deskripsi Modul","Nama Tugas","Deskripsi Tugas","Upload File Modul"]
+    let role = UserDefaults.standard.string(forKey: "role")
     var height = 52.0
     let storageRef = Storage.storage().reference()
     var path = ""
@@ -24,6 +26,7 @@ class ModulController: UIViewController {
     var tugasNameTVC = TugasNameTVC()
     var tugasDescTVC = TugasDescriptionTVC()
     var uploadTVC = UploadTVC()
+    var userModel = UserModel()
     
     var displayURL: String?
     var fullURL: String?
@@ -98,7 +101,7 @@ extension ModulController{
         
         let modulid = "\(UUID().uuidString)"
         let tugasid = "\(UUID().uuidString)"
-            
+        
         if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty,let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty,displayURL != nil{
             let path = "pdf/\(displayURL!)"
             storeData(nameModul: nameModul, descModul: descModul, fileModul: path, classid: classid!,modulid: modulid,nameTugas: nameTugas,descTugas: descTugas,tugasid: tugasid)
@@ -108,7 +111,7 @@ extension ModulController{
         }else{
             
         }
-      
+        
     }
     
     func storeData(nameModul: String, descModul: String,fileModul: String,classid: String,modulid: String,nameTugas: String,descTugas: String,tugasid: String){
@@ -151,21 +154,89 @@ extension ModulController{
             db.collection("muridClass")
                 .whereField("classid", isEqualTo: classid)
                 .getDocuments { (querySnapshot,err) in
-                if let err = err{
-                    print("error murid class")
-                }else{
+                    if let err = err{
+                        print("error murid class")
+                    }else{
+                        let document = querySnapshot!.documents.first
+                        if(document != nil){
+                            document!.reference.updateData([
+                                "modulCount": FieldValue.increment(Int64(1))
+                            ])
+                        }
+                    }
+                }
+            
+            //make notification
+            //first query the user with role = "pelajar"
+            
+            db.collection("muridClass").whereField("classid", isEqualTo: classid).getDocuments { querySnapshot, err in
+                if let err = err {
+                    // Handle error
+                } else {
                     let document = querySnapshot!.documents.first
-                    if(document != nil){
-                        document!.reference.updateData([
-                            "modulCount": FieldValue.increment(Int64(1))
-                        ])
+                    if let classid = document?.data()["classid"] as? String {
+                        print("classidnya = \(classid)")
+                        Messaging.messaging().subscribe(toTopic: classid) { error in
+                            if error != nil {
+                                print("Failed to subscribe to topic \(error?.localizedDescription)")
+                            } else {
+                                print("Subscribed to topic \(classid)")
+                                sendNotification(topic: classid, title: "Kelas bernama \(classname!) telah diupdate!", body: "Modul bernama \(nameModul) & Tugas bernama \(nameTugas) telah ditambahkan!")
+                            }
+                        }
                     }
                 }
             }
         }
     }
-    
 }
+
+private func sendNotification(topic: String, title: String, body: String) {
+    let urlString = "https://fcm.googleapis.com/fcm/send"
+    let url = NSURL(string: urlString)!
+    let paramString: [String : Any] = [
+        "to": "/topics/\(topic)",
+        "notification" : [
+            "title" : title,
+            "body" : body
+        ],
+        "priority" : "high",
+        "sound" : "default"
+    ]
+    print("paramString: \(paramString)")
+    let request = NSMutableURLRequest(url: url as URL)
+    request.httpMethod = "POST"
+    do {
+        let jsonData = try JSONSerialization.data(withJSONObject:paramString, options: [.prettyPrinted])
+        request.httpBody = jsonData
+    } catch let error {
+        print("JSON serialization error: \(error.localizedDescription)")
+    }
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("key=AAAAIMqQqnw:APA91bHQHmGcsni_s9fvsKdUuqpF2XIXid9vP1eHrhZuOy6B6p5qOtGNG-H_hsxVkIBSnXQp0moEQ37UjcMML66QplC8nW2_DOuuDlH5-F8JbzdpqBiZ9aDw0mJpVp-27g-zou-hTb3i", forHTTPHeaderField: "Authorization")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
+    let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+        do {
+            if let jsonData = data {
+                if let json = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: Any] {
+                    print("ini json \(json)")
+                }
+            }
+        } catch let err {
+            print("Error diakhir notif: \(err.localizedDescription)")
+        }
+        
+        if let httpResponse = response as? HTTPURLResponse {
+            print("statusCode: \(httpResponse.statusCode)")
+        }
+        if let data = data {
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString: \(responseString)")
+        }
+    }
+    task.resume()
+}
+
 // MARK: - TableView Datasource & Delegate
 extension ModulController:UITableViewDelegate,UITableViewDataSource{
     
@@ -243,7 +314,7 @@ extension ModulController:UITableViewDelegate,UITableViewDataSource{
         }
         else if(indexPath.section == 4){
             let cell = tableView.dequeueReusableCell(withIdentifier: "UploadTVC", for: indexPath) as! UploadTVC
-           
+            
             cell.importFile = { [weak self] in
                 let supportedTypes: [UTType] = [UTType.pdf]
                 let pickerViewController = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
@@ -268,7 +339,7 @@ extension ModulController:UITableViewDelegate,UITableViewDataSource{
 // MARK: - UIDocumentPickerViewController Deleagte and such
 extension ModulController:UIDocumentPickerDelegate{
     
-
+    
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let myURL = urls.first else {
             return
@@ -285,14 +356,14 @@ extension ModulController:UIDocumentPickerDelegate{
         self.tableView.reloadData()
     }
     
-
+    
     public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .fullScreen
         present(documentPicker, animated: true, completion: nil)
     }
-
-
+    
+    
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         print("view was cancelled")
     }

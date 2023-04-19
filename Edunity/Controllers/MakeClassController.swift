@@ -50,13 +50,6 @@ extension MakeClassController{
         let nibClassDesc = UINib(nibName: "ClassDescriptionTVC", bundle: nil)
         tableView.register(nibClassDesc, forCellReuseIdentifier: "ClassDescriptionTVC")
         
-//        let docRef = db.document("elearningmanagement/class")
-//        docRef.getDocument{ snapshot, error in
-//            guard let data = snapshot?.data(),error == nil else{
-//                return
-//            }
-//            print(data)
-//        }
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.validateInput), name: NSNotification.Name(rawValue: "validateInput"), object: nil)

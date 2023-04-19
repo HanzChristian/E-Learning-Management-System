@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseMessaging
 
 class RegisterController: UIViewController {
     
