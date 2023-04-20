@@ -13,7 +13,7 @@ class TesModel{
     
     // Show in GuruClass
     func fetchAllTes(completion: @escaping(Tes) -> ()){
-        db.collection("tes").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "timestamp",descending: false).addSnapshotListener { querySnapshot, error in
+        db.collection("tes").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "count",descending: false).addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
                 print("No document")

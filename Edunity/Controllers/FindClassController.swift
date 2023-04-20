@@ -137,8 +137,15 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 135
+        return 145.0
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            let separatorView = UIView(frame: CGRect(x: 0, y: cell.frame.height - 10, width: cell.frame.width, height: 10))
+            separatorView.backgroundColor = UIColor(red: 250/255, green: 238/255, blue: 228/255, alpha: 1.0)
+            separatorView.tag = 100
+           cell.addSubview(separatorView)
+       }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
@@ -197,6 +204,11 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ClassTVC", for: indexPath) as! ClassTVC
     
+        let separatorView = UIView(frame: CGRect(x: 0, y: cell.frame.height - 10, width: cell.frame.width, height: 10))
+        separatorView.backgroundColor = UIColor(red: 250/255, green: 238/255, blue: 228/255, alpha: 1.0)
+        separatorView.tag = 100
+        cell.addSubview(separatorView)
+        
         cell.classImg.image = eachClass.classImg
         cell.classtitleLbl.text = eachClass.className
         cell.classmodulLbl.text = "\(eachClass.classModule) modul"

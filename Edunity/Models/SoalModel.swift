@@ -13,7 +13,7 @@ class SoalModel{
     let db = Firestore.firestore()
     
     func fetchAllSoal(completion: @escaping(Soal) -> ()){
-        db.collection("tes").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").whereField("tesid", isEqualTo: "\(SelectedTes.selectedTes.tesPath)").order(by: "timestamp",descending: false).addSnapshotListener { querySnapshot, error in
+        db.collection("tes").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").whereField("tesid", isEqualTo: "\(SelectedTes.selectedTes.tesPath)").order(by: "count",descending: false).addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
                 print("No document")

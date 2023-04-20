@@ -105,9 +105,6 @@ extension ModulController{
         if let nameModul = modulNameTVC?.nameTF.text,!nameModul.isEmpty,let descModul = modulDescriptionTVC?.descTV.text,!descModul.isEmpty,let nameTugas = tugasNameTVC.tugasNameTV.text,!nameTugas.isEmpty, let descTugas = tugasDescTVC.tugasDescTVC.text,!descTugas.isEmpty,displayURL != nil{
             let path = "pdf/\(displayURL!)"
             storeData(nameModul: nameModul, descModul: descModul, fileModul: path, classid: classid!,modulid: modulid,nameTugas: nameTugas,descTugas: descTugas,tugasid: tugasid)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
-            dismiss(animated: true,completion: nil)
         }else{
             
         }
@@ -115,79 +112,119 @@ extension ModulController{
     }
     
     func storeData(nameModul: String, descModul: String,fileModul: String,classid: String,modulid: String,nameTugas: String,descTugas: String,tugasid: String){
-        storageRef.child("pdf/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
+        
+        let batch = db.batch()
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        storageRef.child("pdf/\(displayURL!)").putFile(from: extractURL!,metadata: nil){
             (_,err) in
             
-            if err != nil{
-                print("error disini gan \(err?.localizedDescription)")
-                return
+            if let err = err{
+                print("error disini gan \(err.localizedDescription)")
+            }else{
+                dispatchGroup.leave()
             }
-            
-            
-            db.collection("modul").addDocument(data: [
-                "nameModul": nameModul,
-                "descModul": descModul,
-                "fileModul": fileModul,
-                "classid": classid,
-                "modulid": modulid,
-                "nameTugas": nameTugas,
-                "descTugas": descTugas,
-                "tugasid": tugasid,
-                "timestamp": FieldValue.serverTimestamp()
-            ])
-            
-            //Add Modul count to display in app
-            db.collection("class")
-                .whereField("classid", isEqualTo: classid)
-                .getDocuments { (querySnapshot, err) in
-                    if let err = err {
-                        print("error class")
-                        // Some error occured
-                    }else {
-                        let document = querySnapshot!.documents.first
+        }
+        
+        dispatchGroup.enter()
+        db.collection("modul").whereField("classid", isEqualTo: classid).getDocuments { (snapshot, error) in
+            let count = snapshot?.count ?? 0
+            if let error = error{
+                self.db.collection("modul").addDocument(data: [
+                    "nameModul": nameModul,
+                    "descModul": descModul,
+                    "fileModul": fileModul,
+                    "classid": classid,
+                    "modulid": modulid,
+                    "nameTugas": nameTugas,
+                    "descTugas": descTugas,
+                    "tugasid": tugasid,
+                    "countModul": count + 1
+                ])
+                print("masuk error, count = \(count)")
+            }else{
+                self.db.collection("modul").addDocument(data: [
+                    "nameModul": nameModul,
+                    "descModul": descModul,
+                    "fileModul": fileModul,
+                    "classid": classid,
+                    "modulid": modulid,
+                    "nameTugas": nameTugas,
+                    "descTugas": descTugas,
+                    "tugasid": tugasid,
+                    "countModul": count + 1
+                ])
+                print("masuk error, count = \(count)")
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        //Add Modul count to display in app
+        db.collection("class")
+            .whereField("classid", isEqualTo: classid)
+            .getDocuments { (querySnapshot, err) in
+                if let err = err {
+                    print("error class")
+                    // Some error occured
+                }else {
+                    let document = querySnapshot!.documents.first
+                    document!.reference.updateData([
+                        "modulCount": FieldValue.increment(Int64(1))
+                    ])
+                }
+                dispatchGroup.leave()
+            }
+        
+        dispatchGroup.enter()
+        db.collection("muridClass")
+            .whereField("classid", isEqualTo: classid)
+            .getDocuments { (querySnapshot,err) in
+                if let err = err{
+                    print("error murid class")
+                }else{
+                    let document = querySnapshot!.documents.first
+                    if(document != nil){
                         document!.reference.updateData([
                             "modulCount": FieldValue.increment(Int64(1))
                         ])
                     }
                 }
-            
-            db.collection("muridClass")
-                .whereField("classid", isEqualTo: classid)
-                .getDocuments { (querySnapshot,err) in
-                    if let err = err{
-                        print("error murid class")
-                    }else{
-                        let document = querySnapshot!.documents.first
-                        if(document != nil){
-                            document!.reference.updateData([
-                                "modulCount": FieldValue.increment(Int64(1))
-                            ])
-                        }
-                    }
+                dispatchGroup.leave()
+            }
+        
+        //make notification
+        //first query the user with role = "pelajar"
+        dispatchGroup.enter()
+        db.collection("muridClass").whereField("classid", isEqualTo: classid).getDocuments { [self] querySnapshot, err in
+            if let err = err {
+                // Handle error
+            } else {
+                let document = querySnapshot!.documents.first
+                if let classid = document?.data()["classid"] as? String {
+                    print("classidnya = \(classid)")
+                    sendNotification(topic: classid, title: "\(classname!) telah diupdate!", body: "Modul bernama \(nameModul) & Tugas bernama \(nameTugas) telah ditambahkan!")
                 }
-            
-            //make notification
-            //first query the user with role = "pelajar"
-            
-            db.collection("muridClass").whereField("classid", isEqualTo: classid).getDocuments { querySnapshot, err in
-                if let err = err {
-                    // Handle error
-                } else {
-                    let document = querySnapshot!.documents.first
-                    if let classid = document?.data()["classid"] as? String {
-                        print("classidnya = \(classid)")
-                        Messaging.messaging().subscribe(toTopic: classid) { error in
-                            if error != nil {
-                                print("Failed to subscribe to topic \(error?.localizedDescription)")
-                            } else {
-                                print("Subscribed to topic \(classid)")
-                                sendNotification(topic: classid, title: "Kelas bernama \(classname!) telah diupdate!", body: "Modul bernama \(nameModul) & Tugas bernama \(nameTugas) telah ditambahkan!")
-                            }
-                        }
-                    }
+            }
+            dispatchGroup.leave()
+        }
+        
+        //wait for all the getDocuments() calls completed
+        dispatchGroup.notify(queue: .main) {
+            //commit batch
+            batch.commit() { error in
+                if let error = error {
+                    print("Error writing batched updates: \(error)")
+                }else {
+                    print("Batched updates successful!")
                 }
             }
         }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
+        dismiss(animated: true,completion: nil)
     }
 }
 

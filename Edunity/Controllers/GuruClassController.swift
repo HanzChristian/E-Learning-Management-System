@@ -115,7 +115,7 @@ extension GuruClassController{
     }
     
     @objc func refresh(_ sender: Any){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.7){ [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
             listofModul.removeAll()
             listofTugas.removeAll()
             listofTes.removeAll()

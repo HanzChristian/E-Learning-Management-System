@@ -21,7 +21,7 @@ class ModulModel{
     //For fetching modul
     func fetchModul(completion: @escaping(Modul) -> ()){
         
-        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "timestamp",descending: false).addSnapshotListener { querySnapshot, error in
+        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "countModul",descending: false).addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
                 print("No document = \(SelectedClass.selectedClass.classPath)")
@@ -93,7 +93,7 @@ class ModulModel{
     //for fetching tugas in Guru, where it is based on Class id
     func fetchTugasGuru(completion: @escaping(Tugas) -> ()){
         
-        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "timestamp",descending: false).addSnapshotListener { querySnapshot, error in
+        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "countModul",descending: false).addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
                 print("No document")

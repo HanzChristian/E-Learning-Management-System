@@ -125,18 +125,38 @@ extension InputTesController{
     }
     
     private func storeData(nameTes: String,descTes: String, modulid: String, classid: String, tesid: String,nameModul: String,timer: Double,displayedTime: String){
-        // Upload data
-        db.collection("tes").addDocument(data: [
-            "nameTes": nameTes,
-            "descTes": descTes,
-            "nameModul": nameModul,
-            "modulid": modulid,
-            "classid": classid,
-            "tesid": tesid,
-            "timer": timer,
-            "displayedTime": displayedTime,
-            "timestamp": FieldValue.serverTimestamp()
-        ])
+        
+        db.collection("tes").whereField("classid", isEqualTo: classid).getDocuments { querySnapshot, error in
+            let count = querySnapshot?.count ?? 0
+            if let error = error{
+                // Upload data
+                self.db.collection("tes").addDocument(data: [
+                    "nameTes": nameTes,
+                    "descTes": descTes,
+                    "nameModul": nameModul,
+                    "modulid": modulid,
+                    "classid": classid,
+                    "tesid": tesid,
+                    "timer": timer,
+                    "displayedTime": displayedTime,
+                    "count": count + 1
+                ])
+                return
+            }else{
+                self.db.collection("tes").addDocument(data: [
+                    "nameTes": nameTes,
+                    "descTes": descTes,
+                    "nameModul": nameModul,
+                    "modulid": modulid,
+                    "classid": classid,
+                    "tesid": tesid,
+                    "timer": timer,
+                    "displayedTime": displayedTime,
+                    "count": count + 1
+                ])
+            }
+        }
+    
     }
     
     private func updateData(nameTes: String,descTes: String,timer: Double,displayedTime: String){

@@ -14,14 +14,15 @@ class SoalController:UIViewController{
     
     @IBOutlet weak var tableView: UITableView!
     let tesModel = TesModel()
+    let classModel = ClassModel()
     var jumlahSoal = [JumlahSoal]()
     var soalCount = JumlahSoal(soalNum: 0)
     var listofSoal = [Soal]()
     var soalModel = SoalModel()
-    
     let db = Firestore.firestore()
     
     var tesName: String?
+    var className: String?
     var exist: String?
     
 }
@@ -110,6 +111,11 @@ extension SoalController{
     }
     
     private func fetchDataCondition(){
+        
+        classModel.fetchSelectedClass { [self] classess in
+            className = classess.className
+        }
+        
         //Check for tes name first - tes name will always be there
         tesModel.fetchSpesificTes { [self] tes, error in
             if let error = error{
@@ -149,16 +155,24 @@ extension SoalController{
         }))
         
         alert.addAction(UIAlertAction(title: "Simpan", style: .default,handler:{ [self]_ in
+            
+            let batch = db.batch()
+            let dispatchGroup = DispatchGroup()
+            
+            
             let tesRef = db.collection("tes").whereField("tesid", isEqualTo: SelectedTes.selectedTes.tesPath)
             
+            dispatchGroup.enter()
             tesRef.getDocuments { [self] (querySnapshot,error) in
                 if let error = error {
                     print("Error getting document: \(error)")
+                    dispatchGroup.leave()
                     return
                 }
                 
                 guard let document = querySnapshot?.documents.first else {
                     print("Tes document does not exist")
+                    dispatchGroup.leave()
                     return
                 }
                 
@@ -171,8 +185,35 @@ extension SoalController{
                         self.dismiss(animated: true,completion: nil)
                     }
                 }
+                dispatchGroup.leave()
             }
             
+            dispatchGroup.enter()
+            //Make tes Notification
+            db.collection("muridClass").whereField("classid", isEqualTo: SelectedClass.selectedClass.classPath).getDocuments { [self] querySnapshot, err in
+                if let err = err {
+                    // Handle error
+                } else {
+                    let document = querySnapshot!.documents.first
+                    if let classid = document?.data()["classid"] as? String {
+                        print("classidnya = \(classid)")
+                        sendNotification(topic: classid, title: "\(className!) telah diupdate!", body: "Tes bernama \(tesName!) telah ditambahkan! Jangan lupa dikerjakan!")
+                    }
+                }
+                dispatchGroup.leave()
+            }
+            
+            //wait for all the getDocuments() calls completed
+            dispatchGroup.notify(queue: .main) {
+                //commit batch
+                batch.commit() { error in
+                    if let error = error {
+                        print("Error writing batched updates: \(error)")
+                    }else {
+                        print("Batched updates successful!")
+                    }
+                }
+            }
         }))
         
         let attributes: [NSAttributedString.Key: Any] = [
@@ -188,6 +229,52 @@ extension SoalController{
     
     @objc func btnTapped(sender: UIButton){
         toInputSoal()
+    }
+    
+    private func sendNotification(topic: String, title: String, body: String) {
+        let urlString = "https://fcm.googleapis.com/fcm/send"
+        let url = NSURL(string: urlString)!
+        let paramString: [String : Any] = [
+            "to": "/topics/\(topic)",
+            "notification" : [
+                "title" : title,
+                "body" : body
+            ],
+            "priority" : "high",
+            "sound" : "default"
+        ]
+        print("paramString: \(paramString)")
+        let request = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = "POST"
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject:paramString, options: [.prettyPrinted])
+            request.httpBody = jsonData
+        } catch let error {
+            print("JSON serialization error: \(error.localizedDescription)")
+        }
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("key=AAAAIMqQqnw:APA91bHQHmGcsni_s9fvsKdUuqpF2XIXid9vP1eHrhZuOy6B6p5qOtGNG-H_hsxVkIBSnXQp0moEQ37UjcMML66QplC8nW2_DOuuDlH5-F8JbzdpqBiZ9aDw0mJpVp-27g-zou-hTb3i", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+            do {
+                if let jsonData = data {
+                    if let json = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: Any] {
+                        print("ini json \(json)")
+                    }
+                }
+            } catch let err {
+                print("Error diakhir notif: \(err.localizedDescription)")
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("statusCode: \(httpResponse.statusCode)")
+            }
+            if let data = data {
+                let responseString = String(data: data, encoding: .utf8)
+                print("responseString: \(responseString)")
+            }
+        }
+        task.resume()
     }
     
     
