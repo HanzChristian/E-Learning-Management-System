@@ -368,8 +368,10 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
                 }
             }
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7){ [self] in
+                listofClass.removeAll()
+                fetchData()
+            }
         }
     }
  

@@ -38,8 +38,8 @@ extension FindClassController{
             }else{
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hiddenFind"), object: nil)
             }
+            print("data fetched")
         })
-        print("data fetched")
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -112,6 +112,8 @@ extension FindClassController{
                     }
                 }
             }
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
+            self.dismiss(animated: true,completion: nil)
         }
         
     }
@@ -185,8 +187,6 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
 
                     storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL,classid: classid)
                     
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
-                    self.dismiss(animated: true,completion: nil)
                 }else{
                     print("tidak cocok")
                     print("Enrolment Key: \(enrollmentKey)")
