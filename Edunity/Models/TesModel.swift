@@ -13,7 +13,7 @@ class TesModel{
     
     // Show in GuruClass
     func fetchAllTes(completion: @escaping(Tes) -> ()){
-        db.collection("tes").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "count",descending: false).addSnapshotListener { querySnapshot, error in
+        db.collection("tes").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
                 print("No document")
@@ -30,8 +30,8 @@ class TesModel{
                 let classid = data["classid"] as? String ?? ""
                 let timer = data["timer"] as? Double ?? 0.0
                 let displayedTime = data["displayedTime"] as? String ?? ""
-                
-                let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime)
+                let count = data["count"] as? Int ?? 0
+                let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime,count: count)
                 
                 completion(eachTes)
             }
@@ -66,8 +66,9 @@ class TesModel{
                     let classid = data["classid"] as? String ?? ""
                     let timer = data["timer"] as? Double ?? 0.0
                     let displayedTime = data["displayedTime"] as? String ?? ""
+                    let count = data["count"] as? Int ?? 0
                     
-                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime)
+                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime,count: count)
 
                     completion(eachTes, nil)
                     return
@@ -106,8 +107,9 @@ class TesModel{
                     let classid = data["classid"] as? String ?? ""
                     let timer = data["timer"] as? Double ?? 0.0
                     let displayedTime = data["displayedTime"] as? String ?? ""
+                    let count = data["count"] as? Int ?? 0
                     
-                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime)
+                    let eachTes = Tes(tesName: tesName, tesDesc: tesDesc, modulName: modulName, modulid: modulid, tesid: tesid, classid: classid,timer: timer,displayedTime: displayedTime,count: count)
 
                     completion(eachTes, nil)
                     return

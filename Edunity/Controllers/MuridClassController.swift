@@ -88,6 +88,10 @@ extension MuridClassController{
         listofModul.removeAll()
         modulModel.fetchModul { [self] modul in
             listofModul.append(modul)
+            listofModul.sort {
+                $0.count < $1.count
+            }
+            
             print("listofmodul = \(listofModul.count) tes")
             modulCount.modulNum += 1
             jumlahModul.append(modulCount)

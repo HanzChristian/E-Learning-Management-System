@@ -136,6 +136,9 @@ extension GuruClassController{
         //fetch modul
         modulModel.fetchModul { [self] modul in
             listofModul.append(modul)
+            listofModul.sort {
+                $0.count < $1.count
+            }
             modulCount.modulNum += 1
             jumlahModul.append(modulCount)
             tableView.reloadData()
@@ -145,6 +148,9 @@ extension GuruClassController{
         //fetch tugas
         modulModel.fetchTugasGuru { [self] tugases in
             listofTugas.append(tugases)
+            listofTugas.sort {
+                $0.count < $1.count
+            }
             tugasCount.tugasNum += 1
             jumlahTugas.append(tugasCount)
             tableView.reloadData()
@@ -154,6 +160,9 @@ extension GuruClassController{
         //fetch tes
         tesModel.fetchAllTes { [self] tes in
             listofTes.append(tes)
+            listofTes.sort {
+                $0.count < $1.count
+            }
             tableView.reloadData()
             showEmpty()
         }

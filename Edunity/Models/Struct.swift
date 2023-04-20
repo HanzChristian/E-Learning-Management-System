@@ -56,6 +56,7 @@ struct Tugas{
     let tugasName: String
     let tugasDesc: String
     let tugasid: String
+    let count: Int
 }
 
 struct Modul{
@@ -64,6 +65,7 @@ struct Modul{
     let modulFile: String
     let modulid: String
     let classid: String
+    let count: Int
 }
 
 struct Tes{
@@ -75,6 +77,8 @@ struct Tes{
     let classid: String
     let timer: Double
     let displayedTime: String
+    let count: Int
+    
 }
 
 struct JumlahModul{

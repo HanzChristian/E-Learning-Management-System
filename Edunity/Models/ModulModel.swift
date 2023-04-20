@@ -21,7 +21,7 @@ class ModulModel{
     //For fetching modul
     func fetchModul(completion: @escaping(Modul) -> ()){
         
-        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "countModul",descending: false).addSnapshotListener { querySnapshot, error in
+        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
                 print("No document = \(SelectedClass.selectedClass.classPath)")
@@ -35,8 +35,9 @@ class ModulModel{
                 let modulFile = data["fileModul"] as? String ?? ""
                 let modulid = data["modulid"] as? String ?? ""
                 let classid = data["classid"] as? String ?? ""
+                let count = data["countModul"] as? Int ?? 0
                 print("ini modulidnya di fetchmodul = \(modulid)")
-                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid)
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count:count)
                 completion(eachModul)
             }
         }
@@ -59,8 +60,9 @@ class ModulModel{
                 let modulFile = data["fileModul"] as? String ?? ""
                 let modulid = data["modulid"] as? String ?? ""
                 let classid = data["classid"] as? String ?? ""
+                let count = data["countModul"] as? Int ?? 0
                 print("ini modulidnya di fetchmodul = \(modulid)")
-                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid)
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count: count)
                 completion(eachModul)
             }
         }
@@ -83,8 +85,9 @@ class ModulModel{
                 let modulFile = data["fileModul"] as? String ?? ""
                 let modulid = data["modulid"] as? String ?? ""
                 let classid = data["classid"] as? String ?? ""
+                let count = data["countModul"] as? Int ?? 0
                 print("ini modulidnya di fetchmodul = \(modulid)")
-                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid)
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count: count)
                 completion(eachModul)
             }
         }
@@ -93,7 +96,7 @@ class ModulModel{
     //for fetching tugas in Guru, where it is based on Class id
     func fetchTugasGuru(completion: @escaping(Tugas) -> ()){
         
-        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").order(by: "countModul",descending: false).addSnapshotListener { querySnapshot, error in
+        db.collection("modul").whereField("classid", isEqualTo: "\(SelectedClass.selectedClass.classPath)").addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else{
                 print("No document")
@@ -106,8 +109,9 @@ class ModulModel{
                 let tugasName = data["nameTugas"] as? String ?? ""
                 let tugasDesc = data["descTugas"] as? String ?? ""
                 let tugasid = data["tugasid"] as? String ?? ""
+                let count = data["countModul"] as? Int ?? 0
             
-                let eachTugas = Tugas(tugasName: tugasName, tugasDesc: tugasDesc, tugasid: tugasid)
+                let eachTugas = Tugas(tugasName: tugasName, tugasDesc: tugasDesc, tugasid: tugasid,count: count)
                 completion(eachTugas)
             }
         }
@@ -129,8 +133,9 @@ class ModulModel{
                 let tugasName = data["nameTugas"] as? String ?? ""
                 let tugasDesc = data["descTugas"] as? String ?? ""
                 let tugasid = data["tugasid"] as? String ?? ""
+                let count = data["countModul"] as? Int ?? 0
             
-                let eachTugas = Tugas(tugasName: tugasName, tugasDesc: tugasDesc, tugasid: tugasid)
+                let eachTugas = Tugas(tugasName: tugasName, tugasDesc: tugasDesc, tugasid: tugasid,count: count)
                 completion(eachTugas)
             }
         }

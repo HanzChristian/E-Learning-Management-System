@@ -30,7 +30,7 @@ class SoalModel{
                     let soalAnswerD = question["soalAnswerD"] as? String ?? ""
                     let soalCorrectAns = question["soalCorrectAns"] as? String ?? ""
                     let soalQuestion = question["soalQuestion"] as? String ?? ""
-                    
+//                    let count = question["count"] as? Int ?? 0
                     let eachSoal = Soal(soalQuestion: soalQuestion, soalAnswerA: soalAnswerA, soalAnswerB: soalAnswerB, soalAnswerC: soalAnswerC, soalAnswerD: soalAnswerD, soalCorrectAns: soalCorrectAns)
                     
                     completion(eachSoal)
