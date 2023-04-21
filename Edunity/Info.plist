@@ -63,5 +63,9 @@
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.hanzchristian.edunity</string>
+	</array>
 </dict>
 </plist>
