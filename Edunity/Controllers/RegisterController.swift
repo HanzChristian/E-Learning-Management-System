@@ -94,10 +94,9 @@ extension RegisterController{
                             self.performSegue(withIdentifier: "homepageSegue", sender: self)
                         }
                     }
-                    
                 }
-                
             }
+            
             
         }
     }

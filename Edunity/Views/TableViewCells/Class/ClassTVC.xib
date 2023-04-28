@@ -81,7 +81,7 @@
     <resources>
         <image name="classimage-2" width="32.333332061767578" height="45"/>
         <namedColor name="SegmentedPressedColor">
-            <color red="0.94900000095367432" green="0.80400002002716064" blue="0.36100000143051147" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.80392156862745101" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -250,7 +250,7 @@ private func sendNotification(topic: String, title: String, body: String) {
         print("JSON serialization error: \(error.localizedDescription)")
     }
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.setValue("key=AAAAIMqQqnw:APA91bHQHmGcsni_s9fvsKdUuqpF2XIXid9vP1eHrhZuOy6B6p5qOtGNG-H_hsxVkIBSnXQp0moEQ37UjcMML66QplC8nW2_DOuuDlH5-F8JbzdpqBiZ9aDw0mJpVp-27g-zou-hTb3i", forHTTPHeaderField: "Authorization")
+    request.setValue("KEY", forHTTPHeaderField: "Authorization")
     request.setValue("application/json", forHTTPHeaderField: "Accept")
     let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
         do {

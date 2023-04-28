@@ -24,7 +24,6 @@ class UserModel{
         guard let id = id else{
             return
         }
-        
         db.collection("users").whereField("uid", isEqualTo: "\(id)").getDocuments{ [self] (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else{
                 print("No document")
