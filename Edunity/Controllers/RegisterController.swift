@@ -20,17 +20,20 @@ class RegisterController: UIViewController {
     @IBOutlet weak var errorLbl: UILabel!
     
 
-//    let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.editin))
     
 }
 // MARK: - View Life Cycle
-extension RegisterController{
+extension RegisterController:UITextFieldDelegate{
     override func viewDidLoad(){
         super.viewDidLoad()
         
         //dismiss gesture
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tapGesture)
+        
+        self.namaTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
         
         errorLbl.alpha = 0
         UserDefaults.standard.set("pelajar", forKey: "role")
@@ -145,5 +148,10 @@ extension RegisterController{
     func showError(_ message:String){
         errorLbl.text = message
         errorLbl.alpha = 1
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }

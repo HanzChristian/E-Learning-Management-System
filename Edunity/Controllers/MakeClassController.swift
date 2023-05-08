@@ -82,11 +82,13 @@ extension MakeClassController{
     @objc private func saveItem(){
         
         //Get selected random image
-        let img1 = #imageLiteral(resourceName: "classimage-2")
-        let img2 = #imageLiteral(resourceName: "classimage-1")
-        let img3 = #imageLiteral(resourceName: "classimage-3")
+        let img1 = #imageLiteral(resourceName: "owls-03")
+        let img2 = #imageLiteral(resourceName: "owls-04")
+        let img3 = #imageLiteral(resourceName: "owls-02")
+        let img4 = #imageLiteral(resourceName: "owls-01")
+        let img5 = #imageLiteral(resourceName: "owls-05")
         
-        let imgArray = [img1,img2,img3]
+        let imgArray = [img1,img2,img3,img4,img5]
         let randomImage = imgArray.randomElement()
         
         // Make sure it's not nil
@@ -159,16 +161,6 @@ extension MakeClassController{
     func makeEnrollmentKey(length: Int) -> String {
       let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       return String((0..<length).map{ _ in letters.randomElement()! })
-    }
-    
-    func makeRandomImg() -> UIImage{
-        let img1 = #imageLiteral(resourceName: "classimage-2")
-        let img2 = #imageLiteral(resourceName: "classimage-1")
-        let img3 = #imageLiteral(resourceName: "classimage-3")
-        
-        let imgArray = [img1,img2,img3]
-        let randomImage = imgArray.randomElement()
-        return randomImage!
     }
     
 }

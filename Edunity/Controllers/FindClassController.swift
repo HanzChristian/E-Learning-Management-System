@@ -266,7 +266,7 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
     }
     
     @objc func refresh(_ sender: Any){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2){ [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
             listofClassMurid.removeAll()
             classModel.fetchClassAll(completion: { [self] classess in
                 listofClassMurid.append(classess)

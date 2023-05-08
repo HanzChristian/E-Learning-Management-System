@@ -105,8 +105,10 @@
                 <outlet property="modulNameLbl" destination="HvP-8D-t7q" id="7UR-S4-dBQ"/>
                 <outlet property="modulNumLbl" destination="yT5-Hw-zPg" id="i1L-Kk-YOR"/>
                 <outlet property="modulPdfBtn" destination="Cy7-cC-yeo" id="FTS-Wu-Ygc"/>
+                <outlet property="pdfLbl" destination="Cy7-cC-yeo" id="qO0-4I-icP"/>
                 <outlet property="tesBtn" destination="5kN-ev-rs8" id="nNq-RO-LOl"/>
                 <outlet property="tugasBtn" destination="CL3-Si-LR9" id="0Lo-UW-Elr"/>
+                <outlet property="tugasLbl" destination="CL3-Si-LR9" id="wja-hN-ZbU"/>
             </connections>
             <point key="canvasLocation" x="56.92307692307692" y="-1.4218009478672986"/>
         </tableViewCell>

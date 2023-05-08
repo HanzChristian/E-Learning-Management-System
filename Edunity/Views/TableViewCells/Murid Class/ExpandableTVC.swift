@@ -19,6 +19,8 @@ class ExpandableTVC: UITableViewCell {
     @IBOutlet weak var modulPdfBtn: UIButton!
     @IBOutlet weak var tugasBtn: UIButton!
     @IBOutlet weak var tesBtn: UIButton!
+    @IBOutlet weak var pdfLbl: UIButton!
+    @IBOutlet weak var tugasLbl: UIButton!
     
     
     @IBAction func tesPressed(_ sender: UIButton) {

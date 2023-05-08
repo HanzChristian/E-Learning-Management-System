@@ -1646,7 +1646,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eot-gl-5J0">
                                 <rect key="frame" x="0.0" y="178" width="390" height="666"/>
                                 <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="WE3-w6-ESd">
-                                    <rect key="frame" x="0.0" y="122" width="390" height="545"/>
+                                    <rect key="frame" x="0.0" y="121.66666793823242" width="390" height="545"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <connections>
                                         <segue destination="1Hl-Ie-2l0" kind="embed" id="Jub-25-D8j"/>
@@ -1828,6 +1828,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="o06-fj-g5s"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="P72-zC-zgL" firstAttribute="centerX" secondItem="Djl-Gl-Yew" secondAttribute="centerX" id="8sc-dY-I1o"/>
@@ -1867,6 +1868,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="kmg-2M-1Dm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6fE-pm-5LK" firstAttribute="top" secondItem="sI9-qG-peI" secondAttribute="bottom" constant="30" id="ALJ-Zh-Vij"/>

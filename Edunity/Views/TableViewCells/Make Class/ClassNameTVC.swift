@@ -12,7 +12,12 @@ class ClassNameTVC: UITableViewCell {
 // MARK: - Variables & Outlets
     
     @IBOutlet weak var classnameTF: UITextField!
-// MARK: - Life Cycle
+    
+    @IBAction func returnTapped(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+    
+    // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
 //        classnameTF.addTarget(self, action: #selector(txtFieldEdit(_:)), for: .editingChanged)
@@ -24,6 +29,7 @@ class ClassNameTVC: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
     
 //    @objc func txtFieldEdit(_ textField:UITextField){
 //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "validateInput"), object: nil)
