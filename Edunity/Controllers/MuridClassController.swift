@@ -173,14 +173,28 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
             }
         }
         
+        //Create reference to the file that wants to be download
+        let storageRef = Storage.storage().reference(withPath: eachModul.modulFile)
+
+        //Make the filename in local
+        let fileName = storageRef.name
+        
+        //Create local filesystem URL
+        let localURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
+        
+        //get the file size as a string
+        let fileAttributes = try? FileManager.default.attributesOfItem(atPath: localURL.path)
+        let fileSize = fileAttributes?[.size] as? Int ?? 0
+        let fileSizeString = ByteCountFormatter.string(fromByteCount: Int64(fileSize), countStyle: .file)
+        
         cell.modulNumLbl.text = "Modul \(modul.modulNum)"
         cell.modulNameLbl.text = "\(eachModul.modulName)"
         cell.modulDescLbl.text = "\(eachModul.modulDesc)"
         
         //fix font for Button
         let attrFont = UIFont.boldSystemFont(ofSize: 14)
-        let titlePdf = "Pdf bab \(modul.modulNum)"
-        let titleTugas = "Tugas bab \(modul.modulNum)"
+        var titlePdf = "Pdf bab \(modul.modulNum) - \(fileSizeString)"
+        var titleTugas = "Tugas bab \(modul.modulNum)"
         let attrTitle = NSAttributedString(string: titlePdf, attributes: [NSAttributedString.Key.font: attrFont])
         let attrTitle2 = NSAttributedString(string: titleTugas, attributes: [NSAttributedString.Key.font: attrFont])
 
@@ -208,23 +222,31 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
             
             //Download to local file
             
-            //Create reference to the file that wants to be download
-            let storageRef = Storage.storage().reference(withPath: eachModul.modulFile)
             
-            //Make the filename in local
-            let fileName = storageRef.name
-            
-            //Create local filesystem URL
-            let localURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
+            //Make a progressbar programmatically
+            let progressView = UIProgressView(progressViewStyle: .default)
+                progressView.progress = 0.0
+                progressView.frame = CGRect(x: 80, y: 230, width: 200, height: 30)
+            cell.addSubview(progressView)
             
             //Download the file
             let download = storageRef.write(toFile: localURL)
             
+            // Observe the download progress
+             download.observe(.progress) { snapshot in
+                 let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+                 progressView.progress = Float(percentComplete / 100.0)
+             }
+            
             //Observing the download & open files App
             download.observe(.success){ [self] snapshot in
                 print("File downloaded")
+                
+                
+                progressView.isHidden = true
                 // Open up PDF file
                 let pdfVC = PDFController(url: localURL)
+                
                 
                 //make navigation with Done button
                 let nav = UINavigationController(rootViewController: pdfVC)

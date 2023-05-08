@@ -32,6 +32,7 @@ extension KumpulanTugasController{
         tanggalLbl.isHidden = true
         namaLbl.isHidden = true
         fileLbl.isHidden = true
+
         
         DispatchQueue.main.async{ [self] in
             modulModel.fetchAllTugas { [self] tugas in
@@ -92,15 +93,16 @@ extension KumpulanTugasController:UITableViewDelegate,UITableViewDataSource
         let eachTugas = listofTugas[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath) as! KumpulanTugasTVC
         
+        let attrFont = UIFont.boldSystemFont(ofSize: 14)
+        let titleFile = "\(eachTugas.tugasName)"
+        let attrTitle = NSAttributedString(string: titleFile, attributes: [NSAttributedString.Key.font: attrFont])
+        
         cell.tanggalLbl.text = eachTugas.tugasDate
         cell.namaLbl.text = eachTugas.muridName
-        cell.fileBtn.setTitle(eachTugas.tugasName, for: .normal)
-//        cell.tanggalLbl.text = tugas.tugasDate
-//        cell.namaLbl.text = tugas.tugasName
-//        cell.fileBtn.setTitle(tugas.tugasFile, for: .normal)
+        cell.fileBtn.setAttributedTitle(attrTitle, for: UIControl.State.normal)
+        
         
         cell.downloadPDF = { [weak self] in
-            
             //Download to local file
             
             //Create reference to the file that wants to be download
@@ -114,8 +116,31 @@ extension KumpulanTugasController:UITableViewDelegate,UITableViewDataSource
             //Create local filesystem URL
             let localURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
             
+            let labelView = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+             labelView.text = "Download progress: "
+             labelView.textColor = .black
+            
+            let progressView = UIProgressView(progressViewStyle: .default)
+                progressView.progress = 0.0
+                progressView.frame = CGRect(x: 0, y: 20, width: 200, height: 30)
+            
+           
+            let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+            containerView.addSubview(labelView)
+            containerView.addSubview(progressView)
+            
+            let progressBarButtonItem = UIBarButtonItem(customView: containerView)
+
+            self?.navigationItem.rightBarButtonItem = progressBarButtonItem
+            
             //Download the file
             let download = storageRef.write(toFile: localURL)
+            
+            // Observe the download progress
+             download.observe(.progress) { snapshot in
+                 let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+                 progressView.progress = Float(percentComplete / 100.0)
+             }
             
             //Observing the download & open files App
             download.observe(.success){ snapshot in

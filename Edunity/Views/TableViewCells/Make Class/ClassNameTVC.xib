@@ -21,6 +21,9 @@
                         <rect key="frame" x="10" y="0.0" width="310" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                        <connections>
+                            <action selector="returnTapped:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="MBl-mm-RyV"/>
+                        </connections>
                     </textField>
                 </subviews>
                 <constraints>

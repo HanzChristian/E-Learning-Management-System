@@ -19,12 +19,15 @@ class LoginController: UIViewController {
     var userModel = UserModel()
 }
 // MARK: - View Life Cycle
-extension LoginController{
+extension LoginController:UITextFieldDelegate{
     override func viewDidLoad(){
         super.viewDidLoad()
         //dismiss gesture
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tapGesture)
+        
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
         
         errorLbl.alpha = 0
         emailTextField.attributedPlaceholder = NSAttributedString(
@@ -84,6 +87,11 @@ extension LoginController{
     func showError(_ message:String){
         errorLbl.text = message
         errorLbl.alpha = 1
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
 
