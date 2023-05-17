@@ -36,8 +36,9 @@ class ModulModel{
                 let modulid = data["modulid"] as? String ?? ""
                 let classid = data["classid"] as? String ?? ""
                 let count = data["countModul"] as? Int ?? 0
+                let tugasName = data["nameTugas"] as? String ?? ""
                 print("ini modulidnya di fetchmodul = \(modulid)")
-                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count:count)
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count:count,tugasName: tugasName)
                 completion(eachModul)
             }
         }
@@ -61,8 +62,10 @@ class ModulModel{
                 let modulid = data["modulid"] as? String ?? ""
                 let classid = data["classid"] as? String ?? ""
                 let count = data["countModul"] as? Int ?? 0
+                let tugasName = data["nameTugas"] as? String ?? ""
+                
                 print("ini modulidnya di fetchmodul = \(modulid)")
-                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count: count)
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count: count,tugasName: tugasName)
                 completion(eachModul)
             }
         }
@@ -86,8 +89,9 @@ class ModulModel{
                 let modulid = data["modulid"] as? String ?? ""
                 let classid = data["classid"] as? String ?? ""
                 let count = data["countModul"] as? Int ?? 0
+                let tugasName = data["nameTugas"] as? String ?? ""
                 print("ini modulidnya di fetchmodul = \(modulid)")
-                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count: count)
+                let eachModul = Modul(modulName: modulName, modulDesc: modulDesc, modulFile: modulFile,modulid: modulid,classid:classid,count: count,tugasName: tugasName)
                 completion(eachModul)
             }
         }

@@ -42,6 +42,9 @@ extension SoalController{
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        tableView.bounces = false
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
+        
         fetchDataCondition()
         
         
@@ -214,6 +217,10 @@ extension SoalController{
                     }
                 }
             }
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshSoal"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
         }))
         
         let attributes: [NSAttributedString.Key: Any] = [

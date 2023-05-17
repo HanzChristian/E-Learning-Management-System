@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ClassNameTVC: UITableViewCell {
-
-// MARK: - Variables & Outlets
+class ClassNameTVC: UITableViewCell,UITextFieldDelegate {
+    
+    // MARK: - Variables & Outlets
     
     @IBOutlet weak var classnameTF: UITextField!
     
@@ -20,19 +20,22 @@ class ClassNameTVC: UITableViewCell {
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-//        classnameTF.addTarget(self, action: #selector(txtFieldEdit(_:)), for: .editingChanged)
-        // Initialization code
+        self.classnameTF.delegate = self
     }
-
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Dismiss the keyboard
+        return true
+    }
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        if selected {
+            classnameTF.becomeFirstResponder() // Show the keyboard when the cell is selected
+        } else {
+            classnameTF.resignFirstResponder() // Dismiss the keyboard when the cell is deselected
+        }
     }
-    
-    
-//    @objc func txtFieldEdit(_ textField:UITextField){
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "validateInput"), object: nil)
-//    }
-    
 }

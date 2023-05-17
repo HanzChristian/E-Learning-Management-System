@@ -403,7 +403,7 @@
                                 <rect key="frame" x="0.0" y="216.33333333333331" width="390" height="627.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpZ-RX-sIa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Description" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpZ-RX-sIa">
                                 <rect key="frame" x="16" y="188.33333333333334" width="354" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
@@ -1327,6 +1327,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EuQ-Na-69m"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eGJ-d7-ubg" secondAttribute="trailing" id="3LY-o8-Frp"/>
                             <constraint firstItem="EuQ-Na-69m" firstAttribute="bottom" secondItem="b4G-1s-HpA" secondAttribute="bottom" id="JLB-tE-VRZ"/>
@@ -1646,7 +1647,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eot-gl-5J0">
                                 <rect key="frame" x="0.0" y="178" width="390" height="666"/>
                                 <containerView key="tableFooterView" opaque="NO" contentMode="scaleToFill" id="WE3-w6-ESd">
-                                    <rect key="frame" x="0.0" y="121.66666793823242" width="390" height="545"/>
+                                    <rect key="frame" x="0.0" y="122" width="390" height="545"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <connections>
                                         <segue destination="1Hl-Ie-2l0" kind="embed" id="Jub-25-D8j"/>

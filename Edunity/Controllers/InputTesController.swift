@@ -39,8 +39,8 @@ extension InputTesController{
         self.tableView.dataSource = self
         
         //dismiss gesture
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
-        view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
+//        view.addGestureRecognizer(tapGesture)
         
         let nibTesName = UINib(nibName: "TesNameTVC", bundle: nil)
         tableView.register(nibTesName, forCellReuseIdentifier: "TesNameTVC")

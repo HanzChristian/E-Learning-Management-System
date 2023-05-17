@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ClassDescriptionTVC: UITableViewCell {
+class ClassDescriptionTVC: UITableViewCell,UITextViewDelegate {
 // MARK: - Variables & Outlets
     
     @IBOutlet weak var classdescTF: UITextView!
@@ -16,6 +16,7 @@ class ClassDescriptionTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.classdescTF.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,8 +25,12 @@ class ClassDescriptionTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
-//    @objc func txtFieldEdit(_ textField:UITextView){
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "validateInput"), object: nil)
-//    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
     
 }

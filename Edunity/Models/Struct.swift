@@ -66,6 +66,7 @@ struct Modul{
     let modulid: String
     let classid: String
     let count: Int
+    let tugasName: String
 }
 
 struct Tes{

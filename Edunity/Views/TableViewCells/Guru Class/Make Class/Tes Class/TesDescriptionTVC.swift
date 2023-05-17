@@ -7,12 +7,13 @@
 
 import UIKit
 
-class TesDescriptionTVC: UITableViewCell {
+class TesDescriptionTVC: UITableViewCell,UITextViewDelegate {
 
     @IBOutlet weak var tesDescTF: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.tesDescTF.delegate = self
         // Initialization code
     }
 
@@ -20,6 +21,14 @@ class TesDescriptionTVC: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
     }
     
 }
