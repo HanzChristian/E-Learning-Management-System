@@ -188,6 +188,7 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
                     storeData(nameClass: nameClass, descClass: descClass, uidMurid:uid!, enrollmentKey: enrollmentKey,modulCount: modulCount,imgURL: imgURL,classid: classid)
                     
                 }else{
+                    
                     print("tidak cocok")
                     print("Enrolment Key: \(enrollmentKey)")
                     print("Class Key: \(eachClass.classEnrollment)")
@@ -253,9 +254,12 @@ extension FindClassController:UITableViewDelegate,UITableViewDataSource{
                 
                 self.dismiss(animated: true,completion: nil)
             }else{
-                print("tidak cocok")
-                print("Enrolment Key: \(enrollmentKey)")
-                print("Class Key: \(eachClass.classEnrollment)")
+                let alert = UIAlertController(title: "Enrollment Key tidak cocok!", message: "Masukkan Enrollment Key yang benar!", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler: { [self]_ in
+                    self.dismiss(animated: true,completion: nil)
+                }))
+                present(alert,animated:true)
             }
             
         }))

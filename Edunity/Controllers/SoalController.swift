@@ -42,6 +42,9 @@ extension SoalController{
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        tableView.bounces = false
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
+        
         fetchDataCondition()
         
         
@@ -214,6 +217,10 @@ extension SoalController{
                     }
                 }
             }
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshSoal"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshModul"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
         }))
         
         let attributes: [NSAttributedString.Key: Any] = [
@@ -253,7 +260,7 @@ extension SoalController{
             print("JSON serialization error: \(error.localizedDescription)")
         }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("KEY", forHTTPHeaderField: "Authorization")
+        request.setValue("key=AAAAIMqQqnw:APA91bHQHmGcsni_s9fvsKdUuqpF2XIXid9vP1eHrhZuOy6B6p5qOtGNG-H_hsxVkIBSnXQp0moEQ37UjcMML66QplC8nW2_DOuuDlH5-F8JbzdpqBiZ9aDw0mJpVp-27g-zou-hTb3i", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
             do {

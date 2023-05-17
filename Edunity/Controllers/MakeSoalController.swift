@@ -32,9 +32,8 @@ extension MakeSoalController{
     override func viewDidLoad(){
         super.viewDidLoad()
         
-        //dismiss gesture
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
-        view.addGestureRecognizer(tapGesture)
+        tableView.bounces = false
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 230, right: 0)
         
         tableView.delegate = self
         tableView.dataSource = self

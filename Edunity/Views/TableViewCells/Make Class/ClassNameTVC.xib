@@ -20,7 +20,7 @@
                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Misal: Pemrograman Lanjut" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0VY-ji-O5J">
                         <rect key="frame" x="10" y="0.0" width="310" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                         <connections>
                             <action selector="returnTapped:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="MBl-mm-RyV"/>
                         </connections>

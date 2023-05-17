@@ -33,6 +33,8 @@ class MuridClassController: UIViewController,UIDocumentPickerDelegate{
     var tesId: String?
     var tesName: String?
     var tesScore: String?
+    var pdfName: String?
+    var tugasName: String?
     
     
 }
@@ -144,7 +146,7 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
                         cell.tesBtn.isUserInteractionEnabled = true
                         cell.tesBtn.isEnabled = true
                         let attrFont = UIFont.boldSystemFont(ofSize: 14)
-                        let titleBtn = "\(tesName!)"
+                        let titleBtn = "  \(tesName!)"
                         let attrTitle3 = NSAttributedString(string: titleBtn, attributes: [NSAttributedString.Key.font: attrFont])
                         cell.tesBtn.setAttributedTitle(attrTitle3, for: UIControl.State.normal)
                         
@@ -165,7 +167,7 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
                         cell.tesBtn.isUserInteractionEnabled = false
                         cell.tesBtn.isEnabled = false
                         let attrFont = UIFont.boldSystemFont(ofSize: 14)
-                        let titleBtn = "\(tesName!) - Nilai: \(tesScore!)"
+                        let titleBtn = "  \(tesName!) - Nilai: \(tesScore!)"
                         let attrTitle3 = NSAttributedString(string: titleBtn, attributes: [NSAttributedString.Key.font: attrFont])
                         cell.tesBtn.setAttributedTitle(attrTitle3, for: UIControl.State.normal)
                     }
@@ -191,10 +193,12 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
         cell.modulNameLbl.text = "\(eachModul.modulName)"
         cell.modulDescLbl.text = "\(eachModul.modulDesc)"
         
+        //fix PDF file name
+        let modifiedPDFName = eachModul.modulFile.replacingOccurrences(of: "pdf/", with: "")
         //fix font for Button
         let attrFont = UIFont.boldSystemFont(ofSize: 14)
-        var titlePdf = "Pdf bab \(modul.modulNum) - \(fileSizeString)"
-        var titleTugas = "Tugas bab \(modul.modulNum)"
+        var titlePdf = "  \(modifiedPDFName) - \(fileSizeString)"
+        var titleTugas = "  \(eachModul.tugasName)"
         let attrTitle = NSAttributedString(string: titlePdf, attributes: [NSAttributedString.Key.font: attrFont])
         let attrTitle2 = NSAttributedString(string: titleTugas, attributes: [NSAttributedString.Key.font: attrFont])
 
@@ -226,7 +230,7 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
             //Make a progressbar programmatically
             let progressView = UIProgressView(progressViewStyle: .default)
                 progressView.progress = 0.0
-                progressView.frame = CGRect(x: 80, y: 230, width: 200, height: 30)
+                progressView.frame = CGRect(x: 80, y: 310, width: 200, height: 30)
             cell.addSubview(progressView)
             
             //Download the file
@@ -265,16 +269,22 @@ extension MuridClassController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(selectedIdx == indexPath){
-            return 280
+            return 320
         }
         return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIdx = indexPath
+        
+        if selectedIdx == indexPath{
+            selectedIdx = IndexPath(row: 20, section: 0)
+        }else{
+            selectedIdx = indexPath
+        }
         
         tableView.beginUpdates()
-        tableView.reloadRows(at: [indexPath], with: .none)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+//           tableView.reloadData()
         tableView.endUpdates()
     }
     

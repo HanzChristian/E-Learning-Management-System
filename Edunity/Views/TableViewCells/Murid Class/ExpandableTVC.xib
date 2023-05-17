@@ -31,10 +31,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cy7-cC-yeo">
-                        <rect key="frame" x="8" y="81" width="134.33333333333334" height="34.333333333333343"/>
+                        <rect key="frame" x="5" y="81" width="146" height="39.666666666666657"/>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="  Pdf bab 1.pdf">
-                            <imageReference key="image" image="list.bullet" catalog="system" symbolScale="medium"/>
+                        <buttonConfiguration key="configuration" style="plain" title="    Pdf bab 1.pdf">
+                            <imageReference key="image" image="pdf" symbolScale="medium"/>
                             <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="13"/>
                         </buttonConfiguration>
                         <connections>
@@ -46,27 +46,27 @@
                         <color key="tintColor" red="0.20000001789999999" green="0.20784312490000001" blue="0.21960783" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CL3-Si-LR9">
-                        <rect key="frame" x="8" y="115.33333333333331" width="126" height="35"/>
+                        <rect key="frame" x="8" y="120.66666666666667" width="137.66666666666666" height="39.666666666666671"/>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="  Tugas bab 1">
-                            <imageReference key="image" image="list.bullet" catalog="system" symbolScale="medium"/>
+                        <buttonConfiguration key="configuration" style="plain" title="    Tugas bab 1">
+                            <imageReference key="image" image="task" symbolScale="medium"/>
                             <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="13"/>
                         </buttonConfiguration>
                         <connections>
                             <action selector="tugasPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Sag-9M-g54"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txy-Dt-qvk">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No description" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txy-Dt-qvk">
                         <rect key="frame" x="20" y="54" width="370" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kN-ev-rs8">
-                        <rect key="frame" x="8" y="150.33333333333334" width="110" height="35"/>
+                        <rect key="frame" x="8.0000000000000071" y="160.33333333333334" width="121.66666666666669" height="39.666666666666657"/>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="  Tes bab 1">
-                            <imageReference key="image" image="list.bullet" catalog="system" symbolScale="medium"/>
+                        <buttonConfiguration key="configuration" style="plain" title="    Tes bab 1">
+                            <imageReference key="image" image="test" symbolScale="medium"/>
                             <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="13"/>
                         </buttonConfiguration>
                         <connections>
@@ -80,7 +80,7 @@
                     <constraint firstItem="Txy-Dt-qvk" firstAttribute="top" secondItem="HvP-8D-t7q" secondAttribute="bottom" constant="10" id="65J-O3-PF8"/>
                     <constraint firstItem="HvP-8D-t7q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="73C-fy-y3F"/>
                     <constraint firstItem="yT5-Hw-zPg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="7GZ-GO-oQT"/>
-                    <constraint firstItem="Cy7-cC-yeo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="9GJ-Ar-67y"/>
+                    <constraint firstItem="Cy7-cC-yeo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="9GJ-Ar-67y"/>
                     <constraint firstItem="5kN-ev-rs8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="BaY-9M-c3h"/>
                     <constraint firstItem="yT5-Hw-zPg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Wno-Gh-hef"/>
                     <constraint firstItem="5kN-ev-rs8" firstAttribute="top" secondItem="CL3-Si-LR9" secondAttribute="bottom" id="ayG-qW-N9d"/>
@@ -115,6 +115,8 @@
     </objects>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
-        <image name="list.bullet" catalog="system" width="128" height="87"/>
+        <image name="pdf" width="25.666666030883789" height="25.666666030883789"/>
+        <image name="task" width="25.666666030883789" height="25.666666030883789"/>
+        <image name="test" width="25.666666030883789" height="25.666666030883789"/>
     </resources>
 </document>

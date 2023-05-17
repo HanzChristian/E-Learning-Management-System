@@ -299,14 +299,20 @@ extension DoTesController{
                     if error != nil{
                     }
                     else{
-                        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "HomePageController") as! HomePageController
-                        let tabStoryboard = UIStoryboard(name: "HomePage", bundle: nil)
-                        let tabVC = tabStoryboard.instantiateViewController(withIdentifier: "tabbarHomePage") as! UITabBarController
+                        let alert = UIAlertController(title: "Tes selesai!", message: "Kamu mendapatkan nilai \(formattedFinalScore)", preferredStyle: .alert)
                         
-                        let nav =  UINavigationController(rootViewController: tabVC)
-                        nav.modalPresentationStyle = .fullScreen
-                        self.present(nav, animated: true)
+                        alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler:{ [self]_ in
+                            let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: "HomePageController") as! HomePageController
+                            let tabStoryboard = UIStoryboard(name: "HomePage", bundle: nil)
+                            let tabVC = tabStoryboard.instantiateViewController(withIdentifier: "tabbarHomePage") as! UITabBarController
+                            
+                            let nav =  UINavigationController(rootViewController: tabVC)
+                            nav.modalPresentationStyle = .fullScreen
+                            self.present(nav, animated: true)
+                        }))
+                        self.present(alert, animated: true)
+
                     }
                 }
             }
@@ -316,7 +322,13 @@ extension DoTesController{
     }
     
     private func forceSave(){
-        let alert = UIAlertController(title: "Waktu tes telah habis!", message: "", preferredStyle: .alert)
+        
+        //score
+        var finalScore = Double(correctAns) / Double(listofSoal.count)
+        finalScore *= 100
+        let formattedFinalScore = String(format: "%.2f", finalScore)
+        
+        let alert = UIAlertController(title: "Waktu tes telah habis!", message: "Kamu mendapatkan nilai \(formattedFinalScore)", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler:{ [self]_ in
             //save here
@@ -337,11 +349,6 @@ extension DoTesController{
                     
                 }
             }
-            
-            //score
-            var finalScore = Double(correctAns) / Double(listofSoal.count)
-            finalScore *= 100
-            let formattedFinalScore = String(format: "%.2f", finalScore)
             
             userModel.fetchUser { [self] user in
                 let id = user.id

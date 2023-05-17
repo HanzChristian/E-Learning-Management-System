@@ -7,19 +7,30 @@
 
 import UIKit
 
-class TesNameTVC: UITableViewCell {
+class TesNameTVC: UITableViewCell,UITextFieldDelegate {
 
     @IBOutlet weak var tesNameTV: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.tesNameTV.delegate = self
         // Initialization code
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Dismiss the keyboard
+        return true
+    }
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        if selected {
+            tesNameTV.becomeFirstResponder() // Show the keyboard when the cell is selected
+        } else {
+            tesNameTV.resignFirstResponder() // Dismiss the keyboard when the cell is deselected
+        }
     }
     
 }

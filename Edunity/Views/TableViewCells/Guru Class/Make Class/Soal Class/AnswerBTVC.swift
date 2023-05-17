@@ -7,19 +7,30 @@
 
 import UIKit
 
-class AnswerBTVC: UITableViewCell {
+class AnswerBTVC: UITableViewCell,UITextFieldDelegate {
 
     @IBOutlet weak var bTF: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.bTF.delegate = self
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Dismiss the keyboard
+        return true
+    }
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+        if selected {
+            bTF.becomeFirstResponder() // Show the keyboard when the cell is selected
+        } else {
+            bTF.resignFirstResponder() // Dismiss the keyboard when the cell is deselected
+        }
     }
     
 }

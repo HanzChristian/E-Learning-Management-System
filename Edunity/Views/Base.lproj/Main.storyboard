@@ -36,17 +36,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="417" height="718"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Ibo-n8-HF0">
-                                                    <rect key="frame" x="16" y="526" width="385" height="150"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ibo-n8-HF0">
+                                                    <rect key="frame" x="16" y="526" width="385" height="125"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Akses Kelas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nn-As-usg">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Akses Kelas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nn-As-usg">
                                                             <rect key="frame" x="128.66666666666666" y="0.0" width="127.66666666666666" height="28.666666666666668"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1a5-Ug-FdL">
-                                                            <rect key="frame" x="0.0" y="68.666666666666629" width="385" height="81.333333333333314"/>
+                                                            <rect key="frame" x="0.0" y="43.666666666666622" width="385" height="81.333333333333314"/>
                                                             <string key="text">Lupa ada jadwal apa saja yang akan terjadi hari ini? atau hari esok? Lihat seluruh jadwal yang telah kamu buat dibantu dengan notifikasi yang mengingatkanmu!</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -54,9 +54,7 @@
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="1a5-Ug-FdL" firstAttribute="leading" secondItem="Ibo-n8-HF0" secondAttribute="leading" id="dNI-z5-dTp"/>
-                                                        <constraint firstAttribute="trailing" secondItem="1a5-Ug-FdL" secondAttribute="trailing" id="eM6-Yy-ma4"/>
-                                                        <constraint firstItem="1a5-Ug-FdL" firstAttribute="top" secondItem="0Nn-As-usg" secondAttribute="bottom" constant="40" id="u3Z-nR-SZf"/>
+                                                        <constraint firstItem="1a5-Ug-FdL" firstAttribute="top" secondItem="0Nn-As-usg" secondAttribute="bottom" constant="10" id="5kO-ru-Bqv"/>
                                                     </constraints>
                                                 </stackView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1st-Onboarding" translatesAutoresizingMaskIntoConstraints="NO" id="2TM-aW-dT9">
@@ -94,6 +92,14 @@
                                     <outlet property="delegate" destination="nEL-16-jTt" id="9Yn-rf-YRL"/>
                                 </connections>
                             </collectionView>
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-38-5ce">
+                                <rect key="frame" x="120.66666666666667" y="620" width="133.66666666666663" height="26"/>
+                                <color key="pageIndicatorTintColor" name="SliderColor"/>
+                                <color key="currentPageIndicatorTintColor" name="ButtonColor"/>
+                                <connections>
+                                    <action selector="pageValueChanged:" destination="nEL-16-jTt" eventType="valueChanged" id="W6y-ka-uMa"/>
+                                </connections>
+                            </pageControl>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="7cv-dc-BSJ">
                                 <rect key="frame" x="22.666666666666657" y="676" width="330" height="57"/>
                                 <subviews>
@@ -143,14 +149,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-38-5ce">
-                                <rect key="frame" x="120.66666666666667" y="620" width="133.66666666666663" height="26"/>
-                                <color key="pageIndicatorTintColor" name="SliderColor"/>
-                                <color key="currentPageIndicatorTintColor" name="ButtonColor"/>
-                                <connections>
-                                    <action selector="pageValueChanged:" destination="nEL-16-jTt" eventType="valueChanged" id="W6y-ka-uMa"/>
-                                </connections>
-                            </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1jX-ew-hV9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

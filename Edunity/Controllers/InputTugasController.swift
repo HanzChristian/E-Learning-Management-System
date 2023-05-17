@@ -17,6 +17,7 @@ class InputTugasController: UIViewController {
     var modulModel = ModulModel()
     var userModel = UserModel()
     var descTugasTVC = DeskripsiTugasTVC()
+    var pengumupulanTugasTVC = PengumpulanTugasTVC()
     let dates = Date()
     let dateFormatter = DateFormatter()
     
@@ -110,65 +111,89 @@ extension InputTugasController{
                 tugasDisplay = tugasCons.tugasName
             }
             
-            if(tugasDisplay != nil){ // the user is updating
-                let path = "pdfTugas/\(displayURL!)"
-                print("new url= \(displayURL!)")
-                print("prev url = pdfTugas/\(tugasDisplay!)")
-                prevURL = "pdfTugas/\(tugasDisplay!)"
-                
-                //delete prev file
-                let storageprevRef = Storage.storage().reference().child(prevURL!)
-                storageprevRef.delete { error in
-                    if let error = error{
-                        print("error delete pdf = \(error)")
-                    }else{
-                        print("pdf deleted succesfully!")
-                    }
-                }
-                
-                //save the file
-                storageRef.child("pdfTugas/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
-                    (_,err) in
+            if(displayURL != nil){
+                if(tugasDisplay != nil){ // the user is updating
+                    let path = "pdfTugas/\(displayURL!)"
+                    print("new url= \(displayURL!)")
+                    print("prev url = pdfTugas/\(tugasDisplay!)")
+                    prevURL = "pdfTugas/\(tugasDisplay!)"
                     
-                    if err != nil{
-                        print("error disini gan \(err?.localizedDescription)")
-                        return
+                    //delete prev file
+                    let storageprevRef = Storage.storage().reference().child(prevURL!)
+                    storageprevRef.delete { error in
+                        if let error = error{
+                            print("error delete pdf = \(error)")
+                        }else{
+                            print("pdf deleted succesfully!")
+                        }
                     }
                     
-                    self.userModel.fetchUser{ [self] user in
-                        let uid = user.id
-                        db.collection("muridTugas").whereField("userid", isEqualTo: uid).whereField("modulid", isEqualTo: idModul).getDocuments { [self] querySnapshot, error in
-                            if let error = error{
-                                print("error getting docs: \(error)")
-                            }else{
-                                guard let document = querySnapshot?.documents.first else {
-                                    print("No document found")
-                                    return
+                    //save the file
+                    storageRef.child("pdfTugas/\(displayURL!)").putFile(from: extractURL!,metadata: nil){ [self]
+                        (_,err) in
+                        
+                        if err != nil{
+                            print("error disini gan \(err?.localizedDescription)")
+                            return
+                        }
+                        
+                        self.userModel.fetchUser{ [self] user in
+                            let uid = user.id
+                            db.collection("muridTugas").whereField("userid", isEqualTo: uid).whereField("modulid", isEqualTo: idModul).getDocuments { [self] querySnapshot, error in
+                                if let error = error{
+                                    print("error getting docs: \(error)")
+                                }else{
+                                    guard let document = querySnapshot?.documents.first else {
+                                        print("No document found")
+                                        return
+                                    }
+                                    document.reference.updateData([
+                                        "fileTugas": path,
+                                        "displayedFile": displayURL!
+                                    ])
                                 }
-                                document.reference.updateData([
-                                    "fileTugas": path,
-                                    "displayedFile": displayURL!
-                                ])
                             }
                         }
                     }
-                }
-                dismiss(animated: true,completion: nil)
-            }else{
-                //if it is the first submit
-                setCurrentDate()
-                let path = "pdfTugas/\(displayURL!)"
-                
-                self.userModel.fetchUser{ [self] user in
-                    let userName = user.name
-                    let uid = user.id
-                    print("ini username pas fetch = \(userName)")
                     
-                    storeData(username: userName,userid: uid,modulid: idModul,fileTugas:path,displayedFile: displayURL!, dateSubmitted:currentTime!,classid: classid!)
-                    print("Saved")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
-                    dismiss(animated: true,completion: nil)
+                    let alert = UIAlertController(title: "Tugas berhasil diupdate!", message: "", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler:{ [self]_ in
+                        
+                        dismiss(animated: true,completion: nil)
+                    }))
+                    
+                    present(alert,animated: true)
+                    
+          
+                }else{
+                    //if it is the first submit
+                    setCurrentDate()
+                    let path = "pdfTugas/\(displayURL!)"
+                    
+                    self.userModel.fetchUser{ [self] user in
+                        let userName = user.name
+                        let uid = user.id
+                        print("ini username pas fetch = \(userName)")
+                        storeData(username: userName,userid: uid,modulid: idModul,fileTugas:path,displayedFile: displayURL!, dateSubmitted:currentTime!,classid: classid!)
+                        print("Saved")
+                        
+                        let alert = UIAlertController(title: "Tugas berhasil disimpan!", message: "", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler:{ [self]_ in
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshData"), object: nil)
+                            dismiss(animated: true,completion: nil)
+                        }))
+                        
+                        present(alert,animated: true)
+                    }
                 }
+            }else{
+                let alert = UIAlertController(title: "Tugas gagal disimpan/diupdate!", message: "Pastikan file sudah dimasukkan!", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Lanjut", style: .default,handler:{ [self]_ in
+                }))
+                present(alert,animated: true)
             }
         }
     }
@@ -218,6 +243,8 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
         }else if(indexPath.section == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: "StatusTVC", for: indexPath) as! StatusTVC
             
+            cell.statusLbl.font = UIFont.boldSystemFont(ofSize: 14)
+            cell.statusLbl.textColor = .systemRed
             cell.statusLbl.text = "Belum dikumpulkan!"
             
             modulModel.fetchTugasCondition { [self] tugasCons in
@@ -225,6 +252,7 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
                 if(tugasDisplay != nil){
                     cell.statusLbl.text = "Sudah dikumpulkan!"
                     cell.statusLbl.textColor = .systemBlue
+                    cell.statusLbl.font = UIFont.boldSystemFont(ofSize: 14)
                 }else{
                 }
             }
@@ -242,18 +270,35 @@ extension InputTugasController:UITableViewDelegate,UITableViewDataSource{
             }
             
             if(displayURL == nil){
-                cell.kumpultugasLbl.setTitle("Masukkan File", for: .normal)
+                let attrFont = UIFont.boldSystemFont(ofSize: 14)
+                let titleStatus = "Masukkan File"
+                let attrTitle = NSAttributedString(string: titleStatus, attributes: [NSAttributedString.Key.font: attrFont])
+                
+                cell.kumpultugasLbl.setAttributedTitle(attrTitle, for: UIControl.State.normal)
             }else{
-                cell.kumpultugasLbl.setTitle("\(displayURL!)", for: .normal)
+                let attrFont = UIFont.boldSystemFont(ofSize: 14)
+                let titleStatus = "\(displayURL!)"
+                let attrTitle = NSAttributedString(string: titleStatus, attributes: [NSAttributedString.Key.font: attrFont])
+                
+                cell.kumpultugasLbl.setAttributedTitle(attrTitle, for: UIControl.State.normal)
             }
             
             modulModel.fetchTugasCondition { [self] tugasCons in
                 tugasDisplay = tugasCons.tugasName
                 if(tugasDisplay != nil){
                     if(displayURL != nil){
-                        cell.kumpultugasLbl.setTitle("\(displayURL!)", for: .normal)
+                        let attrFont = UIFont.boldSystemFont(ofSize: 14)
+                        let titleStatus = "\(displayURL!)"
+                        let attrTitle = NSAttributedString(string: titleStatus, attributes: [NSAttributedString.Key.font: attrFont])
+                        
+                        cell.kumpultugasLbl.setAttributedTitle(attrTitle, for: UIControl.State.normal)
                     }else{
-                        cell.kumpultugasLbl.setTitle("Edit File", for: .normal)
+                        
+                        let attrFont = UIFont.boldSystemFont(ofSize: 14)
+                        let titleStatus = "Edit File - \(tugasDisplay!)"
+                        let attrTitle = NSAttributedString(string: titleStatus, attributes: [NSAttributedString.Key.font: attrFont])
+                        
+                        cell.kumpultugasLbl.setAttributedTitle(attrTitle, for: UIControl.State.normal)
                     }
                 }else{
                 }
