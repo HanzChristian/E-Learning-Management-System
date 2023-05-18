@@ -6,7 +6,7 @@ Download Beta Version on TestFlight here:
 
 <img src="https://user-images.githubusercontent.com/78020206/235107915-52df253e-4460-4165-987f-2c53d07ec8e1.png" width="200">
 
-### Last version updated : 1.4
+### Last version updated : 1.5
 
 # All Version Updates
 <pre><b>1.0 - Main functions :
@@ -44,7 +44,7 @@ Download Beta Version on TestFlight here:
 2. Improve and fix some UI</b>
 </pre>
 
-<pre><b>Upcoming 1.5 - Lots of changes based on Usability Testing :
+<pre><b>1.5 - Lots of changes based on Usability Testing :
 1. Changes in onboarding pages wording
 2. Changes in Register to reveal password, fix password regex, make login after register
 3. Make error handling when enrollment key doesn't match
